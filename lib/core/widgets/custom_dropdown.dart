@@ -15,12 +15,16 @@ class CustomDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double maxHeight = MediaQuery.of(context).size.height * 0.4;
+
     return DropdownMenu<String>(
+      menuHeight: maxHeight,
       hintText: hintText,
       width: double.infinity,
       dropdownMenuEntries: items,
       inputDecorationTheme: InputDecorationTheme(
-        contentPadding: EdgeInsets.symmetric(horizontal: AppSpaces.screenHpad, vertical: 5),
+        contentPadding: EdgeInsets.symmetric(
+            horizontal: AppSpaces.screenHpad, vertical: 5),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(

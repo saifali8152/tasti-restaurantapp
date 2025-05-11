@@ -34,7 +34,7 @@ class CustomButton extends StatelessWidget {
         width: isFullWidth ? double.infinity : null,
         decoration: BoxDecoration(
           color: bgColor,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: borderColor, width: 1),
         ),
         child: isLoading

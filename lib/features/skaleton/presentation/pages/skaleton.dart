@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/features/food_menu/food_menu.dart';
+import 'package:tasti_restaurant_app/features/restaurant_working_hours/restaurant_working_hours.dart';
+import 'package:tasti_restaurant_app/features/seating_area/seating_area.dart';
+import '../../../customer_reservations/customer_reservations.dart';
+import '../../../gallery/gallery.dart';
 import '/config/constants/colors.dart';
 import '/features/dashboard/dashboard_screen.dart';
 import '/features/dashboard/widgets/custom_drawer.dart';
@@ -45,7 +50,12 @@ class Skaleton extends StatelessWidget {
               DashboardScreen(),
               ReservationsScreen(),
               ManageBookingTimeScreen(),
-              DashboardScreen(),
+              RestaurantWorkingHoursScreen(),
+              SeatingAreaScreen(),
+              Placeholder(),
+              FoodMenuScreen(),
+              GalleryScreen(),
+              CustomerReservations(),
             ],
           ),
         );

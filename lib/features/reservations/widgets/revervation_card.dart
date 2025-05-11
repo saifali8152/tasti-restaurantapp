@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
+import 'package:tasti_restaurant_app/core/widgets/card_details_row.dart';
 import '../../../core/widgets/custom_button.dart';
 
 class RevervationCard extends StatelessWidget {
@@ -41,9 +42,9 @@ class RevervationCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 8),
-          detailsRow('Name', 'Ali Khan'),
-          detailsRow('Date', '12/05/2025'),
-          detailsRow('Time', '1:45 PM'),
+          CardDetailsRow(label:'Name', value: 'Ali Khan'),
+          CardDetailsRow(label:'Date', value: '12/05/2025'),
+          CardDetailsRow(label:'Time', value: '1:45 PM'),
           SizedBox(height: 5),
           const Divider(),
           SizedBox(height: 5),
@@ -69,16 +70,3 @@ class RevervationCard extends StatelessWidget {
     );
   }
 }
-
-Widget detailsRow(String label, String value) => Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(label, style: TextStyle(color: Colors.grey[700], fontSize: 10)),
-          Text(value,
-              style:
-                  const TextStyle(fontWeight: FontWeight.w500, fontSize: 12)),
-        ],
-      ),
-    );

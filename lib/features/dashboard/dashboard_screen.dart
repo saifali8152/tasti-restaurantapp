@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/core/widgets/curved_container.dart';
 import '/config/constants/colors.dart';
 import 'widgets/monthly_card.dart';
 import 'widgets/today_card.dart';
@@ -30,36 +31,26 @@ class DashboardScreen extends StatelessWidget {
             
           ),
           SliverToBoxAdapter(
-            child: Container(
-              decoration: const BoxDecoration(
-                color: AppColors.background,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(36),
-                  topRight: Radius.circular(36),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 10),
-                    sectionTitle("Today's Overview"),
-                    const SizedBox(height: 12),
-                    TodayCard(title: "Today's Requests"),
-                    const SizedBox(height: 10),
-                    TodayCard(
-                        title: "Today's Queries", approvedLabel: '2 Replied'),
-                    const SizedBox(height: 20),
-                    sectionTitle("Monthly Overview"),
-                    const SizedBox(height: 12),
-                    MonthlyCard(title: 'Monthly Requests (April 2025)'),
-                    const SizedBox(height: 10),
-                    MonthlyCard(
-                        title: 'Monthly Queries (April 2025)',
-                        approvedLabel: '13 Replied',),
-                  ],
-                ),
+            child: CurvedContainer(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 10),
+                  sectionTitle("Today's Overview"),
+                  const SizedBox(height: 12),
+                  TodayCard(title: "Today's Requests"),
+                  const SizedBox(height: 10),
+                  TodayCard(
+                      title: "Today's Queries", approvedLabel: '2 Replied'),
+                  const SizedBox(height: 20),
+                  sectionTitle("Monthly Overview"),
+                  const SizedBox(height: 12),
+                  MonthlyCard(title: 'Monthly Requests (April 2025)'),
+                  const SizedBox(height: 10),
+                  MonthlyCard(
+                      title: 'Monthly Queries (April 2025)',
+                      approvedLabel: '13 Replied',),
+                ],
               ),
             ),
           ),
