@@ -5,6 +5,10 @@ import 'route_name.dart';
 class Routes {
   static MaterialPageRoute generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case RoutesName.campaignSummary:
+        return MaterialPageRoute(
+          builder: (_) => const CampaignSummary(),
+        );
       case RoutesName.targetedCampaign:
         return MaterialPageRoute(
           builder: (_) => const TargetedCampaign(),

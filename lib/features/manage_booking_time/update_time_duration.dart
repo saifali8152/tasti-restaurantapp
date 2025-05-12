@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
+import '/core/widgets/custom_app_bar.dart';
+import '/core/widgets/custom_button.dart';
 import '../../core/widgets/custom_dropdown.dart';
 
 class UpdateTimeDurationScreen extends StatelessWidget {

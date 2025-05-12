@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
+import '/config/constants/colors.dart';
 
 class CurvedContainer extends StatelessWidget {
   final Widget child;

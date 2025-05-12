@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/food_menu/food_menu.dart';
-import 'package:tasti_restaurant_app/features/restaurant_working_hours/restaurant_working_hours.dart';
-import 'package:tasti_restaurant_app/features/seating_area/seating_area.dart';
+import '/features/food_menu/food_menu.dart';
+import '/features/restaurant_working_hours/restaurant_working_hours.dart';
+import '/features/seating_area/seating_area.dart';
 import '../../../customer_reservations/customer_reservations.dart';
 import '../../../gallery/gallery.dart';
 import '/config/constants/colors.dart';

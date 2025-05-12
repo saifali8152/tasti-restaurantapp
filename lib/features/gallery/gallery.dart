@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/config/constants/images.dart';
-import 'package:tasti_restaurant_app/config/routes/route_name.dart';
-import 'package:tasti_restaurant_app/core/widgets/curved_container.dart';
+import '/config/constants/images.dart';
+import '/config/routes/route_name.dart';
+import '/core/widgets/curved_container.dart';
 import '/core/widgets/themed_app_bar.dart';
 import '../../config/constants/icons.dart';
 import '../../core/widgets/icon_button.dart';

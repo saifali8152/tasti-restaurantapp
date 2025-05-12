@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
+import '/core/utils/general_extentions.dart';
 
 import '../../../config/constants/colors.dart';
 

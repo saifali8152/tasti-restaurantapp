@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/widgets/curved_container.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_input_field.dart';
+import '/core/widgets/curved_container.dart';
+import '/core/widgets/custom_button.dart';
+import '/core/widgets/custom_input_field.dart';
 import '/core/widgets/themed_app_bar.dart';
 import '/config/constants/colors.dart';
 

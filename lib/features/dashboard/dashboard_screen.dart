@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/widgets/curved_container.dart';
+import '/core/widgets/curved_container.dart';
 import '/config/constants/colors.dart';
 import 'widgets/monthly_card.dart';
 import 'widgets/today_card.dart';

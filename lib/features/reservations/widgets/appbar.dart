@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/widgets/icon_button.dart';
+import '/core/widgets/icon_button.dart';
 import '/config/constants/icons.dart';
 import '/config/routes/route_name.dart';
 import '../../../config/constants/colors.dart';

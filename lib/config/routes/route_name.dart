@@ -15,6 +15,7 @@ class RoutesName {
   static const String customerReservationDetails = 'customerReservationDetails';
   static const String restaurantQRFoodMenu = 'restaurantQRFoodMenu';
   static const String targetedCampaign = 'targetedCampaign';
+  static const String campaignSummary = 'campaignSummary';
   static const String addPhotos = 'addPhotos';
   static const String contactUs = 'contactUs';
 }

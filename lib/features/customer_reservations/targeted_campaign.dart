@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/config/routes/route_name.dart';
 import '../make_reservation/make_reservation.dart';
 import '/core/widgets/custom_app_bar.dart';
 import '/core/widgets/custom_button.dart';
@@ -40,6 +41,14 @@ class _TargetedCampaignState extends State<TargetedCampaign> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Estimated Cost: ", style: TextStyle(fontSize:18)),
+                  Text("R 0.00", style: TextStyle(fontSize:18, fontWeight: FontWeight.bold)),
+                ],
+              ),
+              const SizedBox(height: 20),
               FieldLabel(title: "Number of Recipients"),
               const SizedBox(height: 5),
               CustomDropdown(
@@ -119,8 +128,7 @@ class _TargetedCampaignState extends State<TargetedCampaign> {
               const SizedBox(height: 30),
               CustomButton(
                 onPressed: () {
-                  if (_formKey.currentState?.validate() ?? false) {
-                  }
+                  Navigator.pushNamed(context, RoutesName.campaignSummary);
                 },
                 text: 'Send Campaign',
               ),

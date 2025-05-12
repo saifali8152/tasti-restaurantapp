@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
+import '/core/widgets/custom_app_bar.dart';
 import '../../config/constants/colors.dart';
 import '../../core/widgets/custom_button.dart';
 import '../../core/widgets/details_row.dart';

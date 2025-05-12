@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
+import '/config/constants/colors.dart';
 
 class ButtonWithIcon extends StatelessWidget {
   final String title;

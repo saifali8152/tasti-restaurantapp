@@ -10,4 +10,5 @@ class AppIcons {
   static const String add = 'assets/icons/add.png';
   static const String target = 'assets/icons/target.png';
   static const String envelop = 'assets/icons/envelop.png';
+  static const String pay = 'assets/icons/pay.png';
 }

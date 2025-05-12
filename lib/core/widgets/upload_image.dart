@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
+import '/config/constants/colors.dart';
+import '/core/utils/general_extentions.dart';
 
 class CustomUploadImageCard extends StatelessWidget {
   final String? imageName;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
-import 'package:tasti_restaurant_app/config/routes/route_name.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/core/widgets/card_details_row.dart';
+import '/config/constants/colors.dart';
+import '/config/routes/route_name.dart';
+import '/core/utils/general_extentions.dart';
+import '/core/widgets/card_details_row.dart';
 import '../../../core/widgets/custom_button.dart';
 
 class SeatingAreaCard extends StatelessWidget {

@@ -11,5 +11,6 @@ export '/features/manage_booking_time/inactive_slots.dart';
 export '../../features/seating_area/seating_area_details.dart';
 export '/features/food_menu/restaurant_qr_food_menu.dart';
 export '/features/gallery/add_photos.dart';
-export 'package:tasti_restaurant_app/features/customer_reservations/customer_reservation_details.dart';
+export '/features/customer_reservations/customer_reservation_details.dart';
 export '/features/customer_reservations/targeted_campaign.dart';
+export '/features/customer_reservations/campaign_summary.dart';

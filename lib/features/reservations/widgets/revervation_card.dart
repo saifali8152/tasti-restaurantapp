@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/core/widgets/card_details_row.dart';
+import '/core/utils/general_extentions.dart';
+import '/core/widgets/card_details_row.dart';
 import '../../../core/widgets/custom_button.dart';
 
 class RevervationCard extends StatelessWidget {
