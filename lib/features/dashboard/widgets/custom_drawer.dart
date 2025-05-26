@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '/config/constants/colors.dart';
 import '/config/constants/images.dart';
 import '/core/utils/general_extentions.dart';
-
 import '../../skaleton/presentation/bloc/cubit/skaleton_cubit.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -54,14 +53,19 @@ class CustomDrawer extends StatelessWidget {
             ),
           ),
           _drawerItem(context,
-              icon: Icons.sms,
-              title: "Manage SMS & Fess",
+              icon: Icons.note,
+              title: "Bundles and Billings",
               index: 10,
               currentIndex: state.index),
           _drawerItem(context,
-              icon: Icons.campaign,
-              title: "Campaigns",
+              icon: Icons.settings,
+              title: "Settings",
               index: 11,
+              currentIndex: state.index),
+          _drawerItem(context,
+              icon: Icons.share,
+              title: "Widget code and share",
+              index: 12,
               currentIndex: state.index),
           const Divider(),
           ListTile(
@@ -102,15 +106,18 @@ class CustomDrawer extends StatelessWidget {
     required int currentIndex,
   }) {
     return ListTile(
+      minTileHeight: 30,
+      minVerticalPadding: 0,
       contentPadding: EdgeInsets.only(left: 54),
       title: Text(title,
           style: TextStyle(
               color: currentIndex == index ? AppColors.darkOrange : null,
+              fontSize: 13,
               fontWeight:
                   currentIndex == index ? FontWeight.bold : FontWeight.w400)),
       onTap: () {
         context.read<SkaletonCubit>().changeTab(index);
-        Navigator.pop(context); // Close drawer
+        Navigator.pop(context);
       },
     );
   }

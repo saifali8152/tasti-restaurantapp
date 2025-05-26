@@ -90,9 +90,9 @@ class ManageBookingTimeScreen extends StatelessWidget {
               ),
               child: Row(
                 children: const [
-                  HeaderCell('Hours', flex: 0),
+                  HeaderCell('Hours'),
                   HeaderCell('Status'),
-                  HeaderCell('Active', flex: 0),
+                  HeaderCell('Active'),
                 ],
               ),
             ),

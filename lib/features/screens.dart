@@ -14,3 +14,4 @@ export '/features/gallery/add_photos.dart';
 export '/features/customer_reservations/customer_reservation_details.dart';
 export '/features/customer_reservations/targeted_campaign.dart';
 export '/features/customer_reservations/campaign_summary.dart';
+export '/features/settings/set_vanue_category.dart';

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '/features/add_cuisines/add_cuisines.dart';
+import '/features/reviews/reviews.dart';
+import '/features/settings/settings.dart';
+import '/features/share/share.dart';
 import '/features/food_menu/food_menu.dart';
 import '/features/restaurant_working_hours/restaurant_working_hours.dart';
 import '/features/seating_area/seating_area.dart';
@@ -52,10 +56,14 @@ class Skaleton extends StatelessWidget {
               ManageBookingTimeScreen(),
               RestaurantWorkingHoursScreen(),
               SeatingAreaScreen(),
-              Placeholder(),
+              AddCuisinesScreen(),
               FoodMenuScreen(),
               GalleryScreen(),
               CustomerReservations(),
+              ReviewsScreen(),
+              Text("Bundles and Billings"),
+              Settings(),
+              ShareLinksScreen(),
             ],
           ),
         );

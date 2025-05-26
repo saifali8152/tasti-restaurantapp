@@ -18,4 +18,5 @@ class RoutesName {
   static const String campaignSummary = 'campaignSummary';
   static const String addPhotos = 'addPhotos';
   static const String contactUs = 'contactUs';
+  static const String setVanueCategory = 'setVanueCategory';
 }

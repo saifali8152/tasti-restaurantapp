@@ -9,6 +9,10 @@ class Routes {
         return MaterialPageRoute(
           builder: (_) => const CampaignSummary(),
         );
+      case RoutesName.setVanueCategory:
+        return MaterialPageRoute(
+          builder: (_) => const SetVanueCategory(),
+        );
       case RoutesName.targetedCampaign:
         return MaterialPageRoute(
           builder: (_) => const TargetedCampaign(),
