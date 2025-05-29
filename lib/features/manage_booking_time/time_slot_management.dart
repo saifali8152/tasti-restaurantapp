@@ -55,7 +55,7 @@ class TimeSlotManagementScreen extends StatelessWidget {
                   Spacer(),
                   CustomButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, RoutesName.inactiveTimeSlots);
+                      Navigator.pushNamed(context, AppRoutes.inactiveTimeSlots);
                     },
                     text: "Inactive Slots: 1",
                     isFullWidth: false,

@@ -62,7 +62,7 @@ class ManageBookingTimeScreen extends StatelessWidget {
               icon: Icon(Icons.update, size: 20, color: Colors.white),
               title: 'Update Time Duration',
               onTap: () {
-                Navigator.pushNamed(context, RoutesName.updateTimeDuration);
+                Navigator.pushNamed(context, AppRoutes.updateTimeDuration);
               },
               bgColor: updateBtnColor,
             ),
@@ -71,7 +71,7 @@ class ManageBookingTimeScreen extends StatelessWidget {
               icon: Icon(Icons.access_alarm, size: 20, color: Colors.white),
               title: 'Open and Close Time Slots',
               onTap: () {
-                Navigator.pushNamed(context, RoutesName.timeSlotManagement);
+                Navigator.pushNamed(context, AppRoutes.timeSlotManagement);
               },
               bgColor: openBtnColor,
             ),

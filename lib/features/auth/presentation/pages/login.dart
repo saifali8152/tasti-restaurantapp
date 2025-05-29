@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../config/constants/colors.dart';
 import '../../../../config/routes/route_name.dart';
 import '../../widgets/auth_stack.dart';
@@ -13,6 +14,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String userType = 'admin';
     final AuthBloc authBloc = AuthBloc();
 
     return AuthStack(
@@ -49,7 +51,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: 8),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, RoutesName.forgotPassword);
+                    context.push(AppRoutes.forgotPassword);
                   },
                   child: Align(
                     alignment: Alignment.centerRight,
@@ -66,32 +68,29 @@ class LoginScreen extends StatelessWidget {
                 CustomButton(
                   text: "Sign in",
                   onPressed: () {
-                    Navigator.pushReplacementNamed(
-                        context, RoutesName.skaleton);
+                    context.pushReplacement(AppRoutes.skaleton);
                   },
                 ),
                 SizedBox(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Don’t have an account? "),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacementNamed(
-                          context,
-                          RoutesName.signup,
-                        );
-                      },
-                      child: Text(
-                        "Sign up",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                if (userType != 'admin')
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Don’t have an account? "),
+                      GestureDetector(
+                        onTap: () {
+                          context.pushReplacement(AppRoutes.signup);
+                        },
+                        child: Text(
+                          "Sign up",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
                 SizedBox(height: 20),
               ],
             ),

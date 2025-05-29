@@ -65,7 +65,7 @@ class ProfileScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.pushNamed(
                     context,
-                    RoutesName.personalInfo,
+                    AppRoutes.personalInfo,
                   );
                 },
               ),
@@ -93,7 +93,7 @@ class ProfileScreen extends StatelessWidget {
               leading: Icon(Icons.help_outline_outlined),
               title: "Contact Us",
               onTap: () {
-                Navigator.pushNamed(context, RoutesName.contactUs);
+                Navigator.pushNamed(context, AppRoutes.contactUs);
               },
             ),
             CustomTile(

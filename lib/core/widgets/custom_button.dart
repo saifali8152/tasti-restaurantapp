@@ -28,7 +28,7 @@ class CustomButton extends StatelessWidget {
       onTap: isLoading ? null : onPressed,
       child: Container(
         padding: EdgeInsets.symmetric(
-          vertical: isLoading ? 2 : 8,
+          vertical: isLoading ? 2 : 6,
           horizontal: AppSpaces.screenHpad,
         ),
         width: isFullWidth ? double.infinity : null,

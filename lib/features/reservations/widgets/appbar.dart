@@ -34,7 +34,7 @@ class ReservationsAppBar extends StatelessWidget {
                 icon: Image.asset(AppIcons.reservation, color: Colors.white, height: 15),
                 title: 'Make reservation',
                 onTap: () {
-                  Navigator.pushNamed(context, RoutesName.makeReservation);
+                  Navigator.pushNamed(context, AppRoutes.makeReservation);
                 },
                 bgColor: Color(0xFF02966B),
               ),

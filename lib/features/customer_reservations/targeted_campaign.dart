@@ -128,7 +128,7 @@ class _TargetedCampaignState extends State<TargetedCampaign> {
               const SizedBox(height: 30),
               CustomButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, RoutesName.campaignSummary);
+                  Navigator.pushNamed(context, AppRoutes.campaignSummary);
                 },
                 text: 'Send Campaign',
               ),

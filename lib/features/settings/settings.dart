@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '/config/constants/spaces.dart';
 import '/core/widgets/icon_button.dart';
 import '/config/constants/colors.dart';
@@ -29,7 +30,7 @@ class _SettingsState extends State<Settings> {
           icon: Icon(Icons.home, color: Colors.white, size: AppSpaces.iconsHeight),
           title: 'Set Vanue Category',
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.setVanueCategory);
+            context.push(AppRoutes.setVanueCategory);
           },
           bgColor: Color(0xFF0D49AA),
         ),
@@ -82,7 +83,7 @@ class _SettingsState extends State<Settings> {
                 const SizedBox(height: 30),
                 CustomButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, RoutesName.campaignSummary);
+                    Navigator.pushNamed(context, AppRoutes.campaignSummary);
                   },
                   text: 'Send Campaign',
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../config/routes/route_name.dart';
 import 'onbording_page2.dart';
 import 'onbording_page3.dart';
@@ -19,6 +20,7 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String userType = "admin";
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -50,8 +52,7 @@ class OnboardingScreen extends StatelessWidget {
               left: 30,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, RoutesName.login, (route) => false);
+                  context.go(AppRoutes.login);
                 },
                 child: Text(
                   "SKIP",
@@ -68,8 +69,13 @@ class OnboardingScreen extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   if (_controller.page == pages.length - 1) {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, RoutesName.signup, (route) => false);
+                    switch (userType) {
+                      case "admin":
+                        context.go(AppRoutes.login);
+                        break;
+                      case 'restaurant':
+                        context.go(AppRoutes.signup);
+                    }
                   } else {
                     _controller.nextPage(
                       duration: const Duration(milliseconds: 300),

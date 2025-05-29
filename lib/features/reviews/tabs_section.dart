@@ -26,13 +26,7 @@ class TabsSection extends StatelessWidget {
           child: TabBarView(
             physics: NeverScrollableScrollPhysics(),
             children: [
-              ListView.separated(
-                itemCount: 10,
-                separatorBuilder: (context, index) => SizedBox(height: 10),
-                itemBuilder: (context, index) {
-                  return ReviewCard(isVerified: true);
-                },
-              ),
+              
               ListView.separated(
                 itemCount: 10,
                 separatorBuilder: (context, index) => SizedBox(height: 10),

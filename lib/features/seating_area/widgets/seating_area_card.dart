@@ -16,7 +16,7 @@ class SeatingAreaCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, RoutesName.settingAreaDetails);
+        Navigator.pushNamed(context, AppRoutes.settingAreaDetails);
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),

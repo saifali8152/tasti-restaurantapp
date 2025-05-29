@@ -26,7 +26,7 @@ class FoodMenuScreen extends StatelessWidget {
           ),
           title: 'Generate Menu QR',
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.restaurantQRFoodMenu);
+            Navigator.pushNamed(context, AppRoutes.restaurantQRFoodMenu);
           },
           bgColor: const Color(0xFF5A73E2),
         ),

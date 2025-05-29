@@ -36,7 +36,7 @@ class GalleryScreen extends StatelessWidget {
           ),
           title: 'Add Photos',
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.addPhotos);
+            Navigator.pushNamed(context, AppRoutes.addPhotos);
           },
           bgColor: const Color(0xFF9747FF),
         ),

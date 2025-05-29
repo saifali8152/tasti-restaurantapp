@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'config/routes/route_name.dart';
 import 'config/routes/routes.dart';
 import 'config/theme/theme.dart';
 import 'features/auth/presentation/bloc/auth/auth_bloc.dart';
@@ -20,12 +19,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => SkaletonCubit()),
         BlocProvider(create: (context) => AuthBloc()),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
         title: 'Tasti Restaurant App',
         theme: AppTheme.lightTheme,
         themeMode: ThemeMode.light,
-        initialRoute: RoutesName.splash,
-        onGenerateRoute: Routes.generateRoute,
+        routerConfig: router,
       ),
     );
   }

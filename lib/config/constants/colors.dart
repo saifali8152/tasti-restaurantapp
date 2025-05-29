@@ -7,6 +7,7 @@ class AppColors {
   static const Color background = Color(0xFFF2F2F2);
   static const Color tileHeader = Color(0XFFF4C4B1);
   static const Color borderColor = Color(0xFF747B84);
+  static const Color grey = Color(0xFFE3E5E6);
   
   static const Color lightGrey = Color(0xFF6A6A6A);
   static const Color darkGrey = Color(0xFF0A2533);

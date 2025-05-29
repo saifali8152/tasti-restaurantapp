@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../config/routes/route_name.dart';
 import '../../widgets/auth_stack.dart';
 import '../../../../core/widgets/custom_button.dart';
@@ -57,8 +58,7 @@ class SignupScreen extends StatelessWidget {
                 CustomButton(
                   text: "Sign Up",
                   onPressed: () {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, RoutesName.skaleton, (route) => false);
+                    context.go(AppRoutes.skaleton);
                   },
                 ),
                 SizedBox(height: 24),
@@ -68,10 +68,7 @@ class SignupScreen extends StatelessWidget {
                     Text("Already have an account? "),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushReplacementNamed(
-                          context,
-                          RoutesName.login,
-                        );
+                        context.go(AppRoutes.login);
                       },
                       child: Text(
                         "Sign in",

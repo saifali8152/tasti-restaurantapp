@@ -31,7 +31,7 @@ class CustomerReservations extends StatelessWidget {
                   color: Colors.white, height: 15),
               title: 'Targeted Campaign',
               onTap: () {
-                Navigator.pushNamed(context, RoutesName.targetedCampaign);
+                Navigator.pushNamed(context, AppRoutes.targetedCampaign);
               },
               bgColor: Color(0xFFD97700),
             ),

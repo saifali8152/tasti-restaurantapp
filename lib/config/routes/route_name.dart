@@ -1,22 +1,50 @@
-class RoutesName {
-  static const String splash = 'splash';
-  static const String login = 'login';
-  static const String signup = 'signup';
-  static const String skaleton = 'skaleton';
-  static const String onboarding = 'onboarding';
-  static const String forgotPassword = 'forgotPassword';
-  static const String personalInfo = 'personalInfo';
-  static const String makeReservation = 'makeReservation';
-  static const String manageBookingTime = 'manageBookingTime';
-  static const String updateTimeDuration = 'updateTimeDuration';
-  static const String timeSlotManagement = 'timeSlotManagement';
-  static const String inactiveTimeSlots = 'inactiveTimeSlots';
-  static const String settingAreaDetails = 'settingAreaDetails';
-  static const String customerReservationDetails = 'customerReservationDetails';
-  static const String restaurantQRFoodMenu = 'restaurantQRFoodMenu';
-  static const String targetedCampaign = 'targetedCampaign';
-  static const String campaignSummary = 'campaignSummary';
-  static const String addPhotos = 'addPhotos';
-  static const String contactUs = 'contactUs';
-  static const String setVanueCategory = 'setVanueCategory';
+class AppRoutes {
+  // ✅ Auth Routes
+  static const String splash = '/splash';
+  static const String login = '/login';
+  static const String signup = '/signup';
+  static const String onboarding = '/onboarding';
+  static const String forgotPassword = '/forgot-password';
+
+  static const String notifications = '/notifications';
+
+  // ✅ Profile / Info
+  static const String personalInfo = '/personal-info';
+
+  // ✅ Main Layout (After Login)
+  static const String skaleton = '/';
+
+  // ✅ Restaurant-Specific Routes
+  static const String makeReservation = '/make-reservation';
+  static const String manageBookingTime = '/manage-booking-time';
+  static const String updateTimeDuration = '/update-time-duration';
+  static const String timeSlotManagement = '/time-slot-management';
+  static const String inactiveTimeSlots = '/inactive-time-slots';
+  static const String settingAreaDetails = '/setting-area-details';
+  static const String customerReservationDetails = '/customer-reservation-details';
+  static const String restaurantQRFoodMenu = '/restaurant-qr-food-menu';
+  static const String targetedCampaign = '/targeted-campaign';
+  static const String campaignSummary = '/campaign-summary';
+  static const String addPhotos = '/add-photos';
+  static const String contactUs = '/contact-us';
+  static const String workingHours = '/working-hours';
+  static const String seatingArea = '/seating-area';
+  static const String addCuisines = '/add-cuisines';
+  static const String foodMenu = '/food-menu';
+  static const String gallery = '/gallery';
+  static const String reservationDatabase = '/reservation-database';
+  static const String maintainReviews = '/maintain-reviews';
+
+  // ✅ Common/Admin Routes
+  static const String stats = '/stats';
+  static const String reservations = '/reservations';
+  static const String billings = '/billings';
+  static const String settings = '/settings';
+  static const String setVanueCategory = '/settings/set-vanue-category';
+  static const String share = '/share';
+  static const String campaignDetails = '/campaign-details';
+  static const String requestDetails = '/request-details';
+  static const String queryDetails = '/query-details';
+  static const String restaurantDetails = '/restaurant-details';
+  static const String reservationDbDetails = '/reservation-db-details';
 }

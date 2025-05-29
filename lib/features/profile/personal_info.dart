@@ -47,7 +47,7 @@ class PersonalInfoScreen extends StatelessWidget {
               leading: Icon(Icons.lock_outline),
               title: "Change Password",
               onTap: () {
-                Navigator.pushNamed(context, RoutesName.forgotPassword );
+                Navigator.pushNamed(context, AppRoutes.forgotPassword );
               },
         
             )

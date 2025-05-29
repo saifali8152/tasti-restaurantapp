@@ -15,7 +15,7 @@ class CustomerReservationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, RoutesName.customerReservationDetails);
+        Navigator.pushNamed(context, AppRoutes.customerReservationDetails);
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
