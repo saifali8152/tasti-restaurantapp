@@ -1,33 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tasti_restaurant_app/config/routes/route_name.dart';
-import '/features/admin/campaign/campaign.dart';
-import '/features/admin/manage_sms/manage_sms.dart';
-import '/features/admin/queries/queries.dart';
-import '/features/admin/requests/requests.dart';
-import '/features/admin/reservations_database/reservations_database.dart';
-import '/features/admin/restaurants/restaurants.dart';
-import '/features/admin/today_queries/today_queries.dart';
-import '/features/admin/today_requests/today_requests.dart';
-import '../../../admin/dashboard/dashboard_screen.dart';
-import '/features/add_cuisines/add_cuisines.dart';
-import '/features/reviews/reviews.dart';
-import '/features/settings/settings.dart';
-import '/features/share/share.dart';
-import '/features/food_menu/food_menu.dart';
-import '/features/restaurant_working_hours/restaurant_working_hours.dart';
-import '/features/seating_area/seating_area.dart';
-import '../../../customer_reservations/customer_reservations.dart';
-import '../../../gallery/gallery.dart';
-import '/config/constants/colors.dart';
-import '/features/dashboard/dashboard_screen.dart';
-import '/features/dashboard/widgets/custom_drawer.dart';
-import '/features/manage_booking_time/manage_booking_time.dart';
-import '/features/reservations/reservations.dart';
+import '/features/screens.dart';
+import '/config/routes/route_name.dart';
 import '../../../../config/constants/icons.dart';
 import '../../../../config/constants/spaces.dart';
+import '/config/constants/colors.dart';
 import '../bloc/cubit/skaleton_cubit.dart';
+
 
 class Skaleton extends StatelessWidget {
   const Skaleton({super.key});
@@ -68,7 +48,7 @@ class Skaleton extends StatelessWidget {
           ),
           body: IndexedStack(
             index: state.index,
-            children: DrawerConfig.drawerItemsForRole('admin'),
+            children: DrawerScreens.drawerItemsForRole('admin'),
           ),
         );
       },
@@ -76,7 +56,7 @@ class Skaleton extends StatelessWidget {
   }
 }
 
-class DrawerConfig {
+class DrawerScreens {
   static List<Widget> drawerItemsForRole(String role) {
     switch (role.toLowerCase()) {
       case "admin":

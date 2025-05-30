@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tasti_restaurant_app/config/routes/route_name.dart';
+import '/config/routes/route_name.dart';
 import '/config/constants/colors.dart';
 
 class ReservationsDBCard extends StatelessWidget {

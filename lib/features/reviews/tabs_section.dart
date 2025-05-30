@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/features/reviews/widgets/review_card.dart';
+import '/features/reviews/widgets/review_card.dart';
 import '../../../../../config/constants/colors.dart';
 
 class TabsSection extends StatelessWidget {

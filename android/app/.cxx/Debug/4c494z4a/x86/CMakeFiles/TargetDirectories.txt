@@ -1,0 +1,2 @@
+/Users/ali/Documents/flutterProjects/tasti-restaurantapp/android/app/.cxx/Debug/4c494z4a/x86/CMakeFiles/edit_cache.dir
+/Users/ali/Documents/flutterProjects/tasti-restaurantapp/android/app/.cxx/Debug/4c494z4a/x86/CMakeFiles/rebuild_cache.dir

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import '/config/routes/route_name.dart';
 import '/config/constants/icons.dart';
 import '/core/widgets/icon_button.dart';
 import 'widgets/manage_sms_card.dart';
@@ -24,14 +26,14 @@ class ManageSMS extends StatelessWidget {
               icon: Image.asset(AppIcons.envelop,
                   color: Colors.white, height: 15),
               title: 'Add SMS Bundles',
-              onTap: () {},
+              onTap: ()=> context.push(AppRoutes.addSmsBundle),
               bgColor: Color(0xFF0D49AA),
             ),
             ButtonWithIcon(
               icon:
                   Image.asset(AppIcons.target, color: Colors.white, height: 15),
               title: 'Transaction History',
-              onTap: () {},
+              onTap: ()=> context.push(AppRoutes.transactionHistory),
               bgColor: Color(0xFF5A73E2),
             ),
             ButtonWithIcon(

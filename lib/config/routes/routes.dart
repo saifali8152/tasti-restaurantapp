@@ -1,15 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/features/admin/campaign/campaign_details.dart';
-import 'package:tasti_restaurant_app/features/admin/reservations_database/reservation_db_details.dart';
-import 'package:tasti_restaurant_app/features/admin/today_queries/query_details.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/request_details.dart';
-import '../../features/admin/restaurants/restaurant_details.dart';
-import '/features/notifications/notifications.dart';
-import '/features/dashboard/dashboard_screen.dart';
-import '/features/reservations/reservations.dart';
-import '/features/restaurant_working_hours/restaurant_working_hours.dart';
-import '/features/settings/settings.dart';
-import '/features/share/share.dart';
+import '/features/admin/manage_sms/add_sms_bundle.dart';
 import '../../features/screens.dart';
 import 'route_name.dart';
 
@@ -23,6 +13,18 @@ final GoRouter router = GoRouter(
   initialLocation: AppRoutes.splash,
   navigatorKey: _rootNavigatorKey,
   routes: [
+    GoRoute(
+      path: AppRoutes.addSmsBundle,
+      builder: (context, state) => const AddSMSBundle(),
+    ),
+    GoRoute(
+      path: AppRoutes.transactionHistory,
+      builder: (context, state) => const TransactionHistory(),
+    ),
+    GoRoute(
+      path: AppRoutes.smsBundleDetails,
+      builder: (context, state) => const SmsBundleDetails(),
+    ),
     GoRoute(
       path: AppRoutes.queryDetails,
       builder: (context, state) => const QueryDetails(),
