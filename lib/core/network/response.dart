@@ -1,4 +1,18 @@
-import 'status.dart';
+abstract class DataState<T> {
+  const DataState();
+}
+
+class DataSuccess<T> extends DataState<T> {
+  final T data;
+  const DataSuccess(this.data);
+}
+
+class DataFailure<T> extends DataState<T> {
+  final String error;
+  const DataFailure(this.error);
+}
+
+enum Status {initial, loading, completed, error }
 
 class ApiResponse<T> {
   Status? status;

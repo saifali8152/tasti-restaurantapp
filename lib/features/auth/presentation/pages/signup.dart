@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../config/routes/route_name.dart';
-import '../../widgets/auth_stack.dart';
+import '../widgets/auth_stack.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_input_field.dart';
 import '../bloc/auth/auth_bloc.dart';

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/dependency_injection.dart';
 import 'config/routes/routes.dart';
 import 'config/theme/theme.dart';
 import 'features/auth/presentation/bloc/auth/auth_bloc.dart';
-import 'features/skaleton/presentation/bloc/cubit/skaleton_cubit.dart';
+import 'features/skaleton/cubit/skaleton_cubit.dart';
 
-void main() {
+void main() async{
+  await initializeDependencies();
   runApp(const MyApp());
 }
 

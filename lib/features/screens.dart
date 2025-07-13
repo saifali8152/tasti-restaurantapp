@@ -1,5 +1,5 @@
 export 'splash/splash.dart';
-export 'skaleton/presentation/pages/skaleton.dart';
+export 'skaleton/pages/skaleton.dart';
 export 'auth/presentation/pages/login.dart';
 export 'auth/presentation/pages/signup.dart';
 export 'onboarding/onbording.dart';
@@ -23,7 +23,7 @@ export '/features/admin/reservations_database/reservations_database.dart';
 export '/features/admin/restaurants/restaurants.dart';
 export '/features/admin/today_queries/today_queries.dart';
 export '/features/admin/today_requests/today_requests.dart';
-export '/features/admin/dashboard/dashboard_screen.dart';
+export 'admin/dashboard/presentation/pages/dashboard_screen.dart';
 export '/features/add_cuisines/add_cuisines.dart';
 export '/features/reviews/reviews.dart';
 export '/features/settings/settings.dart';

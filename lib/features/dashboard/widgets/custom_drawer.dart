@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/features/auth/presentation/widgets/signout_dialog.dart';
 import '/config/constants/colors.dart';
 import '/config/constants/images.dart';
 import '/core/utils/general_extentions.dart';
-import '../../skaleton/presentation/bloc/cubit/skaleton_cubit.dart';
+import '../../skaleton/cubit/skaleton_cubit.dart';
 
 class CustomDrawer extends StatelessWidget {
   final String userRole;
@@ -19,17 +20,22 @@ class CustomDrawer extends StatelessWidget {
       backgroundColor: Colors.white,
       child: ListView(
         children: [
-          UserAccountsDrawerHeader(
-            decoration: const BoxDecoration(color: AppColors.white),
-            accountName: Text(userRole),
-            accountEmail: Text("$userRole@example.com"),
-            currentAccountPicture:
-                CircleAvatar(backgroundImage: AssetImage(AppImages.profile)),
+          BlocBuilder<SkaletonCubit, SkaletonCubitState>(
+            builder: (context, state) {
+              return UserAccountsDrawerHeader(
+                decoration: const BoxDecoration(color: AppColors.white),
+                accountName: Text((state.user == null).toString()),
+                accountEmail: Text("$userRole@example.com"),
+                currentAccountPicture: CircleAvatar(
+                    backgroundImage: AssetImage(AppImages.profile)),
+              );
+            },
           ),
           ...drawerItems.map((item) {
             if (item.isExpandable) {
               return Theme(
-                data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                data: Theme.of(context)
+                    .copyWith(dividerColor: Colors.transparent),
                 child: ExpansionTile(
                   textColor: AppColors.darkOrange,
                   iconColor: AppColors.darkOrange,
@@ -59,7 +65,7 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text("Logout"),
-            onTap: () {},
+            onTap: () => context.showCustomDialog(LogoutDialog()),
           )
         ],
       ),
@@ -88,9 +94,7 @@ class CustomDrawer extends StatelessWidget {
   }
 
   Widget _nestedDrawerItem(BuildContext context,
-      {required String title,
-      required int index,
-      required int currentIndex}) {
+      {required String title, required int index, required int currentIndex}) {
     return ListTile(
       minTileHeight: 30,
       minVerticalPadding: 0,
@@ -102,7 +106,7 @@ class CustomDrawer extends StatelessWidget {
               fontWeight:
                   currentIndex == index ? FontWeight.bold : FontWeight.w400)),
       onTap: () {
-        if(currentIndex == index) {
+        if (currentIndex == index) {
           Navigator.pop(context);
           return;
         }
@@ -139,45 +143,73 @@ class DrawerConfig {
       case "admin":
         return [
           DrawerItemModel(icon: Icons.dashboard, title: "Stats", index: 0),
-          DrawerItemModel(icon: Icons.supervised_user_circle, title: "Restaurants", index: 1),
+          DrawerItemModel(
+              icon: Icons.supervised_user_circle,
+              title: "Restaurants",
+              index: 1),
           DrawerItemModel(
             icon: Icons.build,
             title: "Maintain more",
             isExpandable: true,
             children: [
-              DrawerItemModel(title: "Today's Requests", index: 2, icon: Icons.history),
-              DrawerItemModel(title: "Today's Queries", index: 3, icon: Icons.bug_report),
-              DrawerItemModel(title: "Overall Requests", index: 4 , icon: Icons.speed),
-              DrawerItemModel(title: "Overall Querires", index: 5 , icon: Icons.speed),
-              DrawerItemModel(title: "Reservations Database", index: 6 , icon: Icons.speed),
+              DrawerItemModel(
+                  title: "Today's Requests", index: 2, icon: Icons.history),
+              DrawerItemModel(
+                  title: "Today's Queries", index: 3, icon: Icons.bug_report),
+              DrawerItemModel(
+                  title: "Overall Requests", index: 4, icon: Icons.speed),
+              DrawerItemModel(
+                  title: "Overall Querires", index: 5, icon: Icons.speed),
+              DrawerItemModel(
+                  title: "Reservations Database", index: 6, icon: Icons.speed),
             ],
           ),
-          DrawerItemModel(icon: Icons.supervised_user_circle, title: "Manage SMS & Fees", index: 7),
-          DrawerItemModel(icon: Icons.supervised_user_circle, title: "Campaigns", index: 8),
+          DrawerItemModel(
+              icon: Icons.supervised_user_circle,
+              title: "Manage SMS & Fees",
+              index: 7),
+          DrawerItemModel(
+              icon: Icons.supervised_user_circle, title: "Campaigns", index: 8),
         ];
       case "restaurant":
       default:
         return [
-          DrawerItemModel(icon: Icons.trending_up_rounded, title: "Stats", index: 0),
-          DrawerItemModel(icon: Icons.restaurant_outlined, title: "Reservations", index: 1),
+          DrawerItemModel(
+              icon: Icons.trending_up_rounded, title: "Stats", index: 0),
+          DrawerItemModel(
+              icon: Icons.restaurant_outlined, title: "Reservations", index: 1),
           DrawerItemModel(
             icon: Icons.settings_outlined,
             title: "Availability",
             isExpandable: true,
             children: [
-              DrawerItemModel(title: "Manage Booking Time", index: 2, icon: Icons.access_time),
-              DrawerItemModel(title: "Working Hours", index: 3, icon: Icons.schedule),
-              DrawerItemModel(title: "Seating Area", index: 4, icon: Icons.chair),
-              DrawerItemModel(title: "Add Cuisines & More", index: 5, icon: Icons.food_bank),
-              DrawerItemModel(title: "Food Menu", index: 6, icon: Icons.menu_book),
-              DrawerItemModel(title: "Gallery", index: 7, icon: Icons.photo_album),
-              DrawerItemModel(title: "Reservation Database", index: 8, icon: Icons.storage),
-              DrawerItemModel(title: "Maintain Reviews", index: 9, icon: Icons.reviews),
+              DrawerItemModel(
+                  title: "Manage Booking Time",
+                  index: 2,
+                  icon: Icons.access_time),
+              DrawerItemModel(
+                  title: "Working Hours", index: 3, icon: Icons.schedule),
+              DrawerItemModel(
+                  title: "Seating Area", index: 4, icon: Icons.chair),
+              DrawerItemModel(
+                  title: "Add Cuisines & More",
+                  index: 5,
+                  icon: Icons.food_bank),
+              DrawerItemModel(
+                  title: "Food Menu", index: 6, icon: Icons.menu_book),
+              DrawerItemModel(
+                  title: "Gallery", index: 7, icon: Icons.photo_album),
+              DrawerItemModel(
+                  title: "Reservation Database", index: 8, icon: Icons.storage),
+              DrawerItemModel(
+                  title: "Maintain Reviews", index: 9, icon: Icons.reviews),
             ],
           ),
-          DrawerItemModel(icon: Icons.note, title: "Bundles and Billings", index: 10),
+          DrawerItemModel(
+              icon: Icons.note, title: "Bundles and Billings", index: 10),
           DrawerItemModel(icon: Icons.settings, title: "Settings", index: 11),
-          DrawerItemModel(icon: Icons.share, title: "Widget code and share", index: 12),
+          DrawerItemModel(
+              icon: Icons.share, title: "Widget code and share", index: 12),
         ];
     }
   }

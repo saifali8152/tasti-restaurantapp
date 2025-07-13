@@ -8,6 +8,37 @@ extension FormattedDateExtension on DateTime? {
   }
 }
 
+extension FormattedMonthYear on DateTime {
+  String get monthYear {
+    const monthNames = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+    return '${monthNames[month - 1]} $year';
+  }
+}
+
+extension ShowDialogExtension on BuildContext {
+  void showCustomDialog(Widget widget, {bool isDismissible = true}) {
+    showDialog(
+      context: this,
+      barrierColor: Colors.black87,
+      barrierDismissible: isDismissible,
+      builder: (context) => widget,
+    );
+  }
+}
+
 extension DatePickerExtension on BuildContext {
   Future<void> showCustomDatePicker({
     required DateTime initialDate,
@@ -45,7 +76,6 @@ extension DatePickerExtension on BuildContext {
     }
   }
 }
-
 
 extension ContextExtensions on BuildContext {
   Future<T?> showBottomSheet<T>({

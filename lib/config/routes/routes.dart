@@ -58,6 +58,12 @@ final GoRouter router = GoRouter(
       builder: (context, state) => const LoginScreen(),
     ),
     GoRoute(
+      path: AppRoutes.forgotPassword,
+      builder: (context, state) => Scaffold(
+        appBar: AppBar(title: Text("Forgot Password")),
+      ),
+    ),
+    GoRoute(
       path: AppRoutes.signup,
       builder: (context, state) => const SignupScreen(),
     ),

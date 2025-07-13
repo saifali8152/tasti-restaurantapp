@@ -18,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (!SessionController().isLogin) ...[
+            if (SessionController().user == null) ...[
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -32,7 +32,7 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(height: 10),
               CustomButton(onPressed: () {}, text: "Sign up or Login"),
             ],
-            if (SessionController().isLogin) ...[
+            if (SessionController().user != null) ...[
               Center(
                 child: CircleAvatar(
                   radius: 50,
@@ -109,7 +109,7 @@ class ProfileScreen extends StatelessWidget {
               borderColor: Colors.transparent,
             ),
             Spacer(),
-            SessionController().isLogin
+            SessionController().user != null
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../config/constants/spaces.dart';
+import '/core/widgets/loading_widget.dart';
 import '../../config/constants/colors.dart';
 
 class CustomButton extends StatelessWidget {
@@ -27,32 +27,44 @@ class CustomButton extends StatelessWidget {
     return GestureDetector(
       onTap: isLoading ? null : onPressed,
       child: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: isLoading ? 2 : 6,
-          horizontal: AppSpaces.screenHpad,
-        ),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         width: isFullWidth ? double.infinity : null,
         decoration: BoxDecoration(
           color: bgColor,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(8),
           border: Border.all(color: borderColor, width: 1),
         ),
-        child: isLoading
-            ? const Center(
-                child: CircularProgressIndicator.adaptive(
-                  backgroundColor: Colors.white,
-                ),
-              )
-            : Text(
-                text,
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  color: textColor,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                ),
+        child: AnimatedSize(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 200),
+            switchInCurve: Curves.easeIn,
+            switchOutCurve: Curves.easeOut,
+            transitionBuilder: (child, animation) => FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
+            child: isLoading
+                ? const SizedBox(
+                    key: ValueKey('loading'),
+                    height: 24,
+                    width: 24,
+                    child: LoadingWidget(),
+                  )
+                : Text(
+                    text,
+                    key: const ValueKey('text'),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: textColor,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                    ),
+                  ),
+          ),
         ),
       ),
     );
