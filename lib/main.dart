@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/dependency_injection.dart';
+import 'package:tasti_restaurant_app/features/admin/reservations_database/presentation/bloc/admin_reservation_bloc.dart';
 import 'config/routes/routes.dart';
 import 'config/theme/theme.dart';
 import 'features/auth/presentation/bloc/auth/auth_bloc.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => SkaletonCubit()),
         BlocProvider(create: (context) => AuthBloc()),
+        BlocProvider(create: (context) => sl<AdminReservationBloc>()),
       ],
       child: MaterialApp.router(
         title: 'Tasti Restaurant App',

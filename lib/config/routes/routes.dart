@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/entities/reservation.dart';
 import '/features/admin/manage_sms/add_sms_bundle.dart';
 import '../../features/screens.dart';
 import 'route_name.dart';
@@ -31,7 +32,7 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.reservationDbDetails,
-      builder: (context, state) => const ReservationDbDetails(),
+      builder: (context, state) => ReservationDbDetails(item: state.extra as AdminReservationItem),
     ),
     GoRoute(
       path: AppRoutes.restaurantDetails,

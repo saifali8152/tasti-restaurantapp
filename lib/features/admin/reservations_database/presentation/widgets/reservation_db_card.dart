@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '/features/admin/reservations_database/domain/entities/reservation.dart';
 import '/config/routes/route_name.dart';
 import '/config/constants/colors.dart';
 
 class ReservationsDBCard extends StatelessWidget {
-  const ReservationsDBCard({super.key});
+  final AdminReservationItem item;
+  const ReservationsDBCard({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.push(AppRoutes.reservationDbDetails),
+      onTap: () => context.push(AppRoutes.reservationDbDetails, extra: item),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: .5,
@@ -22,7 +24,7 @@ class ReservationsDBCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Beer Park Sandton',
+                    item.restaurantName,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   Icon(Icons.open_in_new, size: 16),
@@ -38,7 +40,7 @@ class ReservationsDBCard extends StatelessWidget {
                     style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                   ),
                   Text(
-                    'May 24, 2025 1:30 PM',
+                    item.reservationTimeFormatted,
                     style: TextStyle(fontSize: 12, color: Colors.grey[800]),
                   ),
                 ],
@@ -53,7 +55,7 @@ class ReservationsDBCard extends StatelessWidget {
                     style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                   ),
                   Text(
-                    '3',
+                    item.numGuests.toString(),
                     style: TextStyle(fontSize: 14, color: AppColors.darkOrange, fontWeight: FontWeight.bold),
                   ),
                 ],
