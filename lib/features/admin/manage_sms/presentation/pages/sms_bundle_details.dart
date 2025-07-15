@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/entities/admin_sms.dart';
 import '/config/constants/colors.dart';
 import '/core/widgets/custom_button.dart';
 import '/core/widgets/details_row.dart';
 import '/core/widgets/custom_app_bar.dart';
 
 class SmsBundleDetails extends StatelessWidget {
-  const SmsBundleDetails({super.key});
+  final AdminSmsItem item;
+  const SmsBundleDetails({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +17,13 @@ class SmsBundleDetails extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            DetailsRow(title: "Package Owner", value: "Tasti"),
-            DetailsRow(title: "SMS Quantity", value: "1000"),
-            DetailsRow(title: "Origional Price", value: "1000"),
-            DetailsRow(title: "Discounted Price", value: "700"),
-            DetailsRow(title: "Discount %", value: "10%"),
+            DetailsRow(title: "Package Owner", value: item.productOwner),
+            DetailsRow(title: "SMS Quantity", value: item.bundles),
+            DetailsRow(title: "Origional Price", value: item.amount),
+            if(item.hasDiscount)...[
+            DetailsRow(title: "Discounted Price", value: item.discount),
+            DetailsRow(title: "Discount %", value: item.percentage),
+            ],
             SizedBox(height: 20),
             Row(
               children: [

@@ -1,9 +1,11 @@
+import 'package:tasti_restaurant_app/features/admin/manage_sms/data/models/admin_sms.dart';
 import '/core/parms/parms.dart';
 import '/core/network/api_services.dart';
 import '/config/constants/urls.dart';
 
 abstract class ISMSBundleRemoteSourceApi {
   Future<String> addSMSBundle(AddSMSBundleParms parms);
+  Future<AdminSmsModel> fetchAdminSms(PaginationParms parms);
 }
 
 class SMSBundleSourceRemoteApiImpl extends ISMSBundleRemoteSourceApi {
@@ -24,5 +26,21 @@ class SMSBundleSourceRemoteApiImpl extends ISMSBundleRemoteSourceApi {
     var response = await networkApiService.post(AppUrls.adminAddSMS, data);
 
     return response['message'];
+  }
+
+  @override
+  Future<AdminSmsModel> fetchAdminSms(PaginationParms parms) async {
+    Map<String, String> data = {};
+
+    data = {
+      "page": parms.page.toString(),
+      "limit": parms.limit.toString(),
+    };
+    final response = await networkApiService.get(AppUrls.fetchAdminSMS, queryParams: data);
+    final Map<String, dynamic> adminReservation = response;
+
+    final AdminSmsModel adminSmsList = AdminSmsModel.fromJson(adminReservation);
+
+    return adminSmsList;
   }
 }
