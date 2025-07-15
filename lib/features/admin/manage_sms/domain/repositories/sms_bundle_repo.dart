@@ -4,5 +4,6 @@ import '/core/network/response.dart';
 
 abstract class ISMSBundleRepo {
   Future<DataState<String>> addSMSBundle(AddSMSBundleParms parms);
+  Future<DataState<String>> deleteSMSBundle(String id);
   Future<DataState<AdminSmsEntity>> fetchAdminSms(PaginationParms parms);
 }

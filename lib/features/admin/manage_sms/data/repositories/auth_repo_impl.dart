@@ -17,6 +17,16 @@ class SMSBundleRepoImpl extends ISMSBundleRepo {
       return DataFailure(error.toString());
     }
   }
+ 
+  @override
+  Future<DataState<String>> deleteSMSBundle(String id) async{
+    try {
+      final result = await dataSource.deleteSMSBundle(id);
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
   
   @override
   Future<DataState<AdminSmsModel>> fetchAdminSms(PaginationParms parms) async{

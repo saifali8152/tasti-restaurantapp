@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/entities/admin_sms.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/widgets/delete_sms_dialog.dart';
 import '/config/constants/colors.dart';
 import '/core/widgets/custom_button.dart';
 import '/core/widgets/details_row.dart';
@@ -20,9 +22,9 @@ class SmsBundleDetails extends StatelessWidget {
             DetailsRow(title: "Package Owner", value: item.productOwner),
             DetailsRow(title: "SMS Quantity", value: item.bundles),
             DetailsRow(title: "Origional Price", value: item.amount),
-            if(item.hasDiscount)...[
-            DetailsRow(title: "Discounted Price", value: item.discount),
-            DetailsRow(title: "Discount %", value: item.percentage),
+            if (item.hasDiscount) ...[
+              DetailsRow(title: "Discounted Price", value: item.discount),
+              DetailsRow(title: "Discount %", value: item.percentage),
             ],
             SizedBox(height: 20),
             Row(
@@ -36,8 +38,14 @@ class SmsBundleDetails extends StatelessWidget {
                 )),
                 SizedBox(width: 10),
                 Expanded(
-                    child: CustomButton(
-                        onPressed: () {}, text: "Manage Discount")),
+                  child: CustomButton(
+                      onPressed: () {
+                        context.showCustomDialog(
+                          DeleteSmsDialog(id: item.id.toString()),
+                        );
+                      },
+                      text: "Manage Discount"),
+                ),
               ],
             )
           ],

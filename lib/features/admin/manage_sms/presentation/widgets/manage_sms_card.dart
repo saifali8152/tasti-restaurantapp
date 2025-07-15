@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '/core/utils/general_extentions.dart';
+import '/features/admin/manage_sms/presentation/widgets/delete_sms_dialog.dart';
 import '/features/admin/manage_sms/domain/entities/admin_sms.dart';
 import '/config/routes/route_name.dart';
 import '/core/widgets/custom_button.dart';
@@ -68,7 +70,7 @@ class ManageSMSCard extends StatelessWidget {
               Divider(),
               SizedBox(height: 8),
               CustomButton(
-                  onPressed: () {},
+                  onPressed: ()=> context.showCustomDialog(DeleteSmsDialog(id: smsItem.id.toString())),
                   text: "Delete",
                   bgColor: AppColors.grey,
                   textColor: Colors.black),
