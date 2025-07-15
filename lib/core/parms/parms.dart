@@ -16,3 +16,19 @@ class PaginationParms {
     this.search = '',
   });
 }
+
+class AddSMSBundleParms {
+  final String owner;
+  final int quantity;
+  final int discount;
+  final int price;
+  final int percentage;
+
+  AddSMSBundleParms({
+    required this.owner,
+    required this.quantity,
+    required this.discount,
+    required this.price,
+    required this.percentage,
+  });
+}

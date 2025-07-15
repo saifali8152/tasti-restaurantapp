@@ -5,6 +5,11 @@ import 'package:tasti_restaurant_app/features/admin/dashboard/data/repositories/
 import 'package:tasti_restaurant_app/features/admin/dashboard/domain/repositories/admin_dashboard_repo.dart';
 import 'package:tasti_restaurant_app/features/admin/dashboard/domain/usecases/fetch_admin_dashboard.dart';
 import 'package:tasti_restaurant_app/features/admin/dashboard/presentation/bloc/admin_dashboard_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_sms/data/data_sources/sms_bundle_remote_source.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_sms/data/repositories/auth_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/repositories/sms_bundle_repo.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/add_sms_bundle.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/add_sms_bundle_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/data/data_sources/admin_reservation_remote_api.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/data/repositories/admin_dashboard_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/repositories/admin_reservation_repo.dart';
@@ -39,17 +44,20 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IAuthRemoteApi>(AuthRemoteApiImpl(sl()));
   sl.registerSingleton<IAdminDashboardRemoteApi>(AdminDashboardRemoteApiImpl(sl()));
   sl.registerSingleton<IAdminReservationRemoteApi>(AdminReservationRemoteApiImpl(sl()));
+  sl.registerSingleton<ISMSBundleRemoteSourceApi>(SMSBundleSourceRemoteApiImpl(sl()));
   
   // Repository
   sl.registerSingleton<IAuthRepo>(AuthRepoImpl(sl()));
   sl.registerSingleton<IAdminDashboardRepo>(AdminDashboardRepoImpl(sl()));
   sl.registerSingleton<IAdminReservationRepo>(AdminReservationRepoImpl(sl()));
+  sl.registerSingleton<ISMSBundleRepo>(SMSBundleRepoImpl(sl()));
   
   // UseCase
   sl.registerSingleton<LoginUseCase>(LoginUseCase(sl()));
   sl.registerSingleton<SignOutUseCase>(SignOutUseCase(sl()));
   sl.registerSingleton<FetchAdminDashboardUseCase>(FetchAdminDashboardUseCase(sl()));
   sl.registerSingleton<FetchAdminReservationsUseCase>(FetchAdminReservationsUseCase(sl()));
+  sl.registerSingleton<AddSMSBundleUsecase>(AddSMSBundleUsecase(sl()));
   
   // Bloc
   sl.registerLazySingleton<SkaletonCubit>(() => SkaletonCubit());
@@ -57,4 +65,5 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton<SignOutBloc>(() => SignOutBloc(sl()));
   sl.registerLazySingleton<AdminDashboardBloc>(() => AdminDashboardBloc(sl()));
   sl.registerLazySingleton<AdminReservationBloc>(() => AdminReservationBloc(sl()));
+  sl.registerLazySingleton<AddSmsBundleBloc>(() => AddSmsBundleBloc(sl()));
 }

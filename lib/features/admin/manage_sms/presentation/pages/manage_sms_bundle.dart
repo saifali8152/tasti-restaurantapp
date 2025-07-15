@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import '/config/routes/route_name.dart';
 import '/config/constants/icons.dart';
 import '/core/widgets/icon_button.dart';
-import 'widgets/manage_sms_card.dart';
+import '../widgets/manage_sms_card.dart';
 import '/core/widgets/curved_container.dart';
 import '/core/widgets/themed_app_bar.dart';
 import '/config/constants/colors.dart';

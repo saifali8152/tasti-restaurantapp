@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/entities/reservation.dart';
-import '/features/admin/manage_sms/add_sms_bundle.dart';
+import '../../features/admin/manage_sms/presentation/pages/add_sms_bundle.dart';
 import '../../features/screens.dart';
 import 'route_name.dart';
 

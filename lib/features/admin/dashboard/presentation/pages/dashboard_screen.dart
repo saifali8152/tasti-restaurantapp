@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/dependency_injection.dart';
 import 'package:tasti_restaurant_app/features/admin/dashboard/domain/entities/admin_dashboard.dart';
-import 'package:tasti_restaurant_app/features/admin/dashboard/domain/usecases/fetch_admin_dashboard.dart';
 import '/config/constants/colors.dart';
 import '/core/widgets/curved_container.dart';
 import '../bloc/admin_dashboard_bloc.dart';
