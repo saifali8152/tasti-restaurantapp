@@ -31,20 +31,19 @@ class SmsBundleDetails extends StatelessWidget {
               children: [
                 Expanded(
                     child: CustomButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.showCustomDialog(
+                      DeleteSmsDialog(id: item.id.toString()),
+                    );
+                  },
                   text: "Delete",
                   bgColor: AppColors.grey,
                   textColor: Colors.black,
                 )),
                 SizedBox(width: 10),
                 Expanded(
-                  child: CustomButton(
-                      onPressed: () {
-                        context.showCustomDialog(
-                          DeleteSmsDialog(id: item.id.toString()),
-                        );
-                      },
-                      text: "Manage Discount"),
+                  child:
+                      CustomButton(onPressed: () {}, text: "Manage Discount"),
                 ),
               ],
             )

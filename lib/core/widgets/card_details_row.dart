@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 class CardDetailsRow extends StatelessWidget {
   final String label;
   final String value;
+  final int flex;
   const CardDetailsRow({
     required this.label,
     required this.value,
+    this.flex = 0,
     super.key,
   });
 
@@ -16,12 +18,17 @@ class CardDetailsRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: Colors.grey[700], fontSize: 10)),
-          Text(
-            value,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 12,
+          Text(label, style: TextStyle(color: Colors.grey[700], fontSize: 12)),
+          SizedBox(width: 10),
+          Expanded(
+            flex: flex,
+            child: Text(
+              value,
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 12,
+              ),
+              textAlign: TextAlign.end,
             ),
           ),
         ],

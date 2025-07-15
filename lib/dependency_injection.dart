@@ -19,6 +19,11 @@ import 'package:tasti_restaurant_app/features/admin/reservations_database/data/r
 import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/repositories/admin_reservation_repo.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/usecases/fetch_admin_reservations.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/presentation/bloc/admin_reservation_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/transaction_history/data/data_sources/transaction_history_remote_source.dart';
+import 'package:tasti_restaurant_app/features/admin/transaction_history/data/repositories/transaction_history_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/admin/transaction_history/domain/repositories/transaction_history_repo.dart';
+import 'package:tasti_restaurant_app/features/admin/transaction_history/domain/usecases/fetch_admin_transaction_history.dart';
+import 'package:tasti_restaurant_app/features/admin/transaction_history/presentation/bloc/transaction_history_bloc.dart';
 import 'package:tasti_restaurant_app/features/skaleton/cubit/skaleton_cubit.dart';
 import 'features/auth/data/data_sources/auth_remote_api.dart';
 import 'features/auth/data/repositories/auth_repo_impl.dart';
@@ -49,12 +54,14 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IAdminDashboardRemoteApi>(AdminDashboardRemoteApiImpl(sl()));
   sl.registerSingleton<IAdminReservationRemoteApi>(AdminReservationRemoteApiImpl(sl()));
   sl.registerSingleton<ISMSBundleRemoteSourceApi>(SMSBundleSourceRemoteApiImpl(sl()));
+  sl.registerSingleton<ITransactionHistoryRemoteSourceApi>(TransactionHistoryRemoteSourceImp(sl()));
   
   // Repository
   sl.registerSingleton<IAuthRepo>(AuthRepoImpl(sl()));
   sl.registerSingleton<IAdminDashboardRepo>(AdminDashboardRepoImpl(sl()));
   sl.registerSingleton<IAdminReservationRepo>(AdminReservationRepoImpl(sl()));
   sl.registerSingleton<ISMSBundleRepo>(SMSBundleRepoImpl(sl()));
+  sl.registerSingleton<ITransactionHistoryRepo>(TransactionHistoryRepoImpl(sl()));
   
   // UseCase
   sl.registerSingleton<LoginUseCase>(LoginUseCase(sl()));
@@ -64,6 +71,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<AddSMSBundleUsecase>(AddSMSBundleUsecase(sl()));
   sl.registerSingleton<FetchAdminSmsBundleUsecase>(FetchAdminSmsBundleUsecase(sl()));
   sl.registerSingleton<DeleteSMSBundleUsecase>(DeleteSMSBundleUsecase(sl()));
+  sl.registerSingleton<FetchAdminTransactionHistory>(FetchAdminTransactionHistory(sl()));
   
   // Bloc
   sl.registerLazySingleton<SkaletonCubit>(() => SkaletonCubit());
@@ -74,4 +82,5 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton<AddSmsBundleBloc>(() => AddSmsBundleBloc(sl()));
   sl.registerLazySingleton<FetchAdminSmsBloc>(() => FetchAdminSmsBloc(sl()));
   sl.registerLazySingleton<AdminDeleteSmsBloc>(() => AdminDeleteSmsBloc(sl()));
+  sl.registerLazySingleton<FetchTransactionHistoryBloc>(() => FetchTransactionHistoryBloc(sl()));
 }

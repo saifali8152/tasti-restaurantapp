@@ -38,7 +38,6 @@ export '/features/dashboard/widgets/custom_drawer.dart';
 export '/features/reservations/reservations.dart';
 export '/features/admin/campaign/campaign_details.dart';
 export 'admin/manage_sms/presentation/pages/sms_bundle_details.dart';
-export 'admin/manage_sms/presentation/pages/transaction_history.dart';
 export 'admin/reservations_database/presentation/pages/reservation_db_details.dart';
 export '/features/admin/today_queries/query_details.dart';
 export '/features/admin/today_requests/request_details.dart';
