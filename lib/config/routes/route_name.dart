@@ -48,6 +48,7 @@ class AppRoutes {
   static const String restaurantDetails = '/restaurant-details';
   static const String reservationDbDetails = '/reservation-db-details';
   static const String smsBundleDetails = '/sms-bundle-details';
+  static const String manageSmsBundleDiscount = '/manage-sms-bundle-discount';
   static const String transactionHistory = '/transaction-history';
   static const String addSmsBundle = '/add-sms-bundle';
 }

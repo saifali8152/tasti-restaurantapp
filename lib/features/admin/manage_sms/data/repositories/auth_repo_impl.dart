@@ -9,6 +9,16 @@ class SMSBundleRepoImpl extends ISMSBundleRepo {
   SMSBundleRepoImpl(this.dataSource);
 
   @override
+  Future<DataState<String>> manageSmsBundleDiscount(ManageSmsBundleDiscountParms parms) async{
+    try {
+      final result = await dataSource.manageSmsBundleDiscount(parms);
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
+ 
+  @override
   Future<DataState<String>> addSMSBundle(AddSMSBundleParms parms) async{
     try {
       final result = await dataSource.addSMSBundle(parms);

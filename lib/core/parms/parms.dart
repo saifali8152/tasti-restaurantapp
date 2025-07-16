@@ -32,3 +32,15 @@ class AddSMSBundleParms {
     required this.percentage,
   });
 }
+
+class ManageSmsBundleDiscountParms {
+  final int id;
+  final int discount;
+  final int percentage;
+
+  ManageSmsBundleDiscountParms({
+    required this.id,
+    required this.discount,
+    required this.percentage,
+  });
+}

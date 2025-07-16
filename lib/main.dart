@@ -4,6 +4,7 @@ import 'package:tasti_restaurant_app/dependency_injection.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/add_sms_bundle/add_sms_bundle_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/delete_sms/delete_sms_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/manage_sms_bundle_discount/manage_sms_bundle_discount_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/presentation/bloc/admin_reservation_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/transaction_history/presentation/bloc/transaction_history_bloc.dart';
 import 'config/routes/routes.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl<FetchAdminSmsBloc>()),
         BlocProvider(create: (context) => sl<AdminDeleteSmsBloc>()),
         BlocProvider(create: (context) => sl<FetchTransactionHistoryBloc>()),
+        BlocProvider(create: (context) => sl<ManageSmsBundleDiscountBloc>()),
       ],
       child: MaterialApp.router(
         title: 'Tasti Restaurant App',

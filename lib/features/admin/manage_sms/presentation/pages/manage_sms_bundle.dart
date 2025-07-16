@@ -68,60 +68,65 @@ class _ManageSMSState extends State<ManageSMS> {
         bloc: bloc,
         builder: (context, state) {
           return CurvedContainer(
-            child: Builder(
-              builder: (context) {
-                if (state is FetchAdminSmsLoading) {
-                  return const Center(child: LoadingWidget());
-                }
-
-                if (state is FetchAdminSmsError) {
-                  return Center(
-                    child: Text(
-                      state.message,
-                      style: const TextStyle(color: Colors.red, fontSize: 16),
-                    ),
-                  );
-                }
-
-                if (state is FetchAdminSmsLoaded) {
-                  if (state.data.isEmpty) {
+            child: RefreshIndicator.adaptive(
+              onRefresh: ()async{
+                bloc.add(FetchInitialAdminSms());
+              },
+              child: Builder(
+                builder: (context) {
+                  if (state is FetchAdminSmsLoading) {
+                    return const Center(child: LoadingWidget());
+                  }
+              
+                  if (state is FetchAdminSmsError) {
                     return Center(
                       child: Text(
-                        "No SMS Bundle Found.",
-                        style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                        state.message,
+                        style: const TextStyle(color: Colors.red, fontSize: 16),
                       ),
                     );
                   }
-
-                  return NotificationListener<ScrollNotification>(
-                    onNotification: (scrollInfo) {
-                      if (!state.isLoadingMore &&
-                          state.pagination.hasNext &&
-                          scrollInfo.metrics.pixels >=
-                              scrollInfo.metrics.maxScrollExtent - 100) {
-                        bloc.add(FetchMoreAdminSms());
-                      }
-                      return false;
-                    },
-                    child: ListView.separated(
-                      itemCount:
-                          state.data.length + (state.isLoadingMore ? 1 : 0),
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 10),
-                      itemBuilder: (context, index) {
-                        if (index < state.data.length) {
-                          final smsItem = state.data[index];
-                          return ManageSMSCard(smsItem: smsItem);
-                        } else {
-                          return const Center(child: LoadingWidget());
+              
+                  if (state is FetchAdminSmsLoaded) {
+                    if (state.data.isEmpty) {
+                      return Center(
+                        child: Text(
+                          "No SMS Bundle Found.",
+                          style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                        ),
+                      );
+                    }
+              
+                    return NotificationListener<ScrollNotification>(
+                      onNotification: (scrollInfo) {
+                        if (!state.isLoadingMore &&
+                            state.pagination.hasNext &&
+                            scrollInfo.metrics.pixels >=
+                                scrollInfo.metrics.maxScrollExtent - 100) {
+                          bloc.add(FetchMoreAdminSms());
                         }
+                        return false;
                       },
-                    ),
-                  );
-                }
-
-                return const Center(child: Text("Something went wrong."));
-              },
+                      child: ListView.separated(
+                        itemCount:
+                            state.data.length + (state.isLoadingMore ? 1 : 0),
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 10),
+                        itemBuilder: (context, index) {
+                          if (index < state.data.length) {
+                            final smsItem = state.data[index];
+                            return ManageSMSCard(smsItem: smsItem);
+                          } else {
+                            return const Center(child: LoadingWidget());
+                          }
+                        },
+                      ),
+                    );
+                  }
+              
+                  return const Center(child: Text("Something went wrong."));
+                },
+              ),
             ),
           );
         },

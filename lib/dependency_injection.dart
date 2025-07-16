@@ -11,9 +11,12 @@ import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/repositori
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/add_sms_bundle.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/delete_sms_bundle.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/fetch_admin_sms_bundle.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/manage_sms_bundle_discount.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/add_sms_bundle/add_sms_bundle_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/delete_sms/delete_sms_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/manage_sms_bundle_discount/manage_sms_bundle_discount_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/manage_sms_bundle_discount/manage_sms_bundle_discount_event.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/data/data_sources/admin_reservation_remote_api.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/data/repositories/admin_dashboard_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/repositories/admin_reservation_repo.dart';
@@ -72,6 +75,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FetchAdminSmsBundleUsecase>(FetchAdminSmsBundleUsecase(sl()));
   sl.registerSingleton<DeleteSMSBundleUsecase>(DeleteSMSBundleUsecase(sl()));
   sl.registerSingleton<FetchAdminTransactionHistory>(FetchAdminTransactionHistory(sl()));
+  sl.registerSingleton<ManageSmsBundleDiscountUsecase>(ManageSmsBundleDiscountUsecase(sl()));
   
   // Bloc
   sl.registerLazySingleton<SkaletonCubit>(() => SkaletonCubit());
@@ -83,4 +87,5 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton<FetchAdminSmsBloc>(() => FetchAdminSmsBloc(sl()));
   sl.registerLazySingleton<AdminDeleteSmsBloc>(() => AdminDeleteSmsBloc(sl()));
   sl.registerLazySingleton<FetchTransactionHistoryBloc>(() => FetchTransactionHistoryBloc(sl()));
+  sl.registerLazySingleton<ManageSmsBundleDiscountBloc>(() => ManageSmsBundleDiscountBloc(sl()));
 }

@@ -5,6 +5,7 @@ import '/config/constants/urls.dart';
 
 abstract class ISMSBundleRemoteSourceApi {
   Future<String> addSMSBundle(AddSMSBundleParms parms);
+  Future<String> manageSmsBundleDiscount(ManageSmsBundleDiscountParms parms);
   Future<String> deleteSMSBundle(String parms);
   Future<AdminSmsModel> fetchAdminSms(PaginationParms parms);
 }
@@ -13,6 +14,20 @@ class SMSBundleSourceRemoteApiImpl extends ISMSBundleRemoteSourceApi {
   final IApiService networkApiService;
   SMSBundleSourceRemoteApiImpl(this.networkApiService);
 
+  @override
+  Future<String> manageSmsBundleDiscount(ManageSmsBundleDiscountParms parms) async {
+    Map<String, dynamic> data = {};
+
+    data = {
+      "id": parms.id,
+      "discount": parms.discount,
+      "percentage": parms.percentage
+    };
+    var response = await networkApiService.post(AppUrls.adminManageDiscount, data);
+
+    return response['message'];
+  }
+  
   @override
   Future<String> addSMSBundle(AddSMSBundleParms parms) async {
     Map<String, dynamic> data = {};
