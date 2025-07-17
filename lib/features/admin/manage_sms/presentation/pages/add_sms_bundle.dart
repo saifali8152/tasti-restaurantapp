@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/core/network/response.dart';
+import 'package:tasti_restaurant_app/core/parms/parms.dart';
 import 'package:tasti_restaurant_app/core/utils/flushbar_extention.dart';
 import 'package:tasti_restaurant_app/dependency_injection.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/add_sms_bundle/add_sms_bundle_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/add_sms_bundle/add_sms_bundle_event.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/add_sms_bundle/add_sms_bundle_state.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_event.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_state.dart';
 import '/core/widgets/custom_app_bar.dart';
 import '/core/widgets/custom_button.dart';
 import '/core/widgets/custom_input_field.dart';
@@ -29,36 +30,66 @@ class AddSMSBundleView extends StatefulWidget {
 class _AddSMSBundleViewState extends State<AddSMSBundleView> {
   final _formKey = GlobalKey<FormState>();
 
-  final AddSmsBundleBloc bloc = sl<AddSmsBundleBloc>();
+  final FetchAdminSmsBloc bloc = sl<FetchAdminSmsBloc>();
 
+  final ownerController = TextEditingController();
+  final quantityController = TextEditingController();
+  final priceController = TextEditingController();
+  final percentageController = TextEditingController();
   final discountController = TextEditingController();
 
   @override
   void dispose() {
+    ownerController.dispose();
+    quantityController.dispose();
+    priceController.dispose();
+    percentageController.dispose();
     discountController.dispose();
     super.dispose();
+  }
+
+  void _calculateDiscount() {
+    final price = double.tryParse(priceController.text) ?? 0;
+    final percentage = double.tryParse(percentageController.text) ?? 0;
+
+    if (percentage > 0) {
+      final discount = price - (price * percentage / 100);
+      discountController.text = discount.toStringAsFixed(2);
+    } else {
+      discountController.text = '0';
+    }
+  }
+
+  void _submit() {
+    if (_formKey.currentState!.validate()) {
+      final parms = AddSMSBundleParms(
+        owner: ownerController.text,
+        quantity: int.tryParse(quantityController.text) ?? 0,
+        price: int.tryParse(priceController.text) ?? 0,
+        percentage: int.tryParse(percentageController.text) ?? 0,
+        discount: double.tryParse(discountController.text) ?? 0,
+      );
+
+      bloc.add(AdminAddSmsRequested(parms));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: 'Add SMS Bundle'),
-      body: BlocConsumer<AddSmsBundleBloc, AddSmsBundleState>(
+      body: BlocConsumer<FetchAdminSmsBloc, FetchAdminSmsLoaded>(
         listener: (context, state) {
-          if(state.addResposne.status == Status.error){
-            return context.flushBarErrorMessage(message: state.addResposne.message.toString());
+          if (state.addResponse.status == Status.error) {
+            return context.flushBarErrorMessage(
+                message: state.addResponse.message.toString());
           }
-          if(state.addResposne.status == Status.completed){
+          if (state.addResponse.status == Status.completed) {
             Navigator.pop(context);
-            return context.flushBarSuccessMessage(message: state.addResposne.data.toString());
           }
         },
         bloc: bloc,
         builder: (context, state) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            discountController.text = state.discount.toString();
-          });
-
           return SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Form(
@@ -69,53 +100,44 @@ class _AddSMSBundleViewState extends State<AddSMSBundleView> {
                   const SizedBox(height: 10),
                   const FieldLabel(title: "Product Owner"),
                   CustomInputField(
+                    controller: ownerController,
                     hintText: 'Enter owner name',
-                    onChanged: (val) => bloc.add(SetOwnerEvent(val)),
                   ),
                   const SizedBox(height: 10),
                   const FieldLabel(title: "SMS Quantity"),
                   CustomInputField(
-                    hintText: 'Enter SMS quantity',
+                    controller: quantityController,
+                    hintText: '0',
                     keyboardInputType: TextInputType.number,
-                    onChanged: (val) {
-                      final qty = int.tryParse(val) ?? 0;
-                      bloc.add(SetQuantityEvent(qty));
-                    },
                   ),
                   const SizedBox(height: 10),
                   const FieldLabel(title: "Price"),
                   CustomInputField(
-                    hintText: 'Enter price',
+                    controller: priceController,
+                    hintText: '0',
                     keyboardInputType: TextInputType.number,
-                    onChanged: (val) {
-                      final price = int.tryParse(val) ?? 0;
-                      bloc.add(SetPriceEvent(price));
-                    },
+                    onChanged: (val) => _calculateDiscount(),
+                  ),
+                  const SizedBox(height: 10),
+                  const FieldLabel(title: "Discount Percentage"),
+                  CustomInputField(
+                    controller: percentageController,
+                    hintText: '0',
+                    keyboardInputType: TextInputType.number,
+                    onChanged: (val) => _calculateDiscount(),
+                    enableValidation: false,
                   ),
                   const SizedBox(height: 10),
                   const FieldLabel(title: "Discount"),
                   CustomInputField(
                     controller: discountController,
                     readOnly: true,
-                  ),
-                  const SizedBox(height: 10),
-                  const FieldLabel(title: "Discount Percentage"),
-                  CustomInputField(
-                    hintText: 'Enter discount percentage',
-                    keyboardInputType: TextInputType.number,
-                    onChanged: (val) {
-                      final percentage = int.tryParse(val) ?? 0;
-                      bloc.add(SetPercentageEvent(percentage));
-                    },
+                    enableValidation: false,
                   ),
                   const SizedBox(height: 30),
                   CustomButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        bloc.add(SubmitSmsBundleEvent());
-                      }
-                    },
-                    isLoading: state.addResposne.status == Status.loading,
+                    onPressed: _submit,
+                    isLoading: state.addResponse.status == Status.loading,
                     text: 'Add SMS Bundle',
                   ),
                   const SizedBox(height: 10),
@@ -128,6 +150,7 @@ class _AddSMSBundleViewState extends State<AddSMSBundleView> {
     );
   }
 }
+
 
 class FieldLabel extends StatelessWidget {
   final String title;

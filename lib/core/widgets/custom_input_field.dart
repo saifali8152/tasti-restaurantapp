@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../config/constants/spaces.dart';
 
@@ -20,12 +19,14 @@ class CustomInputField extends StatefulWidget {
   final String? initialValue;
   final EdgeInsets contentPadding;
   final double radius;
+  final bool enableValidation;
 
   const CustomInputField({
     this.hintText = '',
     this.onTap,
     this.icon,
     this.isEmailField = false,
+    this.enableValidation = true,
     this.readOnly = false,
     this.suffixIcon,
     this.onChanged,
@@ -37,7 +38,8 @@ class CustomInputField extends StatefulWidget {
     this.padding = const EdgeInsets.symmetric(vertical: 8),
     this.hintStyle,
     this.initialValue,
-    this.contentPadding = const EdgeInsets.symmetric(horizontal: AppSpaces.screenHpad, vertical: 5),
+    this.contentPadding = const EdgeInsets.symmetric(
+        horizontal: AppSpaces.screenHpad, vertical: 5),
     this.radius = 16,
     super.key,
   });
@@ -83,45 +85,47 @@ class _CustomInputFieldState extends State<CustomInputField> {
             onTap: widget.onTap,
             readOnly: widget.readOnly,
             onChanged: widget.onChanged,
-          maxLines: widget.maxLines,
-          style: const TextStyle(fontWeight: FontWeight.normal),
-          controller: widget.controller,
-          textInputAction: TextInputAction.next,
-          obscureText: widget.isPasswordField ? obscureText.value : false,
-          keyboardType: widget.keyboardInputType,
-          decoration: InputDecoration(
-            fillColor: Colors.white,
-            filled: true,
-            prefixIconColor: Colors.black,
-            contentPadding: widget.icon == null
-                ? widget.contentPadding
-                : EdgeInsets.zero,
-            prefixIcon: widget.icon == null ? null : Icon(widget.icon),
-            suffixIcon: widget.suffixIcon ??
-                (widget.isPasswordField
-                    ? IconButton(
-                        onPressed: () {
-                          obscureText.value = !obscureText.value;
-                        },
-                        icon: Icon(
-                          obscureText.value
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                        ))
-                    : null),
-            hintText: widget.hintText.isEmpty ? null : widget.hintText,
-            hintStyle: widget.hintStyle ?? TextStyle(color: Colors.grey.shade600),
-            enabledBorder: border,
-            focusedBorder: border,
-            errorBorder: border,
-            focusedErrorBorder: border,
-          ),
-          validator: (value) {
-            if (value!.isEmpty) {
-              return "Field can't be empty!";
-            }
-              return null;
-            },
+            maxLines: widget.maxLines,
+            style: const TextStyle(fontWeight: FontWeight.normal),
+            controller: widget.controller,
+            textInputAction: TextInputAction.next,
+            obscureText: widget.isPasswordField ? obscureText.value : false,
+            keyboardType: widget.keyboardInputType,
+            decoration: InputDecoration(
+              fillColor: Colors.white,
+              filled: true,
+              prefixIconColor: Colors.black,
+              contentPadding:
+                  widget.icon == null ? widget.contentPadding : EdgeInsets.zero,
+              prefixIcon: widget.icon == null ? null : Icon(widget.icon),
+              suffixIcon: widget.suffixIcon ??
+                  (widget.isPasswordField
+                      ? IconButton(
+                          onPressed: () {
+                            obscureText.value = !obscureText.value;
+                          },
+                          icon: Icon(
+                            obscureText.value
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ))
+                      : null),
+              hintText: widget.hintText.isEmpty ? null : widget.hintText,
+              hintStyle:
+                  widget.hintStyle ?? TextStyle(color: Colors.grey.shade600),
+              enabledBorder: border,
+              focusedBorder: border,
+              errorBorder: border,
+              focusedErrorBorder: border,
+            ),
+            validator: widget.enableValidation
+                ? (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Field can't be empty!";
+                    }
+                    return null;
+                  }
+                : null,
           );
         },
       ),

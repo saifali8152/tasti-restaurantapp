@@ -16,10 +16,10 @@ class SetPriceEvent extends ManageSmsBundleDiscountEvents {
   List<Object?> get props => [price];
 }
 
-class SetPercentageEvent extends ManageSmsBundleDiscountEvents {
+class SetManageDiscountPercentageEvent extends ManageSmsBundleDiscountEvents {
   final int percentage;
 
-  const SetPercentageEvent(this.percentage);
+  const SetManageDiscountPercentageEvent(this.percentage);
 
   @override
   List<Object?> get props => [percentage];

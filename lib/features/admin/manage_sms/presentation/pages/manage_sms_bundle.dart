@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tasti_restaurant_app/core/network/response.dart';
 import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
 import 'package:tasti_restaurant_app/dependency_injection.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_bloc.dart';
@@ -64,7 +65,7 @@ class _ManageSMSState extends State<ManageSMS> {
           ],
         ),
       ),
-      body: BlocBuilder<FetchAdminSmsBloc, GetFetchAdminSmsState>(
+      body: BlocBuilder<FetchAdminSmsBloc, FetchAdminSmsLoaded>(
         bloc: bloc,
         builder: (context, state) {
           return CurvedContainer(
@@ -74,21 +75,21 @@ class _ManageSMSState extends State<ManageSMS> {
               },
               child: Builder(
                 builder: (context) {
-                  if (state is FetchAdminSmsLoading) {
+                  if (state.fetchResponse.status == Status.loading) {
                     return const Center(child: LoadingWidget());
                   }
               
-                  if (state is FetchAdminSmsError) {
+                  if (state.fetchResponse.status == Status.error) {
                     return Center(
                       child: Text(
-                        state.message,
+                        state.fetchResponse.message.toString(),
                         style: const TextStyle(color: Colors.red, fontSize: 16),
                       ),
                     );
                   }
               
-                  if (state is FetchAdminSmsLoaded) {
-                    if (state.data.isEmpty) {
+                  if (state.fetchResponse.status == Status.completed) {
+                    if (state.fetchResponse.data!.isEmpty) {
                       return Center(
                         child: Text(
                           "No SMS Bundle Found.",
@@ -100,7 +101,7 @@ class _ManageSMSState extends State<ManageSMS> {
                     return NotificationListener<ScrollNotification>(
                       onNotification: (scrollInfo) {
                         if (!state.isLoadingMore &&
-                            state.pagination.hasNext &&
+                            state.pagination!.hasNext &&
                             scrollInfo.metrics.pixels >=
                                 scrollInfo.metrics.maxScrollExtent - 100) {
                           bloc.add(FetchMoreAdminSms());
@@ -109,12 +110,12 @@ class _ManageSMSState extends State<ManageSMS> {
                       },
                       child: ListView.separated(
                         itemCount:
-                            state.data.length + (state.isLoadingMore ? 1 : 0),
+                            state.fetchResponse.data!.length + (state.isLoadingMore ? 1 : 0),
                         separatorBuilder: (context, index) =>
                             const SizedBox(height: 10),
                         itemBuilder: (context, index) {
-                          if (index < state.data.length) {
-                            final smsItem = state.data[index];
+                          if (index < state.fetchResponse.data!.length) {
+                            final smsItem = state.fetchResponse.data![index];
                             return ManageSMSCard(smsItem: smsItem);
                           } else {
                             return const Center(child: LoadingWidget());

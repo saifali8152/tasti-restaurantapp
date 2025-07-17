@@ -20,7 +20,7 @@ class PaginationParms {
 class AddSMSBundleParms {
   final String owner;
   final int quantity;
-  final int discount;
+  final double discount;
   final int price;
   final int percentage;
 

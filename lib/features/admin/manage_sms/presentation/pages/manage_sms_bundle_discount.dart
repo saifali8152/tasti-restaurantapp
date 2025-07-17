@@ -86,7 +86,7 @@ class _ManageSmsBundleDiscountViewState
                     keyboardInputType: TextInputType.number,
                     onChanged: (val) {
                       final percentage = int.tryParse(val) ?? 0;
-                      bloc.add(SetPercentageEvent(percentage));
+                      bloc.add(SetManageDiscountPercentageEvent(percentage));
                     },
                   ),
                   const SizedBox(height: 10),

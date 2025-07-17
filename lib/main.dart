@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/dependency_injection.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/add_sms_bundle/add_sms_bundle_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/delete_sms/delete_sms_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/manage_sms_bundle_discount/manage_sms_bundle_discount_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/reservations_database/presentation/bloc/admin_reservation_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/transaction_history/presentation/bloc/transaction_history_bloc.dart';
+import '/dependency_injection.dart';
+import '/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_bloc.dart';
+import '/features/admin/manage_sms/presentation/bloc/manage_sms_bundle_discount/manage_sms_bundle_discount_bloc.dart';
+import '/features/admin/reservations_database/presentation/bloc/admin_reservation_bloc.dart';
+import '/features/admin/transaction_history/presentation/bloc/transaction_history_bloc.dart';
 import 'config/routes/routes.dart';
 import 'config/theme/theme.dart';
 import 'features/auth/presentation/bloc/auth/auth_bloc.dart';
@@ -27,9 +25,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => SkaletonCubit()),
         BlocProvider(create: (context) => AuthBloc()),
         BlocProvider(create: (context) => sl<AdminReservationBloc>()),
-        BlocProvider(create: (context) => sl<AddSmsBundleBloc>()),
         BlocProvider(create: (context) => sl<FetchAdminSmsBloc>()),
-        BlocProvider(create: (context) => sl<AdminDeleteSmsBloc>()),
         BlocProvider(create: (context) => sl<FetchTransactionHistoryBloc>()),
         BlocProvider(create: (context) => sl<ManageSmsBundleDiscountBloc>()),
       ],

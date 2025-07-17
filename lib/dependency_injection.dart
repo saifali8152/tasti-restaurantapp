@@ -13,10 +13,8 @@ import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/d
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/fetch_admin_sms_bundle.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/manage_sms_bundle_discount.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/add_sms_bundle/add_sms_bundle_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/delete_sms/delete_sms_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/manage_sms_bundle_discount/manage_sms_bundle_discount_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/manage_sms_bundle_discount/manage_sms_bundle_discount_event.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/data/data_sources/admin_reservation_remote_api.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/data/repositories/admin_dashboard_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/repositories/admin_reservation_repo.dart';
@@ -83,9 +81,8 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton<SignOutBloc>(() => SignOutBloc(sl()));
   sl.registerLazySingleton<AdminDashboardBloc>(() => AdminDashboardBloc(sl()));
   sl.registerLazySingleton<AdminReservationBloc>(() => AdminReservationBloc(sl()));
-  sl.registerLazySingleton<AddSmsBundleBloc>(() => AddSmsBundleBloc(sl()));
-  sl.registerLazySingleton<FetchAdminSmsBloc>(() => FetchAdminSmsBloc(sl()));
-  sl.registerLazySingleton<AdminDeleteSmsBloc>(() => AdminDeleteSmsBloc(sl()));
-  sl.registerLazySingleton<FetchTransactionHistoryBloc>(() => FetchTransactionHistoryBloc(sl()));
+  // sl.registerLazySingleton<AddSmsBundleBloc>(() => AddSmsBundleBloc(sl()));
+  sl.registerLazySingleton<FetchAdminSmsBloc>(() => FetchAdminSmsBloc(sl(), sl(), sl()));
+  sl.registerFactory<FetchTransactionHistoryBloc>(() => FetchTransactionHistoryBloc(sl()));
   sl.registerLazySingleton<ManageSmsBundleDiscountBloc>(() => ManageSmsBundleDiscountBloc(sl()));
 }
