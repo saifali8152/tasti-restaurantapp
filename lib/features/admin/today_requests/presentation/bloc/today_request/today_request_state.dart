@@ -4,8 +4,8 @@ import 'package:tasti_restaurant_app/features/admin/today_requests/domain/entiti
 
 class TodayRequestState  {
   final ApiResponse<List<TodayRequestItem>> fetchResponse;
-
   final ApiResponse<String> deleteResponse;
+
   final ApiResponse<String> addResponse;
   final PaginationModel? pagination;
   final bool isLoadingMore;

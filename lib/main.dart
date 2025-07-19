@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request/today_request_bloc.dart';
 import '/dependency_injection.dart';
 import '/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_bloc.dart';
 import '/features/admin/manage_sms/presentation/bloc/manage_sms_bundle_discount/manage_sms_bundle_discount_bloc.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl<FetchAdminSmsBloc>()),
         BlocProvider(create: (context) => sl<FetchTransactionHistoryBloc>()),
         BlocProvider(create: (context) => sl<ManageSmsBundleDiscountBloc>()),
+        BlocProvider(create: (context) => sl<TodayRequestBloc>()),
       ],
       child: MaterialApp.router(
         title: 'Tasti Restaurant App',

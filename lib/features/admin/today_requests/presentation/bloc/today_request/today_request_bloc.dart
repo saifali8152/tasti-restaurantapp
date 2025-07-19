@@ -1,10 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/entities/admin_sms.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/add_sms_bundle.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/delete_sms_bundle.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/fetch_admin_sms_bundle.dart';
 import 'package:tasti_restaurant_app/features/admin/today_requests/domain/entities/today_requests.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/domain/usecases/delete_today_requests.dart';
 import 'package:tasti_restaurant_app/features/admin/today_requests/domain/usecases/fetch_today_requests.dart';
 import '/core/network/response.dart';
 import 'today_request_event.dart';
@@ -12,8 +10,8 @@ import 'today_request_state.dart';
 
 class TodayRequestBloc extends Bloc<TodayRequestEvents, TodayRequestState> {
   final FetchTodayRequestUsecase _useCase;
+  final DeleteTodayRequestUsecase _deleteUsecase;
 
-  final DeleteSMSBundleUsecase _deleteUsecase;
   final AddSMSBundleUsecase _addUsecase;
 
 
@@ -25,7 +23,7 @@ class TodayRequestBloc extends Bloc<TodayRequestEvents, TodayRequestState> {
     on<FetchInitialTodayRequests>(_onFetchInitialTodayRequests);
     on<FetchMoreTodayRequests>(_onFetchMoreTodayRequests);
     on<SearchTodayRequests>(_onSearchTodayRequests);
-    // on<AdminDeleteSmsRequested>(_onAdminDeleteSmsRequested);
+    on<AdminDeleteTodayRequest>(_onAdminDeleteTodayRequest);
     // on<AdminAddSmsRequested>(_onAdminAddSmsRequested);
   }
 
@@ -88,25 +86,25 @@ class TodayRequestBloc extends Bloc<TodayRequestEvents, TodayRequestState> {
 // }
 
 
-  // Future<void> _onAdminDeleteSmsRequested(
-  //     AdminDeleteSmsRequested event, Emitter<TodayRequestState> emit) async {
-  //   emit(state.copyWith(deleteResponse: ApiResponse.loading()));
-  //   try {
-  //     final result = await _deleteUsecase.call(event.id.toString());
-  //     if (result is DataSuccess<String>) {
-  //       final oldList = state.fetchResponse.data;
+  Future<void> _onAdminDeleteTodayRequest(
+      AdminDeleteTodayRequest event, Emitter<TodayRequestState> emit) async {
+    emit(state.copyWith(deleteResponse: ApiResponse.loading()));
+    try {
+      final result = await _deleteUsecase.call(event.id.toString());
+      if (result is DataSuccess<String>) {
+        final oldList = state.fetchResponse.data;
 
-  //       final optimisticList = oldList?.where((r) => r.id != event.id).toList();
-  //       emit(state.copyWith(
-  //           fetchResponse: ApiResponse.completed(List.from(optimisticList!)),
-  //           deleteResponse: ApiResponse.completed(result.data)));
-  //     } else if (result is DataFailure<String>) {
-  //       emit(state.copyWith(deleteResponse: ApiResponse.error(result.error)));
-  //     }
-  //   } catch (e) {
-  //     emit(state.copyWith(deleteResponse: ApiResponse.error(e.toString())));
-  //   }
-  // }
+        final optimisticList = oldList?.where((r) => r.reqId != event.id).toList();
+        emit(state.copyWith(
+            fetchResponse: ApiResponse.completed(List.from(optimisticList!)),
+            deleteResponse: ApiResponse.completed(result.data)));
+      } else if (result is DataFailure<String>) {
+        emit(state.copyWith(deleteResponse: ApiResponse.error(result.error)));
+      }
+    } catch (e) {
+      emit(state.copyWith(deleteResponse: ApiResponse.error(e.toString())));
+    }
+  }
 
   Future<void> _onFetchInitialTodayRequests(
       FetchInitialTodayRequests event, Emitter<TodayRequestState> emit) async {

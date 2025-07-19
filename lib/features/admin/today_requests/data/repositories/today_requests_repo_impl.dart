@@ -29,9 +29,9 @@ class TodayRequestRepoImpl extends ITodayRequestRepo {
   }
  
   @override
-  Future<DataState<String>> deleteSMSBundle(String id) async{
+  Future<DataState<String>> deleteTodayRequest(String id) async{
     try {
-      final result = await dataSource.deleteSMSBundle(id);
+      final result = await dataSource.deleteTodayRequest(id);
       return DataSuccess(result);
     } catch (error) {
       return DataFailure(error.toString());

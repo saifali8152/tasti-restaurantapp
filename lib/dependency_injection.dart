@@ -28,6 +28,7 @@ import 'package:tasti_restaurant_app/features/admin/reservations_database/presen
 import 'package:tasti_restaurant_app/features/admin/today_requests/data/data_sources/today_requests_remote_source.dart';
 import 'package:tasti_restaurant_app/features/admin/today_requests/data/repositories/today_requests_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/today_requests/domain/repositories/today_requests_repo.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/domain/usecases/delete_today_requests.dart';
 import 'package:tasti_restaurant_app/features/admin/today_requests/domain/usecases/fetch_today_requests.dart';
 import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request/today_request_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/transaction_history/data/data_sources/transaction_history_remote_source.dart';
@@ -92,6 +93,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FetchAdminMonthlyFeeUsecase>(FetchAdminMonthlyFeeUsecase(sl()));
   sl.registerSingleton<UpdateAdminMonthlyFeeUsecdase>(UpdateAdminMonthlyFeeUsecdase(sl()));
   sl.registerSingleton<FetchTodayRequestUsecase>(FetchTodayRequestUsecase(sl()));
+  sl.registerSingleton<DeleteTodayRequestUsecase>(DeleteTodayRequestUsecase(sl()));
   
   // Bloc
   sl.registerLazySingleton<SkaletonCubit>(() => SkaletonCubit());

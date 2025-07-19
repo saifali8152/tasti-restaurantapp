@@ -5,10 +5,10 @@ import '/config/constants/urls.dart';
 
 abstract class ITodayRequestRemoteSourceApi {
   Future<TodayRequestModel> fetchTodayRequest(PaginationParms parms);
+  Future<String> deleteTodayRequest(String parms);
 
   Future<String> addSMSBundle(AddSMSBundleParms parms);
   Future<String> manageSmsBundleDiscount(ManageSmsBundleDiscountParms parms);
-  Future<String> deleteSMSBundle(String parms);
 }
 
 class TodayRequestSourceRemoteApiImpl extends ITodayRequestRemoteSourceApi {
@@ -46,14 +46,14 @@ class TodayRequestSourceRemoteApiImpl extends ITodayRequestRemoteSourceApi {
   }
 
   @override
-  Future<String> deleteSMSBundle(String id) async {
+  Future<String> deleteTodayRequest(String id) async {
     Map<String, dynamic> data = {};
 
     data = {
-      "id": id,
+      "req_id": id,
     };
     var response =
-        await networkApiService.post(AppUrls.adminDeleteSmsBundle, data);
+        await networkApiService.post(AppUrls.adminDeleteTodayRequests, data);
 
     return response['message'];
   }

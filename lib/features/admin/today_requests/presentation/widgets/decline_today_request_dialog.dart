@@ -1,7 +1,7 @@
 import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_event.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_state.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request/today_request_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request/today_request_event.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request/today_request_state.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/widgets/custom_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,8 +41,8 @@ class DeclineTodayRequestDialog extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
-            BlocConsumer<FetchAdminSmsBloc, FetchAdminSmsLoaded>(
-              bloc: context.read<FetchAdminSmsBloc>(),
+            BlocConsumer<TodayRequestBloc, TodayRequestState>(
+              bloc: context.read<TodayRequestBloc>(),
               listener: (context, state) {
                 if (state.deleteResponse.status == Status.error) {
                   context.flushBarErrorMessage(
@@ -68,8 +68,8 @@ class DeclineTodayRequestDialog extends StatelessWidget {
                       child: CustomButton(
                         onPressed: () {
                           context
-                              .read<FetchAdminSmsBloc>()
-                              .add(AdminDeleteSmsRequested(int.parse(id)));
+                              .read<TodayRequestBloc>()
+                              .add(AdminDeleteTodayRequest(int.parse(id)));
                         },
                         text: "Confirm",
                         isLoading:

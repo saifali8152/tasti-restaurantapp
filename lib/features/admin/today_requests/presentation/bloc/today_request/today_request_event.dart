@@ -8,10 +8,10 @@ abstract class TodayRequestEvents extends Equatable {
   List<Object?> get props => [];
 }
 
-class AdminDeleteSmsRequested extends TodayRequestEvents {
+class AdminDeleteTodayRequest extends TodayRequestEvents {
   final int id;
 
-  const AdminDeleteSmsRequested(this.id);
+  const AdminDeleteTodayRequest(this.id);
 }
 
 class AdminAddSmsRequested extends TodayRequestEvents {
