@@ -9,7 +9,8 @@ import 'package:tasti_restaurant_app/features/admin/manage_fee/data/data_sources
 import 'package:tasti_restaurant_app/features/admin/manage_fee/data/repositories/monthly_fee_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/repositories/fee_repo.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/usecases/fetch_admin_fee.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/bloc/get_monthly_fee/get_monthly_fee_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/usecases/update_fee.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/bloc/get_monthly_fee_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/data/data_sources/sms_bundle_remote_source.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/data/repositories/sms_bundle_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/repositories/sms_bundle_repo.dart';
@@ -82,6 +83,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FetchAdminTransactionHistory>(FetchAdminTransactionHistory(sl()));
   sl.registerSingleton<ManageSmsBundleDiscountUsecase>(ManageSmsBundleDiscountUsecase(sl()));
   sl.registerSingleton<FetchAdminMonthlyFeeUsecase>(FetchAdminMonthlyFeeUsecase(sl()));
+  sl.registerSingleton<UpdateAdminMonthlyFeeUsecdase>(UpdateAdminMonthlyFeeUsecdase(sl()));
   
   // Bloc
   sl.registerLazySingleton<SkaletonCubit>(() => SkaletonCubit());
@@ -89,9 +91,8 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton<SignOutBloc>(() => SignOutBloc(sl()));
   sl.registerLazySingleton<AdminDashboardBloc>(() => AdminDashboardBloc(sl()));
   sl.registerLazySingleton<AdminReservationBloc>(() => AdminReservationBloc(sl()));
-  // sl.registerLazySingleton<AddSmsBundleBloc>(() => AddSmsBundleBloc(sl()));
   sl.registerLazySingleton<FetchAdminSmsBloc>(() => FetchAdminSmsBloc(sl(), sl(), sl()));
   sl.registerFactory<FetchTransactionHistoryBloc>(() => FetchTransactionHistoryBloc(sl()));
-  sl.registerFactory<AdminMonthlyFeeBloc>(() => AdminMonthlyFeeBloc(sl(), sl()));
+  sl.registerLazySingleton<AdminMonthlyFeeBloc>(() => AdminMonthlyFeeBloc(sl(), sl()));
   sl.registerLazySingleton<ManageSmsBundleDiscountBloc>(() => ManageSmsBundleDiscountBloc(sl()));
 }

@@ -52,4 +52,5 @@ class AppRoutes {
   static const String transactionHistory = '/transaction-history';
   static const String addSmsBundle = '/add-sms-bundle';
   static const String monthlyFee = '/monthly-fee';
+  static const String updateMonthlyFee = '/update-monthly-fee';
 }

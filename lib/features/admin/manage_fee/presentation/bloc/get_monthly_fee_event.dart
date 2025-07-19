@@ -8,9 +8,9 @@ abstract class MonthlyFeeEvents extends Equatable {
   List<Object?> get props => [];
 }
 
-class AdminAddSmsRequested extends MonthlyFeeEvents {
-  final AddSMSBundleParms parms;
-  const AdminAddSmsRequested(this.parms);
+class UpdateMonthlyFeeSubmitted extends MonthlyFeeEvents {
+  final UpdateMonthlyFeeParms parms;
+  const UpdateMonthlyFeeSubmitted(this.parms);
 }
 
 class FetchMonthlyFeeSubmitted extends MonthlyFeeEvents {}

@@ -3,7 +3,6 @@ import '/core/parms/parms.dart';
 import '/core/network/response.dart';
 
 abstract class IMonthlyFeeRepo {
-  Future<DataState<String>> addSMSBundle(AddSMSBundleParms parms);
-  Future<DataState<String>> manageSmsBundleDiscount(ManageSmsBundleDiscountParms parms);
+  Future<DataState<String>> updateMonthlyFee(UpdateMonthlyFeeParms parms);
   Future<DataState<MonthlyFeeEntity>> fetchMonthlyFee();
 }

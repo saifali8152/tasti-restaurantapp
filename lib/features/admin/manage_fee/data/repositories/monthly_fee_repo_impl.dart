@@ -9,20 +9,9 @@ class MonthlyFeeRepoImpl extends IMonthlyFeeRepo {
   MonthlyFeeRepoImpl(this.dataSource);
 
   @override
-  Future<DataState<String>> manageSmsBundleDiscount(
-      ManageSmsBundleDiscountParms parms) async {
+  Future<DataState<String>> updateMonthlyFee(UpdateMonthlyFeeParms parms) async {
     try {
-      final result = await dataSource.manageSmsBundleDiscount(parms);
-      return DataSuccess(result);
-    } catch (error) {
-      return DataFailure(error.toString());
-    }
-  }
-
-  @override
-  Future<DataState<String>> addSMSBundle(AddSMSBundleParms parms) async {
-    try {
-      final result = await dataSource.addSMSBundle(parms);
+      final result = await dataSource.updateMonthlyFee(parms);
       return DataSuccess(result);
     } catch (error) {
       return DataFailure(error.toString());

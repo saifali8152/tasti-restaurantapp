@@ -3,20 +3,20 @@ import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/entities/m
 
 class MonthlyFeeState {
   final ApiResponse<MonthlyFeeEntity> fetchResponse;
-  final ApiResponse<String> addResponse;
+  final ApiResponse<String> updateResponse;
   
   MonthlyFeeState({
     required this.fetchResponse,
-    required this.addResponse,
+    required this.updateResponse,
   });
 
   MonthlyFeeState copyWith({
     ApiResponse<MonthlyFeeEntity>? fetchResponse,
-    ApiResponse<String>? addResponse,
+    ApiResponse<String>? updateResponse,
   }) {
     return MonthlyFeeState(
       fetchResponse: fetchResponse ?? this.fetchResponse,
-      addResponse: addResponse ?? this.addResponse,
+      updateResponse: updateResponse ?? this.updateResponse,
     );
   }
 }

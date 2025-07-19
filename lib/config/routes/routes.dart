@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/pages/update_monthly_fee.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/pages/monthly_fee.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/entities/admin_sms.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/pages/manage_sms_bundle_discount.dart';
@@ -34,6 +35,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: AppRoutes.monthlyFee,
       builder: (context, state) => MonthlyFee(),
+    ),
+    GoRoute(
+      path: AppRoutes.updateMonthlyFee,
+      builder: (context, state) => UpdateMonthlyFee(id: state.extra as String),
     ),
     GoRoute(
       path: AppRoutes.manageSmsBundleDiscount,

@@ -5,6 +5,13 @@ class LoginParms {
   LoginParms({required this.email, required this.password});
 }
 
+class UpdateMonthlyFeeParms {
+  final String id;
+  final String money;
+
+  UpdateMonthlyFeeParms({required this.id, required this.money});
+}
+
 class PaginationParms {
   final String page;
   final String limit;
