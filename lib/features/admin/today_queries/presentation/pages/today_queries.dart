@@ -1,9 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_search_field.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request_event.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request_state.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/widgets/requests_card.dart';
+import 'package:tasti_restaurant_app/features/admin/today_queries/presentation/bloc/today_queries_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/today_queries/presentation/bloc/today_queries_event.dart';
+import 'package:tasti_restaurant_app/features/admin/today_queries/presentation/bloc/today_queries_state.dart';
+import 'package:tasti_restaurant_app/features/admin/today_queries/presentation/widgets/queries_card.dart';
 import '/core/widgets/curved_container.dart';
 import '/core/widgets/themed_app_bar.dart';
 import '/config/constants/colors.dart';
@@ -12,18 +13,18 @@ import 'package:tasti_restaurant_app/core/network/response.dart';
 import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
 import 'package:tasti_restaurant_app/dependency_injection.dart';
 
-class TodayRequests extends StatefulWidget {
-  const TodayRequests({super.key});
+class TodayQueries extends StatefulWidget {
+  const TodayQueries({super.key});
 
   @override
-  State<TodayRequests> createState() => _TodayRequestsState();
+  State<TodayQueries> createState() => _TodayQueriesState();
 }
 
-class _TodayRequestsState extends State<TodayRequests> {
-  final bloc = sl<TodayRequestBloc>();
+class _TodayQueriesState extends State<TodayQueries> {
+  final bloc = sl<TodayqueriesBloc>();
   @override
   void initState() {
-    bloc.add(FetchInitialTodayRequests());
+    bloc.add(FetchInitialTodayqueriess());
     super.initState();
   }
 
@@ -33,23 +34,23 @@ class _TodayRequestsState extends State<TodayRequests> {
       backgroundColor: AppColors.darkOrange,
       appBar: ThemedAppBar(
         height: 120,
-        title: "Today's Requests",
+        title: "Today's Queries",
         subTitle: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: CustomSearchField(
             icon: Icons.search,
             hintText: "Search",
-            onChanged: (p0) => bloc.add(SearchTodayRequests(p0)),
+            onChanged: (p0) => bloc.add(SearchTodayqueriess(p0)),
           ),
         ),
       ),
       body: CurvedContainer(
-        child: BlocBuilder<TodayRequestBloc, TodayRequestState>(
+        child: BlocBuilder<TodayqueriesBloc, TodayQueriesState>(
           bloc: bloc,
           builder: (context, state) {
             return RefreshIndicator.adaptive(
               onRefresh: () async {
-                bloc.add(FetchInitialTodayRequests());
+                bloc.add(FetchInitialTodayqueriess());
               },
               child: Builder(builder: (context) {
                 if (state.fetchResponse.status == Status.loading) {
@@ -68,7 +69,7 @@ class _TodayRequestsState extends State<TodayRequests> {
                     if (state.fetchResponse.data!.isEmpty) {
                       return Center(
                         child: Text(
-                          "No Requests Found.",
+                          "No Query Found.",
                           style:
                               TextStyle(fontSize: 16, color: Colors.grey[700]),
                         ),
@@ -81,7 +82,7 @@ class _TodayRequestsState extends State<TodayRequests> {
                             state.pagination!.hasNext &&
                             scrollInfo.metrics.pixels >=
                                 scrollInfo.metrics.maxScrollExtent - 100) {
-                          bloc.add(FetchMoreTodayRequests());
+                          bloc.add(FetchMoreTodayqueriess());
                         }
                         return false;
                       },
@@ -92,8 +93,8 @@ class _TodayRequestsState extends State<TodayRequests> {
                             const SizedBox(height: 10),
                         itemBuilder: (context, index) {
                           if (index < state.fetchResponse.data!.length) {
-                            final request = state.fetchResponse.data![index];
-                            return RequestsCard(request: request);
+                            final query = state.fetchResponse.data![index];
+                            return QueriesCard(query: query);
                           } else {
                             return const Center(child: LoadingWidget());
                           }

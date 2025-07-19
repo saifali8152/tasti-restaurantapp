@@ -1,7 +1,7 @@
 import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request_event.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request_state.dart';
+import 'package:tasti_restaurant_app/features/admin/today_queries/presentation/bloc/today_queries_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/today_queries/presentation/bloc/today_queries_event.dart';
+import 'package:tasti_restaurant_app/features/admin/today_queries/presentation/bloc/today_queries_state.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/widgets/custom_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,12 +37,12 @@ class DeclineTodayRequestDialog extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             const Text(
-              'Are you sure you want to delete this request? This action cannot be undone.',
+              'Are you sure you want to delete this query? This action cannot be undone.',
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
-            BlocConsumer<TodayRequestBloc, TodayRequestState>(
-              bloc: context.read<TodayRequestBloc>(),
+            BlocConsumer<TodayqueriesBloc, TodayQueriesState>(
+              bloc: context.read<TodayqueriesBloc>(),
               listener: (context, state) {
                 if (state.deleteResponse.status == Status.error) {
                   context.flushBarErrorMessage(
@@ -68,8 +68,8 @@ class DeclineTodayRequestDialog extends StatelessWidget {
                       child: CustomButton(
                         onPressed: () {
                           context
-                              .read<TodayRequestBloc>()
-                              .add(AdminDeleteTodayRequest(int.parse(id)));
+                              .read<TodayqueriesBloc>()
+                              .add(AdminDeleteTodayqueries(int.parse(id)));
                         },
                         text: "Confirm",
                         isLoading:

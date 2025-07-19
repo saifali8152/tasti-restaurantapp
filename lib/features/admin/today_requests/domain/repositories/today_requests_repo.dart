@@ -5,7 +5,4 @@ import '/core/network/response.dart';
 abstract class ITodayRequestRepo {
   Future<DataState<TodayRequestEntity>> fetchTodayRequests(PaginationParms parms);
   Future<DataState<String>> deleteTodayRequest(String id);
-
-  Future<DataState<String>> addSMSBundle(AddSMSBundleParms parms);
-  Future<DataState<String>> manageSmsBundleDiscount(ManageSmsBundleDiscountParms parms);
 }

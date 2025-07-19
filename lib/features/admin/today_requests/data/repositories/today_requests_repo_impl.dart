@@ -7,27 +7,7 @@ import '/core/network/response.dart';
 class TodayRequestRepoImpl extends ITodayRequestRepo {
   final ITodayRequestRemoteSourceApi dataSource;
   TodayRequestRepoImpl(this.dataSource);
-
-  @override
-  Future<DataState<String>> manageSmsBundleDiscount(ManageSmsBundleDiscountParms parms) async{
-    try {
-      final result = await dataSource.manageSmsBundleDiscount(parms);
-      return DataSuccess(result);
-    } catch (error) {
-      return DataFailure(error.toString());
-    }
-  }
- 
-  @override
-  Future<DataState<String>> addSMSBundle(AddSMSBundleParms parms) async{
-    try {
-      final result = await dataSource.addSMSBundle(parms);
-      return DataSuccess(result);
-    } catch (error) {
-      return DataFailure(error.toString());
-    }
-  }
- 
+  
   @override
   Future<DataState<String>> deleteTodayRequest(String id) async{
     try {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '/core/widgets/custom_input_field.dart';
-import '/features/admin/today_queries/widgets/queries_card.dart';
+import '../today_queries/presentation/widgets/queries_card.dart';
 import '/core/widgets/curved_container.dart';
 import '/core/widgets/themed_app_bar.dart';
 import '/config/constants/colors.dart';

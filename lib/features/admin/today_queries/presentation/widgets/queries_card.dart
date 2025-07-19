@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tasti_restaurant_app/features/admin/today_queries/domain/entities/today_queries.dart';
 import '/config/routes/route_name.dart';
 import '/config/constants/colors.dart';
 import '/core/widgets/custom_button.dart';
 
 class QueriesCard extends StatelessWidget {
   final bool isVerified;
-  const QueriesCard({super.key, this.isVerified = false});
+  final TodayQueriesItem? query;
+
+  const QueriesCard({super.key, this.isVerified = false, this.query});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push(AppRoutes.queryDetails);
+        context.push(AppRoutes.queryDetails, extra: query);
       },
       child: Container(
         decoration: BoxDecoration(

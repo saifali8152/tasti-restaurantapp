@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/features/admin/today_queries/domain/entities/today_queries.dart';
 import '/core/utils/general_extentions.dart';
 import '/config/constants/colors.dart';
 import '/core/widgets/custom_button.dart';
@@ -6,7 +7,8 @@ import '/core/widgets/details_row.dart';
 import '/core/widgets/custom_app_bar.dart';
 
 class QueryDetails extends StatelessWidget {
-  const QueryDetails({super.key});
+  final TodayQueriesItem query;
+  const QueryDetails({super.key, required this.query});
 
   @override
   Widget build(BuildContext context) {
