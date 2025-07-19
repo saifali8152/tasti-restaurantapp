@@ -10,4 +10,5 @@ class AppUrls{
   static final String adminDeleteSmsBundle = "$base/restaurant/delete-sms-bundle";
   static final String fetchAdminTransactionHistory = "$base/restaurant/get-admin-transaction-history";
   static final String adminManageDiscount = "$base/restaurant/manage-discount";
+  static final String adminFetchMonthlyFee = "$base/restaurant/get-fees";
 }

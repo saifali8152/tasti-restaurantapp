@@ -59,7 +59,7 @@ class _ManageSMSState extends State<ManageSMS> {
               icon:
                   Image.asset(AppIcons.target, color: Colors.white, height: 15),
               title: 'Manage Fees',
-              onTap: () {},
+              onTap: () => context.push(AppRoutes.monthlyFee),
               bgColor: Color(0xFF2EBABA),
             ),
           ],

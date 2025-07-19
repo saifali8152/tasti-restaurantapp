@@ -5,14 +5,18 @@ import 'package:tasti_restaurant_app/features/admin/dashboard/data/repositories/
 import 'package:tasti_restaurant_app/features/admin/dashboard/domain/repositories/admin_dashboard_repo.dart';
 import 'package:tasti_restaurant_app/features/admin/dashboard/domain/usecases/fetch_admin_dashboard.dart';
 import 'package:tasti_restaurant_app/features/admin/dashboard/presentation/bloc/admin_dashboard_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_fee/data/data_sources/monthly_fee_remote_source.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_fee/data/repositories/monthly_fee_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/repositories/fee_repo.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/usecases/fetch_admin_fee.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/bloc/get_monthly_fee/get_monthly_fee_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/data/data_sources/sms_bundle_remote_source.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/data/repositories/auth_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_sms/data/repositories/sms_bundle_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/repositories/sms_bundle_repo.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/add_sms_bundle.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/delete_sms_bundle.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/fetch_admin_sms_bundle.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/manage_sms_bundle_discount.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/add_sms_bundle/add_sms_bundle_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/manage_sms_bundle_discount/manage_sms_bundle_discount_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/data/data_sources/admin_reservation_remote_api.dart';
@@ -55,7 +59,9 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IAdminDashboardRemoteApi>(AdminDashboardRemoteApiImpl(sl()));
   sl.registerSingleton<IAdminReservationRemoteApi>(AdminReservationRemoteApiImpl(sl()));
   sl.registerSingleton<ISMSBundleRemoteSourceApi>(SMSBundleSourceRemoteApiImpl(sl()));
+  sl.registerSingleton<IMonthlyFeeRemoteSourceApi>(MonthlyFeeSourceRemoteApiImpl(sl()));
   sl.registerSingleton<ITransactionHistoryRemoteSourceApi>(TransactionHistoryRemoteSourceImp(sl()));
+  
   
   // Repository
   sl.registerSingleton<IAuthRepo>(AuthRepoImpl(sl()));
@@ -63,6 +69,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IAdminReservationRepo>(AdminReservationRepoImpl(sl()));
   sl.registerSingleton<ISMSBundleRepo>(SMSBundleRepoImpl(sl()));
   sl.registerSingleton<ITransactionHistoryRepo>(TransactionHistoryRepoImpl(sl()));
+  sl.registerSingleton<IMonthlyFeeRepo>(MonthlyFeeRepoImpl(sl()));
   
   // UseCase
   sl.registerSingleton<LoginUseCase>(LoginUseCase(sl()));
@@ -74,6 +81,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<DeleteSMSBundleUsecase>(DeleteSMSBundleUsecase(sl()));
   sl.registerSingleton<FetchAdminTransactionHistory>(FetchAdminTransactionHistory(sl()));
   sl.registerSingleton<ManageSmsBundleDiscountUsecase>(ManageSmsBundleDiscountUsecase(sl()));
+  sl.registerSingleton<FetchAdminMonthlyFeeUsecase>(FetchAdminMonthlyFeeUsecase(sl()));
   
   // Bloc
   sl.registerLazySingleton<SkaletonCubit>(() => SkaletonCubit());
@@ -84,5 +92,6 @@ Future<void> initializeDependencies() async {
   // sl.registerLazySingleton<AddSmsBundleBloc>(() => AddSmsBundleBloc(sl()));
   sl.registerLazySingleton<FetchAdminSmsBloc>(() => FetchAdminSmsBloc(sl(), sl(), sl()));
   sl.registerFactory<FetchTransactionHistoryBloc>(() => FetchTransactionHistoryBloc(sl()));
+  sl.registerFactory<AdminMonthlyFeeBloc>(() => AdminMonthlyFeeBloc(sl(), sl()));
   sl.registerLazySingleton<ManageSmsBundleDiscountBloc>(() => ManageSmsBundleDiscountBloc(sl()));
 }

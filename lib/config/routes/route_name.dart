@@ -51,4 +51,5 @@ class AppRoutes {
   static const String manageSmsBundleDiscount = '/manage-sms-bundle-discount';
   static const String transactionHistory = '/transaction-history';
   static const String addSmsBundle = '/add-sms-bundle';
+  static const String monthlyFee = '/monthly-fee';
 }
