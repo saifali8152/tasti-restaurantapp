@@ -47,7 +47,7 @@ class TodayRequestItemModel extends TodayRequestItem {
       name: json['name'] ?? '',
       email: json['email'] ?? '',
       phone: json['phone'] ?? '',
-      text: json['text'] ?? '',
+      text: json['text'] ?? 'N/A',
       city: json['city'] ?? '',
       role: json['role'] ?? '',
       date: json['date'] ?? '',

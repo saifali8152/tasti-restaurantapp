@@ -3,7 +3,7 @@ import 'package:tasti_restaurant_app/core/widgets/custom_search_field.dart';
 import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request/today_request_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request/today_request_event.dart';
 import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request/today_request_state.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/widgets/requests_card.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/widgets/requests_card.dart';
 import '/core/widgets/curved_container.dart';
 import '/core/widgets/themed_app_bar.dart';
 import '/config/constants/colors.dart';

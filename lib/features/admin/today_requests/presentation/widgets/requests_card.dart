@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/widgets/decline_today_request_dialog.dart';
 import '/features/admin/today_requests/domain/entities/today_requests.dart';
 import '/config/routes/route_name.dart';
 import '/config/constants/colors.dart';
@@ -14,7 +16,7 @@ class RequestsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        context.push(AppRoutes.requestDetails);
+        context.push(AppRoutes.requestDetails, extra: request);
       },
       child: Container(
         decoration: BoxDecoration(
@@ -57,13 +59,13 @@ class RequestsCard extends StatelessWidget {
                 ),
               ],
             ),
-            if (!isVerified) ...[
+            if (!isVerified && request?.action == 'no') ...[
               SizedBox(height: 10),
               Row(
                 children: [
                   Expanded(
                     child: CustomButton(
-                      onPressed: () {},
+                      onPressed: ()=> context.showCustomDialog(DeclineTodayRequestDialog(id: request!.reqId.toString())),
                       text: "Decline",
                       bgColor: Colors.transparent,
                       borderColor: AppColors.darkOrange,

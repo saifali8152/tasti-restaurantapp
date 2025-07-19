@@ -7,9 +7,9 @@ import '/core/widgets/custom_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-class DeleteSmsDialog extends StatelessWidget {
+class DeclineTodayRequestDialog extends StatelessWidget {
   final String id;
-  const DeleteSmsDialog({super.key, required this.id});
+  const DeclineTodayRequestDialog({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
