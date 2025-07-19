@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '/features/admin/today_requests/domain/entities/today_requests.dart';
 import '/config/routes/route_name.dart';
 import '/config/constants/colors.dart';
 import '/core/widgets/custom_button.dart';
 
 class RequestsCard extends StatelessWidget {
   final bool isVerified;
-  const RequestsCard({super.key, this.isVerified = false});
+  final TodayRequestItem? request;
+  const RequestsCard({super.key, this.isVerified = false, this.request});
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +24,15 @@ class RequestsCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Umar Khan",
+              request?.name ?? 'N/A',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            const Text(
-              'Restaurant Name',
+            Text(
+              request?.role ?? 'N/A',
               style: TextStyle(fontSize: 12),
             ),
-            const Text(
-              'Chinese Chinese,Italian',
+            Text(
+              request?.dateFormatted ?? 'N/A',
               style: TextStyle(fontSize: 12),
             ),
             SizedBox(height: 10),
@@ -45,8 +47,8 @@ class RequestsCard extends StatelessWidget {
                 ),
                 SizedBox(width: 5),
                 Expanded(
-                  child: const Text(
-                    'Shop 7, Delta Central, 74 Hillcrest Ave, Blairgowrie, Randburg, 2194, South Africa',
+                  child: Text(
+                    request?.city ?? 'N/A',
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.grey,

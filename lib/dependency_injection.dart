@@ -25,6 +25,11 @@ import 'package:tasti_restaurant_app/features/admin/reservations_database/data/r
 import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/repositories/admin_reservation_repo.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/usecases/fetch_admin_reservations.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/presentation/bloc/admin_reservation_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/data/data_sources/today_requests_remote_source.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/data/repositories/today_requests_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/domain/repositories/today_requests_repo.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/domain/usecases/fetch_today_requests.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request/today_request_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/transaction_history/data/data_sources/transaction_history_remote_source.dart';
 import 'package:tasti_restaurant_app/features/admin/transaction_history/data/repositories/transaction_history_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/transaction_history/domain/repositories/transaction_history_repo.dart';
@@ -62,6 +67,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<ISMSBundleRemoteSourceApi>(SMSBundleSourceRemoteApiImpl(sl()));
   sl.registerSingleton<IMonthlyFeeRemoteSourceApi>(MonthlyFeeSourceRemoteApiImpl(sl()));
   sl.registerSingleton<ITransactionHistoryRemoteSourceApi>(TransactionHistoryRemoteSourceImp(sl()));
+  sl.registerSingleton<ITodayRequestRemoteSourceApi>(TodayRequestSourceRemoteApiImpl(sl()));
   
   
   // Repository
@@ -71,6 +77,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<ISMSBundleRepo>(SMSBundleRepoImpl(sl()));
   sl.registerSingleton<ITransactionHistoryRepo>(TransactionHistoryRepoImpl(sl()));
   sl.registerSingleton<IMonthlyFeeRepo>(MonthlyFeeRepoImpl(sl()));
+  sl.registerSingleton<ITodayRequestRepo>(TodayRequestRepoImpl(sl()));
   
   // UseCase
   sl.registerSingleton<LoginUseCase>(LoginUseCase(sl()));
@@ -84,6 +91,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<ManageSmsBundleDiscountUsecase>(ManageSmsBundleDiscountUsecase(sl()));
   sl.registerSingleton<FetchAdminMonthlyFeeUsecase>(FetchAdminMonthlyFeeUsecase(sl()));
   sl.registerSingleton<UpdateAdminMonthlyFeeUsecdase>(UpdateAdminMonthlyFeeUsecdase(sl()));
+  sl.registerSingleton<FetchTodayRequestUsecase>(FetchTodayRequestUsecase(sl()));
   
   // Bloc
   sl.registerLazySingleton<SkaletonCubit>(() => SkaletonCubit());
@@ -95,4 +103,5 @@ Future<void> initializeDependencies() async {
   sl.registerFactory<FetchTransactionHistoryBloc>(() => FetchTransactionHistoryBloc(sl()));
   sl.registerLazySingleton<AdminMonthlyFeeBloc>(() => AdminMonthlyFeeBloc(sl(), sl()));
   sl.registerLazySingleton<ManageSmsBundleDiscountBloc>(() => ManageSmsBundleDiscountBloc(sl()));
+  sl.registerLazySingleton<TodayRequestBloc>(() => TodayRequestBloc(sl(), sl(), sl()));
 }

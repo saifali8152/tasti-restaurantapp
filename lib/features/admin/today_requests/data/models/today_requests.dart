@@ -1,0 +1,96 @@
+import 'package:tasti_restaurant_app/core/models/pagination.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/domain/entities/today_requests.dart';
+
+class TodayRequestModel extends TodayRequestEntity {
+  const TodayRequestModel({
+    required super.data,
+    required super.pagination,
+  });
+
+  factory TodayRequestModel.fromJson(Map<String, dynamic> json) {
+    return TodayRequestModel(
+      data: List<TodayRequestItemModel>.from(
+        json['data'].map((item) => TodayRequestItemModel.fromJson(item)),
+      ),
+      pagination: PaginationModel.fromJson(json['pagination']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data.map((e) => (e as TodayRequestItemModel).toJson()).toList(),
+      'pagination': (pagination as TodayRequestItemModel).toJson(),
+    };
+  }
+}
+
+class TodayRequestItemModel extends TodayRequestItem {
+  const TodayRequestItemModel({
+    required super.reqId,
+    required super.name,
+    required super.email,
+    required super.phone,
+    required super.text,
+    required super.city,
+    required super.role,
+    required super.date,
+    required super.subject,
+    required super.type,
+    required super.names,
+    required super.action,
+    required super.dateFormatted,
+  });
+
+  factory TodayRequestItemModel.fromJson(Map<String, dynamic> json) {
+    return TodayRequestItemModel(
+      reqId: json['req_id'] ?? 0,
+      name: json['name'] ?? '',
+      email: json['email'] ?? '',
+      phone: json['phone'] ?? '',
+      text: json['text'] ?? '',
+      city: json['city'] ?? '',
+      role: json['role'] ?? '',
+      date: json['date'] ?? '',
+      subject: json['subject'] ?? '',
+      type: json['type'] ?? '',
+      names: json['names'] ?? '',
+      action: json['action'] ?? '',
+      dateFormatted: json['date_formatted'] ?? '',
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'req_id': reqId,
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'text': text,
+      'city': city,
+      'role': role,
+      'date': date,
+      'subject': subject,
+      'type': type,
+      'names': names,
+      'action': action,
+      'date_formatted': dateFormatted,
+    };
+  }
+
+  @override
+  List<Object?> get props => [
+        reqId,
+        name,
+        email,
+        phone,
+        text,
+        city,
+        role,
+        date,
+        subject,
+        type,
+        names,
+        action,
+        dateFormatted,
+      ];
+}

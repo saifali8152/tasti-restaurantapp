@@ -45,7 +45,7 @@ class _UpdateMonthlyFeeState extends State<UpdateMonthlyFee> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Add SMS Bundle'),
+      appBar: CustomAppBar(title: 'Manage Monthly Fee'),
       body: BlocConsumer<AdminMonthlyFeeBloc, MonthlyFeeState>(
         listener: (context, state) {
           if (state.updateResponse.status == Status.error) {
@@ -77,7 +77,7 @@ class _UpdateMonthlyFeeState extends State<UpdateMonthlyFee> {
                   CustomButton(
                     onPressed: _submit,
                     isLoading: state.updateResponse.status == Status.loading,
-                    text: 'Update Monthly Fee',
+                    text: 'Update',
                   ),
                   const SizedBox(height: 10),
                 ],

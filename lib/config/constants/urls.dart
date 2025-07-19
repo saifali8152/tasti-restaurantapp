@@ -12,4 +12,5 @@ class AppUrls{
   static final String adminManageDiscount = "$base/restaurant/manage-discount";
   static final String adminFetchMonthlyFee = "$base/restaurant/get-fees";
   static final String adminUpdateMonthlyFee = "$base/restaurant/update-fees";
+  static final String adminFetchTodayRequests = "$base/restaurant/get-today-requests";
 }
