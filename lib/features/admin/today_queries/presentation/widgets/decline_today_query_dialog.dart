@@ -1,15 +1,15 @@
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/features/admin/today_queries/presentation/bloc/today_queries_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/today_queries/presentation/bloc/today_queries_event.dart';
-import 'package:tasti_restaurant_app/features/admin/today_queries/presentation/bloc/today_queries_state.dart';
+import '/core/network/response.dart';
+import '/features/admin/today_queries/presentation/bloc/today_queries_bloc.dart';
+import '/features/admin/today_queries/presentation/bloc/today_queries_event.dart';
+import '/features/admin/today_queries/presentation/bloc/today_queries_state.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/widgets/custom_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-class DeclineTodayRequestDialog extends StatelessWidget {
+class DeclineTodayQueryDialog extends StatelessWidget {
   final String id;
-  const DeclineTodayRequestDialog({super.key, required this.id});
+  const DeclineTodayQueryDialog({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {

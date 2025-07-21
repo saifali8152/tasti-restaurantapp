@@ -30,6 +30,7 @@ import 'package:tasti_restaurant_app/features/admin/today_queries/data/repositor
 import 'package:tasti_restaurant_app/features/admin/today_queries/domain/repositories/today_queries_repo.dart';
 import 'package:tasti_restaurant_app/features/admin/today_queries/domain/usecases/delete_today_queries.dart';
 import 'package:tasti_restaurant_app/features/admin/today_queries/domain/usecases/fetch_today_queries.dart';
+import 'package:tasti_restaurant_app/features/admin/today_queries/domain/usecases/reply_today_query.dart';
 import 'package:tasti_restaurant_app/features/admin/today_queries/presentation/bloc/today_queries_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/today_requests/data/data_sources/today_requests_remote_source.dart';
 import 'package:tasti_restaurant_app/features/admin/today_requests/data/repositories/today_requests_repo_impl.dart';
@@ -104,6 +105,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<DeleteTodayRequestUsecase>(DeleteTodayRequestUsecase(sl()));
   sl.registerSingleton<FetchTodayQueriesUsecase>(FetchTodayQueriesUsecase(sl()));
   sl.registerSingleton<DeleteTodayQueriesUsecase>(DeleteTodayQueriesUsecase(sl()));
+  sl.registerSingleton<ReplyTodayQueryUsecase>(ReplyTodayQueryUsecase(sl()));
   
   // Bloc
   sl.registerLazySingleton<SkaletonCubit>(() => SkaletonCubit());
@@ -116,5 +118,5 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton<AdminMonthlyFeeBloc>(() => AdminMonthlyFeeBloc(sl(), sl()));
   sl.registerLazySingleton<ManageSmsBundleDiscountBloc>(() => ManageSmsBundleDiscountBloc(sl()));
   sl.registerLazySingleton<TodayRequestBloc>(() => TodayRequestBloc(sl(), sl()));
-  sl.registerLazySingleton<TodayqueriesBloc>(() => TodayqueriesBloc(sl(), sl()));
+  sl.registerLazySingleton<TodayqueriesBloc>(() => TodayqueriesBloc(sl(), sl(), sl()));
 }

@@ -5,4 +5,5 @@ import '/core/network/response.dart';
 abstract class ITodayQueriesRepo {
   Future<DataState<TodayQueriesEntity>> fetchTodayQueries(PaginationParms parms);
   Future<DataState<String>> deleteTodayQueries(String id);
+  Future<DataState<String>> replyTodayQuery(ReplyTodayQueryParms parms);
 }

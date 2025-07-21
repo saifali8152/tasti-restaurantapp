@@ -27,22 +27,53 @@ class TodayQueriesModel extends TodayQueriesEntity {
 class TodayQueriesItemModel extends TodayQueriesItem {
   const TodayQueriesItemModel({
     required super.reqId,
+    required super.name,
+    required super.email,
+    required super.phone,
+    required super.text,
+    required super.city,
+    required super.role,
+    required super.date,
+    required super.subject,
+    required super.type,
+    required super.names,
+    required super.action,
+    required super.dateFormatted,
   });
 
   factory TodayQueriesItemModel.fromJson(Map<String, dynamic> json) {
     return TodayQueriesItemModel(
       reqId: json['req_id'] ?? 0,
+      name: json['name'] ?? '',
+      email: json['email'] ?? '',
+      phone: json['phone'] ?? '',
+      text: json['text'] ?? '',
+      city: json['city'] ?? '',
+      role: json['role'] ?? '',
+      date: json['date'] ?? '',
+      subject: json['subject'] ?? '',
+      type: json['type'] ?? '',
+      names: json['names'] ?? '',
+      action: json['action'] ?? '',
+      dateFormatted: json['date_formatted'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'req_id': reqId,
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'text': text,
+      'city': city,
+      'role': role,
+      'date': date,
+      'subject': subject,
+      'type': type,
+      'names': names,
+      'action': action,
+      'date_formatted': dateFormatted,
     };
   }
-
-  @override
-  List<Object?> get props => [
-        reqId,
-      ];
 }

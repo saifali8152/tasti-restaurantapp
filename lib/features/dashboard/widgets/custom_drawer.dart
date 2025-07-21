@@ -157,6 +157,10 @@ class DrawerConfig {
               DrawerItemModel(
                   title: "Today's Queries", index: 3, icon: Icons.bug_report),
               DrawerItemModel(
+                  title: "Monthly Requests", index: 2, icon: Icons.history),
+              DrawerItemModel(
+                  title: "Monthly Queries", index: 3, icon: Icons.bug_report),
+              DrawerItemModel(
                   title: "Overall Requests", index: 4, icon: Icons.speed),
               DrawerItemModel(
                   title: "Overall Querires", index: 5, icon: Icons.speed),

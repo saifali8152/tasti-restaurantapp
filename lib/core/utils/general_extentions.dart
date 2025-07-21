@@ -1,5 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:tasti_restaurant_app/features/admin/today_queries/domain/entities/today_queries.dart';
+
+extension TodayQueriesItemCopyWith on TodayQueriesItem {
+  TodayQueriesItem copyWith({String? action}) {
+    return TodayQueriesItem(
+      reqId: reqId,
+      name: name,
+      email: email,
+      phone: phone,
+      text: text,
+      city: city,
+      role: role,
+      date: date,
+      subject: subject,
+      type: type,
+      names: names,
+      action: action ?? this.action,
+      dateFormatted: dateFormatted,
+    );
+  }
+}
 
 extension FormattedDateExtension on DateTime? {
   String formatDate({String pattern = 'yyyy-MM-dd'}) {

@@ -19,6 +19,16 @@ class TodayQueriesRepoImpl extends ITodayQueriesRepo {
   }
   
   @override
+  Future<DataState<String>> replyTodayQuery(ReplyTodayQueryParms parms) async{
+    try {
+      final result = await dataSource.replyTodayQuery(parms);
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
+  
+  @override
   Future<DataState<TodayQueriesModel>> fetchTodayQueries(PaginationParms parms) async{
     try {
       final result = await dataSource.fetchTodayQueries(parms);

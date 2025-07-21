@@ -12,6 +12,13 @@ class UpdateMonthlyFeeParms {
   UpdateMonthlyFeeParms({required this.id, required this.money});
 }
 
+class ReplyTodayQueryParms{
+  final int id;
+  final String message;
+
+  ReplyTodayQueryParms({required this.id, required this.message});
+}
+
 class PaginationParms {
   final String page;
   final String limit;

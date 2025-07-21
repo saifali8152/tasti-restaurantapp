@@ -65,6 +65,8 @@ class DrawerScreens {
           Restaurants(),
           TodayRequests(),
           TodayQueries(),
+          Placeholder(),
+          Placeholder(),
           Requests(),
           Queries(),
           ReservationsDatabase(),

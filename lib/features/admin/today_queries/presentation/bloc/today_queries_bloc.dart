@@ -1,8 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/core/parms/parms.dart';
+import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
 import 'package:tasti_restaurant_app/features/admin/today_queries/domain/entities/today_queries.dart';
 import 'package:tasti_restaurant_app/features/admin/today_queries/domain/usecases/delete_today_queries.dart';
 import 'package:tasti_restaurant_app/features/admin/today_queries/domain/usecases/fetch_today_queries.dart';
+import 'package:tasti_restaurant_app/features/admin/today_queries/domain/usecases/reply_today_query.dart';
 import '/core/network/response.dart';
 import 'today_queries_event.dart';
 import 'today_queries_state.dart';
@@ -10,17 +12,45 @@ import 'today_queries_state.dart';
 class TodayqueriesBloc extends Bloc<TodayqueriesEvents, TodayQueriesState> {
   final FetchTodayQueriesUsecase _useCase;
   final DeleteTodayQueriesUsecase _deleteUsecase;
+  final ReplyTodayQueryUsecase _replyUsecase;
 
-
-  TodayqueriesBloc(this._useCase, this._deleteUsecase)
+  TodayqueriesBloc(this._useCase, this._deleteUsecase, this._replyUsecase)
       : super(TodayQueriesState(
-            fetchResponse: ApiResponse.initial(),
-            deleteResponse: ApiResponse.initial(),
-            )) {
+          fetchResponse: ApiResponse.initial(),
+          deleteResponse: ApiResponse.initial(),
+          replyResponse: ApiResponse.initial(),
+        )) {
     on<FetchInitialTodayqueriess>(_onFetchInitialTodayqueriess);
     on<FetchMoreTodayqueriess>(_onFetchMoreTodayqueriess);
     on<SearchTodayqueriess>(_onSearchTodayqueriess);
     on<AdminDeleteTodayqueries>(_onAdminDeleteTodayqueries);
+    on<ReplyTodayQuery>(_onReplyTodayQuery);
+  }
+
+  Future<void> _onReplyTodayQuery(
+      ReplyTodayQuery event, Emitter<TodayQueriesState> emit) async {
+    emit(state.copyWith(replyResponse: ApiResponse.loading()));
+    try {
+      final result = await _replyUsecase.call(event.parms);
+      if (result is DataSuccess<String>) {
+        final oldList = state.fetchResponse.data;
+
+        final optimisticList = oldList?.map((r) {
+          if (r.reqId == event.parms.id) {
+            return r.copyWith(action: '');
+          }
+          return r;
+        }).toList();
+
+        emit(state.copyWith(
+            fetchResponse: ApiResponse.completed(List.from(optimisticList!)),
+            replyResponse: ApiResponse.completed(result.data)));
+      } else if (result is DataFailure<String>) {
+        emit(state.copyWith(replyResponse: ApiResponse.error(result.error)));
+      }
+    } catch (e) {
+      emit(state.copyWith(replyResponse: ApiResponse.error(e.toString())));
+    }
   }
 
   Future<void> _onAdminDeleteTodayqueries(
@@ -31,7 +61,8 @@ class TodayqueriesBloc extends Bloc<TodayqueriesEvents, TodayQueriesState> {
       if (result is DataSuccess<String>) {
         final oldList = state.fetchResponse.data;
 
-        final optimisticList = oldList?.where((r) => r.reqId != event.id).toList();
+        final optimisticList =
+            oldList?.where((r) => r.reqId != event.id).toList();
         emit(state.copyWith(
             fetchResponse: ApiResponse.completed(List.from(optimisticList!)),
             deleteResponse: ApiResponse.completed(result.data)));
@@ -65,7 +96,7 @@ class TodayqueriesBloc extends Bloc<TodayqueriesEvents, TodayQueriesState> {
       emit(state.copyWith(fetchResponse: ApiResponse.error(e.toString())));
     }
   }
-  
+
   Future<void> _onSearchTodayqueriess(
       SearchTodayqueriess event, Emitter<TodayQueriesState> emit) async {
     emit(state.copyWith(fetchResponse: ApiResponse.loading()));
@@ -105,8 +136,9 @@ class TodayqueriesBloc extends Bloc<TodayqueriesEvents, TodayQueriesState> {
         if (result is DataSuccess<TodayQueriesEntity>) {
           final newData = result.data;
 
-          final updatedList = List<TodayQueriesItem>.from(state.fetchResponse.data!)
-            ..addAll(newData.data);
+          final updatedList =
+              List<TodayQueriesItem>.from(state.fetchResponse.data!)
+                ..addAll(newData.data);
 
           emit(state.copyWith(
               fetchResponse: ApiResponse.completed(updatedList),

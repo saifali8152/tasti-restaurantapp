@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
 import 'package:tasti_restaurant_app/features/admin/today_queries/domain/entities/today_queries.dart';
+import 'package:tasti_restaurant_app/features/admin/today_queries/presentation/widgets/decline_today_query_dialog.dart';
 import '/config/routes/route_name.dart';
 import '/config/constants/colors.dart';
 import '/core/widgets/custom_button.dart';
@@ -25,15 +27,15 @@ class QueriesCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Umar Khan",
+              query?.name ?? "N/A",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            const Text(
-              'Restaurant Name',
+            Text(
+              query?.email ?? 'N/A',
               style: TextStyle(fontSize: 12),
             ),
-            const Text(
-              'Chinese Chinese,Italian',
+            Text(
+              query?.dateFormatted ?? 'N/A',
               style: TextStyle(fontSize: 12),
             ),
             SizedBox(height: 10),
@@ -58,10 +60,11 @@ class QueriesCard extends StatelessWidget {
                 ),
               ],
             ),
-            if (!isVerified) ...[
+            if (!isVerified && query?.action == 'none') ...[
               SizedBox(height: 10),
               CustomButton(
-                onPressed: () {},
+                onPressed: () => context.showCustomDialog(
+                    DeclineTodayQueryDialog(id: query!.reqId.toString())),
                 text: "Delete",
                 bgColor: AppColors.grey,
                 textColor: Colors.black,

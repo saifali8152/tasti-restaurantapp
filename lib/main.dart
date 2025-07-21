@@ -22,22 +22,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => SkaletonCubit()),
-        BlocProvider(create: (context) => AuthBloc()),
-        BlocProvider(create: (context) => sl<AdminReservationBloc>()),
-        BlocProvider(create: (context) => sl<FetchAdminSmsBloc>()),
-        BlocProvider(create: (context) => sl<FetchTransactionHistoryBloc>()),
-        BlocProvider(create: (context) => sl<ManageSmsBundleDiscountBloc>()),
-        BlocProvider(create: (context) => sl<TodayRequestBloc>()),
-        BlocProvider(create: (context) => sl<TodayqueriesBloc>()),
-      ],
-      child: MaterialApp.router(
-        title: 'Tasti Restaurant App',
-        theme: AppTheme.lightTheme,
-        themeMode: ThemeMode.light,
-        routerConfig: router,
+    return GestureDetector(
+      onTap: (){
+        FocusScope.of(context).unfocus();
+
+      },
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => SkaletonCubit()),
+          BlocProvider(create: (context) => AuthBloc()),
+          BlocProvider(create: (context) => sl<AdminReservationBloc>()),
+          BlocProvider(create: (context) => sl<FetchAdminSmsBloc>()),
+          BlocProvider(create: (context) => sl<FetchTransactionHistoryBloc>()),
+          BlocProvider(create: (context) => sl<ManageSmsBundleDiscountBloc>()),
+          BlocProvider(create: (context) => sl<TodayRequestBloc>()),
+          BlocProvider(create: (context) => sl<TodayqueriesBloc>()),
+        ],
+        child: MaterialApp.router(
+          title: 'Tasti Restaurant App',
+          theme: AppTheme.lightTheme,
+          themeMode: ThemeMode.light,
+          routerConfig: router,
+        ),
       ),
     );
   }

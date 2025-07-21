@@ -6,6 +6,7 @@ import '/config/constants/urls.dart';
 abstract class ITodayQueriesRemoteSourceApi {
   Future<TodayQueriesModel> fetchTodayQueries(PaginationParms parms);
   Future<String> deleteTodayQueries(String parms);
+  Future<String> replyTodayQuery(ReplyTodayQueryParms parms);
 }
 
 class TodayQueriesSourceRemoteApiImpl extends ITodayQueriesRemoteSourceApi {
@@ -21,6 +22,20 @@ class TodayQueriesSourceRemoteApiImpl extends ITodayQueriesRemoteSourceApi {
     };
     var response =
         await networkApiService.post(AppUrls.adminDeleteTodayQuery, data);
+
+    return response['message'];
+  }
+ 
+  @override
+  Future<String> replyTodayQuery(ReplyTodayQueryParms parms) async {
+    Map<String, dynamic> data = {};
+
+    data = {
+      "req_id": parms.id,
+      "reply": parms.message,
+    };
+    var response =
+        await networkApiService.post(AppUrls.adminReplyTodayQuery, data);
 
     return response['message'];
   }
