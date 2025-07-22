@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tasti_restaurant_app/core/enum/request_type.dart';
+import 'package:tasti_restaurant_app/features/admin/profile/presentation/pages/profile.dart';
 import '/features/screens.dart';
 import '/config/routes/route_name.dart';
 import '../../../config/constants/icons.dart';
@@ -63,15 +65,16 @@ class DrawerScreens {
         return [
           AdminDashboardScreen(),
           Restaurants(),
-          TodayRequests(),
+          TodayRequests(type: RequestType.todayRequests),
           TodayQueries(),
+          TodayRequests(type: RequestType.monthlyRequests),
           Placeholder(),
-          Placeholder(),
-          Requests(),
+          TodayRequests(type: RequestType.overallRequests),
           Queries(),
           ReservationsDatabase(),
           ManageSMS(),
-          MarketingCampain()
+          MarketingCampain(),
+          ProfileScreen(),
         ];
       case "restaurant":
       default:
@@ -89,6 +92,7 @@ class DrawerScreens {
           Text("Bundles and Billings"),
           Settings(),
           ShareLinksScreen(),
+          ProfileScreen(),
         ];
     }
   }

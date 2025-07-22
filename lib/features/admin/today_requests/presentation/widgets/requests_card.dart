@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
 import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/widgets/decline_today_request_dialog.dart';
-import '/features/admin/today_requests/domain/entities/today_requests.dart';
+import '../../domain/entities/requests.dart';
 import '/config/routes/route_name.dart';
 import '/config/constants/colors.dart';
 import '/core/widgets/custom_button.dart';
 
 class RequestsCard extends StatelessWidget {
   final bool isVerified;
-  final TodayRequestItem? request;
+  final RequestItem? request;
   const RequestsCard({super.key, this.isVerified = false, this.request});
 
   @override

@@ -1,3 +1,5 @@
+import 'package:tasti_restaurant_app/core/enum/request_type.dart';
+
 class LoginParms {
   final String email;
   final String password;
@@ -11,8 +13,40 @@ class UpdateMonthlyFeeParms {
 
   UpdateMonthlyFeeParms({required this.id, required this.money});
 }
+class UpdateProfileParms {
+  final String name;
+  final String profilePic;
 
-class ReplyTodayQueryParms{
+  UpdateProfileParms({
+    required this.name,
+    required this.profilePic,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'profile_pic': profilePic,
+    };
+  }
+}
+class ChangePasswordParms {
+  final String currentPassword;
+  final String newPassword;
+
+  ChangePasswordParms({
+    required this.currentPassword,
+    required this.newPassword,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'currentPassword': currentPassword,
+      'newPassword': newPassword,
+    };
+  }
+}
+
+class ReplyTodayQueryParms {
   final int id;
   final String message;
 
@@ -28,6 +62,20 @@ class PaginationParms {
     this.page = '1',
     this.limit = '10',
     this.search = '',
+  });
+}
+
+class RequestParms {
+  final String page;
+  final String limit;
+  final String search;
+  final RequestType type;
+
+  RequestParms({
+    this.page = '1',
+    this.limit = '10',
+    this.search = '',
+    required this.type,
   });
 }
 

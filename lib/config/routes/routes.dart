@@ -3,9 +3,11 @@ import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/page
 import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/pages/monthly_fee.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/entities/admin_sms.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/pages/manage_sms_bundle_discount.dart';
+import 'package:tasti_restaurant_app/features/admin/profile/presentation/pages/change_password.dart';
+import 'package:tasti_restaurant_app/features/admin/profile/presentation/pages/profile.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/entities/reservation.dart';
 import 'package:tasti_restaurant_app/features/admin/today_queries/domain/entities/today_queries.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/domain/entities/today_requests.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/domain/entities/requests.dart';
 import 'package:tasti_restaurant_app/features/admin/transaction_history/presentation/pages/transaction_history.dart';
 import '../../features/admin/manage_sms/presentation/pages/add_sms_bundle.dart';
 import '../../features/screens.dart';
@@ -65,7 +67,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: AppRoutes.requestDetails,
       builder: (context, state) => RequestDetails(
-        request: state.extra as TodayRequestItem,
+        request: state.extra as RequestItem,
       ),
     ),
     GoRoute(
@@ -104,6 +106,15 @@ final GoRouter router = GoRouter(
         return Skaleton();
       },
       routes: [
+        GoRoute(
+            path: AppRoutes.profile,
+            builder: (context, state) => const ProfileScreen(),
+            routes: [
+              GoRoute(
+                path: AppRoutes.changePassword,
+                builder: (context, state) => const ChangePasswordScreen(),
+              ),
+            ]),
         GoRoute(
           path: AppRoutes.stats,
           builder: (context, state) => DashboardScreen(),

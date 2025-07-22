@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:tasti_restaurant_app/core/models/pagination.dart';
 
-class TodayRequestEntity extends Equatable {
-  final List<TodayRequestItem> data;
+class RequestEntity extends Equatable {
+  final List<RequestItem> data;
   final PaginationModel pagination;
 
-  const TodayRequestEntity({
+  const RequestEntity({
     required this.data,
     required this.pagination,
   });
@@ -14,7 +14,7 @@ class TodayRequestEntity extends Equatable {
   List<Object?> get props => [data, pagination];
 }
 
-class TodayRequestItem extends Equatable {
+class RequestItem extends Equatable {
   final int reqId;
   final String name;
   final String email;
@@ -29,7 +29,7 @@ class TodayRequestItem extends Equatable {
   final String action;
   final String dateFormatted;
 
-  const TodayRequestItem({
+  const RequestItem({
     required this.reqId,
     required this.name,
     required this.email,

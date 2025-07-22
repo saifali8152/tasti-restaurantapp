@@ -20,6 +20,7 @@ class SplashServices {
     if (sC.isFirstVisit) {
       context.go(AppRoutes.onboarding);
     } else {
+      userCubit.setUser(sC.user!);
       context.go(AppRoutes.skaleton);
     }
   }

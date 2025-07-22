@@ -1,9 +1,9 @@
 import 'package:tasti_restaurant_app/core/models/pagination.dart';
 import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/domain/entities/today_requests.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/domain/entities/requests.dart';
 
 class TodayRequestState  {
-  final ApiResponse<List<TodayRequestItem>> fetchResponse;
+  final ApiResponse<List<RequestItem>> fetchResponse;
   final ApiResponse<String> deleteResponse;
   final PaginationModel? pagination;
   final bool isLoadingMore;
@@ -18,7 +18,7 @@ class TodayRequestState  {
   });
 
   TodayRequestState copyWith({
-    ApiResponse<List<TodayRequestItem>>? fetchResponse,
+    ApiResponse<List<RequestItem>>? fetchResponse,
     ApiResponse<String>? deleteResponse,
     PaginationModel? pagination,
     bool? isLoadingMore,

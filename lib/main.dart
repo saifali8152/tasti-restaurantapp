@@ -12,7 +12,7 @@ import 'config/theme/theme.dart';
 import 'features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'features/skaleton/cubit/skaleton_cubit.dart';
 
-void main() async{
+void main() async {
   await initializeDependencies();
   runApp(const MyApp());
 }
@@ -23,9 +23,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         FocusScope.of(context).unfocus();
-
       },
       child: MultiBlocProvider(
         providers: [

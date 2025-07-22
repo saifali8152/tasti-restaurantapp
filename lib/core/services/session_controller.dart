@@ -30,6 +30,7 @@ class SessionController {
       } else {
         _user = null;
       }
+      debugPrint('User session loaded: ${UserModel.fromEntity(_user!).toJson()}');
     } catch (e) {
       debugPrint('Session load error: $e');
     }

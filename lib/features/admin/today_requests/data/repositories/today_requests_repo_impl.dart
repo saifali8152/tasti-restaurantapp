@@ -19,7 +19,7 @@ class TodayRequestRepoImpl extends ITodayRequestRepo {
   }
   
   @override
-  Future<DataState<TodayRequestModel>> fetchTodayRequests(PaginationParms parms) async{
+  Future<DataState<TodayRequestModel>> fetchTodayRequests(RequestParms parms) async{
     try {
       final result = await dataSource.fetchTodayRequest(parms);
       return DataSuccess(result);

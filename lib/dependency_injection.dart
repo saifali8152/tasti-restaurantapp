@@ -20,6 +20,13 @@ import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/f
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/manage_sms_bundle_discount.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/manage_sms_bundle_discount/manage_sms_bundle_discount_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/profile/data/data_sources/profile_remote_api.dart';
+import 'package:tasti_restaurant_app/features/admin/profile/data/repositories/profile_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/admin/profile/domain/repositories/profile_repo.dart';
+import 'package:tasti_restaurant_app/features/admin/profile/domain/usecases/change_password.dart';
+import 'package:tasti_restaurant_app/features/admin/profile/domain/usecases/update_profile_usecase.dart';
+import 'package:tasti_restaurant_app/features/admin/profile/presentation/bloc/change_password/change_password_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/profile/presentation/bloc/update_profile/profile_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/data/data_sources/admin_reservation_remote_api.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/data/repositories/admin_dashboard_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/repositories/admin_reservation_repo.dart';
@@ -36,7 +43,7 @@ import 'package:tasti_restaurant_app/features/admin/today_requests/data/data_sou
 import 'package:tasti_restaurant_app/features/admin/today_requests/data/repositories/today_requests_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/today_requests/domain/repositories/today_requests_repo.dart';
 import 'package:tasti_restaurant_app/features/admin/today_requests/domain/usecases/delete_today_requests.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/domain/usecases/fetch_today_requests.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/domain/usecases/fetch_requests.dart';
 import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/transaction_history/data/data_sources/transaction_history_remote_source.dart';
 import 'package:tasti_restaurant_app/features/admin/transaction_history/data/repositories/transaction_history_repo_impl.dart';
@@ -74,57 +81,92 @@ Future<void> initializeDependencies() async {
 
   // Api Services
   sl.registerSingleton<IAuthRemoteApi>(AuthRemoteApiImpl(sl()));
-  sl.registerSingleton<IAdminDashboardRemoteApi>(AdminDashboardRemoteApiImpl(sl()));
-  sl.registerSingleton<IAdminReservationRemoteApi>(AdminReservationRemoteApiImpl(sl()));
-  sl.registerSingleton<ISMSBundleRemoteSourceApi>(SMSBundleSourceRemoteApiImpl(sl()));
-  sl.registerSingleton<IMonthlyFeeRemoteSourceApi>(MonthlyFeeSourceRemoteApiImpl(sl()));
-  sl.registerSingleton<ITransactionHistoryRemoteSourceApi>(TransactionHistoryRemoteSourceImp(sl()));
-  sl.registerSingleton<ITodayRequestRemoteSourceApi>(TodayRequestSourceRemoteApiImpl(sl()));
-  sl.registerSingleton<ITodayQueriesRemoteSourceApi>(TodayQueriesSourceRemoteApiImpl(sl()));
-  
-  
+  sl.registerSingleton<IAdminDashboardRemoteApi>(
+      AdminDashboardRemoteApiImpl(sl()));
+  sl.registerSingleton<IAdminReservationRemoteApi>(
+      AdminReservationRemoteApiImpl(sl()));
+  sl.registerSingleton<ISMSBundleRemoteSourceApi>(
+      SMSBundleSourceRemoteApiImpl(sl()));
+  sl.registerSingleton<IMonthlyFeeRemoteSourceApi>(
+      MonthlyFeeSourceRemoteApiImpl(sl()));
+  sl.registerSingleton<ITransactionHistoryRemoteSourceApi>(
+      TransactionHistoryRemoteSourceImp(sl()));
+  sl.registerSingleton<ITodayRequestRemoteSourceApi>(
+      TodayRequestSourceRemoteApiImpl(sl()));
+  sl.registerSingleton<ITodayQueriesRemoteSourceApi>(
+      TodayQueriesSourceRemoteApiImpl(sl()));
+  sl.registerSingleton<IProfileRemoteApi>(ProfileRemoteApiImpl(sl()));
+
   // Repository
   sl.registerSingleton<IAuthRepo>(AuthRepoImpl(sl()));
   sl.registerSingleton<IAdminDashboardRepo>(AdminDashboardRepoImpl(sl()));
   sl.registerSingleton<IAdminReservationRepo>(AdminReservationRepoImpl(sl()));
   sl.registerSingleton<ISMSBundleRepo>(SMSBundleRepoImpl(sl()));
-  sl.registerSingleton<ITransactionHistoryRepo>(TransactionHistoryRepoImpl(sl()));
+  sl.registerSingleton<ITransactionHistoryRepo>(
+      TransactionHistoryRepoImpl(sl()));
   sl.registerSingleton<IMonthlyFeeRepo>(MonthlyFeeRepoImpl(sl()));
   sl.registerSingleton<ITodayRequestRepo>(TodayRequestRepoImpl(sl()));
   sl.registerSingleton<ITodayQueriesRepo>(TodayQueriesRepoImpl(sl()));
-  
+  sl.registerSingleton<IProfileRepo>(ProfileRepoImpl(sl()));
+
   // UseCase
   sl.registerSingleton<LoginUseCase>(LoginUseCase(sl()));
   sl.registerSingleton<SignOutUseCase>(SignOutUseCase(sl()));
-  sl.registerSingleton<FetchAdminDashboardUseCase>(FetchAdminDashboardUseCase(sl()));
-  sl.registerSingleton<FetchAdminReservationsUseCase>(FetchAdminReservationsUseCase(sl()));
+  sl.registerSingleton<FetchAdminDashboardUseCase>(
+      FetchAdminDashboardUseCase(sl()));
+  sl.registerSingleton<FetchAdminReservationsUseCase>(
+      FetchAdminReservationsUseCase(sl()));
   sl.registerSingleton<AddSMSBundleUsecase>(AddSMSBundleUsecase(sl()));
-  sl.registerSingleton<FetchAdminSmsBundleUsecase>(FetchAdminSmsBundleUsecase(sl()));
+  sl.registerSingleton<FetchAdminSmsBundleUsecase>(
+      FetchAdminSmsBundleUsecase(sl()));
   sl.registerSingleton<DeleteSMSBundleUsecase>(DeleteSMSBundleUsecase(sl()));
-  sl.registerSingleton<FetchAdminTransactionHistory>(FetchAdminTransactionHistory(sl()));
-  sl.registerSingleton<ManageSmsBundleDiscountUsecase>(ManageSmsBundleDiscountUsecase(sl()));
-  sl.registerSingleton<FetchAdminMonthlyFeeUsecase>(FetchAdminMonthlyFeeUsecase(sl()));
-  sl.registerSingleton<UpdateAdminMonthlyFeeUsecdase>(UpdateAdminMonthlyFeeUsecdase(sl()));
-  sl.registerSingleton<FetchTodayRequestUsecase>(FetchTodayRequestUsecase(sl()));
-  sl.registerSingleton<DeleteTodayRequestUsecase>(DeleteTodayRequestUsecase(sl()));
-  sl.registerSingleton<FetchTodayQueriesUsecase>(FetchTodayQueriesUsecase(sl()));
-  sl.registerSingleton<DeleteTodayQueriesUsecase>(DeleteTodayQueriesUsecase(sl()));
+  sl.registerSingleton<FetchAdminTransactionHistory>(
+      FetchAdminTransactionHistory(sl()));
+  sl.registerSingleton<ManageSmsBundleDiscountUsecase>(
+      ManageSmsBundleDiscountUsecase(sl()));
+  sl.registerSingleton<FetchAdminMonthlyFeeUsecase>(
+      FetchAdminMonthlyFeeUsecase(sl()));
+  sl.registerSingleton<UpdateAdminMonthlyFeeUsecdase>(
+      UpdateAdminMonthlyFeeUsecdase(sl()));
+  sl.registerSingleton<FetchTodayRequestUsecase>(
+      FetchTodayRequestUsecase(sl()));
+  sl.registerSingleton<DeleteTodayRequestUsecase>(
+      DeleteTodayRequestUsecase(sl()));
+  sl.registerSingleton<FetchTodayQueriesUsecase>(
+      FetchTodayQueriesUsecase(sl()));
+  sl.registerSingleton<DeleteTodayQueriesUsecase>(
+      DeleteTodayQueriesUsecase(sl()));
   sl.registerSingleton<ReplyTodayQueryUsecase>(ReplyTodayQueryUsecase(sl()));
   sl.registerSingleton<DeleteAccountUsecase>(DeleteAccountUsecase(sl()));
   sl.registerSingleton<ForgotPasswordUsecase>(ForgotPasswordUsecase(sl()));
-  
+  sl.registerSingleton<UpdateProfileUseCase>(UpdateProfileUseCase(sl()));
+  sl.registerSingleton<ChangePasswordUsecase>(ChangePasswordUsecase(sl()));
+
   // Bloc
   sl.registerLazySingleton<SkaletonCubit>(() => SkaletonCubit());
+  sl.registerLazySingleton<ChangePasswordBloc>(() => ChangePasswordBloc(sl()));
+  sl.registerLazySingleton<ProfileBloc>(() => ProfileBloc(
+      pickerServices: sl(),
+      updateProfileUseCase: sl(),
+      sC: sl(),
+      skaletonCubit: sl()));
   sl.registerLazySingleton<LoginBloc>(() => LoginBloc(sl()));
   sl.registerLazySingleton<SignOutBloc>(() => SignOutBloc(sl()));
   sl.registerLazySingleton<DeleteAccountBloc>(() => DeleteAccountBloc(sl()));
   sl.registerLazySingleton<ForgotPasswordBloc>(() => ForgotPasswordBloc(sl()));
   sl.registerLazySingleton<AdminDashboardBloc>(() => AdminDashboardBloc(sl()));
-  sl.registerLazySingleton<AdminReservationBloc>(() => AdminReservationBloc(sl()));
-  sl.registerLazySingleton<FetchAdminSmsBloc>(() => FetchAdminSmsBloc(sl(), sl(), sl()));
-  sl.registerFactory<FetchTransactionHistoryBloc>(() => FetchTransactionHistoryBloc(sl()));
-  sl.registerLazySingleton<AdminMonthlyFeeBloc>(() => AdminMonthlyFeeBloc(sl(), sl()));
-  sl.registerLazySingleton<ManageSmsBundleDiscountBloc>(() => ManageSmsBundleDiscountBloc(sl()));
-  sl.registerLazySingleton<TodayRequestBloc>(() => TodayRequestBloc(sl(), sl()));
-  sl.registerLazySingleton<TodayqueriesBloc>(() => TodayqueriesBloc(sl(), sl(), sl()));
+  sl.registerLazySingleton<AdminReservationBloc>(
+      () => AdminReservationBloc(sl()));
+  sl.registerLazySingleton<FetchAdminSmsBloc>(
+      () => FetchAdminSmsBloc(sl(), sl(), sl()));
+  sl.registerFactory<FetchTransactionHistoryBloc>(
+      () => FetchTransactionHistoryBloc(sl()));
+  sl.registerLazySingleton<AdminMonthlyFeeBloc>(
+      () => AdminMonthlyFeeBloc(sl(), sl()));
+  sl.registerLazySingleton<ManageSmsBundleDiscountBloc>(
+      () => ManageSmsBundleDiscountBloc(sl()));
+  sl.registerLazySingleton<TodayRequestBloc>(
+      () => TodayRequestBloc(sl(), sl()));
+  sl.registerLazySingleton<TodayqueriesBloc>(
+      () => TodayqueriesBloc(sl(), sl(), sl()));
 }

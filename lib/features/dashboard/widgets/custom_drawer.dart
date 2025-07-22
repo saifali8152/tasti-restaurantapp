@@ -73,7 +73,7 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text("Delete Account"),
             onTap: () => context.showCustomDialog(DeleteAccountDialog()),
-          )
+          ),
         ],
       ),
     );
@@ -164,23 +164,23 @@ class DrawerConfig {
               DrawerItemModel(
                   title: "Today's Queries", index: 3, icon: Icons.bug_report),
               DrawerItemModel(
-                  title: "Monthly Requests", index: 2, icon: Icons.history),
+                  title: "Monthly Requests", index: 4, icon: Icons.history),
               DrawerItemModel(
-                  title: "Monthly Queries", index: 3, icon: Icons.bug_report),
+                  title: "Monthly Queries", index: 5, icon: Icons.bug_report),
               DrawerItemModel(
-                  title: "Overall Requests", index: 4, icon: Icons.speed),
+                  title: "Overall Requests", index: 6, icon: Icons.speed),
               DrawerItemModel(
-                  title: "Overall Querires", index: 5, icon: Icons.speed),
+                  title: "Overall Queries", index: 7, icon: Icons.speed),
               DrawerItemModel(
-                  title: "Reservations Database", index: 6, icon: Icons.speed),
+                  title: "Reservations Database", index: 8, icon: Icons.storage),
             ],
           ),
           DrawerItemModel(
-              icon: Icons.supervised_user_circle,
-              title: "Manage SMS & Fees",
-              index: 7),
+              icon: Icons.sms, title: "Manage SMS & Fees", index: 9),
           DrawerItemModel(
-              icon: Icons.supervised_user_circle, title: "Campaigns", index: 8),
+              icon: Icons.campaign, title: "Campaigns", index: 10),
+          DrawerItemModel(
+              icon: Icons.settings, title: "Settings", index: 11),
         ];
       case "restaurant":
       default:
@@ -221,6 +221,8 @@ class DrawerConfig {
           DrawerItemModel(icon: Icons.settings, title: "Settings", index: 11),
           DrawerItemModel(
               icon: Icons.share, title: "Widget code and share", index: 12),
+          DrawerItemModel(
+              title: "Profile", index: 13, icon: Icons.person),
         ];
     }
   }

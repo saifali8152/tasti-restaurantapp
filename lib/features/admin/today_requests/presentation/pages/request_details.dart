@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/domain/entities/today_requests.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/domain/entities/requests.dart';
 import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/widgets/decline_today_request_dialog.dart';
 import '/config/constants/colors.dart';
 import '/core/widgets/custom_button.dart';
@@ -8,7 +8,7 @@ import '/core/widgets/details_row.dart';
 import '/core/widgets/custom_app_bar.dart';
 
 class RequestDetails extends StatelessWidget {
-  final TodayRequestItem? request;
+  final RequestItem? request;
   const RequestDetails({super.key, required this.request});
 
   @override

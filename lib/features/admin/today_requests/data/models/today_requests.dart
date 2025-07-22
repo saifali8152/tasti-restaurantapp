@@ -1,7 +1,7 @@
 import 'package:tasti_restaurant_app/core/models/pagination.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/domain/entities/today_requests.dart';
+import 'package:tasti_restaurant_app/features/admin/today_requests/domain/entities/requests.dart';
 
-class TodayRequestModel extends TodayRequestEntity {
+class TodayRequestModel extends RequestEntity {
   const TodayRequestModel({
     required super.data,
     required super.pagination,
@@ -24,7 +24,7 @@ class TodayRequestModel extends TodayRequestEntity {
   }
 }
 
-class TodayRequestItemModel extends TodayRequestItem {
+class TodayRequestItemModel extends RequestItem {
   const TodayRequestItemModel({
     required super.reqId,
     required super.name,

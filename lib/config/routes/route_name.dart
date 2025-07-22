@@ -5,11 +5,12 @@ class AppRoutes {
   static const String signup = '/signup';
   static const String onboarding = '/onboarding';
   static const String forgotPassword = '/forgot-password';
+  static const String changePassword = 'changePassword';
 
   static const String notifications = '/notifications';
 
   // ✅ Profile / Info
-  static const String personalInfo = '/personal-info';
+  static const String profile = '/personal-info';
 
   // ✅ Main Layout (After Login)
   static const String skaleton = '/';
@@ -21,7 +22,8 @@ class AppRoutes {
   static const String timeSlotManagement = '/time-slot-management';
   static const String inactiveTimeSlots = '/inactive-time-slots';
   static const String settingAreaDetails = '/setting-area-details';
-  static const String customerReservationDetails = '/customer-reservation-details';
+  static const String customerReservationDetails =
+      '/customer-reservation-details';
   static const String restaurantQRFoodMenu = '/restaurant-qr-food-menu';
   static const String targetedCampaign = '/targeted-campaign';
   static const String campaignSummary = '/campaign-summary';
