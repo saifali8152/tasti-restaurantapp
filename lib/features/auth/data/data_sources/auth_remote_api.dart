@@ -7,7 +7,7 @@ abstract class IAuthRemoteApi {
   Future<UserModel> login(LoginParms parms);
   Future<String> signout();
   Future<String> deleteAccount();
-  // Future<String> forgotPassword(String email);
+  Future<String> forgotPassword(String email);
   // Future<UserModel> signup(SignupParms parms);
 }
 
@@ -22,12 +22,12 @@ class AuthRemoteApiImpl extends IAuthRemoteApi {
     return response['message'];
   }
 
-  // @override
-  // Future<String> forgotPassword(String email) async {
-  //   Map<String, dynamic> data = {"email": email};
-  //   var response = await networkApiService.post(AppUrls.forgotPassword, data);
-  //   return response['message'];
-  // }
+  @override
+  Future<String> forgotPassword(String email) async {
+    Map<String, dynamic> data = {"email": email};
+    var response = await networkApiService.post(AppUrls.forgotPassword, data);
+    return response['message'];
+  }
 
   @override
   Future<UserModel> login(LoginParms parms) async {

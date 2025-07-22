@@ -3,6 +3,7 @@ class AppUrls{
 
   static final String login = "$base/restaurant/login";
   static final String logout = "$base/restaurant/logout";
+  static final String forgotPassword = "$base/restaurant/forgot-password";
   static final String adminDashboard = "$base/restaurant/get-admin-dashboard";
   static final String adminReservations = "$base/restaurant/get-admin-reservations";
   static final String fetchAdminSMS = "$base/restaurant/get-admin-sms";

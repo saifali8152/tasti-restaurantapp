@@ -18,15 +18,15 @@ class AuthRepoImpl extends IAuthRepo {
     }
   }
 
-  // @override
-  // Future<DataState<String>> forgotPassword(String email) async {
-  //   try {
-  //     final result = await authRemoteApi.forgotPassword(email);
-  //     return DataSuccess(result);
-  //   } catch (error) {
-  //     return DataFailure(error.toString());
-  //   }
-  // }
+  @override
+  Future<DataState<String>> forgotPassword(String email) async {
+    try {
+      final result = await authRemoteApi.forgotPassword(email);
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
 
   @override
   Future<DataState<UserModel>> login(LoginParms parms) async {
