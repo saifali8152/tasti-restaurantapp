@@ -6,7 +6,7 @@ import '/config/constants/urls.dart';
 abstract class IAuthRemoteApi {
   Future<UserModel> login(LoginParms parms);
   Future<String> signout();
-  // Future<String> deleteAccount();
+  Future<String> deleteAccount();
   // Future<String> forgotPassword(String email);
   // Future<UserModel> signup(SignupParms parms);
 }
@@ -15,12 +15,12 @@ class AuthRemoteApiImpl extends IAuthRemoteApi {
   final IApiService networkApiService;
   AuthRemoteApiImpl(this.networkApiService);
 
-  // @override
-  // Future<String> deleteAccount() async {
-  //   Map<String, dynamic> data = {};
-  //   var response = await networkApiService.post(AppUrls.deleteAccount, data);
-  //   return response['message'];
-  // }
+  @override
+  Future<String> deleteAccount() async {
+    Map<String, dynamic> data = {};
+    var response = await networkApiService.post(AppUrls.deleteAdminProfile, data);
+    return response['message'];
+  }
 
   // @override
   // Future<String> forgotPassword(String email) async {

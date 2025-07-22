@@ -43,6 +43,8 @@ import 'package:tasti_restaurant_app/features/admin/transaction_history/data/rep
 import 'package:tasti_restaurant_app/features/admin/transaction_history/domain/repositories/transaction_history_repo.dart';
 import 'package:tasti_restaurant_app/features/admin/transaction_history/domain/usecases/fetch_admin_transaction_history.dart';
 import 'package:tasti_restaurant_app/features/admin/transaction_history/presentation/bloc/transaction_history_bloc.dart';
+import 'package:tasti_restaurant_app/features/auth/domain/usecases/delete_account.dart';
+import 'package:tasti_restaurant_app/features/auth/presentation/bloc/delete_account/delete_account_bloc.dart';
 import 'package:tasti_restaurant_app/features/skaleton/cubit/skaleton_cubit.dart';
 import 'features/auth/data/data_sources/auth_remote_api.dart';
 import 'features/auth/data/repositories/auth_repo_impl.dart';
@@ -106,11 +108,13 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FetchTodayQueriesUsecase>(FetchTodayQueriesUsecase(sl()));
   sl.registerSingleton<DeleteTodayQueriesUsecase>(DeleteTodayQueriesUsecase(sl()));
   sl.registerSingleton<ReplyTodayQueryUsecase>(ReplyTodayQueryUsecase(sl()));
+  sl.registerSingleton<DeleteAccountUsecase>(DeleteAccountUsecase(sl()));
   
   // Bloc
   sl.registerLazySingleton<SkaletonCubit>(() => SkaletonCubit());
   sl.registerLazySingleton<LoginBloc>(() => LoginBloc(sl()));
   sl.registerLazySingleton<SignOutBloc>(() => SignOutBloc(sl()));
+  sl.registerLazySingleton<DeleteAccountBloc>(() => DeleteAccountBloc(sl()));
   sl.registerLazySingleton<AdminDashboardBloc>(() => AdminDashboardBloc(sl()));
   sl.registerLazySingleton<AdminReservationBloc>(() => AdminReservationBloc(sl()));
   sl.registerLazySingleton<FetchAdminSmsBloc>(() => FetchAdminSmsBloc(sl(), sl(), sl()));

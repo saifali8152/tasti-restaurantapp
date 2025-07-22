@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/features/auth/presentation/widgets/delete_account_dialog.dart';
 import 'package:tasti_restaurant_app/features/auth/presentation/widgets/signout_dialog.dart';
 import '/config/constants/colors.dart';
 import '/config/constants/images.dart';
@@ -66,6 +67,12 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text("Logout"),
             onTap: () => context.showCustomDialog(LogoutDialog()),
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text("Delete Account"),
+            onTap: () => context.showCustomDialog(DeleteAccountDialog()),
           )
         ],
       ),

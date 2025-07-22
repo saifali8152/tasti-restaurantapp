@@ -8,15 +8,15 @@ class AuthRepoImpl extends IAuthRepo {
   final IAuthRemoteApi authRemoteApi;
   AuthRepoImpl(this.authRemoteApi);
 
-  // @override
-  // Future<DataState<String>> deleteAccount() async {
-  //   try {
-  //     final result = await authRemoteApi.deleteAccount();
-  //     return DataSuccess(result);
-  //   } catch (error) {
-  //     return DataFailure(error.toString());
-  //   }
-  // }
+  @override
+  Future<DataState<String>> deleteAccount() async {
+    try {
+      final result = await authRemoteApi.deleteAccount();
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
 
   // @override
   // Future<DataState<String>> forgotPassword(String email) async {
