@@ -1,3 +1,4 @@
+import 'package:tasti_restaurant_app/core/enum/query_type.dart';
 import 'package:tasti_restaurant_app/core/enum/request_type.dart';
 
 class LoginParms {
@@ -46,11 +47,11 @@ class ChangePasswordParms {
   }
 }
 
-class ReplyTodayQueryParms {
+class ReplyQueryParms {
   final int id;
   final String message;
 
-  ReplyTodayQueryParms({required this.id, required this.message});
+  ReplyQueryParms({required this.id, required this.message});
 }
 
 class PaginationParms {
@@ -72,6 +73,20 @@ class RequestParms {
   final RequestType type;
 
   RequestParms({
+    this.page = '1',
+    this.limit = '10',
+    this.search = '',
+    required this.type,
+  });
+}
+
+class QueryParms {
+  final String page;
+  final String limit;
+  final String search;
+  final QueryType type;
+
+  QueryParms({
     this.page = '1',
     this.limit = '10',
     this.search = '',

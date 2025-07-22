@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:tasti_restaurant_app/features/admin/today_queries/domain/entities/today_queries.dart';
+import 'package:tasti_restaurant_app/features/admin/queries/domain/entities/queries.dart';
 
-extension TodayQueriesItemCopyWith on TodayQueriesItem {
-  TodayQueriesItem copyWith({String? action}) {
-    return TodayQueriesItem(
+extension QueriesItemCopyWith on QueriesItem {
+  QueriesItem copyWith({String? action}) {
+    return QueriesItem(
       reqId: reqId,
       name: name,
       email: email,

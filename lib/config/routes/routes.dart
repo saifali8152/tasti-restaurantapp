@@ -6,8 +6,8 @@ import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/page
 import 'package:tasti_restaurant_app/features/admin/profile/presentation/pages/change_password.dart';
 import 'package:tasti_restaurant_app/features/admin/profile/presentation/pages/profile.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/entities/reservation.dart';
-import 'package:tasti_restaurant_app/features/admin/today_queries/domain/entities/today_queries.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/domain/entities/requests.dart';
+import 'package:tasti_restaurant_app/features/admin/queries/domain/entities/queries.dart';
+import 'package:tasti_restaurant_app/features/admin/requests/domain/entities/requests.dart';
 import 'package:tasti_restaurant_app/features/admin/transaction_history/presentation/pages/transaction_history.dart';
 import '../../features/admin/manage_sms/presentation/pages/add_sms_bundle.dart';
 import '../../features/screens.dart';
@@ -52,7 +52,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: AppRoutes.queryDetails,
       builder: (context, state) => QueryDetails(
-        query: state.extra as TodayQueriesItem,
+        query: state.extra as QueriesItem,
       ),
     ),
     GoRoute(

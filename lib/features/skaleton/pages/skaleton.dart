@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tasti_restaurant_app/core/enum/query_type.dart';
 import 'package:tasti_restaurant_app/core/enum/request_type.dart';
 import 'package:tasti_restaurant_app/features/admin/profile/presentation/pages/profile.dart';
 import '/features/screens.dart';
@@ -65,12 +66,12 @@ class DrawerScreens {
         return [
           AdminDashboardScreen(),
           Restaurants(),
-          TodayRequests(type: RequestType.todayRequests),
-          TodayQueries(),
-          TodayRequests(type: RequestType.monthlyRequests),
-          Placeholder(),
-          TodayRequests(type: RequestType.overallRequests),
-          Queries(),
+          Requests(type: RequestType.todayRequests),
+          Queries(type: QueryType.todayQueries),
+          Requests(type: RequestType.monthlyRequests),
+          Queries(type: QueryType.monthlyQueries),
+          Requests(type: RequestType.overallRequests),
+          Queries(type: QueryType.overallQueries),
           ReservationsDatabase(),
           ManageSMS(),
           MarketingCampain(),

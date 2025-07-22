@@ -32,19 +32,19 @@ import 'package:tasti_restaurant_app/features/admin/reservations_database/data/r
 import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/repositories/admin_reservation_repo.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/usecases/fetch_admin_reservations.dart';
 import 'package:tasti_restaurant_app/features/admin/reservations_database/presentation/bloc/admin_reservation_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/today_queries/data/data_sources/today_queries_remote_source.dart';
-import 'package:tasti_restaurant_app/features/admin/today_queries/data/repositories/today_queries_repo_impl.dart';
-import 'package:tasti_restaurant_app/features/admin/today_queries/domain/repositories/today_queries_repo.dart';
-import 'package:tasti_restaurant_app/features/admin/today_queries/domain/usecases/delete_today_queries.dart';
-import 'package:tasti_restaurant_app/features/admin/today_queries/domain/usecases/fetch_today_queries.dart';
-import 'package:tasti_restaurant_app/features/admin/today_queries/domain/usecases/reply_today_query.dart';
-import 'package:tasti_restaurant_app/features/admin/today_queries/presentation/bloc/today_queries_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/data/data_sources/today_requests_remote_source.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/data/repositories/today_requests_repo_impl.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/domain/repositories/today_requests_repo.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/domain/usecases/delete_today_requests.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/domain/usecases/fetch_requests.dart';
-import 'package:tasti_restaurant_app/features/admin/today_requests/presentation/bloc/today_request_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/queries/data/data_sources/queries_remote_source.dart';
+import 'package:tasti_restaurant_app/features/admin/queries/data/repositories/queries_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/admin/queries/domain/repositories/queries_repo.dart';
+import 'package:tasti_restaurant_app/features/admin/queries/domain/usecases/delete_queries.dart';
+import 'package:tasti_restaurant_app/features/admin/queries/domain/usecases/fetch_queries.dart';
+import 'package:tasti_restaurant_app/features/admin/queries/domain/usecases/reply_query.dart';
+import 'package:tasti_restaurant_app/features/admin/queries/presentation/bloc/queries_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/requests/data/data_sources/requests_remote_source.dart';
+import 'package:tasti_restaurant_app/features/admin/requests/data/repositories/requests_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/admin/requests/domain/repositories/requests_repo.dart';
+import 'package:tasti_restaurant_app/features/admin/requests/domain/usecases/delete_requests.dart';
+import 'package:tasti_restaurant_app/features/admin/requests/domain/usecases/fetch_requests.dart';
+import 'package:tasti_restaurant_app/features/admin/requests/presentation/bloc/request_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/transaction_history/data/data_sources/transaction_history_remote_source.dart';
 import 'package:tasti_restaurant_app/features/admin/transaction_history/data/repositories/transaction_history_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/transaction_history/domain/repositories/transaction_history_repo.dart';
@@ -91,10 +91,10 @@ Future<void> initializeDependencies() async {
       MonthlyFeeSourceRemoteApiImpl(sl()));
   sl.registerSingleton<ITransactionHistoryRemoteSourceApi>(
       TransactionHistoryRemoteSourceImp(sl()));
-  sl.registerSingleton<ITodayRequestRemoteSourceApi>(
-      TodayRequestSourceRemoteApiImpl(sl()));
-  sl.registerSingleton<ITodayQueriesRemoteSourceApi>(
-      TodayQueriesSourceRemoteApiImpl(sl()));
+  sl.registerSingleton<IRequestRemoteSourceApi>(
+      RequestSourceRemoteApiImpl(sl()));
+  sl.registerSingleton<IQueriesRemoteSourceApi>(
+      QueriesSourceRemoteApiImpl(sl()));
   sl.registerSingleton<IProfileRemoteApi>(ProfileRemoteApiImpl(sl()));
 
   // Repository
@@ -105,8 +105,8 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<ITransactionHistoryRepo>(
       TransactionHistoryRepoImpl(sl()));
   sl.registerSingleton<IMonthlyFeeRepo>(MonthlyFeeRepoImpl(sl()));
-  sl.registerSingleton<ITodayRequestRepo>(TodayRequestRepoImpl(sl()));
-  sl.registerSingleton<ITodayQueriesRepo>(TodayQueriesRepoImpl(sl()));
+  sl.registerSingleton<IRequestRepo>(RequestRepoImpl(sl()));
+  sl.registerSingleton<IQueriesRepo>(QueriesRepoImpl(sl()));
   sl.registerSingleton<IProfileRepo>(ProfileRepoImpl(sl()));
 
   // UseCase
@@ -128,15 +128,15 @@ Future<void> initializeDependencies() async {
       FetchAdminMonthlyFeeUsecase(sl()));
   sl.registerSingleton<UpdateAdminMonthlyFeeUsecdase>(
       UpdateAdminMonthlyFeeUsecdase(sl()));
-  sl.registerSingleton<FetchTodayRequestUsecase>(
-      FetchTodayRequestUsecase(sl()));
-  sl.registerSingleton<DeleteTodayRequestUsecase>(
-      DeleteTodayRequestUsecase(sl()));
-  sl.registerSingleton<FetchTodayQueriesUsecase>(
-      FetchTodayQueriesUsecase(sl()));
-  sl.registerSingleton<DeleteTodayQueriesUsecase>(
-      DeleteTodayQueriesUsecase(sl()));
-  sl.registerSingleton<ReplyTodayQueryUsecase>(ReplyTodayQueryUsecase(sl()));
+  sl.registerSingleton<FetchRequestUsecase>(
+      FetchRequestUsecase(sl()));
+  sl.registerSingleton<DeleteRequestUsecase>(
+      DeleteRequestUsecase(sl()));
+  sl.registerSingleton<FetchQueriesUsecase>(
+      FetchQueriesUsecase(sl()));
+  sl.registerSingleton<DeleteQueriesUsecase>(
+      DeleteQueriesUsecase(sl()));
+  sl.registerSingleton<ReplyQueryUsecase>(ReplyQueryUsecase(sl()));
   sl.registerSingleton<DeleteAccountUsecase>(DeleteAccountUsecase(sl()));
   sl.registerSingleton<ForgotPasswordUsecase>(ForgotPasswordUsecase(sl()));
   sl.registerSingleton<UpdateProfileUseCase>(UpdateProfileUseCase(sl()));
@@ -165,8 +165,8 @@ Future<void> initializeDependencies() async {
       () => AdminMonthlyFeeBloc(sl(), sl()));
   sl.registerLazySingleton<ManageSmsBundleDiscountBloc>(
       () => ManageSmsBundleDiscountBloc(sl()));
-  sl.registerLazySingleton<TodayRequestBloc>(
-      () => TodayRequestBloc(sl(), sl()));
-  sl.registerLazySingleton<TodayqueriesBloc>(
-      () => TodayqueriesBloc(sl(), sl(), sl()));
+  sl.registerLazySingleton<RequestBloc>(
+      () => RequestBloc(sl(), sl()));
+  sl.registerLazySingleton<QueriesBloc>(
+      () => QueriesBloc(sl(), sl(), sl()));
 }
