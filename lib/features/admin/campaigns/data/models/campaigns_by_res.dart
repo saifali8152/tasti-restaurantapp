@@ -1,0 +1,34 @@
+import 'package:tasti_restaurant_app/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
+
+class CampaignsByResModel extends CampaignsByResEntity {
+  const CampaignsByResModel({
+    required super.cId,
+    required super.people,
+    required super.dates,
+    required super.area,
+    required super.cash,
+    required super.status,
+  });
+
+  factory CampaignsByResModel.fromJson(Map<String, dynamic> json) {
+    return CampaignsByResModel(
+      cId: json['c_id'],
+      people: json['people'].toString(),
+      area: json['area'].toString(),
+      dates: json['dates'].toString(),
+      cash: json['cash'].toString(),
+      status: json['status'].toString(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'c_id': cId,
+      'people': people,
+      'area': area,
+      'dates': dates,
+      'cash': cash,
+      'status': status,
+    };
+  }
+}

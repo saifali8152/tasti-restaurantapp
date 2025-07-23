@@ -44,7 +44,8 @@ class AppRoutes {
   static const String settings = '/settings';
   static const String setVanueCategory = '/settings/set-vanue-category';
   static const String share = '/share';
-  static const String campaignDetails = '/campaign-details';
+  static const String campaignDetailsByRes = '/campaign-details';
+  static const String campaignByRes = '/campaign-by-res';
   static const String requestDetails = '/request-details';
   static const String queryDetails = '/query-details';
   static const String restaurantDetails = '/restaurant-details';

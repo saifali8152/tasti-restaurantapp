@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tasti_restaurant_app/core/enum/query_type.dart';
 import 'package:tasti_restaurant_app/core/enum/request_type.dart';
+import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/pages/campaigns.dart';
 import 'package:tasti_restaurant_app/features/admin/profile/presentation/pages/profile.dart';
 import '/features/screens.dart';
 import '/config/routes/route_name.dart';

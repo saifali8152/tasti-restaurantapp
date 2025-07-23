@@ -1,5 +1,12 @@
 import 'package:get_it/get_it.dart';
 import 'package:tasti_restaurant_app/core/services/picker_services.dart';
+import 'package:tasti_restaurant_app/features/admin/campaigns/data/data_sources/queries_remote_source.dart';
+import 'package:tasti_restaurant_app/features/admin/campaigns/data/repositories/campaign_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/admin/campaigns/domain/repositories/campaigns_repo.dart';
+import 'package:tasti_restaurant_app/features/admin/campaigns/domain/usecases/fetch_campaigns.dart';
+import 'package:tasti_restaurant_app/features/admin/campaigns/domain/usecases/fetch_campaigns_by_res.dart';
+import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/bloc/campaign/campaign_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/dashboard/data/data_sources/admin_dashboard_remote_api.dart';
 import 'package:tasti_restaurant_app/features/admin/dashboard/data/repositories/admin_dashboard_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/dashboard/domain/repositories/admin_dashboard_repo.dart';
@@ -96,6 +103,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IQueriesRemoteSourceApi>(
       QueriesSourceRemoteApiImpl(sl()));
   sl.registerSingleton<IProfileRemoteApi>(ProfileRemoteApiImpl(sl()));
+  sl.registerSingleton<ICampaignRemoteSourceApi>(CampaignSourceRemoteApiImpl(sl()));
 
   // Repository
   sl.registerSingleton<IAuthRepo>(AuthRepoImpl(sl()));
@@ -108,6 +116,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IRequestRepo>(RequestRepoImpl(sl()));
   sl.registerSingleton<IQueriesRepo>(QueriesRepoImpl(sl()));
   sl.registerSingleton<IProfileRepo>(ProfileRepoImpl(sl()));
+  sl.registerSingleton<ICampaignsRepo>(CampaignRepoImpl(sl()));
 
   // UseCase
   sl.registerSingleton<LoginUseCase>(LoginUseCase(sl()));
@@ -141,8 +150,12 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<ForgotPasswordUsecase>(ForgotPasswordUsecase(sl()));
   sl.registerSingleton<UpdateProfileUseCase>(UpdateProfileUseCase(sl()));
   sl.registerSingleton<ChangePasswordUsecase>(ChangePasswordUsecase(sl()));
+  sl.registerSingleton<FetchCampaignsUsecase>(FetchCampaignsUsecase(sl()));
+  sl.registerSingleton<FetchCampaignsByResUsecase>(FetchCampaignsByResUsecase(sl()));
 
   // Bloc
+  sl.registerLazySingleton<CampaignBloc>(() => CampaignBloc(sl()));
+  sl.registerLazySingleton<CampaignByResBloc>(() => CampaignByResBloc(sl()));
   sl.registerLazySingleton<SkaletonCubit>(() => SkaletonCubit());
   sl.registerLazySingleton<ChangePasswordBloc>(() => ChangePasswordBloc(sl()));
   sl.registerLazySingleton<ProfileBloc>(() => ProfileBloc(

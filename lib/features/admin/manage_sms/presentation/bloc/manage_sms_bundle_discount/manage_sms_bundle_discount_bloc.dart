@@ -36,7 +36,6 @@ class ManageSmsBundleDiscountBloc
       if (newPercentage != 0) {
         final discountValue = price - (price * newPercentage / 100);
         discount = double.parse(discountValue.toStringAsFixed(2)).toInt();
-        print("discount changed: $discount");
       } else {
         discount = 0;
       }

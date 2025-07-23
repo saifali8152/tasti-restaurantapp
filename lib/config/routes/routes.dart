@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/pages/campaigns_by_res.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/pages/update_monthly_fee.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/pages/monthly_fee.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/entities/admin_sms.dart';
@@ -75,8 +76,12 @@ final GoRouter router = GoRouter(
       builder: (context, state) => const Notifications(),
     ),
     GoRoute(
-      path: AppRoutes.campaignDetails,
-      builder: (context, state) => const CampaignDetails(),
+      path: AppRoutes.campaignDetailsByRes,
+      builder: (context, state) => const CampaignByResDetails(),
+    ),
+    GoRoute(
+      path: AppRoutes.campaignByRes,
+      builder: (context, state) => MarketingCampaignByRes(id: state.extra as String),
     ),
     GoRoute(
       path: AppRoutes.splash,
