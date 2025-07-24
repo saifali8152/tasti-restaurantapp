@@ -4,199 +4,121 @@ import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/page
 import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/pages/monthly_fee.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/entities/admin_sms.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/pages/manage_sms_bundle_discount.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/pages/add_sms_bundle.dart';
 import 'package:tasti_restaurant_app/features/admin/profile/presentation/pages/change_password.dart';
-import 'package:tasti_restaurant_app/features/admin/profile/presentation/pages/profile.dart';
-import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/entities/reservation.dart';
+import 'package:tasti_restaurant_app/features/admin/profile/presentation/pages/personal_info.dart';
 import 'package:tasti_restaurant_app/features/admin/queries/domain/entities/queries.dart';
 import 'package:tasti_restaurant_app/features/admin/requests/domain/entities/requests.dart';
+import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/entities/reservation.dart';
 import 'package:tasti_restaurant_app/features/admin/transaction_history/presentation/pages/transaction_history.dart';
-import '../../features/admin/manage_sms/presentation/pages/add_sms_bundle.dart';
-import '../../features/screens.dart';
+import 'package:tasti_restaurant_app/features/screens.dart';
 import 'route_name.dart';
 
-import 'package:go_router/go_router.dart';
-
-final _rootNavigatorKey = GlobalKey<NavigatorState>();
-final _shellNavigatorKey = GlobalKey<NavigatorState>();
-
-final GoRouter router = GoRouter(
-  debugLogDiagnostics: true,
-  initialLocation: AppRoutes.splash,
-  navigatorKey: _rootNavigatorKey,
-  routes: [
-    GoRoute(
-      path: AppRoutes.addSmsBundle,
-      builder: (context, state) => const AddSMSBundle(),
-    ),
-    GoRoute(
-      path: AppRoutes.transactionHistory,
-      builder: (context, state) => const TransactionHistory(),
-    ),
-    GoRoute(
-      path: AppRoutes.smsBundleDetails,
-      builder: (context, state) =>
-          SmsBundleDetails(item: state.extra as AdminSmsItem),
-    ),
-    GoRoute(
-      path: AppRoutes.monthlyFee,
-      builder: (context, state) => MonthlyFee(),
-    ),
-    GoRoute(
-      path: AppRoutes.updateMonthlyFee,
-      builder: (context, state) => UpdateMonthlyFee(id: state.extra as String),
-    ),
-    GoRoute(
-      path: AppRoutes.manageSmsBundleDiscount,
-      builder: (context, state) =>
-          ManageSmsBundleDiscountView(item: state.extra as AdminSmsItem),
-    ),
-    GoRoute(
-      path: AppRoutes.queryDetails,
-      builder: (context, state) => QueryDetails(
-        query: state.extra as QueriesItem,
-      ),
-    ),
-    GoRoute(
-      path: AppRoutes.reservationDbDetails,
-      builder: (context, state) =>
-          ReservationDbDetails(item: state.extra as AdminReservationItem),
-    ),
-    GoRoute(
-      path: AppRoutes.restaurantDetails,
-      builder: (context, state) => const RestaurantDetails(),
-    ),
-    GoRoute(
-      path: AppRoutes.requestDetails,
-      builder: (context, state) => RequestDetails(
-        request: state.extra as RequestItem,
-      ),
-    ),
-    GoRoute(
-      path: AppRoutes.notifications,
-      builder: (context, state) => const Notifications(),
-    ),
-    GoRoute(
-      path: AppRoutes.campaignDetailsByRes,
-      builder: (context, state) => const CampaignByResDetails(),
-    ),
-    GoRoute(
-      path: AppRoutes.campaignByRes,
-      builder: (context, state) => MarketingCampaignByRes(id: state.extra as String),
-    ),
-    GoRoute(
-      path: AppRoutes.splash,
-      builder: (context, state) => const SplashScreen(),
-    ),
-    GoRoute(
-      path: AppRoutes.login,
-      builder: (context, state) => const LoginScreen(),
-    ),
-    GoRoute(
-      path: AppRoutes.forgotPassword,
-      builder: (context, state) => Scaffold(
-        appBar: AppBar(title: Text("Forgot Password")),
-      ),
-    ),
-    GoRoute(
-      path: AppRoutes.signup,
-      builder: (context, state) => const SignupScreen(),
-    ),
-    GoRoute(
-      path: AppRoutes.onboarding,
-      builder: (context, state) => OnboardingScreen(),
-    ),
-    ShellRoute(
-      navigatorKey: _shellNavigatorKey,
-      builder: (context, state, child) {
-        return Skaleton();
-      },
-      routes: [
-        GoRoute(
-            path: AppRoutes.profile,
-            builder: (context, state) => const ProfileScreen(),
-            routes: [
-              GoRoute(
-                path: AppRoutes.changePassword,
-                builder: (context, state) => const ChangePasswordScreen(),
-              ),
-            ]),
-        GoRoute(
-          path: AppRoutes.stats,
-          builder: (context, state) => DashboardScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.billings,
-          builder: (context, state) => const Text("Bundle and billings"),
-        ),
-        GoRoute(
-          path: AppRoutes.makeReservation,
-          builder: (context, state) => MakeReservationScreen(),
-        ),
-        GoRoute(
-            path: AppRoutes.workingHours,
-            builder: (context, state) => const RestaurantWorkingHoursScreen()),
-        GoRoute(
-          path: AppRoutes.manageBookingTime,
-          builder: (context, state) => const ManageBookingTimeScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.timeSlotManagement,
-          builder: (context, state) => const TimeSlotManagementScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.inactiveTimeSlots,
-          builder: (context, state) => const InactiveSlotsScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.updateTimeDuration,
-          builder: (context, state) => const UpdateTimeDurationScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.reservations,
-          builder: (context, state) => const ReservationsScreen(),
-        ),
-        GoRoute(
-            path: AppRoutes.settings,
-            builder: (context, state) => const Settings(),
-            routes: [
-              GoRoute(
-                path: AppRoutes.setVanueCategory,
-                builder: (context, state) => const SetVanueCategory(),
-              ),
-            ]),
-        GoRoute(
-          path: AppRoutes.share,
-          builder: (context, state) => const ShareLinksScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.campaignSummary,
-          builder: (context, state) => const CampaignSummary(),
-        ),
-        GoRoute(
-          path: AppRoutes.targetedCampaign,
-          builder: (context, state) => const TargetedCampaign(),
-        ),
-        GoRoute(
-          path: AppRoutes.customerReservationDetails,
-          builder: (context, state) => const CustomerReservationDetails(),
-        ),
-        GoRoute(
-          path: AppRoutes.addPhotos,
-          builder: (context, state) => const AddPhotosScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.settingAreaDetails,
-          builder: (context, state) => const SeatingAreaDetails(),
-        ),
-        GoRoute(
-          path: AppRoutes.restaurantQRFoodMenu,
-          builder: (context, state) => const RestaurantQrFoodMenu(),
-        ),
-        GoRoute(
-          path: AppRoutes.skaleton,
-          builder: (context, state) => const Skaleton(),
-        ),
-      ],
-    ),
-  ],
-);
+class Routes {
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case AppRoutes.addSmsBundle:
+        return MaterialPageRoute(builder: (_) => const AddSMSBundle());
+      case AppRoutes.transactionHistory:
+        return MaterialPageRoute(builder: (_) => const TransactionHistory());
+      case AppRoutes.smsBundleDetails:
+        return MaterialPageRoute(
+          builder: (_) => SmsBundleDetails(item: settings.arguments as AdminSmsItem),
+        );
+      case AppRoutes.monthlyFee:
+        return MaterialPageRoute(builder: (_) => MonthlyFee());
+      case AppRoutes.updateMonthlyFee:
+        return MaterialPageRoute(
+          builder: (_) => UpdateMonthlyFee(id: settings.arguments as String),
+        );
+      case AppRoutes.manageSmsBundleDiscount:
+        return MaterialPageRoute(
+          builder: (_) => ManageSmsBundleDiscountView(item: settings.arguments as AdminSmsItem),
+        );
+      case AppRoutes.queryDetails:
+        return MaterialPageRoute(
+          builder: (_) => QueryDetails(query: settings.arguments as QueriesItem),
+        );
+      case AppRoutes.reservationDbDetails:
+        return MaterialPageRoute(
+          builder: (_) => ReservationDbDetails(item: settings.arguments as AdminReservationItem),
+        );
+      case AppRoutes.restaurantDetails:
+        return MaterialPageRoute(builder: (_) => const RestaurantDetails());
+      case AppRoutes.requestDetails:
+        return MaterialPageRoute(
+          builder: (_) => RequestDetails(request: settings.arguments as RequestItem),
+        );
+      case AppRoutes.notifications:
+        return MaterialPageRoute(builder: (_) => const Notifications());
+      case AppRoutes.campaignDetailsByRes:
+        return MaterialPageRoute(builder: (_) => const CampaignByResDetails());
+      case AppRoutes.campaignByRes:
+        return MaterialPageRoute(
+          builder: (_) => MarketingCampaignByRes(id: settings.arguments as String),
+        );
+      case AppRoutes.splash:
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
+      case AppRoutes.login:
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
+      case AppRoutes.forgotPassword:
+        return MaterialPageRoute(
+          builder: (_) => Scaffold(appBar: AppBar(title: Text("Forgot Password"))),
+        );
+      case AppRoutes.signup:
+        return MaterialPageRoute(builder: (_) => const SignupScreen());
+      case AppRoutes.onboarding:
+        return MaterialPageRoute(builder: (_) => OnboardingScreen());
+      case AppRoutes.profile:
+        return MaterialPageRoute(builder: (_) => const PersonalInfoScreen());
+      case AppRoutes.changePassword:
+        return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
+      case AppRoutes.stats:
+        return MaterialPageRoute(builder: (_) => DashboardScreen());
+      case AppRoutes.billings:
+        return MaterialPageRoute(
+          builder: (_) => const Scaffold(body: Center(child: Text("Bundle and billings"))),
+        );
+      case AppRoutes.makeReservation:
+        return MaterialPageRoute(builder: (_) => MakeReservationScreen());
+      case AppRoutes.workingHours:
+        return MaterialPageRoute(builder: (_) => const RestaurantWorkingHoursScreen());
+      case AppRoutes.manageBookingTime:
+        return MaterialPageRoute(builder: (_) => const ManageBookingTimeScreen());
+      case AppRoutes.timeSlotManagement:
+        return MaterialPageRoute(builder: (_) => const TimeSlotManagementScreen());
+      case AppRoutes.inactiveTimeSlots:
+        return MaterialPageRoute(builder: (_) => const InactiveSlotsScreen());
+      case AppRoutes.updateTimeDuration:
+        return MaterialPageRoute(builder: (_) => const UpdateTimeDurationScreen());
+      case AppRoutes.reservations:
+        return MaterialPageRoute(builder: (_) => const ReservationsScreen());
+      case AppRoutes.settings:
+        return MaterialPageRoute(builder: (_) => const Settings());
+      case AppRoutes.setVanueCategory:
+        return MaterialPageRoute(builder: (_) => const SetVanueCategory());
+      case AppRoutes.share:
+        return MaterialPageRoute(builder: (_) => const ShareLinksScreen());
+      case AppRoutes.campaignSummary:
+        return MaterialPageRoute(builder: (_) => const CampaignSummary());
+      case AppRoutes.targetedCampaign:
+        return MaterialPageRoute(builder: (_) => const TargetedCampaign());
+      case AppRoutes.customerReservationDetails:
+        return MaterialPageRoute(builder: (_) => const CustomerReservationDetails());
+      case AppRoutes.addPhotos:
+        return MaterialPageRoute(builder: (_) => const AddPhotosScreen());
+      case AppRoutes.settingAreaDetails:
+        return MaterialPageRoute(builder: (_) => const SeatingAreaDetails());
+      case AppRoutes.restaurantQRFoodMenu:
+        return MaterialPageRoute(builder: (_) => const RestaurantQrFoodMenu());
+      case AppRoutes.skaleton:
+        return MaterialPageRoute(builder: (_) => const Skaleton());
+      default:
+        return MaterialPageRoute(
+          builder: (_) => Scaffold(
+            body: Center(child: Text('No route defined for ${settings.name}')),
+          ),
+        );
+    }
+  }
+}

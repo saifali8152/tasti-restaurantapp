@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import '/config/routes/route_name.dart';
 
 class RestaurantCard extends StatelessWidget {
@@ -8,7 +7,7 @@ class RestaurantCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.push(AppRoutes.restaurantDetails),
+      onTap: () => Navigator.pushNamed(context,AppRoutes.restaurantDetails),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 4,

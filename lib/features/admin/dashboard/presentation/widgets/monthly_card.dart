@@ -76,10 +76,11 @@ class AdminMonthlyCard extends StatelessWidget {
                     CircularPercentIndicator(
                       radius: 40.0,
                       lineWidth: 6.0,
-                      percent: data.total / data.rejected,
+                      percent:
+                          data.total == 0 ? 0.0 : data.approved / data.total,
                       animation: true,
-                      backgroundColor: Colors.green,
-                      progressColor: AppColors.pending,
+                      backgroundColor: AppColors.pending,
+                      progressColor: Colors.green,
                     ),
                     SizedBox(height: 10),
                     Row(

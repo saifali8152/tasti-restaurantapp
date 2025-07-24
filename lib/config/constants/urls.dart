@@ -27,4 +27,5 @@ class AppUrls{
   static final String deleteAdminProfile = "$base/restaurant/delete-admin-profile";
   static final String adminFetchCampaigns = "$base/restaurant/get-admin-campaigns";
   static final String adminFetchCampaignsByRes = "$base/restaurant/get-admin-campaigns-by-res";
+  static final String adminFetchEvents = "$base/restaurant/get-events";
 }

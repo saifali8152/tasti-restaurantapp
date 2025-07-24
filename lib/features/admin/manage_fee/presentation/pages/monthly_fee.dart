@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tasti_restaurant_app/config/constants/colors.dart';
 import 'package:tasti_restaurant_app/config/routes/route_name.dart';
 import 'package:tasti_restaurant_app/core/network/response.dart';
@@ -82,9 +81,9 @@ class _MonthlyFeeState extends State<MonthlyFee> {
                     SizedBox(height: 20),
                     CustomButton(
                       onPressed: () {
-                        context.push(
+                        Navigator.pushNamed(context,
                           AppRoutes.updateMonthlyFee,
-                          extra: state.fetchResponse.data!.id.toString(),
+                          arguments: state.fetchResponse.data!.id.toString(),
                         );
                       },
                       text: "Update Fee",

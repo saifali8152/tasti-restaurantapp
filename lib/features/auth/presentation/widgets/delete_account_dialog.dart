@@ -1,4 +1,3 @@
-import 'package:go_router/go_router.dart';
 import 'package:tasti_restaurant_app/features/auth/presentation/bloc/delete_account/delete_account_bloc.dart';
 import 'package:tasti_restaurant_app/features/auth/presentation/bloc/delete_account/delete_account_event.dart';
 import 'package:tasti_restaurant_app/features/auth/presentation/bloc/delete_account/delete_account_state.dart';
@@ -53,7 +52,7 @@ class DeleteAccountDialog extends StatelessWidget {
                   }
                   if (state is DeleteAccountSuccess) {
                     Navigator.pop(context);
-                    context.go(AppRoutes.login);
+                    Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login, (route) => false);
                     context.read<SkaletonCubit>().changeTab(0);
                   }
                 },

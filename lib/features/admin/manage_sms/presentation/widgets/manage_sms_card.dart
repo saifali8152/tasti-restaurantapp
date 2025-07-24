@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import '/core/utils/general_extentions.dart';
 import '/features/admin/manage_sms/presentation/widgets/delete_sms_dialog.dart';
 import '/features/admin/manage_sms/domain/entities/admin_sms.dart';
@@ -14,7 +13,7 @@ class ManageSMSCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.push(AppRoutes.smsBundleDetails, extra: smsItem),
+      onTap: () => Navigator.pushNamed(context,AppRoutes.smsBundleDetails, arguments: smsItem),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 2,

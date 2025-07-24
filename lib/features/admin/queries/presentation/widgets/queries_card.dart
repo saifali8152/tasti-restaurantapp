@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
 import 'package:tasti_restaurant_app/features/admin/queries/domain/entities/queries.dart';
 import 'package:tasti_restaurant_app/features/admin/queries/presentation/widgets/decline_query_dialog.dart';
@@ -17,7 +16,7 @@ class QueriesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push(AppRoutes.queryDetails, extra: query);
+        Navigator.pushNamed(context,AppRoutes.queryDetails, arguments: query);
       },
       child: Container(
         decoration: BoxDecoration(

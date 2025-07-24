@@ -68,7 +68,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                     BlocBuilder<SkaletonCubit, SkaletonCubitState>(
                       builder: (context, state) {
                         return Text(
-                          state.user!.name,
+                          user?.name ?? "User Name",
                           style: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         );

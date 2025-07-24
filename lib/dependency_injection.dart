@@ -180,6 +180,5 @@ Future<void> initializeDependencies() async {
       () => ManageSmsBundleDiscountBloc(sl()));
   sl.registerLazySingleton<RequestBloc>(
       () => RequestBloc(sl(), sl()));
-  sl.registerLazySingleton<QueriesBloc>(
-      () => QueriesBloc(sl(), sl(), sl()));
+  sl.registerLazySingleton<QueriesBloc>(() => QueriesBloc(sl(), sl(), sl()));
 }

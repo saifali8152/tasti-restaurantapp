@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/entities/admin_sms.dart';
 import '/core/network/response.dart';
 import '/core/utils/flushbar_extention.dart';
@@ -56,7 +55,7 @@ class _ManageSmsBundleDiscountViewState
                 message: state.manageDiscountResponse.message.toString());
           }
           if (state.manageDiscountResponse.status == Status.completed) {
-            context.pop(context);
+            Navigator.pop(context);
           }
         },
         bloc: bloc,

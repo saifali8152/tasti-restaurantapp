@@ -1,4 +1,3 @@
-import 'package:go_router/go_router.dart';
 import 'package:tasti_restaurant_app/features/skaleton/cubit/skaleton_cubit.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/widgets/custom_button.dart';
@@ -53,7 +52,7 @@ class LogoutDialog extends StatelessWidget {
                   }
                   if (state is SignOutSuccess) {
                     Navigator.pop(context);
-                    context.go(AppRoutes.login);
+                    Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login, (route) => false);
                     context.read<SkaletonCubit>().changeTab(0);
                   }
                 },

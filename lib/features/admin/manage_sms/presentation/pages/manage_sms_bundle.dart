@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tasti_restaurant_app/core/network/response.dart';
 import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
 import 'package:tasti_restaurant_app/dependency_injection.dart';
@@ -45,21 +44,21 @@ class _ManageSMSState extends State<ManageSMS> {
               icon: Image.asset(AppIcons.envelop,
                   color: Colors.white, height: 15),
               title: 'Add SMS Bundles',
-              onTap: () => context.push(AppRoutes.addSmsBundle),
+              onTap: () => Navigator.pushNamed(context,AppRoutes.addSmsBundle),
               bgColor: Color(0xFF0D49AA),
             ),
             ButtonWithIcon(
               icon:
                   Image.asset(AppIcons.target, color: Colors.white, height: 15),
               title: 'Transaction History',
-              onTap: () => context.push(AppRoutes.transactionHistory),
+              onTap: () => Navigator.pushNamed(context,AppRoutes.transactionHistory),
               bgColor: Color(0xFF5A73E2),
             ),
             ButtonWithIcon(
               icon:
                   Image.asset(AppIcons.target, color: Colors.white, height: 15),
               title: 'Manage Fees',
-              onTap: () => context.push(AppRoutes.monthlyFee),
+              onTap: () => Navigator.pushNamed(context,AppRoutes.monthlyFee),
               bgColor: Color(0xFF2EBABA),
             ),
           ],

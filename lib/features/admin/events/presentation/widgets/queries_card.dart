@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/features/admin/requests/presentation/widgets/decline_request_dialog.dart';
-import '../../domain/entities/requests.dart';
+import 'package:tasti_restaurant_app/features/admin/queries/domain/entities/queries.dart';
+import 'package:tasti_restaurant_app/features/admin/queries/presentation/widgets/decline_query_dialog.dart';
 import '/config/routes/route_name.dart';
 import '/config/constants/colors.dart';
 import '/core/widgets/custom_button.dart';
 
-class RequestsCard extends StatelessWidget {
+class QueriesCard extends StatelessWidget {
   final bool isVerified;
-  final RequestItem? request;
-  const RequestsCard({super.key, this.isVerified = false, this.request});
+  final QueriesItem? query;
+
+  const QueriesCard({super.key, this.isVerified = false, this.query});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.pushNamed(context,AppRoutes.requestDetails, arguments: request);
+      onTap: () {
+        Navigator.pushNamed(context, AppRoutes.queryDetails, arguments: query);
       },
       child: Container(
         decoration: BoxDecoration(
@@ -25,15 +26,15 @@ class RequestsCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              request?.name ?? 'N/A',
+              query?.name ?? "N/A",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(
-              request?.role ?? 'N/A',
+              query?.email ?? 'N/A',
               style: TextStyle(fontSize: 12),
             ),
             Text(
-              request?.dateFormatted ?? 'N/A',
+              query?.dateFormatted ?? 'N/A',
               style: TextStyle(fontSize: 12),
             ),
             SizedBox(height: 10),
@@ -48,8 +49,8 @@ class RequestsCard extends StatelessWidget {
                 ),
                 SizedBox(width: 5),
                 Expanded(
-                  child: Text(
-                    request?.city ?? 'N/A',
+                  child: const Text(
+                    'Shop 7, Delta Central, 74 Hillcrest Ave, Blairgowrie, Randburg, 2194, South Africa',
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.grey,
@@ -58,30 +59,15 @@ class RequestsCard extends StatelessWidget {
                 ),
               ],
             ),
-            if (!isVerified && request?.action == 'no') ...[
+            if (!isVerified && query?.action == 'none') ...[
               SizedBox(height: 10),
-              Row(
-                children: [
-                  Expanded(
-                    child: CustomButton(
-                      onPressed: ()=> context.showCustomDialog(DeclineRequestDialog(id: request!.reqId.toString())),
-                      text: "Decline",
-                      bgColor: Colors.transparent,
-                      borderColor: AppColors.darkOrange,
-                      textColor: AppColors.darkOrange,
-                      isFullWidth: false,
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: CustomButton(
-                      onPressed: () {},
-                      text: "Accept",
-                      isFullWidth: false,
-                    ),
-                  )
-                ],
-              ),
+              CustomButton(
+                onPressed: () => context.showCustomDialog(
+                    DeclineQueryDialog(id: query!.reqId.toString())),
+                text: "Delete",
+                bgColor: AppColors.grey,
+                textColor: Colors.black,
+              )
             ]
           ],
         ),

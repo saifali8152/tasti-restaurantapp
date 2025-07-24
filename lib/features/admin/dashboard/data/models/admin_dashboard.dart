@@ -1,108 +1,73 @@
-import 'package:tasti_restaurant_app/features/admin/dashboard/domain/entities/admin_dashboard.dart';
+import '../../domain/entities/admin_dashboard.dart';
 
-class DashboardModel {
-  final DashboardDataModel today;
-  final DashboardDataModel monthly;
-
+class DashboardModel extends AdminDashboardEntity {
   DashboardModel({
-    required this.today,
-    required this.monthly,
-  });
+    required AdminDashboardDataModel today,
+    required AdminDashboardDataModel monthly,
+  }) : super(today: today, monthly: monthly);
 
-  factory DashboardModel.fromJson(Map<String, dynamic>? json) {
-    final dashboard = json?['dashboard'] as Map<String, dynamic>?;
-
+  factory DashboardModel.fromJson(Map<String, dynamic> json) {
+    final dashboard = json['dashboard'] as Map<String, dynamic>;
     return DashboardModel(
-      today: DashboardDataModel.fromJson(dashboard?['today']),
-      monthly: DashboardDataModel.fromJson(dashboard?['monthly']),
+      today: AdminDashboardDataModel.fromJson(dashboard['today']),
+      monthly: AdminDashboardDataModel.fromJson(dashboard['monthly']),
     );
   }
 
-  Map<String, dynamic> toJson() => {
-        'dashboard': {
-          'today': today.toJson(),
-          'monthly': monthly.toJson(),
-        },
-      };
-
-  /// Converts Model to Entity
-  AdminDashboardEntity toEntity() => AdminDashboardEntity(
-        today: today.toEntity(),
-        monthly: monthly.toEntity(),
-      );
+  Map<String, dynamic> toJson() {
+    return {
+      'dashboard': {
+        'today': (today as AdminDashboardDataModel).toJson(),
+        'monthly': (monthly as AdminDashboardDataModel).toJson(),
+      },
+    };
+  }
 }
 
-class DashboardDataModel {
-  final RequestQueryModel requests;
-  final RequestQueryModel queries;
+class AdminDashboardDataModel extends AdminDashboardDataEntity {
+  AdminDashboardDataModel({
+    required AdminRequestQueryModel requests,
+    required AdminRequestQueryModel queries,
+  }) : super(requests: requests, queries: queries);
 
-  DashboardDataModel({
-    required this.requests,
-    required this.queries,
-  });
-
-  factory DashboardDataModel.fromJson(Map<String, dynamic>? json) {
-    return DashboardDataModel(
-      requests: RequestQueryModel.fromJson(json?['requests']),
-      queries: RequestQueryModel.fromJson(json?['queries']),
+  factory AdminDashboardDataModel.fromJson(Map<String, dynamic> json) {
+    return AdminDashboardDataModel(
+      requests: AdminRequestQueryModel.fromJson(json['requests']),
+      queries: AdminRequestQueryModel.fromJson(json['queries']),
     );
   }
 
-  Map<String, dynamic> toJson() => {
-        'requests': requests.toJson(),
-        'queries': queries.toJson(),
-      };
-
-  AdminDashboardDataEntity toEntity() => AdminDashboardDataEntity(
-        requests: requests.toEntity(),
-        queries: queries.toEntity(),
-      );
+  Map<String, dynamic> toJson() {
+    return {
+      'requests': (requests as AdminRequestQueryModel).toJson(),
+      'queries': (queries as AdminRequestQueryModel).toJson(),
+    };
+  }
 }
 
-class RequestQueryModel {
-  final int total;
-  final int approved;
-  final int rejected;
-  final int pending;
-
-  RequestQueryModel({
-    required this.total,
-    required this.approved,
-    required this.rejected,
-    required this.pending,
+class AdminRequestQueryModel extends AdminRequestQueryEntity {
+  AdminRequestQueryModel({
+    required super.total,
+    required super.approved,
+    required super.rejected,
+    required super.pending,
   });
 
-  factory RequestQueryModel.fromJson(Map<String, dynamic>? json) {
-    return RequestQueryModel(
-      total: _toInt(json, 'total'),
-      approved: _toInt(json, 'approved'),
-      rejected: _toInt(json, 'rejected'),
-      pending: _toInt(json, 'pending'),
+  factory AdminRequestQueryModel.fromJson(Map<String, dynamic> json) {
+    return AdminRequestQueryModel(
+      total: json['total'],
+      approved: json['approved'],
+      rejected: json['rejected'],
+      pending: json['pending'],
     );
   }
 
-  Map<String, dynamic> toJson() => {
-        'total': total,
-        'approved': approved,
-        'rejected': rejected,
-        'pending': pending,
-      };
-
-  AdminRequestQueryEntity toEntity() => AdminRequestQueryEntity(
-        total: total,
-        approved: approved,
-        rejected: rejected,
-        pending: pending,
-      );
-
-  static int _toInt(Map<String, dynamic>? json, String key) {
-    if (json == null) return 0;
-    final value = json[key];
-
-    if (value is int) return value;
-    if (value is String) return int.tryParse(value) ?? 0;
-    if (value is double) return value.toInt();
-
-    return 0;
+  Map<String, dynamic> toJson() {
+    return {
+      'total': total,
+      'approved': approved,
+      'rejected': rejected,
+      'pending': pending,
+    };
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tasti_restaurant_app/features/auth/presentation/widgets/auth_stack.dart';
 import '/core/network/response.dart';
 import '/core/utils/flushbar_extention.dart';
@@ -56,7 +55,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: 8),
                 GestureDetector(
                   onTap: () {
-                    context.push(AppRoutes.forgotPassword);
+                    Navigator.pushNamed(context, AppRoutes.forgotPassword);
                   },
                   child: Align(
                     alignment: Alignment.centerRight,
@@ -84,7 +83,8 @@ class LoginScreen extends StatelessWidget {
                     }
 
                     if (state.loginResponse.status == Status.completed) {
-                      context.go(AppRoutes.skaleton);
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, AppRoutes.skaleton, (route) => false);
                     }
                   },
                   builder: (context, state) {
@@ -106,7 +106,8 @@ class LoginScreen extends StatelessWidget {
                     Text("Don’t have an account? "),
                     GestureDetector(
                       onTap: () {
-                        context.pushReplacement(
+                        Navigator.pushReplacementNamed(
+                          context,
                           AppRoutes.signup,
                         );
                       },

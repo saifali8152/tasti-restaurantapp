@@ -122,7 +122,7 @@ class NetworkApiServiceImpl implements IApiService {
   }
 
   Exception _handleDioError(DioException dioError) {
-    log('DioError: ${dioError.response}');
+    log('DioError: ${dioError.response} ${dioError.requestOptions.uri}');
     if (dioError.response != null) {
       final status = dioError.response?.statusCode;
       final msg = dioError.response?.data['message'] ?? 'Something went wrong.';

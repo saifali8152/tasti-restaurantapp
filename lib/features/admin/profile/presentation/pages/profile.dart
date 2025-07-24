@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tasti_restaurant_app/core/services/session_controller.dart';
 import '/config/routes/route_name.dart';
 import '/core/widgets/custom_button.dart';
@@ -72,7 +71,7 @@ class ProfileScreen extends StatelessWidget {
                     leading: Icon(Icons.lock_outline),
                     title: "Change Password",
                     onTap: () {
-                      context.go('${AppRoutes.profile}/${AppRoutes.changePassword}');
+                      Navigator.pushNamed(context, AppRoutes.changePassword);
                     },
                   ),
                   SizedBox(height: 20),

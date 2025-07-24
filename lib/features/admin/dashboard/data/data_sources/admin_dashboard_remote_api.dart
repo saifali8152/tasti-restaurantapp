@@ -14,7 +14,7 @@ class AdminDashboardRemoteApiImpl extends IAdminDashboardRemoteApi {
   Future<DashboardModel> fetchAdminDashboard() async {
     var response = await networkApiService.get(AppUrls.adminDashboard);
 
-    final Map<String, dynamic> adminDashboard = response['dashboard'];
+    final Map<String, dynamic> adminDashboard = response;
 
     final DashboardModel dashboard = DashboardModel.fromJson(adminDashboard);
     return dashboard;

@@ -11,7 +11,7 @@ class AdminDashboardRepoImpl extends IAdminDashboardRepo {
   Future<DataState<AdminDashboardEntity>> fetchAdminDashboardUseCase() async {
     try {
       final result = await remoteApi.fetchAdminDashboard();
-      return DataSuccess(result.toEntity());
+      return DataSuccess(result);
     } catch (error) {
       return DataFailure(error.toString());
     }

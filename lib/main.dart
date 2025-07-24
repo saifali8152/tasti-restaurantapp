@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/config/routes/route_name.dart';
+import 'package:tasti_restaurant_app/features/admin/profile/presentation/bloc/change_password/change_password_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/profile/presentation/bloc/update_profile/profile_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/queries/presentation/bloc/queries_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/requests/presentation/bloc/request_bloc.dart';
 import '/dependency_injection.dart';
@@ -30,6 +33,8 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => SkaletonCubit()),
           BlocProvider(create: (context) => AuthBloc()),
+          BlocProvider(create: (context) => sl<ChangePasswordBloc>()),
+          BlocProvider(create: (context) => sl<ProfileBloc>()),
           BlocProvider(create: (context) => sl<AdminReservationBloc>()),
           BlocProvider(create: (context) => sl<FetchAdminSmsBloc>()),
           BlocProvider(create: (context) => sl<FetchTransactionHistoryBloc>()),
@@ -37,11 +42,12 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => sl<RequestBloc>()),
           BlocProvider(create: (context) => sl<QueriesBloc>()),
         ],
-        child: MaterialApp.router(
+        child: MaterialApp(
           title: 'Tasti Restaurant App',
           theme: AppTheme.lightTheme,
           themeMode: ThemeMode.light,
-          routerConfig: router,
+          initialRoute: AppRoutes.splash,
+          onGenerateRoute: Routes.generateRoute,
         ),
       ),
     );

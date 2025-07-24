@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import '/features/admin/reservations_database/domain/entities/reservation.dart';
 import '/config/routes/route_name.dart';
 import '/config/constants/colors.dart';
@@ -11,7 +10,7 @@ class ReservationsDBCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.push(AppRoutes.reservationDbDetails, extra: item),
+      onTap: () => Navigator.pushNamed(context,AppRoutes.reservationDbDetails, arguments: item),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: .5,

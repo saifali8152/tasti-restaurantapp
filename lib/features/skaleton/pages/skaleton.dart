@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tasti_restaurant_app/core/enum/query_type.dart';
 import 'package:tasti_restaurant_app/core/enum/request_type.dart';
 import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/pages/campaigns.dart';
+import 'package:tasti_restaurant_app/features/admin/events/presentation/pages/events.dart';
 import 'package:tasti_restaurant_app/features/admin/profile/presentation/pages/profile.dart';
 import '/features/screens.dart';
 import '/config/routes/route_name.dart';
@@ -36,7 +36,7 @@ class Skaleton extends StatelessWidget {
                 padding: EdgeInsets.only(right: 26),
                 child: GestureDetector(
                   onTap: (){
-                    context.push(AppRoutes.notifications);
+                    Navigator.pushNamed(context, AppRoutes.notifications);
                   },
                   child: Image.asset(
                     AppIcons.noti,
@@ -65,18 +65,20 @@ class DrawerScreens {
     switch (role.toLowerCase()) {
       case "admin":
         return [
-          AdminDashboardScreen(),
-          Restaurants(),
-          Requests(type: RequestType.todayRequests),
-          Queries(type: QueryType.todayQueries),
-          Requests(type: RequestType.monthlyRequests),
-          Queries(type: QueryType.monthlyQueries),
-          Requests(type: RequestType.overallRequests),
-          Queries(type: QueryType.overallQueries),
-          ReservationsDatabase(),
-          ManageSMS(),
-          MarketingCampain(),
-          ProfileScreen(),
+          AdminDashboardScreen(),                         // 0
+          Restaurants(),                                  // 1
+          Requests(type: RequestType.todayRequests),      // 2
+          Queries(type: QueryType.todayQueries),          // 3
+          Requests(type: RequestType.monthlyRequests),    // 4
+          Queries(type: QueryType.monthlyQueries),        // 5
+          Requests(type: RequestType.overallRequests),    // 6
+          Queries(type: QueryType.overallQueries),        // 7
+          ReservationsDatabase(),                         // 8
+          Events(),           // 9
+          ManageSMS(),                                    // 10
+          MarketingCampain(),                             // 11
+          Settings(),                                     // 12 ✅ Settings screen here
+          ProfileScreen(),                                // 13 ✅ Profile screen here
         ];
       case "restaurant":
       default:

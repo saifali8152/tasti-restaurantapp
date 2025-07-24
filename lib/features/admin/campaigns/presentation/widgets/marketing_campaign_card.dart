@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tasti_restaurant_app/core/widgets/card_details_row.dart';
 import 'package:tasti_restaurant_app/features/admin/campaigns/domain/entities/campaigns.dart';
 import '/config/routes/route_name.dart';
@@ -12,7 +11,7 @@ class MarketingcampaignCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        context.push(AppRoutes.campaignByRes, extra: campaign.id.toString());
+        Navigator.pushNamed(context, AppRoutes.campaignByRes, arguments: campaign.id.toString());
       },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

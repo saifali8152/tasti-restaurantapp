@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tasti_restaurant_app/config/routes/route_name.dart';
 import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/entities/admin_sms.dart';
@@ -46,9 +45,9 @@ class SmsBundleDetails extends StatelessWidget {
                 Expanded(
                   child: CustomButton(
                     onPressed: () {
-                      context.push(
+                      Navigator.pushNamed(context,
                         AppRoutes.manageSmsBundleDiscount,
-                        extra: item,
+                        arguments: item,
                       );
                     },
                     text: "Manage Discount",
