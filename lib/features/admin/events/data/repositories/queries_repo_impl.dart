@@ -17,6 +17,17 @@ class EventRepoImpl extends IEventRepo {
       return DataFailure(error.toString());
     }
   }
+  
+  @override
+  Future<DataState<EventItemModel>> updateEvent(UpdateEventParms parms) async{
+    try {
+      final result = await dataSource.updateEvent(parms);
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
+  
   @override
   Future<DataState<String>> deleteEvent(String id) async{
     try {

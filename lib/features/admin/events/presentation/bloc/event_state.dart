@@ -6,6 +6,7 @@ class EventState  {
   final ApiResponse<List<EventItem>> fetchResponse;
   final ApiResponse<String> deleteResponse;
   final ApiResponse<EventItem> addResponse;
+  final ApiResponse<EventItem> updateResponse;
   final PaginationModel? pagination;
   final bool isLoadingMore;
   final String query;
@@ -14,6 +15,7 @@ class EventState  {
     required this.fetchResponse,
     required this.deleteResponse,
     required this.addResponse,
+    required this.updateResponse,
     this.pagination,
     this.isLoadingMore = false,
     this.query = '',
@@ -23,6 +25,7 @@ class EventState  {
     ApiResponse<List<EventItem>>? fetchResponse,
     ApiResponse<String>? deleteResponse,
     ApiResponse<EventItem>? addResponse,
+    ApiResponse<EventItem>? updateResponse,
     PaginationModel? pagination,
     bool? isLoadingMore,
     String? query,
@@ -31,6 +34,7 @@ class EventState  {
       fetchResponse: fetchResponse ?? this.fetchResponse,
       deleteResponse: deleteResponse ?? this.deleteResponse,
       addResponse: addResponse ?? this.addResponse,
+      updateResponse: updateResponse ?? this.updateResponse,
       pagination: pagination ?? this.pagination,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
       query: query ?? this.query,

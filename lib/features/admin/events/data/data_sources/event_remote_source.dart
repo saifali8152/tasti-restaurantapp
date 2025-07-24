@@ -7,6 +7,7 @@ import '/config/constants/urls.dart';
 abstract class IEventRemoteSourceApi {
   Future<String> deleteEvent(String id);
   Future<EventItemModel> addEvent(AddEventParms parms);
+  Future<EventItemModel> updateEvent(UpdateEventParms parms);
   Future<EventModel> fetchEvents(PaginationParms parms);
 }
 
@@ -44,6 +45,29 @@ class EventSourceRemoteApiImpl extends IEventRemoteSourceApi {
 
     var response = await networkApiService.postMultipart(
         AppUrls.adminAddEvent, data, files);
+
+    return response['message'];
+  }
+
+  @override
+  Future<EventItemModel> updateEvent(UpdateEventParms parms) async {
+    Map<String, dynamic> data = {};
+    Map<String, MultipartFile> files = {};
+    if (parms.image.isNotEmpty && !(parms.image.contains("http"))) {
+      files = {
+        "event_image": await MultipartFile.fromFile(parms.image,
+            filename: parms.image.split('/').last),
+      };
+    }
+
+    data = {
+      "event_id": parms.eventId,
+      "event_title": parms.title,
+      "event_link": parms.link,
+    };
+
+    var response = await networkApiService.postMultipart(
+        AppUrls.adminUpdateEvent, data, files);
 
     return response['message'];
   }

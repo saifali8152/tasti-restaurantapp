@@ -26,6 +26,12 @@ class AddEvent extends EventEvents {
   const AddEvent(this.parms);
 }
 
+class UpdateEvent extends EventEvents {
+  final UpdateEventParms parms;
+
+  const UpdateEvent(this.parms);
+}
+
 class FetchInitialEvent extends EventEvents {}
 
 class FetchMoreEvent extends EventEvents {}

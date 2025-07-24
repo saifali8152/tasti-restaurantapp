@@ -68,6 +68,20 @@ class AddEventParms {
   });
 }
 
+class UpdateEventParms {
+  final String eventId;
+  final String title;
+  final String link;
+  final String image;
+
+  UpdateEventParms({
+    required this.eventId,
+    required this.title,
+    required this.link,
+    required this.image,
+  });
+}
+
 class PaginationParms {
   final String page;
   final String limit;

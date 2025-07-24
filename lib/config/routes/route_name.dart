@@ -57,4 +57,5 @@ class AppRoutes {
   static const String monthlyFee = '/monthly-fee';
   static const String updateMonthlyFee = '/update-monthly-fee';
   static const String addEvent = '/add-event';
+  static const String updateEvent = '/update-event';
 }

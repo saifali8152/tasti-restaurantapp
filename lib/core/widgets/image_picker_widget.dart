@@ -5,11 +5,13 @@ import 'package:tasti_restaurant_app/core/utils/image_picker.dart';
 class ImagePickerField extends StatefulWidget {
   final ValueChanged<File> onImagePicked;
   final String placeholderText;
+  final String? initialImage; // New: can be file path or network URL
 
   const ImagePickerField({
     super.key,
     required this.onImagePicked,
     this.placeholderText = "Tap to pick image",
+    this.initialImage,
   });
 
   @override
@@ -29,6 +31,27 @@ class _ImagePickerFieldState extends State<ImagePickerField> {
     }
   }
 
+  Widget _buildImageWidget() {
+    if (_imageFile != null) {
+      return Image.file(_imageFile!, width: double.infinity, fit: BoxFit.cover);
+    }
+
+    if (widget.initialImage != null && widget.initialImage!.isNotEmpty) {
+      // Determine if it's a file path or a network URL
+      if (widget.initialImage!.startsWith('http')) {
+        return Image.network(widget.initialImage!,
+            width: double.infinity, fit: BoxFit.cover);
+      } else {
+        final file = File(widget.initialImage!);
+        if (file.existsSync()) {
+          return Image.file(file, width: double.infinity, fit: BoxFit.cover);
+        }
+      }
+    }
+
+    return Center(child: Text(widget.placeholderText));
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -40,16 +63,10 @@ class _ImagePickerFieldState extends State<ImagePickerField> {
           borderRadius: BorderRadius.circular(12),
           color: Colors.grey[200],
         ),
-        child: _imageFile == null
-            ? Center(child: Text(widget.placeholderText))
-            : ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.file(
-                  _imageFile!,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-              ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: _buildImageWidget(),
+        ),
       ),
     );
   }

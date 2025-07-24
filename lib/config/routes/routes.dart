@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
 import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/pages/campaigns_by_res.dart';
+import 'package:tasti_restaurant_app/features/admin/events/domain/entities/event.dart';
 import 'package:tasti_restaurant_app/features/admin/events/presentation/pages/add_event.dart';
+import 'package:tasti_restaurant_app/features/admin/events/presentation/pages/update_event.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/pages/update_monthly_fee.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/pages/monthly_fee.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/entities/admin_sms.dart';
@@ -23,6 +25,10 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const AddSMSBundle());
       case AppRoutes.addEvent:
         return MaterialPageRoute(builder: (_) => const AddEventScreen());
+      case AppRoutes.updateEvent:
+        return MaterialPageRoute(builder: (_) => UpdateEventScreen(
+          event: settings.arguments as EventItem,
+        ));
       case AppRoutes.transactionHistory:
         return MaterialPageRoute(builder: (_) => const TransactionHistory());
       case AppRoutes.smsBundleDetails:
