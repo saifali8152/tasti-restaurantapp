@@ -41,18 +41,10 @@ class EventBloc extends Bloc<EventEvents, EventState> {
     try {
       final result = await _updateUsecase.call(event.parms);
 
-      if (result is DataSuccess<EventItem>) {
-        final oldList = state.fetchResponse.data ?? [];
-
-        final updatedList = oldList.map((item) {
-          return item.eventId == result.data.eventId ? result.data : item;
-        }).toList();
-
-        emit(state.copyWith(
-          fetchResponse: ApiResponse.completed(updatedList),
-          updateResponse: ApiResponse.completed(result.data),
-        ));
-      } else if (result is DataFailure<EventItem>) {
+      if (result is DataSuccess<String>) {
+        await _onFetchInitialEvent(FetchInitialEvent(), emit);
+        emit(state.copyWith(updateResponse: ApiResponse.completed(result.data)));
+      } else if (result is DataFailure<String>) {
         emit(state.copyWith(updateResponse: ApiResponse.error(result.error)));
       }
     } catch (e) {
@@ -66,16 +58,10 @@ class EventBloc extends Bloc<EventEvents, EventState> {
     try {
       final result = await _addUsecase.call(event.parms);
 
-      if (result is DataSuccess<EventItem>) {
-        final oldList = state.fetchResponse.data ?? [];
-
-        final newList = List<EventItem>.from(oldList)..add(result.data);
-
-        emit(state.copyWith(
-          fetchResponse: ApiResponse.completed(newList),
-          addResponse: ApiResponse.completed(result.data),
-        ));
-      } else if (result is DataFailure<EventItem>) {
+      if (result is DataSuccess<String>) {
+        await _onFetchInitialEvent(FetchInitialEvent(), emit);
+        emit(state.copyWith(addResponse: ApiResponse.completed(result.data)));
+      } else if (result is DataFailure<String>) {
         emit(state.copyWith(addResponse: ApiResponse.error(result.error)));
       }
     } catch (e) {

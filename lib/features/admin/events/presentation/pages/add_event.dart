@@ -68,7 +68,12 @@ class _AddEventScreenState extends State<AddEventScreen> {
                 onImagePicked: (file) => _pickedImage = file.path,
               ),
               const SizedBox(height: 30),
-              BlocBuilder<EventBloc, EventState>(
+              BlocConsumer<EventBloc, EventState>(
+                listener: (context, state) {
+                  if(state.addResponse.status == Status.completed){
+                    Navigator.of(context).pop();
+                  }
+                },
                 builder: (context, state) {
                   return CustomButton(
                     onPressed: _submit,

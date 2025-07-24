@@ -4,7 +4,7 @@ import '/core/network/response.dart';
 
 abstract class IEventRepo {
   Future<DataState<String>> deleteEvent(String id);
-  Future<DataState<EventItem>> addEvent(AddEventParms parms);
-  Future<DataState<EventItem>> updateEvent(UpdateEventParms parms);
+  Future<DataState<String>> addEvent(AddEventParms parms);
+  Future<DataState<String>> updateEvent(UpdateEventParms parms);
   Future<DataState<EventEntity>> fetchEvents(PaginationParms parms);
 }

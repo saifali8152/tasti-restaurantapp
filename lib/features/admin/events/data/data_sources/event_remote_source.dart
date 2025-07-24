@@ -6,8 +6,8 @@ import '/config/constants/urls.dart';
 
 abstract class IEventRemoteSourceApi {
   Future<String> deleteEvent(String id);
-  Future<EventItemModel> addEvent(AddEventParms parms);
-  Future<EventItemModel> updateEvent(UpdateEventParms parms);
+  Future<String> addEvent(AddEventParms parms);
+  Future<String> updateEvent(UpdateEventParms parms);
   Future<EventModel> fetchEvents(PaginationParms parms);
 }
 
@@ -28,7 +28,7 @@ class EventSourceRemoteApiImpl extends IEventRemoteSourceApi {
   }
 
   @override
-  Future<EventItemModel> addEvent(AddEventParms parms) async {
+  Future<String> addEvent(AddEventParms parms) async {
     Map<String, dynamic> data = {};
     Map<String, MultipartFile> files = {};
     if (parms.image.isNotEmpty && !(parms.image.contains("http"))) {
@@ -50,7 +50,7 @@ class EventSourceRemoteApiImpl extends IEventRemoteSourceApi {
   }
 
   @override
-  Future<EventItemModel> updateEvent(UpdateEventParms parms) async {
+  Future<String> updateEvent(UpdateEventParms parms) async {
     Map<String, dynamic> data = {};
     Map<String, MultipartFile> files = {};
     if (parms.image.isNotEmpty && !(parms.image.contains("http"))) {

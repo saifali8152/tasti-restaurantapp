@@ -59,32 +59,28 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           onRefresh: ()async{
             _bloc.add(FetchAdminDashboard());
           },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 10),
-                sectionTitle("Today's Overview"),
-                const SizedBox(height: 12),
-                AdminTodayCard(
-                  title: "Today’s Requests",
-                  data: data.today.requests,
-                ),
-                const SizedBox(height: 10),
-                AdminTodayCard(
-                  title: "Today's Queries",
-                  data: data.today.queries,
-                ),
-                const SizedBox(height: 20),
-                sectionTitle("Monthly Overview"),
-                const SizedBox(height: 12),
-                AdminMonthlyCard(title: "Monthly Requests" ,data: data.monthly.requests),
-                const SizedBox(height: 10),
-                AdminMonthlyCard(title: "Monthly Queries",data: data.monthly.queries),
-                const SizedBox(height: 20),
-              ],
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              sectionTitle("Today's Overview"),
+              const SizedBox(height: 12),
+              AdminTodayCard(
+                title: "Today’s Requests",
+                data: data.today.requests,
+              ),
+              const SizedBox(height: 10),
+              AdminTodayCard(
+                title: "Today's Queries",
+                data: data.today.queries,
+              ),
+              const SizedBox(height: 20),
+              sectionTitle("Monthly Overview"),
+              const SizedBox(height: 12),
+              AdminMonthlyCard(title: "Monthly Requests" ,data: data.monthly.requests),
+              const SizedBox(height: 10),
+              AdminMonthlyCard(title: "Monthly Queries",data: data.monthly.queries),
+              const SizedBox(height: 20),
+            ],
           ),
         ),
       ),

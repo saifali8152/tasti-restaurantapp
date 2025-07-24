@@ -9,7 +9,7 @@ class EventRepoImpl extends IEventRepo {
   EventRepoImpl(this.dataSource);
   
   @override
-  Future<DataState<EventItemModel>> addEvent(AddEventParms parms) async{
+  Future<DataState<String>> addEvent(AddEventParms parms) async{
     try {
       final result = await dataSource.addEvent(parms);
       return DataSuccess(result);
@@ -19,7 +19,7 @@ class EventRepoImpl extends IEventRepo {
   }
   
   @override
-  Future<DataState<EventItemModel>> updateEvent(UpdateEventParms parms) async{
+  Future<DataState<String>> updateEvent(UpdateEventParms parms) async{
     try {
       final result = await dataSource.updateEvent(parms);
       return DataSuccess(result);
