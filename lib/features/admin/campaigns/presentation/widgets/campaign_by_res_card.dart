@@ -11,7 +11,7 @@ class CampaignByResCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.pushNamed(context, AppRoutes.campaignDetailsByRes);
+        Navigator.pushNamed(context, AppRoutes.campaignDetailsByRes, arguments: campaign);
       },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

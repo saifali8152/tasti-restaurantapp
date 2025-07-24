@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:tasti_restaurant_app/core/services/picker_services.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/data/data_sources/queries_remote_source.dart';
+import 'package:tasti_restaurant_app/features/admin/campaigns/data/data_sources/campaign_remote_source.dart';
 import 'package:tasti_restaurant_app/features/admin/campaigns/data/repositories/campaign_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/campaigns/domain/repositories/campaigns_repo.dart';
 import 'package:tasti_restaurant_app/features/admin/campaigns/domain/usecases/fetch_campaigns.dart';
@@ -12,6 +12,12 @@ import 'package:tasti_restaurant_app/features/admin/dashboard/data/repositories/
 import 'package:tasti_restaurant_app/features/admin/dashboard/domain/repositories/admin_dashboard_repo.dart';
 import 'package:tasti_restaurant_app/features/admin/dashboard/domain/usecases/fetch_admin_dashboard.dart';
 import 'package:tasti_restaurant_app/features/admin/dashboard/presentation/bloc/admin_dashboard_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/events/data/data_sources/event_remote_source.dart';
+import 'package:tasti_restaurant_app/features/admin/events/data/repositories/queries_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/admin/events/domain/repositories/event_repo.dart';
+import 'package:tasti_restaurant_app/features/admin/events/domain/usecases/delete_event.dart';
+import 'package:tasti_restaurant_app/features/admin/events/domain/usecases/fetch_events.dart';
+import 'package:tasti_restaurant_app/features/admin/events/presentation/bloc/event_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_fee/data/data_sources/monthly_fee_remote_source.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_fee/data/repositories/monthly_fee_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/repositories/fee_repo.dart';
@@ -104,6 +110,7 @@ Future<void> initializeDependencies() async {
       QueriesSourceRemoteApiImpl(sl()));
   sl.registerSingleton<IProfileRemoteApi>(ProfileRemoteApiImpl(sl()));
   sl.registerSingleton<ICampaignRemoteSourceApi>(CampaignSourceRemoteApiImpl(sl()));
+  sl.registerSingleton<IEventRemoteSourceApi>(EventSourceRemoteApiImpl(sl()));
 
   // Repository
   sl.registerSingleton<IAuthRepo>(AuthRepoImpl(sl()));
@@ -117,6 +124,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IQueriesRepo>(QueriesRepoImpl(sl()));
   sl.registerSingleton<IProfileRepo>(ProfileRepoImpl(sl()));
   sl.registerSingleton<ICampaignsRepo>(CampaignRepoImpl(sl()));
+  sl.registerSingleton<IEventRepo>(EventRepoImpl(sl()));
 
   // UseCase
   sl.registerSingleton<LoginUseCase>(LoginUseCase(sl()));
@@ -152,12 +160,15 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<ChangePasswordUsecase>(ChangePasswordUsecase(sl()));
   sl.registerSingleton<FetchCampaignsUsecase>(FetchCampaignsUsecase(sl()));
   sl.registerSingleton<FetchCampaignsByResUsecase>(FetchCampaignsByResUsecase(sl()));
+  sl.registerSingleton<FetchEventsUsecase>(FetchEventsUsecase(sl()));
+  sl.registerSingleton<DeleteEventUsecase>(DeleteEventUsecase(sl()));
 
   // Bloc
   sl.registerLazySingleton<CampaignBloc>(() => CampaignBloc(sl()));
   sl.registerLazySingleton<CampaignByResBloc>(() => CampaignByResBloc(sl()));
   sl.registerLazySingleton<SkaletonCubit>(() => SkaletonCubit());
   sl.registerLazySingleton<ChangePasswordBloc>(() => ChangePasswordBloc(sl()));
+  sl.registerLazySingleton<EventBloc>(() => EventBloc(sl(), sl()));
   sl.registerLazySingleton<ProfileBloc>(() => ProfileBloc(
       pickerServices: sl(),
       updateProfileUseCase: sl(),

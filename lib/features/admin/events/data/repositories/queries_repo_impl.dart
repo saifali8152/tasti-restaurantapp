@@ -1,17 +1,17 @@
-import 'package:tasti_restaurant_app/features/admin/queries/data/models/queries.dart';
-import 'package:tasti_restaurant_app/features/admin/queries/domain/repositories/queries_repo.dart';
+import 'package:tasti_restaurant_app/features/admin/events/data/models/event.dart';
+import 'package:tasti_restaurant_app/features/admin/events/domain/repositories/event_repo.dart';
 import '/core/parms/parms.dart';
-import '../data_sources/queries_remote_source.dart';
+import '../data_sources/event_remote_source.dart';
 import '/core/network/response.dart';
 
-class QueriesRepoImpl extends IQueriesRepo {
-  final IQueriesRemoteSourceApi dataSource;
-  QueriesRepoImpl(this.dataSource);
+class EventRepoImpl extends IEventRepo {
+  final IEventRemoteSourceApi dataSource;
+  EventRepoImpl(this.dataSource);
   
   @override
-  Future<DataState<String>> deleteQueries(String id) async{
+  Future<DataState<String>> deleteEvent(String id) async{
     try {
-      final result = await dataSource.deleteQueries(id);
+      final result = await dataSource.deleteEvent(id);
       return DataSuccess(result);
     } catch (error) {
       return DataFailure(error.toString());
@@ -19,19 +19,9 @@ class QueriesRepoImpl extends IQueriesRepo {
   }
   
   @override
-  Future<DataState<String>> replyQuery(ReplyQueryParms parms) async{
+  Future<DataState<EventModel>> fetchEvents(PaginationParms parms) async{
     try {
-      final result = await dataSource.replyQuery(parms);
-      return DataSuccess(result);
-    } catch (error) {
-      return DataFailure(error.toString());
-    }
-  }
-  
-  @override
-  Future<DataState<QueriesModel>> fetchQueries(QueryParms parms) async{
-    try {
-      final result = await dataSource.fetchQueries(parms);
+      final result = await dataSource.fetchEvents(parms);
       return DataSuccess(result);
     } catch (error) {
       return DataFailure(error.toString());

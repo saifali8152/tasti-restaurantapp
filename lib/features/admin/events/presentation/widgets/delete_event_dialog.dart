@@ -1,15 +1,15 @@
+import 'package:tasti_restaurant_app/features/admin/events/presentation/bloc/event_event.dart';
+import 'package:tasti_restaurant_app/features/admin/events/presentation/bloc/event_state.dart';
+import 'package:tasti_restaurant_app/features/admin/events/presentation/bloc/event_bloc.dart';
 import '/core/network/response.dart';
-import '../bloc/queries_bloc.dart';
-import '../bloc/queries_event.dart';
-import '../bloc/queries_state.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/widgets/custom_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-class DeclineQueryDialog extends StatelessWidget {
+class DeleteEventDialog extends StatelessWidget {
   final String id;
-  const DeclineQueryDialog({super.key, required this.id});
+  const DeleteEventDialog({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +41,8 @@ class DeclineQueryDialog extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
-            BlocConsumer<QueriesBloc, QueriesState>(
-              bloc: context.read<QueriesBloc>(),
+            BlocConsumer<EventBloc, EventState>(
+              bloc: context.read<EventBloc>(),
               listener: (context, state) {
                 if (state.deleteResponse.status == Status.error) {
                   context.flushBarErrorMessage(
@@ -68,8 +68,8 @@ class DeclineQueryDialog extends StatelessWidget {
                       child: CustomButton(
                         onPressed: () {
                           context
-                              .read<QueriesBloc>()
-                              .add(AdminDeleteQueries(int.parse(id)));
+                              .read<EventBloc>()
+                              .add(AdminDeleteEvent(int.parse(id)));
                         },
                         text: "Confirm",
                         isLoading:

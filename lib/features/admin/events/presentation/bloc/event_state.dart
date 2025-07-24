@@ -1,35 +1,31 @@
 import 'package:tasti_restaurant_app/core/models/pagination.dart';
 import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/features/admin/queries/domain/entities/queries.dart';
+import 'package:tasti_restaurant_app/features/admin/events/domain/entities/event.dart';
 
-class QueriesState  {
-  final ApiResponse<List<QueriesItem>> fetchResponse;
+class EventState  {
+  final ApiResponse<List<EventItem>> fetchResponse;
   final ApiResponse<String> deleteResponse;
-  final ApiResponse<String> replyResponse;
   final PaginationModel? pagination;
   final bool isLoadingMore;
   final String query;
 
-  QueriesState({
+  EventState({
     required this.fetchResponse,
     required this.deleteResponse,
-    required this.replyResponse,
     this.pagination,
     this.isLoadingMore = false,
     this.query = '',
   });
 
-  QueriesState copyWith({
-    ApiResponse<List<QueriesItem>>? fetchResponse,
+  EventState copyWith({
+    ApiResponse<List<EventItem>>? fetchResponse,
     ApiResponse<String>? deleteResponse,
-    ApiResponse<String>? replyResponse,
     PaginationModel? pagination,
     bool? isLoadingMore,
     String? query,
   }) {
-    return QueriesState(
+    return EventState(
       fetchResponse: fetchResponse ?? this.fetchResponse,
-      replyResponse: replyResponse ?? this.replyResponse,
       deleteResponse: deleteResponse ?? this.deleteResponse,
       pagination: pagination ?? this.pagination,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,

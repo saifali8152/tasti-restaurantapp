@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
 import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/pages/campaigns_by_res.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/pages/update_monthly_fee.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/pages/monthly_fee.dart';
@@ -52,7 +53,9 @@ class Routes {
       case AppRoutes.notifications:
         return MaterialPageRoute(builder: (_) => const Notifications());
       case AppRoutes.campaignDetailsByRes:
-        return MaterialPageRoute(builder: (_) => const CampaignByResDetails());
+        return MaterialPageRoute(builder: (_) => CampaignByResDetails(
+          campaign: settings.arguments as CampaignsByResEntity,
+        ));
       case AppRoutes.campaignByRes:
         return MaterialPageRoute(
           builder: (_) => MarketingCampaignByRes(id: settings.arguments as String),

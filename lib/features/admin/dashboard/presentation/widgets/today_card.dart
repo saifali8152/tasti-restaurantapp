@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/dashboard/domain/entities/admin_dashboard.dart';
+import 'package:tasti_restaurant_app/features/skaleton/cubit/skaleton_cubit.dart';
 import '/config/constants/colors.dart';
 import '/core/utils/general_extentions.dart';
 
@@ -12,7 +14,13 @@ class AdminTodayCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        if(title.contains("Requests")){
+          context.read<SkaletonCubit>().changeTab(2);
+        }else{
+          context.read<SkaletonCubit>().changeTab(3);
+        }
+      },
       child: Card(
         elevation: 0.5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

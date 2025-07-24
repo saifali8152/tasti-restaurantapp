@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import '/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
 import '/core/widgets/details_row.dart';
 import '/core/widgets/custom_app_bar.dart';
 
 class CampaignByResDetails extends StatelessWidget {
-  const CampaignByResDetails({super.key});
+  final CampaignsByResEntity campaign;
+  const CampaignByResDetails({super.key, required this.campaign});
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +15,12 @@ class CampaignByResDetails extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            DetailsRow(title: "Restaurant Name", value: "Tristan Flynn"),
-            DetailsRow(title: "Latest Campaign Date", value: "2025-05-23"),
-            DetailsRow(title: "Status", value: "pending"),
-            DetailsRow(title: "Province", value: "xyz"),
-            SizedBox(height: 20),
+            DetailsRow(title: "Recipients", value: campaign.people),
+            DetailsRow(title: "Province", value: campaign.area),
+            DetailsRow(title: "SMS/Email Bundles", value: "campaign.bundles"),
+            DetailsRow(title: "Campaign Date", value: campaign.dates),
+            DetailsRow(title: "Amount Paid", value: campaign.cash),
+            DetailsRow(title: "Campaign Message", value: "campaign.message"),
           ],
         ),
       ),

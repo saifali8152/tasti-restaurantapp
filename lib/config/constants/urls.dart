@@ -28,4 +28,5 @@ class AppUrls{
   static final String adminFetchCampaigns = "$base/restaurant/get-admin-campaigns";
   static final String adminFetchCampaignsByRes = "$base/restaurant/get-admin-campaigns-by-res";
   static final String adminFetchEvents = "$base/restaurant/get-events";
+  static final String adminDeleteEvent = "$base/restaurant/delete-event";
 }

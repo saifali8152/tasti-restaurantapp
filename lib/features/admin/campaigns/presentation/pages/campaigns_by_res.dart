@@ -31,55 +31,58 @@ class _MarketingCampaignByResState extends State<MarketingCampaignByRes> {
       appBar: CustomAppBar(
         title: "Marketing Campaign",
       ),
-      body: BlocBuilder<CampaignByResBloc, CampaignByResState>(
-        bloc: bloc,
-        builder: (context, state) {
-          return RefreshIndicator.adaptive(
-            onRefresh: () async {
-              bloc.add(FetchCampaignsByRes(widget.id));
-            },
-            child: Builder(builder: (context) {
-              if (state.fetchResponse.status == Status.loading) {
-                return const Center(child: LoadingWidget());
-              }
-      
-              if (state.fetchResponse.status == Status.error) {
-                return Center(
-                  child: Text(
-                    state.fetchResponse.message.toString(),
-                    style: const TextStyle(color: Colors.red, fontSize: 16),
-                  ),
-                );
-              }
-              if (state.fetchResponse.status == Status.completed) {
-                if (state.fetchResponse.data!.isEmpty) {
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: BlocBuilder<CampaignByResBloc, CampaignByResState>(
+          bloc: bloc,
+          builder: (context, state) {
+            return RefreshIndicator.adaptive(
+              onRefresh: () async {
+                bloc.add(FetchCampaignsByRes(widget.id));
+              },
+              child: Builder(builder: (context) {
+                if (state.fetchResponse.status == Status.loading) {
+                  return const Center(child: LoadingWidget());
+                }
+        
+                if (state.fetchResponse.status == Status.error) {
                   return Center(
                     child: Text(
-                      "No Campaign Found.",
-                      style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                      state.fetchResponse.message.toString(),
+                      style: const TextStyle(color: Colors.red, fontSize: 16),
                     ),
                   );
                 }
-      
-                return ListView.separated(
-                    itemCount: state.fetchResponse.data!.length,
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 10),
-                    itemBuilder: (context, index) {
-                      if (index < state.fetchResponse.data!.length) {
-                        final campaign = state.fetchResponse.data![index];
-                        return CampaignByResCard(campaign: campaign);
-                      } else {
-                        return const Center(child: LoadingWidget());
-                      }
-                    },
-                  );
-              }
-      
-              return const Center(child: Text("Something went wrong."));
-            }),
-          );
-        },
+                if (state.fetchResponse.status == Status.completed) {
+                  if (state.fetchResponse.data!.isEmpty) {
+                    return Center(
+                      child: Text(
+                        "No Campaign Found.",
+                        style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                      ),
+                    );
+                  }
+        
+                  return ListView.separated(
+                      itemCount: state.fetchResponse.data!.length,
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 10),
+                      itemBuilder: (context, index) {
+                        if (index < state.fetchResponse.data!.length) {
+                          final campaign = state.fetchResponse.data![index];
+                          return CampaignByResCard(campaign: campaign);
+                        } else {
+                          return const Center(child: LoadingWidget());
+                        }
+                      },
+                    );
+                }
+        
+                return const Center(child: Text("Something went wrong."));
+              }),
+            );
+          },
+        ),
       ),
     );
   }

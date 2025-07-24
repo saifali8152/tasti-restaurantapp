@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-
+  url_launcher: ^6.3.1
   cached_network_image: ^3.4.1
   qr_flutter: ^4.1.0
   pie_chart: ^5.3.2
