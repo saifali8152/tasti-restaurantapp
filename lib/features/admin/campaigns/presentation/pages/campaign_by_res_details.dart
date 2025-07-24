@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
+import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
+import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/widgets/approve_campaign_dialog.dart';
 import '/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
 import '/core/widgets/details_row.dart';
 import '/core/widgets/custom_app_bar.dart';
@@ -21,6 +24,12 @@ class CampaignByResDetails extends StatelessWidget {
             DetailsRow(title: "Campaign Date", value: campaign.dates),
             DetailsRow(title: "Amount Paid", value: campaign.cash),
             DetailsRow(title: "Campaign Message", value: "campaign.message"),
+            if(campaign.status.toLowerCase() == "pending")...[
+             SizedBox(height: 20), 
+            CustomButton(onPressed: (){
+              context.showCustomDialog(ApproveCampaignDialog(id: campaign.cId.toString()));
+            }, text: "Approve")
+            ]
           ],
         ),
       ),

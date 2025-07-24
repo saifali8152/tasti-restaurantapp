@@ -12,3 +12,9 @@ class FetchCampaignsByRes extends CampaignByResEvent {
 
   const FetchCampaignsByRes(this.id);
 }
+
+class ApproveCampaignEvent extends CampaignByResEvent {
+  final int id;
+
+  const ApproveCampaignEvent(this.id);
+}

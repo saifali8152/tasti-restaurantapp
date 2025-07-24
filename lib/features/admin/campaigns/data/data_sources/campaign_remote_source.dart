@@ -6,6 +6,7 @@ import '/config/constants/urls.dart';
 abstract class ICampaignRemoteSourceApi {
   Future<List<CampaignsModel>> fetchCampaign();
   Future<List<CampaignsByResModel>> fetchCampaignByRes(String id);
+  Future<String> approveCampaign(String id);
 }
 
 class CampaignSourceRemoteApiImpl extends ICampaignRemoteSourceApi {
@@ -17,11 +18,12 @@ class CampaignSourceRemoteApiImpl extends ICampaignRemoteSourceApi {
     String url = AppUrls.adminFetchCampaigns;
 
     final response = await networkApiService.get(url);
-    final List<dynamic> rawList = response['data'];    
-    final List<CampaignsModel> campaigns = rawList.map((campaign) => CampaignsModel.fromJson(campaign)).toList();
+    final List<dynamic> rawList = response['data'];
+    final List<CampaignsModel> campaigns =
+        rawList.map((campaign) => CampaignsModel.fromJson(campaign)).toList();
     return campaigns;
   }
-  
+
   @override
   Future<List<CampaignsByResModel>> fetchCampaignByRes(String id) async {
     String url = AppUrls.adminFetchCampaignsByRes;
@@ -29,8 +31,23 @@ class CampaignSourceRemoteApiImpl extends ICampaignRemoteSourceApi {
     final payload = {"res_id": id};
 
     final response = await networkApiService.get(url, queryParams: payload);
-    final List<dynamic> rawList = response['data'];    
-    final List<CampaignsByResModel> campaigns = rawList.map((campaign) => CampaignsByResModel.fromJson(campaign)).toList();
+    final List<dynamic> rawList = response['data'];
+    final List<CampaignsByResModel> campaigns = rawList
+        .map((campaign) => CampaignsByResModel.fromJson(campaign))
+        .toList();
     return campaigns;
+  }
+
+  @override
+  Future<String> approveCampaign(String id) async {
+    Map<String, dynamic> data = {};
+
+    data = {
+      "c_id": id,
+    };
+    var response =
+        await networkApiService.post(AppUrls.adminApproveCampaign, data);
+
+    return response['message'];
   }
 }

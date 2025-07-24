@@ -5,4 +5,5 @@ import '/core/network/response.dart';
 abstract class ICampaignsRepo {
   Future<DataState<List<CampaignsEntity>>> fetchCampaigns();
   Future<DataState<List<CampaignsByResEntity>>> fetchCampaignsByRes(String id);
+  Future<DataState<String>> approveCampaign(String id);
 }

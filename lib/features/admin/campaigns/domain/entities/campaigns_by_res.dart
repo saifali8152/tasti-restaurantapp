@@ -17,6 +17,25 @@ class CampaignsByResEntity extends Equatable {
     required this.cash,
   });
 
+  CampaignsByResEntity copyWith({
+  int? cId,
+  String? people,
+  String? dates,
+  String? area,
+  String? status,
+  String? cash,
+}) {
+  return CampaignsByResEntity(
+    cId: cId ?? this.cId,
+    people: people ?? this.people,
+    dates: dates ?? this.dates,
+    area: area ?? this.area,
+    status: status ?? this.status,
+    cash: cash ?? this.cash,
+  );
+}
+
+
   @override
   List<Object?> get props => [
         cId,

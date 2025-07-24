@@ -9,6 +9,15 @@ class CampaignRepoImpl extends ICampaignsRepo {
   CampaignRepoImpl(this.dataSource);
   
   @override
+  Future<DataState<String>> approveCampaign(String id) async{
+    try {
+      final result = await dataSource.approveCampaign(id);
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
+  @override
   Future<DataState<List<CampaignsModel>>> fetchCampaigns() async{
     try {
       final result = await dataSource.fetchCampaign();
