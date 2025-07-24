@@ -16,6 +16,7 @@ import 'package:tasti_restaurant_app/features/admin/dashboard/presentation/bloc/
 import 'package:tasti_restaurant_app/features/admin/events/data/data_sources/event_remote_source.dart';
 import 'package:tasti_restaurant_app/features/admin/events/data/repositories/queries_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/events/domain/repositories/event_repo.dart';
+import 'package:tasti_restaurant_app/features/admin/events/domain/usecases/add_event.dart';
 import 'package:tasti_restaurant_app/features/admin/events/domain/usecases/delete_event.dart';
 import 'package:tasti_restaurant_app/features/admin/events/domain/usecases/fetch_events.dart';
 import 'package:tasti_restaurant_app/features/admin/events/presentation/bloc/event_bloc.dart';
@@ -164,13 +165,14 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FetchEventsUsecase>(FetchEventsUsecase(sl()));
   sl.registerSingleton<DeleteEventUsecase>(DeleteEventUsecase(sl()));
   sl.registerSingleton<ApproveCampaignUsecase>(ApproveCampaignUsecase(sl()));
+  sl.registerSingleton<AddEventUsecase>(AddEventUsecase(sl()));
 
   // Bloc
   sl.registerLazySingleton<CampaignBloc>(() => CampaignBloc(sl()));
   sl.registerLazySingleton<CampaignByResBloc>(() => CampaignByResBloc(sl(), sl()));
   sl.registerLazySingleton<SkaletonCubit>(() => SkaletonCubit());
   sl.registerLazySingleton<ChangePasswordBloc>(() => ChangePasswordBloc(sl()));
-  sl.registerLazySingleton<EventBloc>(() => EventBloc(sl(), sl()));
+  sl.registerLazySingleton<EventBloc>(() => EventBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<ProfileBloc>(() => ProfileBloc(
       pickerServices: sl(),
       updateProfileUseCase: sl(),

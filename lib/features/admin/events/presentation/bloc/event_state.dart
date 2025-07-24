@@ -5,6 +5,7 @@ import 'package:tasti_restaurant_app/features/admin/events/domain/entities/event
 class EventState  {
   final ApiResponse<List<EventItem>> fetchResponse;
   final ApiResponse<String> deleteResponse;
+  final ApiResponse<EventItem> addResponse;
   final PaginationModel? pagination;
   final bool isLoadingMore;
   final String query;
@@ -12,6 +13,7 @@ class EventState  {
   EventState({
     required this.fetchResponse,
     required this.deleteResponse,
+    required this.addResponse,
     this.pagination,
     this.isLoadingMore = false,
     this.query = '',
@@ -20,6 +22,7 @@ class EventState  {
   EventState copyWith({
     ApiResponse<List<EventItem>>? fetchResponse,
     ApiResponse<String>? deleteResponse,
+    ApiResponse<EventItem>? addResponse,
     PaginationModel? pagination,
     bool? isLoadingMore,
     String? query,
@@ -27,6 +30,7 @@ class EventState  {
     return EventState(
       fetchResponse: fetchResponse ?? this.fetchResponse,
       deleteResponse: deleteResponse ?? this.deleteResponse,
+      addResponse: addResponse ?? this.addResponse,
       pagination: pagination ?? this.pagination,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
       query: query ?? this.query,

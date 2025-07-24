@@ -30,4 +30,5 @@ class AppUrls{
   static final String adminApproveCampaign = "$base/restaurant/approve-campaign";
   static final String adminFetchEvents = "$base/restaurant/get-events";
   static final String adminDeleteEvent = "$base/restaurant/delete-event";
+  static final String adminAddEvent = "$base/restaurant/add-event";
 }

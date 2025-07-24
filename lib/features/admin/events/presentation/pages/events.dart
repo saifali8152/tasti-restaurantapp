@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/config/routes/route_name.dart';
 import 'package:tasti_restaurant_app/features/admin/events/presentation/bloc/event_event.dart';
 import 'package:tasti_restaurant_app/features/admin/events/presentation/bloc/event_state.dart';
 import 'package:tasti_restaurant_app/features/admin/events/presentation/bloc/event_bloc.dart';
@@ -31,6 +32,12 @@ class _EventsState extends State<Events> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.darkOrange,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, AppRoutes.addEvent);
+        },
+        child: Icon(Icons.add),
+      ),
       appBar: ThemedAppBar(
         height: 120,
         title: "Events",

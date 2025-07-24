@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/config/routes/route_name.dart';
 import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/events/presentation/bloc/event_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/profile/presentation/bloc/change_password/change_password_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/profile/presentation/bloc/update_profile/profile_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/queries/presentation/bloc/queries_bloc.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => sl<CampaignByResBloc>()),
           BlocProvider(create: (context) => sl<AdminReservationBloc>()),
           BlocProvider(create: (context) => sl<FetchAdminSmsBloc>()),
+          BlocProvider(create: (context) => sl<EventBloc>()),
           BlocProvider(create: (context) => sl<FetchTransactionHistoryBloc>()),
           BlocProvider(create: (context) => sl<ManageSmsBundleDiscountBloc>()),
           BlocProvider(create: (context) => sl<RequestBloc>()),

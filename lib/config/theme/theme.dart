@@ -13,10 +13,14 @@ class AppTheme {
       dropdownMenuTheme: CustomDropdownTheme.lightTheme,
       sliderTheme: CustomSliderTheme.lightTheme,
       cardTheme: CustomCardTheme.lightTheme,
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: AppColors.darkOrange,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        elevation: 4,
+      ),
       dialogTheme: DialogThemeData(
         backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
+        shape: CircleBorder(),
       ));
 }

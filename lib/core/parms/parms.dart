@@ -14,6 +14,7 @@ class UpdateMonthlyFeeParms {
 
   UpdateMonthlyFeeParms({required this.id, required this.money});
 }
+
 class UpdateProfileParms {
   final String name;
   final String profilePic;
@@ -30,6 +31,7 @@ class UpdateProfileParms {
     };
   }
 }
+
 class ChangePasswordParms {
   final String currentPassword;
   final String newPassword;
@@ -52,6 +54,18 @@ class ReplyQueryParms {
   final String message;
 
   ReplyQueryParms({required this.id, required this.message});
+}
+
+class AddEventParms {
+  final String title;
+  final String link;
+  final String image;
+
+  AddEventParms({
+    required this.title,
+    required this.link,
+    required this.image,
+  });
 }
 
 class PaginationParms {

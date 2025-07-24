@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:tasti_restaurant_app/features/admin/events/data/models/event.dart';
 import '/core/parms/parms.dart';
 import '/core/network/api_services.dart';
@@ -5,8 +6,8 @@ import '/config/constants/urls.dart';
 
 abstract class IEventRemoteSourceApi {
   Future<String> deleteEvent(String id);
+  Future<EventItemModel> addEvent(AddEventParms parms);
   Future<EventModel> fetchEvents(PaginationParms parms);
-
 }
 
 class EventSourceRemoteApiImpl extends IEventRemoteSourceApi {
@@ -24,7 +25,29 @@ class EventSourceRemoteApiImpl extends IEventRemoteSourceApi {
 
     return response['message'];
   }
- 
+
+  @override
+  Future<EventItemModel> addEvent(AddEventParms parms) async {
+    Map<String, dynamic> data = {};
+    Map<String, MultipartFile> files = {};
+    if (parms.image.isNotEmpty && !(parms.image.contains("http"))) {
+      files = {
+        "event_image": await MultipartFile.fromFile(parms.image,
+            filename: parms.image.split('/').last),
+      };
+    }
+
+    data = {
+      "event_title": parms.title,
+      "event_link": parms.link,
+    };
+
+    var response = await networkApiService.postMultipart(
+        AppUrls.adminAddEvent, data, files);
+
+    return response['message'];
+  }
+
   @override
   Future<EventModel> fetchEvents(PaginationParms parms) async {
     Map<String, String> data = {};
