@@ -32,4 +32,7 @@ class AppUrls{
   static final String adminDeleteEvent = "$base/restaurant/delete-event";
   static final String adminAddEvent = "$base/restaurant/add-event";
   static final String adminUpdateEvent = "$base/restaurant/update-event";
+  static final String adminFetchAllRestaurants = "$base/restaurant/get-all-restaurants";
+  static final String adminActivateRestaurant = "$base/restaurant/activate-restaurant";
+  static final String adminSuspendRestaurant = "$base/restaurant/suspend-restaurant";
 }

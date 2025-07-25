@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/features/admin/restaurants/domain/entities/restaurant.dart';
 import '/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
 import '/features/admin/campaigns/presentation/pages/campaigns_by_res.dart';
 import '/features/admin/events/domain/entities/event.dart';
@@ -53,7 +54,9 @@ class Routes {
           builder: (_) => ReservationDbDetails(item: settings.arguments as AdminReservationItem),
         );
       case AppRoutes.restaurantDetails:
-        return MaterialPageRoute(builder: (_) => const RestaurantDetails());
+        return MaterialPageRoute(builder: (_) => RestaurantDetails(
+          restaurant: settings.arguments as RestaurantItem,
+        ));
       case AppRoutes.requestDetails:
         return MaterialPageRoute(
           builder: (_) => RequestDetails(data: settings.arguments as Map<String, dynamic>),

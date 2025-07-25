@@ -20,15 +20,22 @@ class CampaignByResDetails extends StatelessWidget {
           children: [
             DetailsRow(title: "Recipients", value: campaign.people),
             DetailsRow(title: "Province", value: campaign.area),
-            DetailsRow(title: "SMS/Email Bundles", value: "campaign.bundles"),
+            DetailsRow(title: "SMS/Email Bundles", value: campaign.sms),
             DetailsRow(title: "Campaign Date", value: campaign.dates),
             DetailsRow(title: "Amount Paid", value: campaign.cash),
-            DetailsRow(title: "Campaign Message", value: "campaign.message"),
-            if(campaign.status.toLowerCase() == "pending")...[
-             SizedBox(height: 20), 
-            CustomButton(onPressed: (){
-              context.showCustomDialog(ApproveCampaignDialog(id: campaign.cId.toString()));
-            }, text: "Approve")
+            DetailsRow(title: "Campaign Message", value: campaign.message),
+            if (campaign.status.toLowerCase() == "pending") ...[
+              SizedBox(height: 20),
+              CustomButton(
+                onPressed: () {
+                  context.showCustomDialog(
+                    ApproveCampaignDialog(
+                      id: campaign.cId.toString(),
+                    ),
+                  );
+                },
+                text: "Approve",
+              )
             ]
           ],
         ),

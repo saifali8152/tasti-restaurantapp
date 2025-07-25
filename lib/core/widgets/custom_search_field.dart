@@ -84,6 +84,7 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
         valueListenable: obscureText,
         builder: (context, value, child) {
           return TextFormField(
+            autofocus: false,
             initialValue: widget.initialValue,
             onFieldSubmitted: widget.onFieldSubmitted,
             onTap: widget.onTap,

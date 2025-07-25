@@ -7,6 +7,9 @@ class CampaignsByResEntity extends Equatable {
   final String area;
   final String status;
   final String cash;
+  final String message;
+  final String sms;
+  final String reference;
 
   const CampaignsByResEntity({
     required this.cId,
@@ -15,6 +18,9 @@ class CampaignsByResEntity extends Equatable {
     required this.area,
     required this.status,
     required this.cash,
+    required this.message,
+    required this.sms,
+    required this.reference,
   });
 
   CampaignsByResEntity copyWith({
@@ -24,6 +30,9 @@ class CampaignsByResEntity extends Equatable {
   String? area,
   String? status,
   String? cash,
+  String? message,
+  String? sms,
+  String? reference
 }) {
   return CampaignsByResEntity(
     cId: cId ?? this.cId,
@@ -32,6 +41,9 @@ class CampaignsByResEntity extends Equatable {
     area: area ?? this.area,
     status: status ?? this.status,
     cash: cash ?? this.cash,
+    message: message ?? this.message,
+    sms: sms ?? this.sms,
+    reference: reference ?? this.reference,
   );
 }
 

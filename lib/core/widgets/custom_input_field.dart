@@ -50,23 +50,6 @@ class CustomInputField extends StatefulWidget {
 
 class _CustomInputFieldState extends State<CustomInputField> {
   ValueNotifier<bool> obscureText = ValueNotifier<bool>(true);
-  // Timer? _debounce;
-
-  // @override
-  // void dispose() {
-  //   if (_debounce?.isActive ?? false) _debounce!.cancel();
-  //   super.dispose();
-  // }
-
-  // void _onChanged(String value) {
-  //   if (_debounce?.isActive ?? false) _debounce!.cancel();
-
-  //   _debounce = Timer(const Duration(milliseconds: 300), () {
-  //     if (widget.onChanged != null) {
-  //       widget.onChanged!(value);
-  //     }
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {

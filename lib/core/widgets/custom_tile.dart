@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class CustomTile extends StatelessWidget {
   final Widget leading;
   final String title;
@@ -16,23 +17,19 @@ class CustomTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return ListTile(
+      contentPadding: EdgeInsets.all(0),
       onTap: onTap ?? () {},
-      child: Container(
-        margin: EdgeInsets.only(bottom: 2),
-        padding: EdgeInsets.symmetric(vertical: 10),
-        child: Row(
-          children: [
-            leading,
-            SizedBox(width: 15),
-            Text(title, style: TextStyle(fontSize: fontSize),),
-            Spacer(),
-            applyTrailing! ? Icon(
+      leading: leading,
+      trailing: applyTrailing!
+          ? Icon(
               Icons.arrow_forward_ios,
               size: 14,
-            ) : SizedBox(),
-          ],
-        ),
+            )
+          : SizedBox(),
+      title: Text(
+        title,
+        style: TextStyle(fontSize: fontSize),
       ),
     );
   }

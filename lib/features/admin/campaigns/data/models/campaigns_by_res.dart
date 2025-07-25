@@ -8,6 +8,9 @@ class CampaignsByResModel extends CampaignsByResEntity {
     required super.area,
     required super.cash,
     required super.status,
+    required super.message,
+    required super.sms,
+    required super.reference,
   });
 
   factory CampaignsByResModel.fromJson(Map<String, dynamic> json) {
@@ -18,6 +21,9 @@ class CampaignsByResModel extends CampaignsByResEntity {
       dates: json['dates'].toString(),
       cash: json['cash'].toString(),
       status: json['status'].toString(),
+      message: json['message'].toString(),
+      sms: json['sms'].toString(),
+      reference: json['reference'].toString(),
     );
   }
 
@@ -29,6 +35,9 @@ class CampaignsByResModel extends CampaignsByResEntity {
       'dates': dates,
       'cash': cash,
       'status': status,
+      'message': message,
+      'sms': sms,
+      'reference': reference,
     };
   }
 }

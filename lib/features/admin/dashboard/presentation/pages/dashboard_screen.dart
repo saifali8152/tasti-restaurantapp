@@ -55,11 +55,11 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
 
   Widget buildDashboardContent(
       BuildContext context, AdminDashboardEntity data) {
-    return SingleChildScrollView(
-      child: RefreshIndicator(
-        onRefresh: ()async{
-          _bloc.add(FetchAdminDashboard());
-        },
+    return RefreshIndicator(
+      onRefresh: ()async{
+        _bloc.add(FetchAdminDashboard());
+      },
+      child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

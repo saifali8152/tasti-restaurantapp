@@ -93,6 +93,19 @@ class PaginationParms {
     this.search = '',
   });
 }
+class AllRestaurantParms {
+  final String page;
+  final String limit;
+  final String search;
+  final String filter;
+
+  AllRestaurantParms({
+    this.page = '1',
+    this.limit = '10',
+    this.search = '',
+    this.filter = '',
+  });
+}
 
 class RequestParms {
   final String page;

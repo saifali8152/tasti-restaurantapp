@@ -55,7 +55,10 @@ class _QueryDetailsState extends State<QueryDetails> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(widget.query.text),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Text(widget.query.text),
+                    ),
                   ],
                 ),
               ),
