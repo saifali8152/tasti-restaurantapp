@@ -1,7 +1,7 @@
-import 'package:tasti_restaurant_app/features/auth/presentation/bloc/delete_account/delete_account_bloc.dart';
-import 'package:tasti_restaurant_app/features/auth/presentation/bloc/delete_account/delete_account_event.dart';
-import 'package:tasti_restaurant_app/features/auth/presentation/bloc/delete_account/delete_account_state.dart';
-import 'package:tasti_restaurant_app/features/skaleton/cubit/skaleton_cubit.dart';
+import '/features/auth/presentation/bloc/delete_account/delete_account_bloc.dart';
+import '/features/auth/presentation/bloc/delete_account/delete_account_event.dart';
+import '/features/auth/presentation/bloc/delete_account/delete_account_state.dart';
+import '/features/skaleton/cubit/skaleton_cubit.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/widgets/custom_button.dart';
 import '/dependency_injection.dart';

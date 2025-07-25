@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/admin/requests/domain/entities/requests.dart';
-import 'package:tasti_restaurant_app/features/admin/requests/domain/usecases/delete_requests.dart';
-import 'package:tasti_restaurant_app/features/admin/requests/domain/usecases/fetch_requests.dart';
+import '/core/parms/parms.dart';
+import '/features/admin/requests/domain/entities/requests.dart';
+import '/features/admin/requests/domain/usecases/delete_requests.dart';
+import '/features/admin/requests/domain/usecases/fetch_requests.dart';
 import '/core/network/response.dart';
 import 'request_event.dart';
 import 'request_state.dart';
@@ -31,9 +31,9 @@ class RequestBloc extends Bloc<RequestEvents, RequestState> {
       if (result is DataSuccess<String>) {
         final oldList = state.fetchResponse.data;
 
-        final optimisticList = oldList?.where((r) => r.reqId != event.id).toList();
+        final optimisticList = oldList?.where((r) => r.reqId != event.id).toList() ?? [];
         emit(state.copyWith(
-            fetchResponse: ApiResponse.completed(List.from(optimisticList!)),
+            fetchResponse: ApiResponse.completed(List.from(optimisticList)),
             deleteResponse: ApiResponse.completed(result.data)));
       } else if (result is DataFailure<String>) {
         emit(state.copyWith(deleteResponse: ApiResponse.error(result.error)));

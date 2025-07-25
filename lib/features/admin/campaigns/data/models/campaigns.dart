@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/admin/campaigns/domain/entities/campaigns.dart';
+import '/features/admin/campaigns/domain/entities/campaigns.dart';
 
 class CampaignsModel extends CampaignsEntity {
   const CampaignsModel({

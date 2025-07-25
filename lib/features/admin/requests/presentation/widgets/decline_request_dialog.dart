@@ -1,7 +1,7 @@
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/features/admin/requests/presentation/bloc/request_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/requests/presentation/bloc/request_event.dart';
-import 'package:tasti_restaurant_app/features/admin/requests/presentation/bloc/request_state.dart';
+import '/core/network/response.dart';
+import '/features/admin/requests/presentation/bloc/request_bloc.dart';
+import '/features/admin/requests/presentation/bloc/request_event.dart';
+import '/features/admin/requests/presentation/bloc/request_state.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/widgets/custom_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 
 class DeclineRequestDialog extends StatelessWidget {
   final String id;
-  const DeclineRequestDialog({super.key, required this.id});
+  final RequestBloc bloc;
+  const DeclineRequestDialog({super.key, required this.id, required this.bloc});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class DeclineRequestDialog extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             BlocConsumer<RequestBloc, RequestState>(
-              bloc: context.read<RequestBloc>(),
+              bloc: bloc,
               listener: (context, state) {
                 if (state.deleteResponse.status == Status.error) {
                   context.flushBarErrorMessage(
@@ -67,9 +68,7 @@ class DeclineRequestDialog extends StatelessWidget {
                     Expanded(
                       child: CustomButton(
                         onPressed: () {
-                          context
-                              .read<RequestBloc>()
-                              .add(AdminDeleteRequest(int.parse(id)));
+                          bloc.add(AdminDeleteRequest(int.parse(id)));
                         },
                         text: "Confirm",
                         isLoading:

@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/features/admin/requests/data/models/requests.dart';
-import 'package:tasti_restaurant_app/features/admin/requests/domain/repositories/requests_repo.dart';
+import '/features/admin/requests/data/models/requests.dart';
+import '/features/admin/requests/domain/repositories/requests_repo.dart';
 import '/core/parms/parms.dart';
 import '../data_sources/requests_remote_source.dart';
 import '/core/network/response.dart';

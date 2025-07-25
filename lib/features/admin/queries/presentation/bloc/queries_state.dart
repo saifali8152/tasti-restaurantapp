@@ -1,6 +1,6 @@
-import 'package:tasti_restaurant_app/core/models/pagination.dart';
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/features/admin/queries/domain/entities/queries.dart';
+import '/core/models/pagination.dart';
+import '/core/network/response.dart';
+import '/features/admin/queries/domain/entities/queries.dart';
 
 class QueriesState  {
   final ApiResponse<List<QueriesItem>> fetchResponse;

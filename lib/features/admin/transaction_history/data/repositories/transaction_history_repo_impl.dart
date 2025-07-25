@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/features/admin/transaction_history/data/models/transaction_history.dart';
-import 'package:tasti_restaurant_app/features/admin/transaction_history/domain/repositories/transaction_history_repo.dart';
+import '/features/admin/transaction_history/data/models/transaction_history.dart';
+import '/features/admin/transaction_history/domain/repositories/transaction_history_repo.dart';
 import '/core/parms/parms.dart';
 import '../data_sources/transaction_history_remote_source.dart';
 import '/core/network/response.dart';

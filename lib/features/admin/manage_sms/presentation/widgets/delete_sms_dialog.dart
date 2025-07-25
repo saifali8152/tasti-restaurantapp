@@ -1,7 +1,7 @@
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_event.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_state.dart';
+import '/core/network/response.dart';
+import '/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_bloc.dart';
+import '/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_event.dart';
+import '/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_state.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/widgets/custom_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/features/admin/campaigns/data/models/campaigns.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/data/models/campaigns_by_res.dart';
+import '/features/admin/campaigns/data/models/campaigns.dart';
+import '/features/admin/campaigns/data/models/campaigns_by_res.dart';
 import '/core/network/api_services.dart';
 import '/config/constants/urls.dart';
 

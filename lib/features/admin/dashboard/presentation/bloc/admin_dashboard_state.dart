@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/admin/dashboard/domain/entities/admin_dashboard.dart';
+import '/features/admin/dashboard/domain/entities/admin_dashboard.dart';
 
 abstract class AdminDashboardState {}
 

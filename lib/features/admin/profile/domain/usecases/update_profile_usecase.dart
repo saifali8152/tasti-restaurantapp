@@ -1,7 +1,7 @@
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/core/usecase/usecase.dart';
-import 'package:tasti_restaurant_app/features/admin/profile/domain/repositories/profile_repo.dart';
-import 'package:tasti_restaurant_app/features/auth/domain/entities/user.dart';
+import '/core/parms/parms.dart';
+import '/core/usecase/usecase.dart';
+import '/features/admin/profile/domain/repositories/profile_repo.dart';
+import '/features/auth/domain/entities/user.dart';
 import '/core/network/response.dart';
 
 class UpdateProfileUseCase

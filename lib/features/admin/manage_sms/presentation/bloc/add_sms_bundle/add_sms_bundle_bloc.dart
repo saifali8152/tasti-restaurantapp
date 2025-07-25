@@ -1,7 +1,7 @@
 // import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:tasti_restaurant_app/core/network/response.dart';
-// import 'package:tasti_restaurant_app/core/parms/parms.dart';
-// import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/add_sms_bundle.dart';
+// import '/core/network/response.dart';
+// import '/core/parms/parms.dart';
+// import '/features/admin/manage_sms/domain/usecases/add_sms_bundle.dart';
 // import 'add_sms_bundle_event.dart';
 // import 'add_sms_bundle_state.dart';
 

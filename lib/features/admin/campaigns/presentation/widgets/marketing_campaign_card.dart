@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/widgets/card_details_row.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/domain/entities/campaigns.dart';
+import '/core/widgets/card_details_row.dart';
+import '/features/admin/campaigns/domain/entities/campaigns.dart';
 import '/config/routes/route_name.dart';
 
 class MarketingcampaignCard extends StatelessWidget {

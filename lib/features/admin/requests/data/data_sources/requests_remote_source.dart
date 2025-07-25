@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/core/enum/request_type.dart';
-import 'package:tasti_restaurant_app/features/admin/requests/data/models/requests.dart';
+import '/core/enum/request_type.dart';
+import '/features/admin/requests/data/models/requests.dart';
 import '/core/parms/parms.dart';
 import '/core/network/api_services.dart';
 import '/config/constants/urls.dart';

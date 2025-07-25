@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/features/admin/queries/domain/entities/queries.dart';
-import 'package:tasti_restaurant_app/features/admin/queries/presentation/widgets/decline_query_dialog.dart';
+import '/core/utils/general_extentions.dart';
+import '/features/admin/queries/domain/entities/queries.dart';
+import '/features/admin/queries/presentation/bloc/queries_bloc.dart';
+import '/features/admin/queries/presentation/widgets/decline_query_dialog.dart';
 import '/config/routes/route_name.dart';
 import '/config/constants/colors.dart';
 import '/core/widgets/custom_button.dart';
@@ -9,8 +10,9 @@ import '/core/widgets/custom_button.dart';
 class QueriesCard extends StatelessWidget {
   final bool isVerified;
   final QueriesItem? query;
+  final QueriesBloc bloc;
 
-  const QueriesCard({super.key, this.isVerified = false, this.query});
+  const QueriesCard({super.key, this.isVerified = false, this.query, required this.bloc});
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +65,7 @@ class QueriesCard extends StatelessWidget {
               SizedBox(height: 10),
               CustomButton(
                 onPressed: () => context.showCustomDialog(
-                    DeclineQueryDialog(id: query!.reqId.toString())),
+                    DeclineQueryDialog(id: query!.reqId.toString(), bloc: bloc,)),
                 text: "Delete",
                 bgColor: AppColors.grey,
                 textColor: Colors.black,

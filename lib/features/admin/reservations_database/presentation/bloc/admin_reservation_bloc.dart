@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
+import '/core/parms/parms.dart';
 import '/features/admin/reservations_database/domain/entities/reservation.dart';
 import '/features/admin/reservations_database/domain/usecases/fetch_admin_reservations.dart';
 import '/core/network/response.dart';

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:bloc/bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/profile/domain/usecases/update_profile_usecase.dart';
-import '/features/skaleton/cubit/skaleton_cubit.dart';
+import '/features/admin/profile/domain/usecases/update_profile_usecase.dart';
+import '/features/skaleton/user_cubit/skaleton_cubit.dart';
 import '/core/network/response.dart';
 import '/core/parms/parms.dart';
 import '/core/services/session_controller.dart';
@@ -17,13 +17,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final PickerServices pickerServices;
   final UpdateProfileUseCase updateProfileUseCase;
   final SessionController sC;
-  final SkaletonCubit skaletonCubit;
+  final UserCubit userCubit;
 
   ProfileBloc({
     required this.pickerServices,
     required this.updateProfileUseCase,
     required this.sC,
-    required this.skaletonCubit,
+    required this.userCubit,
   }) : super(ProfileState(response: ApiResponse.initial())) {
     on<ProfileImageChanged>(_onProfileImageChanged);
     on<SetProfilePic>(_onSetProfilePic);
@@ -35,7 +35,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     try {
       emit(state.copyWith(response: ApiResponse.loading()));
 
-      if(event.name == sl<SkaletonCubit>().state.user!.name && state.profilePic.contains("http")){
+      if(event.name == sl<UserCubit>().state.user!.name && state.profilePic.contains("http")){
         return emit(state.copyWith(response: ApiResponse.completed("Profile updated successfully")));
       }
 
@@ -45,7 +45,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       if (response.status == Status.completed) {
         await sC.saveUserSession(response.data!);
         await sC.loadSession();
-        skaletonCubit.setUser(response.data!);
+        userCubit.setUser(response.data!);
         emit(state.copyWith(response: ApiResponse.completed("Profile updated successfully")));
       } else {
         emit(state.copyWith(

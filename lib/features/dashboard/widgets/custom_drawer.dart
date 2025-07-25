@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '/features/skaleton/user_cubit/skaleton_cubit.dart';
 import '/config/constants/colors.dart';
-import '/config/constants/images.dart';
 import '/core/utils/general_extentions.dart';
 import '../../skaleton/cubit/skaleton_cubit.dart';
 
@@ -19,14 +19,20 @@ class CustomDrawer extends StatelessWidget {
       backgroundColor: Colors.white,
       child: ListView(
         children: [
-          BlocBuilder<SkaletonCubit, SkaletonCubitState>(
+          BlocBuilder<UserCubit, UserCubitState>(
             builder: (context, state) {
-              return UserAccountsDrawerHeader(
-                decoration: const BoxDecoration(color: AppColors.white),
-                accountName: Text((state.user == null).toString()),
-                accountEmail: Text("$userRole@example.com"),
-                currentAccountPicture: CircleAvatar(
-                    backgroundImage: AssetImage(AppImages.profile)),
+              return GestureDetector(
+                onTap: (){
+                  context.read<SkaletonCubit>().changeTab(13);
+                  Navigator.pop(context);
+                },
+                child: UserAccountsDrawerHeader(
+                  decoration: const BoxDecoration(color: AppColors.white),
+                  accountName: Text(state.user?.name??'Guest'),
+                  accountEmail: Text("${state.user?.email}"),
+                  currentAccountPicture: CircleAvatar(
+                      backgroundImage: NetworkImage(state.user?.profilePic??'')),
+                ),
               );
             },
           ),
@@ -155,7 +161,6 @@ class DrawerConfig {
           DrawerItemModel(icon: Icons.event, title: "Events", index: 9),
           DrawerItemModel(icon: Icons.sms, title: "Manage SMS & Fees", index: 10),
           DrawerItemModel(icon: Icons.campaign, title: "Campaigns", index: 11),
-          DrawerItemModel(icon: Icons.settings, title: "Settings", index: 12),
           DrawerItemModel(icon: Icons.person, title: "Profile", index: 13),
         ];
       case "restaurant":

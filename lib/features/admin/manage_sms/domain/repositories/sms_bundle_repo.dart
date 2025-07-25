@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/entities/admin_sms.dart';
+import '/features/admin/manage_sms/domain/entities/admin_sms.dart';
 import '/core/parms/parms.dart';
 import '/core/network/response.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/manage_sms_bundle_discount.dart';
+import '/core/network/response.dart';
+import '/core/parms/parms.dart';
+import '/features/admin/manage_sms/domain/usecases/manage_sms_bundle_discount.dart';
 import 'manage_sms_bundle_discount_event.dart';
 import 'manage_sms_bundle_discount_state.dart';
 

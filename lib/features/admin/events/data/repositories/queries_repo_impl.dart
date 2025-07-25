@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/features/admin/events/data/models/event.dart';
-import 'package:tasti_restaurant_app/features/admin/events/domain/repositories/event_repo.dart';
+import '/features/admin/events/data/models/event.dart';
+import '/features/admin/events/domain/repositories/event_repo.dart';
 import '/core/parms/parms.dart';
 import '../data_sources/event_remote_source.dart';
 import '/core/network/response.dart';

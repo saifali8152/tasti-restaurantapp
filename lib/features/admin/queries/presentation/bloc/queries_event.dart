@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:tasti_restaurant_app/core/enum/query_type.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
+import '/core/enum/query_type.dart';
+import '/core/parms/parms.dart';
 
 abstract class QueriesEvents extends Equatable {
   const QueriesEvents();

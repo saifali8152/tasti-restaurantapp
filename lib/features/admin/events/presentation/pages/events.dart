@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/config/routes/route_name.dart';
-import 'package:tasti_restaurant_app/features/admin/events/presentation/bloc/event_event.dart';
-import 'package:tasti_restaurant_app/features/admin/events/presentation/bloc/event_state.dart';
-import 'package:tasti_restaurant_app/features/admin/events/presentation/bloc/event_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/events/presentation/widgets/event_card.dart';
+import '/config/routes/route_name.dart';
+import '/features/admin/events/presentation/bloc/event_event.dart';
+import '/features/admin/events/presentation/bloc/event_state.dart';
+import '/features/admin/events/presentation/bloc/event_bloc.dart';
+import '/features/admin/events/presentation/widgets/event_card.dart';
 import '/core/widgets/custom_search_field.dart';
 import '/core/widgets/curved_container.dart';
 import '/core/widgets/themed_app_bar.dart';

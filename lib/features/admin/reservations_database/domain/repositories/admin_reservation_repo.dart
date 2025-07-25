@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
+import '/core/parms/parms.dart';
 import '../entities/reservation.dart';
 import '/core/network/response.dart';
 

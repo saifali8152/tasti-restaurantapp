@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/config/routes/route_name.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/entities/admin_sms.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/widgets/delete_sms_dialog.dart';
+import '/config/routes/route_name.dart';
+import '/core/utils/general_extentions.dart';
+import '/features/admin/manage_sms/domain/entities/admin_sms.dart';
+import '/features/admin/manage_sms/presentation/widgets/delete_sms_dialog.dart';
 import '/config/constants/colors.dart';
 import '/core/widgets/custom_button.dart';
 import '/core/widgets/details_row.dart';

@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/skaleton/cubit/skaleton_cubit.dart';
+import '/features/skaleton/cubit/skaleton_cubit.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/widgets/custom_button.dart';
 import '/dependency_injection.dart';

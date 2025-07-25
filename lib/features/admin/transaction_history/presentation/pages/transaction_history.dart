@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
-import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
-import 'package:tasti_restaurant_app/dependency_injection.dart';
-import 'package:tasti_restaurant_app/features/admin/transaction_history/presentation/bloc/transaction_history_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/transaction_history/presentation/bloc/transaction_history_event.dart';
-import 'package:tasti_restaurant_app/features/admin/transaction_history/presentation/bloc/transaction_history_state.dart';
-import 'package:tasti_restaurant_app/features/admin/transaction_history/presentation/widgets/transaction_history_card.dart';
+import '/core/widgets/custom_app_bar.dart';
+import '/core/widgets/loading_widget.dart';
+import '/dependency_injection.dart';
+import '/features/admin/transaction_history/presentation/bloc/transaction_history_bloc.dart';
+import '/features/admin/transaction_history/presentation/bloc/transaction_history_event.dart';
+import '/features/admin/transaction_history/presentation/bloc/transaction_history_state.dart';
+import '/features/admin/transaction_history/presentation/widgets/transaction_history_card.dart';
 
 class TransactionHistory extends StatefulWidget {
   const TransactionHistory({super.key});

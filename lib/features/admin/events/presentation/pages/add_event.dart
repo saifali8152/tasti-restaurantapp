@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_input_field.dart';
-import 'package:tasti_restaurant_app/core/widgets/image_picker_widget.dart';
-import 'package:tasti_restaurant_app/features/admin/events/presentation/bloc/event_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/events/presentation/bloc/event_event.dart';
-import 'package:tasti_restaurant_app/features/admin/events/presentation/bloc/event_state.dart';
+import '/core/network/response.dart';
+import '/core/parms/parms.dart';
+import '/core/widgets/custom_app_bar.dart';
+import '/core/widgets/custom_button.dart';
+import '/core/widgets/custom_input_field.dart';
+import '/core/widgets/image_picker_widget.dart';
+import '/features/admin/events/presentation/bloc/event_bloc.dart';
+import '/features/admin/events/presentation/bloc/event_event.dart';
+import '/features/admin/events/presentation/bloc/event_state.dart';
 
 class AddEventScreen extends StatefulWidget {
   const AddEventScreen({super.key});

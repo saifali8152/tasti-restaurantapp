@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/bloc/campaign/campaign_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/bloc/campaign/campaign_event.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/bloc/campaign/campaign_state.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/widgets/marketing_campaign_card.dart';
+import '/features/admin/campaigns/presentation/bloc/campaign/campaign_bloc.dart';
+import '/features/admin/campaigns/presentation/bloc/campaign/campaign_event.dart';
+import '/features/admin/campaigns/presentation/bloc/campaign/campaign_state.dart';
+import '/features/admin/campaigns/presentation/widgets/marketing_campaign_card.dart';
 import '/core/widgets/curved_container.dart';
 import '/core/widgets/themed_app_bar.dart';
 import '/config/constants/colors.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/auth/domain/usecases/delete_account.dart';
+import '/features/auth/domain/usecases/delete_account.dart';
 import '/core/network/response.dart';
 import '/core/services/session_controller.dart';
 import 'delete_account_event.dart';

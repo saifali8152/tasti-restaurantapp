@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:tasti_restaurant_app/features/auth/data/models/user.dart';
-import 'package:tasti_restaurant_app/features/auth/domain/entities/user.dart';
+import '/features/auth/data/models/user.dart';
+import '/features/auth/domain/entities/user.dart';
 import '/core/services/session_controller.dart';
 import '/dependency_injection.dart';
 import '/core/parms/parms.dart';

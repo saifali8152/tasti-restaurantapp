@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/admin/queries/domain/entities/queries.dart';
-import 'package:tasti_restaurant_app/features/admin/queries/domain/usecases/delete_queries.dart';
-import 'package:tasti_restaurant_app/features/admin/queries/domain/usecases/fetch_queries.dart';
-import 'package:tasti_restaurant_app/features/admin/queries/domain/usecases/reply_query.dart';
+import '/core/parms/parms.dart';
+import '/features/admin/queries/domain/entities/queries.dart';
+import '/features/admin/queries/domain/usecases/delete_queries.dart';
+import '/features/admin/queries/domain/usecases/fetch_queries.dart';
+import '/features/admin/queries/domain/usecases/reply_query.dart';
 import '/core/network/response.dart';
 import 'queries_event.dart';
 import 'queries_state.dart';
@@ -55,16 +55,13 @@ class QueriesBloc extends Bloc<QueriesEvents, QueriesState> {
       if (result is DataSuccess<String>) {
         final oldList = state.fetchResponse.data;
 
-        final optimisticList =
-            oldList?.where((r) => r.reqId != event.id).toList();
-        emit(state.copyWith(
-            fetchResponse: ApiResponse.completed(List.from(optimisticList!)),
-            deleteResponse: ApiResponse.completed(result.data)));
+        final optimisticList = oldList?.where((r) => r.reqId != event.id).toList() ?? [];
+        emit(state.copyWith(fetchResponse: ApiResponse.completed(List.from(optimisticList)),deleteResponse: ApiResponse.completed(result.data)));
       } else if (result is DataFailure<String>) {
         emit(state.copyWith(deleteResponse: ApiResponse.error(result.error)));
       }
     } catch (e) {
-      emit(state.copyWith(deleteResponse: ApiResponse.error(e.toString())));
+      emit(state.copyWith(deleteResponse: ApiResponse.error("${e.toString}")));
     }
   }
 

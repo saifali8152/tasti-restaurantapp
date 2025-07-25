@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/features/admin/campaigns/domain/entities/campaigns.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/domain/repositories/campaigns_repo.dart';
+import '/features/admin/campaigns/domain/entities/campaigns.dart';
+import '/features/admin/campaigns/domain/repositories/campaigns_repo.dart';
 import '/core/network/response.dart';
 import '/core/usecase/usecase.dart';
 

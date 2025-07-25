@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_event.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_state.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/widgets/campaign_by_res_card.dart';
+import '/core/widgets/custom_app_bar.dart';
+import '/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_bloc.dart';
+import '/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_event.dart';
+import '/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_state.dart';
+import '/features/admin/campaigns/presentation/widgets/campaign_by_res_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/network/response.dart';
 import '/core/widgets/loading_widget.dart';

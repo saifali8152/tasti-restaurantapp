@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/profile/domain/usecases/change_password.dart';
+import '/features/admin/profile/domain/usecases/change_password.dart';
 import '/core/network/response.dart';
 import 'change_password_event.dart';
 import 'change_password_state.dart';

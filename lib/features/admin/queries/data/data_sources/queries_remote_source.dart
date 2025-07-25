@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/core/enum/query_type.dart';
-import 'package:tasti_restaurant_app/features/admin/queries/data/models/queries.dart';
+import '/core/enum/query_type.dart';
+import '/features/admin/queries/data/models/queries.dart';
 import '/core/parms/parms.dart';
 import '/core/network/api_services.dart';
 import '/config/constants/urls.dart';

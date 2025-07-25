@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/domain/usecases/approve_event.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/domain/usecases/fetch_campaigns_by_res.dart';
+import '/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
+import '/features/admin/campaigns/domain/usecases/approve_event.dart';
+import '/features/admin/campaigns/domain/usecases/fetch_campaigns_by_res.dart';
 import '/core/network/response.dart';
 import 'campaign_by_res_event.dart';
 import 'campaign_by_res_state.dart';

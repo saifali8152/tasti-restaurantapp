@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tasti_restaurant_app/core/enum/request_type.dart';
+import '/core/enum/request_type.dart';
 
 abstract class RequestEvents extends Equatable {
   const RequestEvents();

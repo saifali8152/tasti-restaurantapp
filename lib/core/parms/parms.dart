@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/core/enum/query_type.dart';
-import 'package:tasti_restaurant_app/core/enum/request_type.dart';
+import '/core/enum/query_type.dart';
+import '/core/enum/request_type.dart';
 
 class LoginParms {
   final String email;

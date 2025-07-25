@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/admin/events/domain/entities/event.dart';
-import 'package:tasti_restaurant_app/features/admin/events/domain/usecases/add_event.dart';
-import 'package:tasti_restaurant_app/features/admin/events/domain/usecases/delete_event.dart';
-import 'package:tasti_restaurant_app/features/admin/events/domain/usecases/fetch_events.dart';
-import 'package:tasti_restaurant_app/features/admin/events/domain/usecases/update_event.dart';
+import '/core/parms/parms.dart';
+import '/features/admin/events/domain/entities/event.dart';
+import '/features/admin/events/domain/usecases/add_event.dart';
+import '/features/admin/events/domain/usecases/delete_event.dart';
+import '/features/admin/events/domain/usecases/fetch_events.dart';
+import '/features/admin/events/domain/usecases/update_event.dart';
 import '/core/network/response.dart';
 import 'event_event.dart';
 import 'event_state.dart';

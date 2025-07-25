@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:tasti_restaurant_app/features/admin/dashboard/domain/entities/admin_dashboard.dart';
-import 'package:tasti_restaurant_app/features/skaleton/cubit/skaleton_cubit.dart';
+import '/features/admin/dashboard/domain/entities/admin_dashboard.dart';
+import '/features/skaleton/cubit/skaleton_cubit.dart';
 import '../../../../../config/constants/colors.dart';
 import '/core/utils/general_extentions.dart';
 

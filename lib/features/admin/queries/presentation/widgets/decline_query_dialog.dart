@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 
 class DeclineQueryDialog extends StatelessWidget {
   final String id;
-  const DeclineQueryDialog({super.key, required this.id});
+  final QueriesBloc bloc;
+  const DeclineQueryDialog({super.key, required this.id, required this.bloc});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class DeclineQueryDialog extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             BlocConsumer<QueriesBloc, QueriesState>(
-              bloc: context.read<QueriesBloc>(),
+              bloc: bloc,
               listener: (context, state) {
                 if (state.deleteResponse.status == Status.error) {
                   context.flushBarErrorMessage(
@@ -67,9 +68,7 @@ class DeclineQueryDialog extends StatelessWidget {
                     Expanded(
                       child: CustomButton(
                         onPressed: () {
-                          context
-                              .read<QueriesBloc>()
-                              .add(AdminDeleteQueries(int.parse(id)));
+                          bloc.add(AdminDeleteQueries(int.parse(id)));
                         },
                         text: "Confirm",
                         isLoading:

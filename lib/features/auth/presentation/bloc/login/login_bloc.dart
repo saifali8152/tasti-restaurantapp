@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '/features/skaleton/user_cubit/skaleton_cubit.dart';
 import '/features/auth/domain/entities/user.dart';
 import '/features/auth/domain/usecases/login.dart';
-import '../../../../skaleton/cubit/skaleton_cubit.dart';
 import '/core/services/session_controller.dart';
 import '/dependency_injection.dart';
 import '/core/parms/parms.dart';
@@ -39,7 +39,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         final SessionController sC = sl();
         await sC.saveUserSession(result.data);
         await sC.loadSession();
-        sl<SkaletonCubit>().setUser(result.data);
+        sl<UserCubit>().setUser(result.data);
         emit(state.copyWith(loginResponse: ApiResponse.completed(result.data)));
         break;
       case DataFailure():

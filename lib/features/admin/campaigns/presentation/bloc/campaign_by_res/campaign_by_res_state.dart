@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
+import '/core/network/response.dart';
+import '/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
 
 class CampaignByResState {
   final ApiResponse<List<CampaignsByResEntity>> fetchResponse;

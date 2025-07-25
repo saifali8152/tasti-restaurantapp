@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/entities/monthly_fee.dart';
+import '/features/admin/manage_fee/domain/entities/monthly_fee.dart';
 import '/core/parms/parms.dart';
 import '/core/network/response.dart';
 

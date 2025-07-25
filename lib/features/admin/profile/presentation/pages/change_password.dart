@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
-import 'package:tasti_restaurant_app/config/constants/spaces.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_input_field.dart';
+import '/config/constants/colors.dart';
+import '/config/constants/spaces.dart';
+import '/core/widgets/custom_button.dart';
+import '/core/widgets/custom_input_field.dart';
 import '/core/parms/parms.dart';
 import '/core/utils/flushbar_extention.dart';
 import '../bloc/change_password/change_password_bloc.dart';

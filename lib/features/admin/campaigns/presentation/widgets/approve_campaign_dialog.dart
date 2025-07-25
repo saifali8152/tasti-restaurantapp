@@ -1,6 +1,6 @@
-import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_event.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_state.dart';
+import '/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_bloc.dart';
+import '/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_event.dart';
+import '/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_state.dart';
 import '/core/network/response.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/widgets/custom_button.dart';

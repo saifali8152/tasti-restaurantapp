@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/core/models/pagination.dart';
-import 'package:tasti_restaurant_app/features/admin/transaction_history/domain/entities/transaction_history.dart';
+import '/core/models/pagination.dart';
+import '/features/admin/transaction_history/domain/entities/transaction_history.dart';
 
 abstract class TransactionHistoryState {}
 

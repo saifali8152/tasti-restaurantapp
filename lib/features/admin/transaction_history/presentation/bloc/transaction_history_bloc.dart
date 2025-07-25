@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/admin/transaction_history/domain/entities/transaction_history.dart';
-import 'package:tasti_restaurant_app/features/admin/transaction_history/domain/usecases/fetch_admin_transaction_history.dart';
+import '/core/parms/parms.dart';
+import '/features/admin/transaction_history/domain/entities/transaction_history.dart';
+import '/features/admin/transaction_history/domain/usecases/fetch_admin_transaction_history.dart';
 import '/core/network/response.dart';
 import 'transaction_history_event.dart';
 import 'transaction_history_state.dart';

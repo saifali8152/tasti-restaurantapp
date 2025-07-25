@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
-import 'package:tasti_restaurant_app/config/routes/route_name.dart';
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
-import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
-import 'package:tasti_restaurant_app/dependency_injection.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/bloc/get_monthly_fee_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/bloc/get_monthly_fee_event.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/bloc/get_monthly_fee_state.dart';
+import '/config/constants/colors.dart';
+import '/config/routes/route_name.dart';
+import '/core/network/response.dart';
+import '/core/utils/general_extentions.dart';
+import '/core/widgets/custom_app_bar.dart';
+import '/core/widgets/custom_button.dart';
+import '/core/widgets/loading_widget.dart';
+import '/dependency_injection.dart';
+import '/features/admin/manage_fee/presentation/bloc/get_monthly_fee_bloc.dart';
+import '/features/admin/manage_fee/presentation/bloc/get_monthly_fee_event.dart';
+import '/features/admin/manage_fee/presentation/bloc/get_monthly_fee_state.dart';
 
 class MonthlyFee extends StatefulWidget {
   const MonthlyFee({super.key});

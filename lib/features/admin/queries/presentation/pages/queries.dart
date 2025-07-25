@@ -94,7 +94,7 @@ class _QueriesState extends State<Queries> {
                       itemBuilder: (context, index) {
                         if (index < state.fetchResponse.data!.length) {
                           final query = state.fetchResponse.data![index];
-                          return QueriesCard(query: query);
+                          return QueriesCard(query: query, bloc: bloc);
                         } else {
                           return const Center(child: LoadingWidget());
                         }

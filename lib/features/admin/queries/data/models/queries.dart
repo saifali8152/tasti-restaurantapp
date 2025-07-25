@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/core/models/pagination.dart';
-import 'package:tasti_restaurant_app/features/admin/queries/domain/entities/queries.dart';
+import '/core/models/pagination.dart';
+import '/features/admin/queries/domain/entities/queries.dart';
 
 class QueriesModel extends QueriesEntity {
   const QueriesModel({

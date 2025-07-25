@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/widgets/card_details_row.dart';
-import 'package:tasti_restaurant_app/features/admin/transaction_history/domain/entities/transaction_history.dart';
+import '/core/widgets/card_details_row.dart';
+import '/features/admin/transaction_history/domain/entities/transaction_history.dart';
 
 class TransactionHistoryCard extends StatelessWidget {
   final TransactionHistoryItem item;

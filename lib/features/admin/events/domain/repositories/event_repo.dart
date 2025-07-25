@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/admin/events/domain/entities/event.dart';
+import '/features/admin/events/domain/entities/event.dart';
 import '/core/parms/parms.dart';
 import '/core/network/response.dart';
 

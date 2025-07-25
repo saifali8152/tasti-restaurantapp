@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/entities/monthly_fee.dart';
+import '/core/network/response.dart';
+import '/features/admin/manage_fee/domain/entities/monthly_fee.dart';
 
 class MonthlyFeeState {
   final ApiResponse<MonthlyFeeEntity> fetchResponse;

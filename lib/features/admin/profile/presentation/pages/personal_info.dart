@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/config/constants/spaces.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_input_field.dart';
-import 'package:tasti_restaurant_app/features/admin/profile/presentation/bloc/update_profile/profile_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/profile/presentation/widgets/profile_image.dart';
-import 'package:tasti_restaurant_app/features/auth/domain/entities/user.dart';
+import '/config/constants/spaces.dart';
+import '/core/widgets/custom_input_field.dart';
+import '/features/admin/profile/presentation/bloc/update_profile/profile_bloc.dart';
+import '/features/admin/profile/presentation/widgets/profile_image.dart';
+import '/features/auth/domain/entities/user.dart';
+import '/features/skaleton/user_cubit/skaleton_cubit.dart';
 import '/features/skaleton/cubit/skaleton_cubit.dart';
 import '/core/network/response.dart';
 import '/core/utils/flushbar_extention.dart';
@@ -20,7 +21,7 @@ class PersonalInfoScreen extends StatefulWidget {
 
 class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
   final ProfileBloc bloc = sl<ProfileBloc>();
-  final UserEntity? user = sl<SkaletonCubit>().state.user;
+  final UserEntity? user = sl<UserCubit>().state.user;
   late TextEditingController nameC;
 
   @override

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/config/routes/route_name.dart';
-import 'package:tasti_restaurant_app/core/services/launcher_services.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
-import 'package:tasti_restaurant_app/core/widgets/image_widget.dart';
-import 'package:tasti_restaurant_app/features/admin/events/domain/entities/event.dart';
-import 'package:tasti_restaurant_app/features/admin/events/presentation/widgets/delete_event_dialog.dart';
+import '/config/routes/route_name.dart';
+import '/core/services/launcher_services.dart';
+import '/core/utils/general_extentions.dart';
+import '/core/widgets/custom_button.dart';
+import '/core/widgets/image_widget.dart';
+import '/features/admin/events/domain/entities/event.dart';
+import '/features/admin/events/presentation/widgets/delete_event_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventCard extends StatelessWidget {

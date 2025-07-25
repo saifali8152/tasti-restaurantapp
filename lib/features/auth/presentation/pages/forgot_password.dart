@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/auth/presentation/widgets/forgot_password_email_sent_dialog.dart';
+import '/features/auth/presentation/widgets/forgot_password_email_sent_dialog.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/utils/general_extentions.dart';
 import '/dependency_injection.dart';

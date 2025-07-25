@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/entities/monthly_fee.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/usecases/fetch_admin_fee.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/usecases/update_fee.dart';
+import '/core/parms/parms.dart';
+import '/features/admin/manage_fee/domain/entities/monthly_fee.dart';
+import '/features/admin/manage_fee/domain/usecases/fetch_admin_fee.dart';
+import '/features/admin/manage_fee/domain/usecases/update_fee.dart';
 import '/core/network/response.dart';
 import 'get_monthly_fee_event.dart';
 import 'get_monthly_fee_state.dart';

@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/utils/image_picker.dart';
+import '/core/utils/image_picker.dart';
 
 class ImagePickerField extends StatefulWidget {
   final ValueChanged<File> onImagePicked;

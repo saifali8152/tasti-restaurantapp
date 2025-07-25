@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tasti_restaurant_app/core/models/pagination.dart';
+import '/core/models/pagination.dart';
 
 class EventEntity extends Equatable {
   final List<EventItem> data;

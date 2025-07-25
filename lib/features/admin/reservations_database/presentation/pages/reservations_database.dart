@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
+import '/core/widgets/loading_widget.dart';
 import '/dependency_injection.dart';
 import '/features/admin/reservations_database/presentation/bloc/admin_reservation_bloc.dart';
 import '/features/admin/reservations_database/presentation/bloc/admin_reservation_event.dart';

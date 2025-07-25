@@ -5,9 +5,8 @@ import 'package:image_picker/image_picker.dart';
 class ImagePickerHelper {
   static Future<File?> pickImage(BuildContext context) async {
     final picker = ImagePicker();
-    File? pickedImage;
 
-    await showModalBottomSheet(
+    final ImageSource? source = await showModalBottomSheet<ImageSource>(
       context: context,
       builder: (_) => SafeArea(
         child: Wrap(
@@ -15,30 +14,25 @@ class ImagePickerHelper {
             ListTile(
               leading: const Icon(Icons.photo_camera),
               title: const Text('Camera'),
-              onTap: () async {
-                final pickedFile = await picker.pickImage(source: ImageSource.camera);
-                if (pickedFile != null) {
-                  pickedImage = File(pickedFile.path);
-                }
-                Navigator.of(context).pop();
-              },
+              onTap: () => Navigator.of(context).pop(ImageSource.camera),
             ),
             ListTile(
               leading: const Icon(Icons.photo_library),
               title: const Text('Gallery'),
-              onTap: () async {
-                final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-                if (pickedFile != null) {
-                  pickedImage = File(pickedFile.path);
-                }
-                Navigator.of(context).pop();
-              },
+              onTap: () => Navigator.of(context).pop(ImageSource.gallery),
             ),
           ],
         ),
       ),
     );
 
-    return pickedImage;
+    if (source == null) return null;
+
+    final pickedFile = await picker.pickImage(source: source);
+    if (pickedFile != null) {
+      return File(pickedFile.path);
+    }
+
+    return null;
   }
 }

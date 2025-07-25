@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:tasti_restaurant_app/features/admin/queries/domain/entities/queries.dart';
+import '/features/admin/queries/domain/entities/queries.dart';
 
 extension QueriesItemCopyWith on QueriesItem {
   QueriesItem copyWith({String? action}) {

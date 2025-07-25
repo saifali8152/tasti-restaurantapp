@@ -1,6 +1,6 @@
-import 'package:tasti_restaurant_app/features/admin/profile/data/data_sources/profile_remote_api.dart';
-import 'package:tasti_restaurant_app/features/admin/profile/domain/repositories/profile_repo.dart';
-import 'package:tasti_restaurant_app/features/auth/domain/entities/user.dart';
+import '/features/admin/profile/data/data_sources/profile_remote_api.dart';
+import '/features/admin/profile/domain/repositories/profile_repo.dart';
+import '/features/auth/domain/entities/user.dart';
 import '/core/parms/parms.dart';
 import '/core/network/response.dart';
 

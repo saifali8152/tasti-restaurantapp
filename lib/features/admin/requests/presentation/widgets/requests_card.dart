@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/features/admin/requests/presentation/widgets/decline_request_dialog.dart';
+import '/core/utils/general_extentions.dart';
+import '/features/admin/requests/presentation/bloc/request_bloc.dart';
+import '/features/admin/requests/presentation/widgets/decline_request_dialog.dart';
 import '../../domain/entities/requests.dart';
 import '/config/routes/route_name.dart';
 import '/config/constants/colors.dart';
@@ -9,13 +10,14 @@ import '/core/widgets/custom_button.dart';
 class RequestsCard extends StatelessWidget {
   final bool isVerified;
   final RequestItem? request;
-  const RequestsCard({super.key, this.isVerified = false, this.request});
+  final RequestBloc bloc;
+  const RequestsCard({super.key, this.isVerified = false, this.request, required this.bloc});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.pushNamed(context,AppRoutes.requestDetails, arguments: request);
+        Navigator.pushNamed(context,AppRoutes.requestDetails, arguments: {'request': request, 'bloc': bloc});
       },
       child: Container(
         decoration: BoxDecoration(
@@ -64,7 +66,7 @@ class RequestsCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: CustomButton(
-                      onPressed: ()=> context.showCustomDialog(DeclineRequestDialog(id: request!.reqId.toString())),
+                      onPressed: ()=> context.showCustomDialog(DeclineRequestDialog(id: request!.reqId.toString(), bloc: bloc)),
                       text: "Decline",
                       bgColor: Colors.transparent,
                       borderColor: AppColors.darkOrange,

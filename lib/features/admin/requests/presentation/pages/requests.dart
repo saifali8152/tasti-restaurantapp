@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/enum/request_type.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_search_field.dart';
-import 'package:tasti_restaurant_app/features/admin/requests/presentation/bloc/request_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/requests/presentation/bloc/request_event.dart';
-import 'package:tasti_restaurant_app/features/admin/requests/presentation/bloc/request_state.dart';
-import 'package:tasti_restaurant_app/features/admin/requests/presentation/widgets/requests_card.dart';
+import '/core/enum/request_type.dart';
+import '/core/widgets/custom_search_field.dart';
+import '/features/admin/requests/presentation/bloc/request_bloc.dart';
+import '/features/admin/requests/presentation/bloc/request_event.dart';
+import '/features/admin/requests/presentation/bloc/request_state.dart';
+import '/features/admin/requests/presentation/widgets/requests_card.dart';
 import '/core/widgets/curved_container.dart';
 import '/core/widgets/themed_app_bar.dart';
 import '/config/constants/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
-import 'package:tasti_restaurant_app/dependency_injection.dart';
+import '/core/network/response.dart';
+import '/core/widgets/loading_widget.dart';
+import '/dependency_injection.dart';
 
 class Requests extends StatefulWidget {
   final RequestType type;
@@ -94,7 +94,7 @@ class _RequestsState extends State<Requests> {
                       itemBuilder: (context, index) {
                         if (index < state.fetchResponse.data!.length) {
                           final request = state.fetchResponse.data![index];
-                          return RequestsCard(request: request);
+                          return RequestsCard(request: request, bloc: bloc);
                         } else {
                           return const Center(child: LoadingWidget());
                         }

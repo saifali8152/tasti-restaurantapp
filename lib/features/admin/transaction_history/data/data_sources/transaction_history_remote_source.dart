@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/admin/transaction_history/data/models/transaction_history.dart';
+import '/features/admin/transaction_history/data/models/transaction_history.dart';
 import '/core/parms/parms.dart';
 import '/core/network/api_services.dart';
 import '/config/constants/urls.dart';

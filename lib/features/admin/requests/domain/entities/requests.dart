@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tasti_restaurant_app/core/models/pagination.dart';
+import '/core/models/pagination.dart';
 
 class RequestEntity extends Equatable {
   final List<RequestItem> data;

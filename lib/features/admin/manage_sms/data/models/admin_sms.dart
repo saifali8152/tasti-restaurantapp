@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/core/models/pagination.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/entities/admin_sms.dart';
+import '/core/models/pagination.dart';
+import '/features/admin/manage_sms/domain/entities/admin_sms.dart';
 
 class AdminSmsModel extends AdminSmsEntity {
   const AdminSmsModel({

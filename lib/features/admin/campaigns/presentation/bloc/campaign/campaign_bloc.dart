@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/domain/entities/campaigns.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/domain/usecases/fetch_campaigns.dart';
+import '/features/admin/campaigns/domain/entities/campaigns.dart';
+import '/features/admin/campaigns/domain/usecases/fetch_campaigns.dart';
 import '/core/network/response.dart';
 import 'campaign_event.dart';
 import 'campaign_state.dart';

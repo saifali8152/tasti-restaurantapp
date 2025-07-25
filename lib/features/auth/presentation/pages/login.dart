@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/auth/presentation/widgets/auth_stack.dart';
+import '/features/auth/presentation/widgets/auth_stack.dart';
 import '/core/network/response.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/dependency_injection.dart';

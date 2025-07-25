@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/core/models/pagination.dart';
-import 'package:tasti_restaurant_app/features/admin/events/domain/entities/event.dart';
+import '/core/models/pagination.dart';
+import '/features/admin/events/domain/entities/event.dart';
 
 class EventModel extends EventEntity {
   const EventModel({

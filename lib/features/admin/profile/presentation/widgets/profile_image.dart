@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tasti_restaurant_app/core/widgets/image_picker_dialog.dart';
-import 'package:tasti_restaurant_app/features/admin/profile/presentation/bloc/update_profile/profile_bloc.dart';
+import '/core/widgets/image_picker_dialog.dart';
+import '/features/admin/profile/presentation/bloc/update_profile/profile_bloc.dart';
 import '/core/widgets/loading_widget.dart';
 import '/config/constants/colors.dart';
 import 'package:flutter/material.dart';

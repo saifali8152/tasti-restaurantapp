@@ -35,17 +35,19 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       child: Scaffold(
         appBar: ThemedAppBar(title: "Master Panel"),
         backgroundColor: AppColors.darkOrange,
-        body: BlocBuilder<AdminDashboardBloc, AdminDashboardState>(
-          builder: (context, state) {
-            if (state is AdminDashboardLoading) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is AdminDashboardSuccess) {
-              return buildDashboardContent(context, state.data);
-            } else if (state is AdminDashboardError) {
-              return Center(child: Text(state.message));
-            }
-            return const SizedBox.shrink();
-          },
+        body: CurvedContainer(
+          child: BlocBuilder<AdminDashboardBloc, AdminDashboardState>(
+            builder: (context, state) {
+              if (state is AdminDashboardLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is AdminDashboardSuccess) {
+                return buildDashboardContent(context, state.data);
+              } else if (state is AdminDashboardError) {
+                return Center(child: Text(state.message));
+              }
+              return const SizedBox.shrink();
+            },
+          ),
         ),
       ),
     );
@@ -53,35 +55,33 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
 
   Widget buildDashboardContent(
       BuildContext context, AdminDashboardEntity data) {
-    return CurvedContainer(
-      child: SingleChildScrollView(
-        child: RefreshIndicator(
-          onRefresh: ()async{
-            _bloc.add(FetchAdminDashboard());
-          },
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              sectionTitle("Today's Overview"),
-              const SizedBox(height: 12),
-              AdminTodayCard(
-                title: "Today’s Requests",
-                data: data.today.requests,
-              ),
-              const SizedBox(height: 10),
-              AdminTodayCard(
-                title: "Today's Queries",
-                data: data.today.queries,
-              ),
-              const SizedBox(height: 20),
-              sectionTitle("Monthly Overview"),
-              const SizedBox(height: 12),
-              AdminMonthlyCard(title: "Monthly Requests" ,data: data.monthly.requests),
-              const SizedBox(height: 10),
-              AdminMonthlyCard(title: "Monthly Queries",data: data.monthly.queries),
-              const SizedBox(height: 20),
-            ],
-          ),
+    return SingleChildScrollView(
+      child: RefreshIndicator(
+        onRefresh: ()async{
+          _bloc.add(FetchAdminDashboard());
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            sectionTitle("Today's Overview"),
+            const SizedBox(height: 12),
+            AdminTodayCard(
+              title: "Today’s Requests",
+              data: data.today.requests,
+            ),
+            const SizedBox(height: 10),
+            AdminTodayCard(
+              title: "Today's Queries",
+              data: data.today.queries,
+            ),
+            const SizedBox(height: 20),
+            sectionTitle("Monthly Overview"),
+            const SizedBox(height: 12),
+            AdminMonthlyCard(title: "Monthly Requests" ,data: data.monthly.requests),
+            const SizedBox(height: 10),
+            AdminMonthlyCard(title: "Monthly Queries",data: data.monthly.queries),
+            const SizedBox(height: 20),
+          ],
         ),
       ),
     );

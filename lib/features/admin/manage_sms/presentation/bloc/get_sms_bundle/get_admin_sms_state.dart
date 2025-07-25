@@ -1,6 +1,6 @@
-import 'package:tasti_restaurant_app/core/models/pagination.dart';
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/entities/admin_sms.dart';
+import '/core/models/pagination.dart';
+import '/core/network/response.dart';
+import '/features/admin/manage_sms/domain/entities/admin_sms.dart';
 
 abstract class AdminSmsBundleState {}
 class FetchAdminSmsLoaded extends AdminSmsBundleState {

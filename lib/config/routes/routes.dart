@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
-import 'package:tasti_restaurant_app/features/admin/campaigns/presentation/pages/campaigns_by_res.dart';
-import 'package:tasti_restaurant_app/features/admin/events/domain/entities/event.dart';
-import 'package:tasti_restaurant_app/features/admin/events/presentation/pages/add_event.dart';
-import 'package:tasti_restaurant_app/features/admin/events/presentation/pages/update_event.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/pages/update_monthly_fee.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/pages/monthly_fee.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/entities/admin_sms.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/pages/manage_sms_bundle_discount.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/presentation/pages/add_sms_bundle.dart';
-import 'package:tasti_restaurant_app/features/admin/profile/presentation/pages/change_password.dart';
-import 'package:tasti_restaurant_app/features/admin/profile/presentation/pages/personal_info.dart';
-import 'package:tasti_restaurant_app/features/admin/queries/domain/entities/queries.dart';
-import 'package:tasti_restaurant_app/features/admin/requests/domain/entities/requests.dart';
-import 'package:tasti_restaurant_app/features/admin/reservations_database/domain/entities/reservation.dart';
-import 'package:tasti_restaurant_app/features/admin/transaction_history/presentation/pages/transaction_history.dart';
-import 'package:tasti_restaurant_app/features/screens.dart';
+import '/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
+import '/features/admin/campaigns/presentation/pages/campaigns_by_res.dart';
+import '/features/admin/events/domain/entities/event.dart';
+import '/features/admin/events/presentation/pages/add_event.dart';
+import '/features/admin/events/presentation/pages/update_event.dart';
+import '/features/admin/manage_fee/presentation/pages/update_monthly_fee.dart';
+import '/features/admin/manage_fee/presentation/pages/monthly_fee.dart';
+import '/features/admin/manage_sms/domain/entities/admin_sms.dart';
+import '/features/admin/manage_sms/presentation/pages/manage_sms_bundle_discount.dart';
+import '/features/admin/manage_sms/presentation/pages/add_sms_bundle.dart';
+import '/features/admin/profile/presentation/pages/change_password.dart';
+import '/features/admin/profile/presentation/pages/personal_info.dart';
+import '/features/admin/queries/domain/entities/queries.dart';
+import '/features/admin/reservations_database/domain/entities/reservation.dart';
+import '/features/admin/transaction_history/presentation/pages/transaction_history.dart';
+import '/features/screens.dart';
 import 'route_name.dart';
 
 class Routes {
@@ -57,7 +56,7 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const RestaurantDetails());
       case AppRoutes.requestDetails:
         return MaterialPageRoute(
-          builder: (_) => RequestDetails(request: settings.arguments as RequestItem),
+          builder: (_) => RequestDetails(data: settings.arguments as Map<String, dynamic>),
         );
       case AppRoutes.notifications:
         return MaterialPageRoute(builder: (_) => const Notifications());

@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/entities/admin_sms.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/add_sms_bundle.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/delete_sms_bundle.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_sms/domain/usecases/fetch_admin_sms_bundle.dart';
+import '/core/parms/parms.dart';
+import '/features/admin/manage_sms/domain/entities/admin_sms.dart';
+import '/features/admin/manage_sms/domain/usecases/add_sms_bundle.dart';
+import '/features/admin/manage_sms/domain/usecases/delete_sms_bundle.dart';
+import '/features/admin/manage_sms/domain/usecases/fetch_admin_sms_bundle.dart';
 import '/core/network/response.dart';
 import 'get_admin_sms_event.dart';
 import 'get_admin_sms_state.dart';
