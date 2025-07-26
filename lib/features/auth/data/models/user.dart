@@ -9,27 +9,58 @@ class UserModel extends UserEntity {
     required super.profilePic,
     required super.phoneNumber,
     required super.token,
+    required super.restaurant,
+    required super.subscriptionStatus,
+    required super.subscriptionMessage,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        id: json['id'].toString(),
-        token: json['token'].toString(),
-        type: json['type'].toString(),
-        profilePic: json['profile_pic'].toString(),
-        phoneNumber: json['phone_number'].toString(),
-        name: json['name'].toString(),
-        email: json['email'].toString(),
-      );
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    final user = json['user'] ?? json;
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'token': token,
-        'name': name,
-        'email': email,
-        'type': type,
-        'phone_number': phoneNumber,
-        'profile_pic': profilePic,
-      };
+    RestaurantModel? parseRestaurant(dynamic data) {
+      if (data == null) return null;
+
+      if (data is Map<String, dynamic>) {
+        return RestaurantModel.fromJson(data);
+      } else if (data is List &&
+          data.isNotEmpty &&
+          data.first is Map<String, dynamic>) {
+        return RestaurantModel.fromJson(data.first);
+      }
+
+      return null; // or throw/return default
+    }
+
+    return UserModel(
+      id: user['id'].toString(),
+      token: json['token'].toString(),
+      name: user['name'].toString(),
+      email: user['email'].toString(),
+      type: user['type'].toString(),
+      profilePic: user['profile_pic'].toString(),
+      phoneNumber: user['phone_number'].toString(),
+      subscriptionStatus: user['subscription_status'],
+      subscriptionMessage: user['subscription_message'],
+      restaurant: parseRestaurant(user['restaurant']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'token': token,
+      'name': name,
+      'email': email,
+      'type': type,
+      'phone_number': phoneNumber,
+      'profile_pic': profilePic,
+      'subscription_status': subscriptionStatus,
+      'subscription_message': subscriptionMessage,
+      'restaurant': restaurant is RestaurantModel
+          ? (restaurant as RestaurantModel).toJson()
+          : [],
+    };
+  }
 
   UserEntity toEntity() => UserEntity(
         id: id,
@@ -39,6 +70,9 @@ class UserModel extends UserEntity {
         type: type,
         profilePic: profilePic,
         phoneNumber: phoneNumber,
+        subscriptionStatus: subscriptionStatus,
+        subscriptionMessage: subscriptionMessage,
+        restaurant: restaurant,
       );
 
   factory UserModel.fromEntity(UserEntity entity) {
@@ -50,6 +84,9 @@ class UserModel extends UserEntity {
       type: entity.type,
       phoneNumber: entity.phoneNumber,
       profilePic: entity.profilePic,
+      subscriptionStatus: entity.subscriptionStatus,
+      subscriptionMessage: entity.subscriptionMessage,
+      restaurant: entity.restaurant,
     );
   }
 
@@ -61,6 +98,9 @@ class UserModel extends UserEntity {
     String? type,
     String? profilePic,
     String? phoneNumber,
+    String? subscriptionStatus,
+    String? subscriptionMessage,
+    RestaurantEntity? restaurant,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -70,6 +110,81 @@ class UserModel extends UserEntity {
       type: type ?? this.type,
       profilePic: profilePic ?? this.profilePic,
       phoneNumber: phoneNumber ?? this.phoneNumber,
+      subscriptionStatus: subscriptionStatus ?? this.subscriptionStatus,
+      subscriptionMessage: subscriptionMessage ?? this.subscriptionMessage,
+      restaurant: restaurant ?? this.restaurant,
     );
+  }
+}
+
+class RestaurantModel extends RestaurantEntity {
+  const RestaurantModel({
+    required super.id,
+    required super.name,
+    required super.phone,
+    required super.email,
+    required super.address,
+    required super.city,
+    required super.status,
+    required super.paid,
+    required super.lat,
+    required super.lon,
+    required super.rating,
+    super.website,
+    super.cuisineImage,
+    super.cuisines,
+    super.dressCode,
+    super.attributes,
+    super.bookedTimesToday,
+    super.tablesLeft,
+    super.timeDuration,
+  });
+
+  factory RestaurantModel.fromJson(Map<String, dynamic> json) {
+    return RestaurantModel(
+      id: json['id'],
+      name: json['name'],
+      phone: json['phone'],
+      email: json['email'],
+      address: json['address'],
+      city: json['city'],
+      status: json['status'],
+      paid: json['paid'],
+      lat: (json['lat'] as num).toDouble(),
+      lon: (json['lon'] as num).toDouble(),
+      rating: json['rating'],
+      website: json['website'],
+      cuisineImage: json['cuisine'],
+      cuisines: json['cuisines'],
+      dressCode: json['dress_code'],
+      attributes: json['attributes'],
+      bookedTimesToday: json['booked_times_today'],
+      tablesLeft: json['tables_left'],
+      timeDuration: json['time_duration'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'phone': phone,
+      'email': email,
+      'address': address,
+      'city': city,
+      'status': status,
+      'paid': paid,
+      'lat': lat,
+      'lon': lon,
+      'rating': rating,
+      'website': website,
+      'cuisine': cuisineImage,
+      'cuisines': cuisines,
+      'dress_code': dressCode,
+      'attributes': attributes,
+      'booked_times_today': bookedTimesToday,
+      'tables_left': tablesLeft,
+      'time_duration': timeDuration,
+    };
   }
 }

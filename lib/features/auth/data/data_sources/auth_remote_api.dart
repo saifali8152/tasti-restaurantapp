@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '/core/parms/parms.dart';
 import '/features/auth/data/models/user.dart';
 import '/core/network/api_services.dart';
@@ -31,7 +33,8 @@ class AuthRemoteApiImpl extends IAuthRemoteApi {
 
   @override
   Future<UserModel> login(LoginParms parms) async {
-    Map<String, dynamic> data = {};
+    try {
+      Map<String, dynamic> data = {};
 
     data = {
       "email": parms.email,
@@ -51,6 +54,10 @@ class AuthRemoteApiImpl extends IAuthRemoteApi {
 
     final UserModel completeUser = UserModel.fromJson(fullUserData);
     return completeUser;
+    } catch (e, stackTrace) {
+      log("Stack trace: $stackTrace");
+      throw Exception("Login failed. Please try again.");
+    }
   }
 
   @override

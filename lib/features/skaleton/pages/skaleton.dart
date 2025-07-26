@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/core/services/session_controller.dart';
 import '/core/enum/query_type.dart';
 import '/core/enum/request_type.dart';
 import '/dependency_injection.dart';
@@ -52,11 +53,15 @@ class Skaleton extends StatelessWidget {
             ],
           ),
           drawer: CustomDrawer(
-            userRole: "admin",
+            userRole: SessionController().user?.type.toLowerCase() == 'admin'
+                ? 'admin'
+                : 'restaurant',
           ),
           body: IndexedStack(
             index: state.index,
-            children: DrawerScreens.drawerItemsForRole('admin'),
+            children: DrawerScreens.drawerItemsForRole(
+              SessionController().user?.type.toLowerCase() == 'admin' ? 'admin' : 'restaurant',
+            ),
           ),
         );
       },

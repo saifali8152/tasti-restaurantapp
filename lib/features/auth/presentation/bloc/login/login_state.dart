@@ -21,7 +21,7 @@ class LoginState extends Equatable {
     return LoginState(
       email: email ?? this.email,
       password: password ?? this.password,
-      loginResponse: loginResponse ?? this.loginResponse,
+      loginResponse: loginResponse ?? ApiResponse.initial(),
     );
   }
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/core/enum/subscription_status.dart';
+import 'package:tasti_restaurant_app/core/services/session_controller.dart';
 import '/features/auth/presentation/widgets/auth_stack.dart';
 import '/core/network/response.dart';
 import '/core/utils/flushbar_extention.dart';
@@ -15,51 +17,80 @@ import '../../../../core/widgets/custom_input_field.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
+  void _handleLoginNavigation(BuildContext context) {
+    final user = SessionController().user;
+    if (user == null) return;
+
+    if (user.type == 'admin') {
+      Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route) => false);
+    } else if (user.type == 'restaurant') {
+      final status = user.subscriptionStatus;
+      if (status == SubscriptionStatus.active.title) {
+        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route) => false);
+      }
+      if (status == SubscriptionStatus.noRestaurant.title) {
+        context.flushBarErrorMessage(message: user.subscriptionMessage);
+      }
+      if (status == SubscriptionStatus.restaurantSuspended.title) {
+        context.flushBarErrorMessage(message: user.subscriptionMessage);
+      }
+      if (status == SubscriptionStatus.inactive.title) {
+        context.flushBarErrorMessage(message: user.subscriptionMessage);
+      }
+      if (status == SubscriptionStatus.expired.title) {
+        context.flushBarErrorMessage(message: user.subscriptionMessage);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
     final loginBloc = sl<LoginBloc>();
+
     return BlocProvider(
-      create: (context) => loginBloc,
+      create: (_) => loginBloc,
       child: AuthStack(
         title: "Welcome Back!",
-        subtitle:
-            "Log in to book your table and manage your reservations easily.",
+        subtitle: "Log in to book your table and manage your reservations easily.",
         child: Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 24),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(40),
-            ),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
           ),
           child: Form(
             key: formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
+
+                /// Email
                 CustomInputField(
                   icon: Icons.email_outlined,
                   hintText: "Email",
                   keyboardInputType: TextInputType.emailAddress,
-                  onChanged: (p0) => loginBloc.add(EmailChanged(p0)),
+                  onChanged: (value) => loginBloc.add(EmailChanged(value)),
                 ),
+
+                /// Password
                 CustomInputField(
                   icon: Icons.lock_outline,
                   hintText: "Password",
                   isPasswordField: true,
-                  onChanged: (p0) => loginBloc.add(PasswordChanged(p0)),
+                  onChanged: (value) => loginBloc.add(PasswordChanged(value)),
                 ),
-                SizedBox(height: 8),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.forgotPassword);
-                  },
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
+
+                const SizedBox(height: 8),
+
+                /// Forgot Password
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, AppRoutes.forgotPassword),
+                    child: const Text(
                       "Forgot Password?",
                       style: TextStyle(
                         color: AppColors.darkOrange,
@@ -68,23 +99,20 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 24),
+
+                const SizedBox(height: 24),
+
+                /// Sign in Button
                 BlocConsumer<LoginBloc, LoginState>(
                   bloc: loginBloc,
-                  listenWhen: (previous, current) {
-                    return previous.loginResponse.status !=
-                        current.loginResponse.status;
-                  },
                   listener: (context, state) {
                     if (state.loginResponse.status == Status.error) {
                       context.flushBarErrorMessage(
-                          message:
-                              state.loginResponse.message ?? "Error Occured");
+                        message: state.loginResponse.message ?? "Error Occurred",
+                      );
                     }
-
                     if (state.loginResponse.status == Status.completed) {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, AppRoutes.skaleton, (route) => false);
+                      _handleLoginNavigation(context);
                     }
                   },
                   builder: (context, state) {
@@ -92,26 +120,25 @@ class LoginScreen extends StatelessWidget {
                       isLoading: state.loginResponse.status == Status.loading,
                       text: "Sign in",
                       onPressed: () {
-                        if (formKey.currentState!.validate()) {
+                        if (formKey.currentState?.validate() ?? false) {
                           loginBloc.add(LoginSubmitted());
                         }
                       },
                     );
                   },
                 ),
-                SizedBox(height: 24),
+
+                const SizedBox(height: 24),
+
+                /// Sign Up
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don’t have an account? "),
+                    const Text("Don’t have an account? "),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacementNamed(
-                          context,
-                          AppRoutes.signup,
-                        );
-                      },
-                      child: Text(
+                      onTap: () =>
+                          Navigator.pushReplacementNamed(context, AppRoutes.signup),
+                      child: const Text(
                         "Sign up",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -121,7 +148,8 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+
+                const SizedBox(height: 20),
               ],
             ),
           ),
