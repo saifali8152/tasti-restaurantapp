@@ -22,25 +22,23 @@ class SignupScreen extends StatelessWidget {
     if (user == null) return;
 
     if (user.type == 'admin') {
-      Navigator.pushNamedAndRemoveUntil(
-          context, AppRoutes.skaleton, (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route) => false);
     } else if (user.type == 'restaurant') {
       final status = user.subscriptionStatus;
       if (status == SubscriptionStatus.active.title) {
-        Navigator.pushNamedAndRemoveUntil(
-            context, AppRoutes.skaleton, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route) => false);
       }
       if (status == SubscriptionStatus.noRestaurant.title) {
-        context.flushBarErrorMessage(message: user.subscriptionMessage);
+        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.createNewRestaurant, (route) => false);
       }
       if (status == SubscriptionStatus.restaurantSuspended.title) {
-        context.flushBarErrorMessage(message: user.subscriptionMessage);
+        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.createNewRestaurant, (route) => false);
       }
       if (status == SubscriptionStatus.inactive.title) {
-        context.flushBarErrorMessage(message: user.subscriptionMessage);
+        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.monthlyFee, (route) => false);
       }
       if (status == SubscriptionStatus.expired.title) {
-        context.flushBarErrorMessage(message: user.subscriptionMessage);
+        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.monthlyFee, (route) => false);
       }
     }
   }

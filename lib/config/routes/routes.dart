@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/domain/entities/restaurant.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/pages/create_new_restaurant.dart';
 import '/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
 import '/features/admin/campaigns/presentation/pages/campaigns_by_res.dart';
 import '/features/admin/events/domain/entities/event.dart';
@@ -23,6 +24,8 @@ class Routes {
     switch (settings.name) {
       case AppRoutes.addSmsBundle:
         return MaterialPageRoute(builder: (_) => const AddSMSBundle());
+      case AppRoutes.createNewRestaurant:
+        return MaterialPageRoute(builder: (_) => const CreateNewRestaurant());
       case AppRoutes.addEvent:
         return MaterialPageRoute(builder: (_) => const AddEventScreen());
       case AppRoutes.updateEvent:

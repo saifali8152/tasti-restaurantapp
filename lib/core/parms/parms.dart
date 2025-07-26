@@ -1,6 +1,17 @@
 import '/core/enum/query_type.dart';
 import '/core/enum/request_type.dart';
 
+class GetPlaceDetailsParms {
+  final String placeId;
+
+  GetPlaceDetailsParms({required this.placeId});
+}
+
+class GetPlacePredictionParms {
+  final String query;
+  GetPlacePredictionParms({required this.query});
+}
+
 class LoginParms {
   final String email;
   final String password;
@@ -8,7 +19,40 @@ class LoginParms {
   LoginParms({required this.email, required this.password});
 }
 
-class SignupParms {
+class CreateRestaurantParms{
+  final String name;
+  final String email;
+  final String phone;
+  final String website;
+  final String address;
+  final String city;
+  final String lat;
+  final String lon;
+  final String dressCode;
+  final String minimumSpend;
+  final String description;
+  final String cuisines;
+  final String image;
+
+
+  CreateRestaurantParms({
+    required this.name,
+    required this.email,
+    required this.phone,
+    required this.website,
+    required this.address,
+    required this.city,
+    required this.lat,
+    required this.lon,
+    required this.dressCode,
+    required this.minimumSpend,
+    required this.description,
+    required this.cuisines,
+    required this.image,
+  });
+}
+
+class SignupParms{
   final String firstName;
   final String lastName;
   final String email;

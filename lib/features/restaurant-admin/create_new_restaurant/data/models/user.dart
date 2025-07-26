@@ -17,15 +17,15 @@ class UserModel extends UserEntity {
   factory UserModel.fromJson(Map<String, dynamic> json) {
     final user = json['user'] ?? json;
 
-    UserRestaurantModel? parseRestaurant(dynamic data) {
+    RestaurantModel? parseRestaurant(dynamic data) {
       if (data == null) return null;
 
       if (data is Map<String, dynamic>) {
-        return UserRestaurantModel.fromJson(data);
+        return RestaurantModel.fromJson(data);
       } else if (data is List &&
           data.isNotEmpty &&
           data.first is Map<String, dynamic>) {
-        return UserRestaurantModel.fromJson(data.first);
+        return RestaurantModel.fromJson(data.first);
       }
 
       return null; // or throw/return default
@@ -56,8 +56,8 @@ class UserModel extends UserEntity {
       'profile_pic': profilePic,
       'subscription_status': subscriptionStatus,
       'subscription_message': subscriptionMessage,
-      'restaurant': restaurant is UserRestaurantModel
-          ? (restaurant as UserRestaurantModel).toJson()
+      'restaurant': restaurant is RestaurantModel
+          ? (restaurant as RestaurantModel).toJson()
           : [],
     };
   }
@@ -100,7 +100,7 @@ class UserModel extends UserEntity {
     String? phoneNumber,
     String? subscriptionStatus,
     String? subscriptionMessage,
-    UserRestaurantEntity? restaurant,
+    RestaurantEntity? restaurant,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -117,8 +117,8 @@ class UserModel extends UserEntity {
   }
 }
 
-class UserRestaurantModel extends UserRestaurantEntity {
-  const UserRestaurantModel({
+class RestaurantModel extends RestaurantEntity {
+  const RestaurantModel({
     required super.id,
     required super.name,
     required super.phone,
@@ -140,8 +140,8 @@ class UserRestaurantModel extends UserRestaurantEntity {
     super.timeDuration,
   });
 
-  factory UserRestaurantModel.fromJson(Map<String, dynamic> json) {
-    return UserRestaurantModel(
+  factory RestaurantModel.fromJson(Map<String, dynamic> json) {
+    return RestaurantModel(
       id: json['id'],
       name: json['name'],
       phone: json['phone'],

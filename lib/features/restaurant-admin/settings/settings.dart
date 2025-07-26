@@ -5,7 +5,7 @@ import '/config/constants/colors.dart';
 import '/core/widgets/curved_container.dart';
 import '/core/widgets/themed_app_bar.dart';
 import '/config/routes/route_name.dart';
-import '../make_reservation/make_reservation.dart';
+import '../../make_reservation/make_reservation.dart';
 import '/core/widgets/custom_button.dart';
 import '/core/widgets/custom_input_field.dart';
 

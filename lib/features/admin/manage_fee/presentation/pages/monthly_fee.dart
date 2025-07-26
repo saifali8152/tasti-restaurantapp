@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/core/services/session_controller.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/widgets/admin_content.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/widgets/feature_item.dart';
 import '/config/constants/colors.dart';
-import '/config/routes/route_name.dart';
 import '/core/network/response.dart';
-import '/core/utils/general_extentions.dart';
 import '/core/widgets/custom_app_bar.dart';
 import '/core/widgets/custom_button.dart';
 import '/core/widgets/loading_widget.dart';
@@ -30,7 +31,12 @@ class _MonthlyFeeState extends State<MonthlyFee> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Manage Monthly Fee'),
+      appBar: CustomAppBar(
+        title: SessionController().user?.type == "admin"
+            ? 'Manage Monthly Fee'
+            : 'Monthly Fee',
+        applyLeading: SessionController().user?.type == "admin",
+      ),
       body: BlocBuilder<AdminMonthlyFeeBloc, MonthlyFeeState>(
         bloc: bloc,
         builder: (context, state) {
@@ -62,32 +68,75 @@ class _MonthlyFeeState extends State<MonthlyFee> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
+                    if (SessionController().user?.type == 'restaurant')
+                      Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 16.0),
+                              decoration: BoxDecoration(
+                                color: AppColors.darkOrange,
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Text(
+                                'Tasti Restaurant Monthly Subscription',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 24),
+                            Column(
+                              children: [
+                                Text(
+                                  state.fetchResponse.data?.money ?? "N/A",
+                                  style: TextStyle(
+                                    fontSize: 60,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                                const Text(
+                                  'per month',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.grey,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 24),
+                            FeatureItem(
+                                text:
+                                    'Full access to reservation management system'),
+                            FeatureItem(
+                                text:
+                                    'Table booking and availability tracking'),
+                            FeatureItem(
+                                text: 'Reservation scheduling and reminders'),
+                            FeatureItem(text: 'Guest management and history'),
+                            FeatureItem(text: '24/7 Support'),
+                            const SizedBox(height: 32),
+                            CustomButton(
+                              onPressed: () {},
+                              text: 'Subscribe Now',
+                            ),
+                          ],
+                        ),
+                      ),
                     SizedBox(height: 20),
-                    Text(
-                      "Current Monthly Fee",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 10),
-                    Container(
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            color: AppColors.darkOrange.withSafeOpacity(.3),
-                            borderRadius: BorderRadius.circular(5)),
-                        width: double.infinity,
-                        child: Center(
-                            child: Text(
-                                state.fetchResponse.data?.money ?? 'N/A'))),
-                    SizedBox(height: 20),
-                    CustomButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context,
-                          AppRoutes.updateMonthlyFee,
-                          arguments: state.fetchResponse.data!.id.toString(),
-                        );
-                      },
-                      text: "Update Fee",
-                    ),
+                    if (SessionController().user?.type == 'admin') ...[
+                      AdminContent(item: state.fetchResponse.data!)
+                    ],
                   ],
                 ),
               ),

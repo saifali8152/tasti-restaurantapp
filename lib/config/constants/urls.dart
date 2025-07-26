@@ -1,4 +1,7 @@
 class AppUrls{
+  static const String googleApiUrl = "https://maps.googleapis.com/maps/api/place/autocomplete/json";
+
+
   static final String base = "https://backend.tasti.co.za";
 
   static final String login = "$base/restaurant/login";
@@ -36,4 +39,6 @@ class AppUrls{
   static final String adminFetchAllRestaurants = "$base/restaurant/get-all-restaurants";
   static final String adminActivateRestaurant = "$base/restaurant/activate-restaurant";
   static final String adminSuspendRestaurant = "$base/restaurant/suspend-restaurant";
+  
+  static final String createRestaurant = "$base/restaurant/create-restaurant";
 }

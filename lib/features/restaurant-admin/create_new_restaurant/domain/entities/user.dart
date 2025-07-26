@@ -40,8 +40,8 @@ class UserEntity extends Equatable {
       ];
 }
 
-class UserRestaurantEntity extends Equatable {
-  const UserRestaurantEntity({
+class RestaurantEntity extends Equatable {
+  const RestaurantEntity({
     required this.id,
     required this.name,
     required this.phone,

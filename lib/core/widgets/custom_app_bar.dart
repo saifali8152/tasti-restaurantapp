@@ -3,9 +3,11 @@ import '/config/constants/colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final bool applyLeading;
   const CustomAppBar({
     super.key,
     required this.title,
+    this.applyLeading = true,
   });
 
   @override
@@ -22,7 +24,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       centerTitle: true,
       leadingWidth: 80,
-      leading: GestureDetector(
+      leading: applyLeading? GestureDetector(
         onTap: () => Navigator.pop(context),
         child: Container(
           margin: EdgeInsets.all(20),
@@ -32,7 +34,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           child: Icon(Icons.arrow_back, color: Colors.white),
         ),
-      ),
+      ) : SizedBox.shrink(),
     );
   }
 

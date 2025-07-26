@@ -8,6 +8,13 @@ import 'package:tasti_restaurant_app/features/admin/restaurants/domain/usecases/
 import 'package:tasti_restaurant_app/features/admin/restaurants/presentation/bloc/restaurant_bloc.dart';
 import 'package:tasti_restaurant_app/features/auth/domain/usecases/signup.dart';
 import 'package:tasti_restaurant_app/features/auth/presentation/bloc/signup/signup_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/data/data_sources/create_restaurant_repo.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/data/repositories/auth_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/domain/repositories/create_restaurant_repo.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/domain/usecases/create_new_restaurant.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/domain/usecases/get_location_usecase.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/domain/usecases/get_predictions_usecase.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/bloc/create_new_restaurant_bloc.dart';
 import '/core/services/picker_services.dart';
 import '/features/admin/campaigns/data/data_sources/campaign_remote_source.dart';
 import '/features/admin/campaigns/data/repositories/campaign_repo_impl.dart';
@@ -122,9 +129,13 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IQueriesRemoteSourceApi>(
       QueriesSourceRemoteApiImpl(sl()));
   sl.registerSingleton<IProfileRemoteApi>(ProfileRemoteApiImpl(sl()));
-  sl.registerSingleton<ICampaignRemoteSourceApi>(CampaignSourceRemoteApiImpl(sl()));
+  sl.registerSingleton<ICampaignRemoteSourceApi>(
+      CampaignSourceRemoteApiImpl(sl()));
   sl.registerSingleton<IEventRemoteSourceApi>(EventSourceRemoteApiImpl(sl()));
-  sl.registerSingleton<IRestaurantRemoteSourceApi>(RestaurantSourceRemoteApiImpl(sl()));
+  sl.registerSingleton<IRestaurantRemoteSourceApi>(
+      RestaurantSourceRemoteApiImpl(sl()));
+  sl.registerSingleton<ICreateRestaurantRemoteApi>(
+      CreateRestaurantRemoteApiImpl(sl()));
 
   // Repository
   sl.registerSingleton<IAuthRepo>(AuthRepoImpl(sl()));
@@ -140,6 +151,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<ICampaignsRepo>(CampaignRepoImpl(sl()));
   sl.registerSingleton<IEventRepo>(EventRepoImpl(sl()));
   sl.registerSingleton<IRestaurantRepo>(RestaurantRepoImpl(sl()));
+  sl.registerSingleton<ICreateRestaurantRepo>(CreateRestaurantRepoImpl(sl()));
 
   // UseCase
   sl.registerSingleton<LoginUseCase>(LoginUseCase(sl()));
@@ -160,21 +172,18 @@ Future<void> initializeDependencies() async {
       FetchAdminMonthlyFeeUsecase(sl()));
   sl.registerSingleton<UpdateAdminMonthlyFeeUsecdase>(
       UpdateAdminMonthlyFeeUsecdase(sl()));
-  sl.registerSingleton<FetchRequestUsecase>(
-      FetchRequestUsecase(sl()));
-  sl.registerSingleton<DeleteRequestUsecase>(
-      DeleteRequestUsecase(sl()));
-  sl.registerSingleton<FetchQueriesUsecase>(
-      FetchQueriesUsecase(sl()));
-  sl.registerSingleton<DeleteQueriesUsecase>(
-      DeleteQueriesUsecase(sl()));
+  sl.registerSingleton<FetchRequestUsecase>(FetchRequestUsecase(sl()));
+  sl.registerSingleton<DeleteRequestUsecase>(DeleteRequestUsecase(sl()));
+  sl.registerSingleton<FetchQueriesUsecase>(FetchQueriesUsecase(sl()));
+  sl.registerSingleton<DeleteQueriesUsecase>(DeleteQueriesUsecase(sl()));
   sl.registerSingleton<ReplyQueryUsecase>(ReplyQueryUsecase(sl()));
   sl.registerSingleton<DeleteAccountUsecase>(DeleteAccountUsecase(sl()));
   sl.registerSingleton<ForgotPasswordUsecase>(ForgotPasswordUsecase(sl()));
   sl.registerSingleton<UpdateProfileUseCase>(UpdateProfileUseCase(sl()));
   sl.registerSingleton<ChangePasswordUsecase>(ChangePasswordUsecase(sl()));
   sl.registerSingleton<FetchCampaignsUsecase>(FetchCampaignsUsecase(sl()));
-  sl.registerSingleton<FetchCampaignsByResUsecase>(FetchCampaignsByResUsecase(sl()));
+  sl.registerSingleton<FetchCampaignsByResUsecase>(
+      FetchCampaignsByResUsecase(sl()));
   sl.registerSingleton<FetchEventsUsecase>(FetchEventsUsecase(sl()));
   sl.registerSingleton<DeleteEventUsecase>(DeleteEventUsecase(sl()));
   sl.registerSingleton<ApproveCampaignUsecase>(ApproveCampaignUsecase(sl()));
@@ -182,12 +191,21 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<UpdateEventUsecase>(UpdateEventUsecase(sl()));
   sl.registerSingleton<FetchRestaurantUsecase>(FetchRestaurantUsecase(sl()));
   sl.registerSingleton<ActiveRestaurantUsecase>(ActiveRestaurantUsecase(sl()));
-  sl.registerSingleton<SuspendRestaurantUsecase>(SuspendRestaurantUsecase(sl()));
+  sl.registerSingleton<SuspendRestaurantUsecase>(
+      SuspendRestaurantUsecase(sl()));
   sl.registerSingleton<SignUpUseCase>(SignUpUseCase(sl()));
+  sl.registerSingleton<CreateNewRestaurantUsecase>(
+      CreateNewRestaurantUsecase(sl()));
+  sl.registerSingleton<GetPlaceDetailsUseCase>(GetPlaceDetailsUseCase(sl()));
+  sl.registerSingleton<GetPlacePredictionsUseCase>(
+      GetPlacePredictionsUseCase(sl()));
 
   // Bloc
+  sl.registerLazySingleton<CreateNewRestaurantBloc>(
+      () => CreateNewRestaurantBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<CampaignBloc>(() => CampaignBloc(sl()));
-  sl.registerLazySingleton<CampaignByResBloc>(() => CampaignByResBloc(sl(), sl()));
+  sl.registerLazySingleton<CampaignByResBloc>(
+      () => CampaignByResBloc(sl(), sl()));
   sl.registerLazySingleton<SkaletonCubit>(() => SkaletonCubit());
   sl.registerLazySingleton<UserCubit>(() => UserCubit());
   sl.registerLazySingleton<ChangePasswordBloc>(() => ChangePasswordBloc(sl()));
@@ -204,16 +222,17 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton<AdminDashboardBloc>(() => AdminDashboardBloc(sl()));
   sl.registerLazySingleton<AdminReservationBloc>(
       () => AdminReservationBloc(sl()));
-      sl.registerLazySingleton<SignupBloc>(() => SignupBloc(sl()));
+  sl.registerLazySingleton<SignupBloc>(() => SignupBloc(sl()));
   sl.registerLazySingleton<FetchAdminSmsBloc>(
       () => FetchAdminSmsBloc(sl(), sl(), sl()));
   sl.registerFactory<FetchTransactionHistoryBloc>(
       () => FetchTransactionHistoryBloc(sl()));
   sl.registerLazySingleton<AdminMonthlyFeeBloc>(
       () => AdminMonthlyFeeBloc(sl(), sl()));
-  sl.registerLazySingleton<ManageSmsBundleDiscountBloc>(() => ManageSmsBundleDiscountBloc(sl()));
-  sl.registerLazySingleton<RestaurantBloc>(() => RestaurantBloc(sl(), sl(), sl()));
-  sl.registerFactory<RequestBloc>(
-      () => RequestBloc(sl(), sl()));
+  sl.registerLazySingleton<ManageSmsBundleDiscountBloc>(
+      () => ManageSmsBundleDiscountBloc(sl()));
+  sl.registerLazySingleton<RestaurantBloc>(
+      () => RestaurantBloc(sl(), sl(), sl()));
+  sl.registerFactory<RequestBloc>(() => RequestBloc(sl(), sl()));
   sl.registerFactory<QueriesBloc>(() => QueriesBloc(sl(), sl(), sl()));
 }

@@ -29,16 +29,16 @@ class LoginScreen extends StatelessWidget {
         Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route) => false);
       }
       if (status == SubscriptionStatus.noRestaurant.title) {
-        context.flushBarErrorMessage(message: user.subscriptionMessage);
+        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.createNewRestaurant, (route) => false);
       }
       if (status == SubscriptionStatus.restaurantSuspended.title) {
-        context.flushBarErrorMessage(message: user.subscriptionMessage);
+        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.createNewRestaurant, (route) => false);
       }
       if (status == SubscriptionStatus.inactive.title) {
-        context.flushBarErrorMessage(message: user.subscriptionMessage);
+        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.monthlyFee, (route) => false);
       }
       if (status == SubscriptionStatus.expired.title) {
-        context.flushBarErrorMessage(message: user.subscriptionMessage);
+        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.monthlyFee, (route) => false);
       }
     }
   }

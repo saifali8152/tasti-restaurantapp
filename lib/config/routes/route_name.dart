@@ -36,6 +36,7 @@ class AppRoutes {
   static const String gallery = '/gallery';
   static const String reservationDatabase = '/reservation-database';
   static const String maintainReviews = '/maintain-reviews';
+  static const String createNewRestaurant = '/create-new-restaurant';
 
   // ✅ Common/Admin Routes
   static const String stats = '/stats';
