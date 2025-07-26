@@ -3,7 +3,7 @@ import '/core/network/api_services.dart';
 import '/config/constants/urls.dart';
 
 abstract class IAdminDashboardRemoteApi {
-  Future<DashboardModel> fetchAdminDashboard();
+  Future<AdminDashboardModel> fetchAdminDashboard();
 }
 
 class AdminDashboardRemoteApiImpl extends IAdminDashboardRemoteApi {
@@ -11,12 +11,12 @@ class AdminDashboardRemoteApiImpl extends IAdminDashboardRemoteApi {
   AdminDashboardRemoteApiImpl(this.networkApiService);
 
   @override
-  Future<DashboardModel> fetchAdminDashboard() async {
+  Future<AdminDashboardModel> fetchAdminDashboard() async {
     var response = await networkApiService.get(AppUrls.adminDashboard);
 
     final Map<String, dynamic> adminDashboard = response;
 
-    final DashboardModel dashboard = DashboardModel.fromJson(adminDashboard);
+    final AdminDashboardModel dashboard = AdminDashboardModel.fromJson(adminDashboard);
     return dashboard;
   }
 }

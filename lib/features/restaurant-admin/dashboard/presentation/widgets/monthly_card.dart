@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import '/core/utils/general_extentions.dart';
 
-import '../../../config/constants/colors.dart';
+import '../../../../../config/constants/colors.dart';
 
 class MonthlyCard extends StatelessWidget {
   final String title;

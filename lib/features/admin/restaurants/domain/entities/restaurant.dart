@@ -25,12 +25,12 @@ class RestaurantItem extends Equatable {
   final String status;
   final String paid;
   final String address;
-  final double? lat;
-  final double? lon;
-  final double? cost;
+  final String lat;
+  final String lon;
+  final String cost;
   final String description;
   final String dressCode;
-  final double? minimumSpend;
+  final String minimumSpend;
   final String paidStatus;
   final String paidStatusText;
   final String statusText;
@@ -46,12 +46,12 @@ class RestaurantItem extends Equatable {
     required this.status,
     required this.paid,
     required this.address,
-    this.lat,
-    this.lon,
-    this.cost,
+    required this.lat,
+    required this.lon,
+    required this.cost,
     required this.description,
     required this.dressCode,
-    this.minimumSpend,
+    required this.minimumSpend,
     required this.paidStatus,
     required this.paidStatusText,
     required this.statusText,
@@ -68,12 +68,12 @@ class RestaurantItem extends Equatable {
     String? status,
     String? paid,
     String? address,
-    double? lat,
-    double? lon,
-    double? cost,
+    String? lat,
+    String? lon,
+    String? cost,
     String? description,
     String? dressCode,
-    double? minimumSpend,
+    String? minimumSpend,
     String? paidStatus,
     String? paidStatusText,
     String? statusText,

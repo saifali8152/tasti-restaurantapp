@@ -41,4 +41,5 @@ class AppUrls{
   static final String adminSuspendRestaurant = "$base/restaurant/suspend-restaurant";
   
   static final String createRestaurant = "$base/restaurant/create-restaurant";
+  static final String getDashboard = "$base/restaurant/get-dashboard";
 }

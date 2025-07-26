@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/domain/entities/restaurant.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/pages/create_new_restaurant.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/presentation/pages/dashboard_screen.dart';
 import '/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
 import '/features/admin/campaigns/presentation/pages/campaigns_by_res.dart';
 import '/features/admin/events/domain/entities/event.dart';

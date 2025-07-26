@@ -1,14 +1,14 @@
 import '../../domain/entities/admin_dashboard.dart';
 
-class DashboardModel extends AdminDashboardEntity {
-  DashboardModel({
+class AdminDashboardModel extends AdminDashboardEntity {
+  AdminDashboardModel({
     required AdminDashboardDataModel today,
     required AdminDashboardDataModel monthly,
   }) : super(today: today, monthly: monthly);
 
-  factory DashboardModel.fromJson(Map<String, dynamic> json) {
+  factory AdminDashboardModel.fromJson(Map<String, dynamic> json) {
     final dashboard = json['dashboard'] as Map<String, dynamic>;
-    return DashboardModel(
+    return AdminDashboardModel(
       today: AdminDashboardDataModel.fromJson(dashboard['today']),
       monthly: AdminDashboardDataModel.fromJson(dashboard['monthly']),
     );

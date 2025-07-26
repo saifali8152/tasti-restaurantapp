@@ -15,6 +15,11 @@ import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restau
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/domain/usecases/get_location_usecase.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/domain/usecases/get_predictions_usecase.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/bloc/create_new_restaurant_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/data/data_sources/dashboard_remote_api.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/data/repositories/dashboard_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/domain/repositories/dashboard_repo.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/domain/usecases/fetch_dashboard.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/presentation/bloc/dashboard_bloc.dart';
 import '/core/services/picker_services.dart';
 import '/features/admin/campaigns/data/data_sources/campaign_remote_source.dart';
 import '/features/admin/campaigns/data/repositories/campaign_repo_impl.dart';
@@ -114,8 +119,8 @@ Future<void> initializeDependencies() async {
 
   // Api Services
   sl.registerSingleton<IAuthRemoteApi>(AuthRemoteApiImpl(sl()));
-  sl.registerSingleton<IAdminDashboardRemoteApi>(
-      AdminDashboardRemoteApiImpl(sl()));
+  sl.registerSingleton<IAdminDashboardRemoteApi>(AdminDashboardRemoteApiImpl(sl()));
+  sl.registerSingleton<IDashboardRemoteApi>(DashboardRemoteApiImpl(sl()));
   sl.registerSingleton<IAdminReservationRemoteApi>(
       AdminReservationRemoteApiImpl(sl()));
   sl.registerSingleton<ISMSBundleRemoteSourceApi>(
@@ -140,6 +145,7 @@ Future<void> initializeDependencies() async {
   // Repository
   sl.registerSingleton<IAuthRepo>(AuthRepoImpl(sl()));
   sl.registerSingleton<IAdminDashboardRepo>(AdminDashboardRepoImpl(sl()));
+  sl.registerSingleton<IDashboardRepo>(DashboardRepoImpl(sl()));
   sl.registerSingleton<IAdminReservationRepo>(AdminReservationRepoImpl(sl()));
   sl.registerSingleton<ISMSBundleRepo>(SMSBundleRepoImpl(sl()));
   sl.registerSingleton<ITransactionHistoryRepo>(
@@ -156,8 +162,8 @@ Future<void> initializeDependencies() async {
   // UseCase
   sl.registerSingleton<LoginUseCase>(LoginUseCase(sl()));
   sl.registerSingleton<SignOutUseCase>(SignOutUseCase(sl()));
-  sl.registerSingleton<FetchAdminDashboardUseCase>(
-      FetchAdminDashboardUseCase(sl()));
+  sl.registerSingleton<FetchAdminDashboardUseCase>(FetchAdminDashboardUseCase(sl()));
+  sl.registerSingleton<FetchDashboardUseCase>(FetchDashboardUseCase(sl()));
   sl.registerSingleton<FetchAdminReservationsUseCase>(
       FetchAdminReservationsUseCase(sl()));
   sl.registerSingleton<AddSMSBundleUsecase>(AddSMSBundleUsecase(sl()));
@@ -220,6 +226,7 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton<DeleteAccountBloc>(() => DeleteAccountBloc(sl()));
   sl.registerLazySingleton<ForgotPasswordBloc>(() => ForgotPasswordBloc(sl()));
   sl.registerLazySingleton<AdminDashboardBloc>(() => AdminDashboardBloc(sl()));
+  sl.registerLazySingleton<DashboardBloc>(() => DashboardBloc(sl()));
   sl.registerLazySingleton<AdminReservationBloc>(
       () => AdminReservationBloc(sl()));
   sl.registerLazySingleton<SignupBloc>(() => SignupBloc(sl()));
