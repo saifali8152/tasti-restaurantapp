@@ -7,5 +7,5 @@ abstract class IAuthRepo {
   Future<DataState<String>> signout();
   Future<DataState<String>> deleteAccount();
   Future<DataState<String>> forgotPassword(String email);
-  // Future<DataState<UserEntity>> signup(SignupParms parms);
+  Future<DataState<UserEntity>> signup(SignupParms parms);
 }

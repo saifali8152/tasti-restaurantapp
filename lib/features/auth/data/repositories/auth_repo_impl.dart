@@ -48,13 +48,13 @@ class AuthRepoImpl extends IAuthRepo {
     }
   }
 
-  // @override
-  // Future<DataState<UserModel>> signup(SignupParms parms) async {
-  //   try {
-  //     final result = await authRemoteApi.signup(parms);
-  //     return DataSuccess(result);
-  //   } catch (error) {
-  //     return DataFailure(error.toString());
-  //   }
-  // }
+  @override
+  Future<DataState<UserModel>> signup(SignupParms parms) async {
+    try {
+      final result = await authRemoteApi.signup(parms);
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
 }

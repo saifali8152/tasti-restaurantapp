@@ -6,6 +6,8 @@ import 'package:tasti_restaurant_app/features/admin/restaurants/domain/usecases/
 import 'package:tasti_restaurant_app/features/admin/restaurants/domain/usecases/fetch_restaurant.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/domain/usecases/suspend_restaurant.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/presentation/bloc/restaurant_bloc.dart';
+import 'package:tasti_restaurant_app/features/auth/domain/usecases/signup.dart';
+import 'package:tasti_restaurant_app/features/auth/presentation/bloc/signup/signup_bloc.dart';
 import '/core/services/picker_services.dart';
 import '/features/admin/campaigns/data/data_sources/campaign_remote_source.dart';
 import '/features/admin/campaigns/data/repositories/campaign_repo_impl.dart';
@@ -181,6 +183,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FetchRestaurantUsecase>(FetchRestaurantUsecase(sl()));
   sl.registerSingleton<ActiveRestaurantUsecase>(ActiveRestaurantUsecase(sl()));
   sl.registerSingleton<SuspendRestaurantUsecase>(SuspendRestaurantUsecase(sl()));
+  sl.registerSingleton<SignUpUseCase>(SignUpUseCase(sl()));
 
   // Bloc
   sl.registerLazySingleton<CampaignBloc>(() => CampaignBloc(sl()));
@@ -201,6 +204,7 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton<AdminDashboardBloc>(() => AdminDashboardBloc(sl()));
   sl.registerLazySingleton<AdminReservationBloc>(
       () => AdminReservationBloc(sl()));
+      sl.registerLazySingleton<SignupBloc>(() => SignupBloc(sl()));
   sl.registerLazySingleton<FetchAdminSmsBloc>(
       () => FetchAdminSmsBloc(sl(), sl(), sl()));
   sl.registerFactory<FetchTransactionHistoryBloc>(

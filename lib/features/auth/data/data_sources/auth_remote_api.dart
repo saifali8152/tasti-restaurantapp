@@ -10,7 +10,7 @@ abstract class IAuthRemoteApi {
   Future<String> signout();
   Future<String> deleteAccount();
   Future<String> forgotPassword(String email);
-  // Future<UserModel> signup(SignupParms parms);
+  Future<UserModel> signup(SignupParms parms);
 }
 
 class AuthRemoteApiImpl extends IAuthRemoteApi {
@@ -67,29 +67,30 @@ class AuthRemoteApiImpl extends IAuthRemoteApi {
     return response['message'];
   }
 
-  // @override
-  // Future<UserModel> signup(SignupParms parms) async {
-  //   Map<String, dynamic> data = {};
+  @override
+  Future<UserModel> signup(SignupParms parms) async {
+    Map<String, dynamic> data = {};
 
-  //   data = {
-  //     "name": parms.fullName,
-  //     "email": parms.email,
-  //     "phone_number": parms.phoneNumber,
-  //     "password": parms.password,
-  //   };
-  //   var response = await networkApiService.post(AppUrls.signup, data);
+    data = {
+      "first_name": parms.firstName,
+      "last_name": parms.lastName,
+      "email": parms.email,
+      "phone_number": parms.phone,
+      "password": parms.password,
+    };
+    var response = await networkApiService.post(AppUrls.signup, data);
 
-  //   final String token = response['token'];
-  //   final Map<String, dynamic> userJson = response['user'];
+    final String token = response['token'];
+    final Map<String, dynamic> userJson = response['user'];
 
-  //   Map<String, dynamic> fullUserData;
+    Map<String, dynamic> fullUserData;
 
-  //   fullUserData = {
-  //     'token': token,
-  //     ...userJson,
-  //   };
+    fullUserData = {
+      'token': token,
+      ...userJson,
+    };
 
-  //   final UserModel completeUser = UserModel.fromJson(fullUserData);
-  //   return completeUser;
-  // }
+    final UserModel completeUser = UserModel.fromJson(fullUserData);
+    return completeUser;
+  }
 }

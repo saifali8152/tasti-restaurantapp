@@ -8,6 +8,22 @@ class LoginParms {
   LoginParms({required this.email, required this.password});
 }
 
+class SignupParms {
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String phone;
+  final String password;
+
+  SignupParms({
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.phone,
+    required this.password,
+  });
+}
+
 class UpdateMonthlyFeeParms {
   final String id;
   final String money;
@@ -93,6 +109,7 @@ class PaginationParms {
     this.search = '',
   });
 }
+
 class AllRestaurantParms {
   final String page;
   final String limit;

@@ -2,6 +2,7 @@ class AppUrls{
   static final String base = "https://backend.tasti.co.za";
 
   static final String login = "$base/restaurant/login";
+  static final String signup = "$base/restaurant/signup";
   static final String logout = "$base/restaurant/logout";
   static final String forgotPassword = "$base/restaurant/forgot-password";
   static final String updateAdminPassword = "$base/restaurant/update-admin-password";

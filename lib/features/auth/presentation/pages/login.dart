@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
       create: (_) => loginBloc,
       child: AuthStack(
         title: "Welcome Back!",
-        subtitle: "Log in to book your table and manage your reservations easily.",
+        subtitle: "Log in to manage tables, monitor bookings, and keep your restaurant running smoothly.",
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 24),

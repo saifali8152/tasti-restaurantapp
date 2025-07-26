@@ -16,7 +16,6 @@ import '/features/admin/reservations_database/presentation/bloc/admin_reservatio
 import '/features/admin/transaction_history/presentation/bloc/transaction_history_bloc.dart';
 import 'config/routes/routes.dart';
 import 'config/theme/theme.dart';
-import 'features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'features/skaleton/cubit/skaleton_cubit.dart';
 
 void main() async {
@@ -36,7 +35,6 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => SkaletonCubit()),
-          BlocProvider(create: (context) => AuthBloc()),
           BlocProvider(create: (context) => sl<UserCubit>()),
           BlocProvider(create: (context) => sl<ChangePasswordBloc>()),
           BlocProvider(create: (context) => sl<RestaurantBloc>()),

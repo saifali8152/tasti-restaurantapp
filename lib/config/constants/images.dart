@@ -11,4 +11,5 @@ class AppImages {
   static const String gallery2 = "assets/images/gallery2.png";
   static const String gallery3 = "assets/images/gallery3.png";
   static const String gallery4 = "assets/images/gallery4.png";
+  static const String flag = "assets/images/flag.png";
 }

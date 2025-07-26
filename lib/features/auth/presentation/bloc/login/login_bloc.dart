@@ -29,7 +29,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Future<void> _onLoginSubmitted(
       LoginSubmitted event, Emitter<LoginState> emit) async {
-    // emit(state.copyWith(loginResponse: ApiResponse.loading()));
+    emit(state.copyWith(loginResponse: ApiResponse.loading()));
 
     final parms = LoginParms(email: state.email, password: state.password);
     final result = await _loginUseCase(parms);
