@@ -24,7 +24,7 @@ export 'admin/dashboard/presentation/pages/dashboard_screen.dart';
 export '/features/add_cuisines/add_cuisines.dart';
 export '/features/reviews/reviews.dart';
 export 'restaurant-admin/settings/settings.dart';
-export '/features/share/share.dart';
+export 'restaurant-admin/share/share.dart';
 export '/features/food_menu/food_menu.dart';
 export '/features/restaurant_working_hours/restaurant_working_hours.dart';
 export '/features/seating_area/seating_area.dart';
