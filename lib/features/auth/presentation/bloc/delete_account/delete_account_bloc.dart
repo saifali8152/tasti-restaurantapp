@@ -1,4 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/core/enum/account_type.dart';
+import 'package:tasti_restaurant_app/dependency_injection.dart';
+import 'package:tasti_restaurant_app/features/skaleton/user_cubit/skaleton_cubit.dart';
 import '/features/auth/domain/usecases/delete_account.dart';
 import '/core/network/response.dart';
 import '/core/services/session_controller.dart';
@@ -19,7 +22,8 @@ class DeleteAccountBloc extends Bloc<DeleteAccountEvent, DeleteAccountState> {
     emit(DeleteAccountLoading());
 
     try {
-      final result = await _deleteAccountUsecase.call(null);
+      final userType = sl<UserCubitState>().user!.type == 'admin' ? AccountType.admin : AccountType.restaurant;
+      final result = await _deleteAccountUsecase.call(userType);
 
       if (result is DataSuccess) {
         emit(DeleteAccountSuccess());

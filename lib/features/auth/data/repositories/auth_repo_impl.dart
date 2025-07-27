@@ -1,3 +1,4 @@
+import 'package:tasti_restaurant_app/core/enum/account_type.dart';
 import '/core/parms/parms.dart';
 import '/features/auth/data/models/user.dart';
 import '../data_sources/auth_remote_api.dart';
@@ -9,9 +10,9 @@ class AuthRepoImpl extends IAuthRepo {
   AuthRepoImpl(this.authRemoteApi);
 
   @override
-  Future<DataState<String>> deleteAccount() async {
+  Future<DataState<String>> deleteAccount(AccountType accountType) async {
     try {
-      final result = await authRemoteApi.deleteAccount();
+      final result = await authRemoteApi.deleteAccount(accountType);
       return DataSuccess(result);
     } catch (error) {
       return DataFailure(error.toString());

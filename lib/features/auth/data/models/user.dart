@@ -39,8 +39,8 @@ class UserModel extends UserEntity {
       type: user['type'].toString(),
       profilePic: user['profile_pic'].toString(),
       phoneNumber: user['phone_number'].toString(),
-      subscriptionStatus: user['subscription_status'],
-      subscriptionMessage: user['subscription_message'],
+      subscriptionStatus: user['subscription_status'].toString(),
+      subscriptionMessage: user['subscription_message'].toString(),
       restaurant: parseRestaurant(user['restaurant']),
     );
   }

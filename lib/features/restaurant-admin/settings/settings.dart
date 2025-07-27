@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/core/widgets/image_picker_widget.dart';
+import 'package:tasti_restaurant_app/dependency_injection.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/bloc/create_new_restaurant_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/widgets/location_dropdown_field.dart';
 import '/config/constants/spaces.dart';
 import '/core/widgets/icon_button.dart';
 import '/config/constants/colors.dart';
@@ -35,13 +39,14 @@ class _SettingsState extends State<Settings> {
         ),
       ),
       backgroundColor: AppColors.darkOrange,
-      body: SingleChildScrollView(
-        child: CurvedContainer(
+      body: CurvedContainer(
+        child: SingleChildScrollView(
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                ImagePickerField(onImagePicked: (img){}, showButton: true),
                 const SizedBox(height: 10),
                 FieldLabel(title: "Average Cost"),
                 const SizedBox(height: 5),
@@ -55,9 +60,7 @@ class _SettingsState extends State<Settings> {
                 ),
                 const SizedBox(height: 10),
                 FieldLabel(title: "Address"),
-                const CustomInputField(
-                  hintText: "Enter address",
-                ),
+                LocationDropdownField(bloc: sl<CreateNewRestaurantBloc>()),
                 const SizedBox(height: 10),
                 FieldLabel(title: "Website"),
                 const CustomInputField(
@@ -74,6 +77,11 @@ class _SettingsState extends State<Settings> {
                   hintText: "Enter dress code",
                 ),
                 const SizedBox(height: 10),
+                FieldLabel(title: "Minumum Spend"),
+                const CustomInputField(
+                  hintText: "Enter minumum spend",
+                ),
+                const SizedBox(height: 10),
                 FieldLabel(title: "Message Content"),
                 const CustomInputField(
                   contentPadding: EdgeInsets.all(20),
@@ -84,7 +92,7 @@ class _SettingsState extends State<Settings> {
                   onPressed: () {
                     Navigator.pushNamed(context, AppRoutes.campaignSummary);
                   },
-                  text: 'Send Campaign',
+                  text: 'Update',
                 ),
               ],
             ),

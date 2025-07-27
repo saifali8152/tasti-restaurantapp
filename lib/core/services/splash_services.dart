@@ -28,40 +28,40 @@ class SplashServices {
 
   static void _handleLoginNavigation(BuildContext context) {
   final user = SessionController().user;
-  print("User from session: $user");
+  debugPrint("User from session: $user");
 
   if (user == null) {
-    print("No user found in session.");
+    debugPrint("No user found in session.");
     return;
   }
 
-  print("User type: ${user.type}");
+  debugPrint("User type: ${user.type}");
 
   if (user.type == 'admin') {
-    print("Navigating to admin skaleton screen.");
+    debugPrint("Navigating to admin skaleton screen.");
     Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route) => false);
   } else if (user.type == 'restaurant') {
     final status = user.subscriptionStatus;
-    print("Restaurant user subscription status: $status");
+    debugPrint("Restaurant user subscription status: $status");
 
     if (status == SubscriptionStatus.active.title) {
-      print("Subscription is active. Navigating to skaleton screen.");
+      debugPrint("Subscription is active. Navigating to skaleton screen.");
       Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route) => false);
     }
     if (status == SubscriptionStatus.noRestaurant.title) {
-      print("No restaurant found. Navigating to createNewRestaurant screen.");
+      debugPrint("No restaurant found. Navigating to createNewRestaurant screen.");
       Navigator.pushNamedAndRemoveUntil(context, AppRoutes.createNewRestaurant, (route) => false);
     }
     if (status == SubscriptionStatus.restaurantSuspended.title) {
-      print("Restaurant suspended. Showing error: ${user.subscriptionMessage}");
+      debugPrint("Restaurant suspended. Showing error: ${user.subscriptionMessage}");
       Navigator.pushNamedAndRemoveUntil(context, AppRoutes.createNewRestaurant, (route) => false);
     }
     if (status == SubscriptionStatus.inactive.title) {
-      print("Subscription inactive. Showing error: ${user.subscriptionMessage}");
+      debugPrint("Subscription inactive. Showing error: ${user.subscriptionMessage}");
       Navigator.pushNamedAndRemoveUntil(context, AppRoutes.monthlyFee, (route) => false);
     }
     if (status == SubscriptionStatus.expired.title) {
-      print("Subscription expired. Showing error: ${user.subscriptionMessage}");
+      debugPrint("Subscription expired. Showing error: ${user.subscriptionMessage}");
       Navigator.pushNamedAndRemoveUntil(context, AppRoutes.monthlyFee, (route) => false);
     }
   }

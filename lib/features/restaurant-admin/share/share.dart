@@ -25,25 +25,25 @@ class ShareLinksScreen extends StatelessWidget {
             childAspectRatio: .9,
             children: [
               ShareCard(
-                url: 'https://tasti.co.za/reservation.php?id=${SessionController().user!.restaurant.id}',
+                url: 'https://tasti.co.za/reservation.php?id=${SessionController().user?.restaurant.id}',
                 imageUrl: 'https://cdn-icons-png.flaticon.com/512/174/174857.png',
                 label: 'LinkedIn',
                 brandColor: Color(0xFF0077B5),
               ),
               ShareCard(
-                url: 'https://tasti.co.za/reservation.php?id=${SessionController().user!.restaurant.id}',
+                url: 'https://tasti.co.za/reservation.php?id=${SessionController().user?.restaurant.id}',
                 imageUrl: 'https://cdn-icons-png.flaticon.com/512/733/733547.png',
                 label: 'Facebook',
                 brandColor: Color(0xFF4267B2),
               ),
               ShareCard(
-                url: 'https://tasti.co.za/reservation.php?id=${SessionController().user!.restaurant.id}',
+                url: 'https://tasti.co.za/reservation.php?id=${SessionController().user?.restaurant.id}',
                 imageUrl: 'https://cdn-icons-png.flaticon.com/512/3670/3670151.png',
                 label: 'Twitter',
                 brandColor: Color(0xFF1DA1F2),
               ),
               ShareCard(
-                url: 'https://tasti.co.za/reservation.php?id=${SessionController().user!.restaurant.id}',
+                url: 'https://tasti.co.za/reservation.php?id=${SessionController().user?.restaurant.id}',
                 imageUrl: 'https://cdn-icons-png.flaticon.com/512/733/733585.png',
                 label: 'WhatsApp',
                 brandColor: Color(0xFF25D366),

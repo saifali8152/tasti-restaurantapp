@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:tasti_restaurant_app/core/enum/account_type.dart';
 import '/core/parms/parms.dart';
 import '/features/auth/data/models/user.dart';
 import '/core/network/api_services.dart';
@@ -8,7 +8,7 @@ import '/config/constants/urls.dart';
 abstract class IAuthRemoteApi {
   Future<UserModel> login(LoginParms parms);
   Future<String> signout();
-  Future<String> deleteAccount();
+  Future<String> deleteAccount(AccountType accountType);
   Future<String> forgotPassword(String email);
   Future<UserModel> signup(SignupParms parms);
 }
@@ -18,9 +18,12 @@ class AuthRemoteApiImpl extends IAuthRemoteApi {
   AuthRemoteApiImpl(this.networkApiService);
 
   @override
-  Future<String> deleteAccount() async {
+  Future<String> deleteAccount(AccountType accountType) async {
+    final String url = accountType == AccountType.admin
+        ? AppUrls.deleteAdminProfile
+        : AppUrls.deleteRestaurantProfile;
     Map<String, dynamic> data = {};
-    var response = await networkApiService.post(AppUrls.deleteAdminProfile, data);
+    var response = await networkApiService.post(url, data);
     return response['message'];
   }
 
@@ -36,24 +39,24 @@ class AuthRemoteApiImpl extends IAuthRemoteApi {
     try {
       Map<String, dynamic> data = {};
 
-    data = {
-      "email": parms.email,
-      "password": parms.password,
-    };
-    var response = await networkApiService.post(AppUrls.login, data);
+      data = {
+        "email": parms.email,
+        "password": parms.password,
+      };
+      var response = await networkApiService.post(AppUrls.login, data);
 
-    final String token = response['token'];
-    final Map<String, dynamic> userJson = response['user'];
+      final String token = response['token'];
+      final Map<String, dynamic> userJson = response['user'];
 
-    Map<String, dynamic> fullUserData;
+      Map<String, dynamic> fullUserData;
 
-    fullUserData = {
-      'token': token,
-      ...userJson,
-    };
+      fullUserData = {
+        'token': token,
+        ...userJson,
+      };
 
-    final UserModel completeUser = UserModel.fromJson(fullUserData);
-    return completeUser;
+      final UserModel completeUser = UserModel.fromJson(fullUserData);
+      return completeUser;
     } catch (e, stackTrace) {
       log("Stack trace: $stackTrace");
       throw Exception("Login failed. Please try again.");

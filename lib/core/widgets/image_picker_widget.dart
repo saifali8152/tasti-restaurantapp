@@ -1,17 +1,20 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
 import '/core/utils/image_picker.dart';
 
 class ImagePickerField extends StatefulWidget {
   final ValueChanged<File> onImagePicked;
   final String placeholderText;
-  final String? initialImage; // New: can be file path or network URL
+  final String? initialImage;
+  final bool showButton;
 
   const ImagePickerField({
     super.key,
     required this.onImagePicked,
     this.placeholderText = "Tap to pick image",
     this.initialImage,
+    this.showButton = false,
   });
 
   @override
@@ -54,20 +57,36 @@ class _ImagePickerFieldState extends State<ImagePickerField> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _handlePickImage(context),
-      child: Container(
-        height: 180,
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(12),
-          color: Colors.grey[200],
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () => widget.showButton ? null : _handlePickImage(context),
+          child: Container(
+            height: 180,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(12),
+              color: Colors.grey[200],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: _buildImageWidget(),
+            ),
+          ),
         ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: _buildImageWidget(),
-        ),
-      ),
+        if (widget.showButton) ...[
+          const SizedBox(height: 10),
+          Center(
+            child: CustomButton(
+              onPressed: () =>
+                  widget.showButton ? _handlePickImage(context) : null,
+              text: "Upload Photo",
+              bgColor: Colors.grey.shade400,
+              isFullWidth: false,
+            ),
+          ),
+        ]
+      ],
     );
   }
 }
