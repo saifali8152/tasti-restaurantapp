@@ -14,4 +14,14 @@ class UpdateMonthlyFeeSubmitted extends MonthlyFeeEvents {
 }
 
 class FetchMonthlyFeeSubmitted extends MonthlyFeeEvents {}
+class VerifyPaymentSubmitted extends MonthlyFeeEvents {
+  final String reference;
+
+  const VerifyPaymentSubmitted(this.reference);
+}
+class InitPaymentSubmitted extends MonthlyFeeEvents {
+  final String amount;
+
+  const InitPaymentSubmitted(this.amount);
+}
 

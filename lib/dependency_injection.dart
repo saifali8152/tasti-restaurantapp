@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/usecases/initialize_payment_fee.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/usecases/verify_payment.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/data/data_sources/restaurant_remote_source.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/data/repositories/restaurant_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/domain/repositories/restaurant_repo.dart';
@@ -203,8 +205,9 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<CreateNewRestaurantUsecase>(
       CreateNewRestaurantUsecase(sl()));
   sl.registerSingleton<GetPlaceDetailsUseCase>(GetPlaceDetailsUseCase(sl()));
-  sl.registerSingleton<GetPlacePredictionsUseCase>(
-      GetPlacePredictionsUseCase(sl()));
+  sl.registerSingleton<GetPlacePredictionsUseCase>(GetPlacePredictionsUseCase(sl()));
+  sl.registerSingleton<InitializePaymentFeeUsecase>(InitializePaymentFeeUsecase(sl()));
+  sl.registerSingleton<VerifyPaymentUsecase>(VerifyPaymentUsecase(sl()));
 
   // Bloc
   sl.registerLazySingleton<CreateNewRestaurantBloc>(
@@ -234,8 +237,7 @@ Future<void> initializeDependencies() async {
       () => FetchAdminSmsBloc(sl(), sl(), sl()));
   sl.registerFactory<FetchTransactionHistoryBloc>(
       () => FetchTransactionHistoryBloc(sl()));
-  sl.registerLazySingleton<AdminMonthlyFeeBloc>(
-      () => AdminMonthlyFeeBloc(sl(), sl()));
+  sl.registerLazySingleton<AdminMonthlyFeeBloc>(() => AdminMonthlyFeeBloc(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<ManageSmsBundleDiscountBloc>(
       () => ManageSmsBundleDiscountBloc(sl()));
   sl.registerLazySingleton<RestaurantBloc>(

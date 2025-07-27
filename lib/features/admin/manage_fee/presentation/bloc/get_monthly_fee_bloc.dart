@@ -1,4 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/core/services/session_controller.dart';
+import 'package:tasti_restaurant_app/dependency_injection.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/entities/initialize_payment.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/usecases/initialize_payment_fee.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/usecases/verify_payment.dart';
+import 'package:tasti_restaurant_app/features/auth/data/models/user.dart';
+import 'package:tasti_restaurant_app/features/skaleton/user_cubit/skaleton_cubit.dart';
 import '/core/parms/parms.dart';
 import '/features/admin/manage_fee/domain/entities/monthly_fee.dart';
 import '/features/admin/manage_fee/domain/usecases/fetch_admin_fee.dart';
@@ -10,14 +17,37 @@ import 'get_monthly_fee_state.dart';
 class AdminMonthlyFeeBloc extends Bloc<MonthlyFeeEvents, MonthlyFeeState> {
   final FetchAdminMonthlyFeeUsecase _useCase;
   final UpdateAdminMonthlyFeeUsecdase _updateUsecase;
+  final InitializePaymentFeeUsecase _initPaymentUsecase;
+  final VerifyPaymentUsecase _verifyPaymentUsecase;
 
-  AdminMonthlyFeeBloc(this._useCase, this._updateUsecase)
+  AdminMonthlyFeeBloc(this._useCase, this._updateUsecase, this._initPaymentUsecase, this._verifyPaymentUsecase)
       : super(MonthlyFeeState(
           fetchResponse: ApiResponse.initial(),
+          initResponse: ApiResponse.initial(),
           updateResponse: ApiResponse.initial(),
+          verifyResponse: ApiResponse.initial(),
         )) {
     on<FetchMonthlyFeeSubmitted>(_onFetchMonthlyFeeSubmitted);
     on<UpdateMonthlyFeeSubmitted>(_onUpdateMonthlyFee);
+    on<InitPaymentSubmitted>(_onInitPaymentSubmitted);
+    on<VerifyPaymentSubmitted>(_onVerifyPaymentSubmitted);
+  }
+
+  Future<void> _onInitPaymentSubmitted(
+      InitPaymentSubmitted event, Emitter<MonthlyFeeState> emit) async {
+    emit(state.copyWith(initResponse: ApiResponse.loading()));
+
+    try {
+      final result = await _initPaymentUsecase(event.amount);
+
+      if (result is DataSuccess<InitializePaymentEntity>) {
+        emit(state.copyWith(initResponse: ApiResponse.completed(result.data)));
+      } else if (result is DataFailure<InitializePaymentEntity>) {
+        emit(state.copyWith(initResponse: ApiResponse.error(result.error)));
+      }
+    } catch (e) {
+      emit(state.copyWith(initResponse: ApiResponse.error(e.toString())));
+    }
   }
 
   Future<void> _onUpdateMonthlyFee(
@@ -68,6 +98,25 @@ class AdminMonthlyFeeBloc extends Bloc<MonthlyFeeEvents, MonthlyFeeState> {
       }
     } catch (e) {
       emit(state.copyWith(fetchResponse: ApiResponse.error(e.toString())));
+    }
+  }
+  
+  Future<void> _onVerifyPaymentSubmitted(
+      VerifyPaymentSubmitted event, Emitter<MonthlyFeeState> emit) async {
+    emit(state.copyWith(verifyResponse: ApiResponse.loading()));
+    try {
+      final result = await _verifyPaymentUsecase.call(event.reference);
+      if (result is DataSuccess<UserModel>) {
+        
+        await SessionController().saveUserSession(result.data.toEntity());
+        sl<UserCubit>().setUser(result.data.toEntity());
+
+        emit(state.copyWith(verifyResponse: ApiResponse.completed(result.data)));
+      } else if (result is DataFailure<UserModel>) {
+        emit(state.copyWith(verifyResponse: ApiResponse.error(result.error)));
+      }
+    } catch (e) {
+      emit(state.copyWith(verifyResponse: ApiResponse.error(e.toString())));
     }
   }
 }

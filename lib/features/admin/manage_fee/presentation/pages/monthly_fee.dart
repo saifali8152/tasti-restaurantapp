@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/core/services/session_controller.dart';
+import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/widgets/admin_content.dart';
 import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/widgets/feature_item.dart';
+import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/widgets/subscribe_dialog.dart';
 import '/config/constants/colors.dart';
 import '/core/network/response.dart';
 import '/core/widgets/custom_app_bar.dart';
@@ -127,7 +129,9 @@ class _MonthlyFeeState extends State<MonthlyFee> {
                             FeatureItem(text: '24/7 Support'),
                             const SizedBox(height: 32),
                             CustomButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                context.showCustomDialog(SubscribeDialog(amount: state.fetchResponse.data?.money??'0'));
+                              },
                               text: 'Subscribe Now',
                             ),
                           ],
