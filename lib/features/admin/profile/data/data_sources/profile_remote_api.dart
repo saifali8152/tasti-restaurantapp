@@ -42,10 +42,12 @@ class ProfileRemoteApiImpl extends IProfileRemoteApi {
     final response = await networkApiService.postMultipart(url, fields, files);
 
     final String token = sl<SessionController>().user!.token;
+    final restaurant = sl<SessionController>().user!.restaurant;
+    final String subscriptionStatus = sl<SessionController>().user!.subscriptionStatus;
 
     final UserModel newUser = UserModel.fromJson(response['user']);
 
-    final UserEntity updatedUser = newUser.copyWith(token: token).toEntity();
+    final UserEntity updatedUser = newUser.copyWith(token: token, subscriptionStatus: subscriptionStatus, restaurant: restaurant).toEntity();
     return updatedUser;
   }
 }

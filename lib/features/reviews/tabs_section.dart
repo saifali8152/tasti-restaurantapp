@@ -31,6 +31,13 @@ class TabsSection extends StatelessWidget {
                 itemCount: 10,
                 separatorBuilder: (context, index) => SizedBox(height: 10),
                 itemBuilder: (context, index) {
+                  return ReviewCard(isVerified: true);
+                },
+              ),
+              ListView.separated(
+                itemCount: 10,
+                separatorBuilder: (context, index) => SizedBox(height: 10),
+                itemBuilder: (context, index) {
                   return ReviewCard(isVerified: false);
                 },
               ),
