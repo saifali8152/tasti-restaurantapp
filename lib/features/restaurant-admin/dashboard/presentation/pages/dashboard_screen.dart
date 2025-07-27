@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/domain/entities/dashboard.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/presentation/bloc/dashboard_event.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/presentation/bloc/dashboard_state.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/presentation/widgets/monthly_card.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/presentation/widgets/today_card.dart';
 import '/core/widgets/themed_app_bar.dart';
 import '/dependency_injection.dart';
@@ -65,24 +64,46 @@ class _DashboardScreenState extends State<DashboardScreen> {
           children: [
             sectionTitle("Today's Overview"),
             const SizedBox(height: 12),
-            TodayCard(
-              title: "Today’s Requests",
-              // data: data.today.requests,
+            DashboardCard(
+              title: "Today’s Reservations",
+              count: data.todayStats.reservationCount,
+              icon: Icons.event_available,
+              bgColor: Colors.white,
             ),
             const SizedBox(height: 10),
-            TodayCard(
-              title: "Today's Queries",
-              // data: data.today.queries,
+            DashboardCard(
+              title: "Today's Guests",
+              count: data.todayStats.totalGuests,
+              icon: Icons.group,
+              bgColor: Colors.white,
             ),
             const SizedBox(height: 20),
             sectionTitle("Monthly Overview"),
             const SizedBox(height: 12),
-            MonthlyCard(title: "Monthly Requests"
-            //  ,data: data.monthly.requests
+            DashboardCard(title: "Reservations | This Month",
+            count: data.monthlyStats.reservationCount,
+            icon: Icons.date_range,
+            bgColor: Color(0XFFEDD2C8),
              ),
             const SizedBox(height: 10),
-            MonthlyCard(title: "Monthly Queries"
-            // ,data: data.monthly.queries
+            DashboardCard(title: "Total Guests | This Month",
+            count: data.monthlyStats.totalGuests,
+            icon: Icons.groups,
+            bgColor: Color(0XFFEDD2C8),
+            ),
+            const SizedBox(height: 20),
+            sectionTitle("Overall Statistics"),
+            const SizedBox(height: 12),
+            DashboardCard(title: "Total Reservations",
+            count: data.overallStats.reservationCount,
+            icon: Icons.assignment_turned_in,
+            bgColor: Color(0XFFF4E2B8),
+             ),
+            const SizedBox(height: 10),
+            DashboardCard(title: "Total Guests",
+            count: data.overallStats.totalGuests,
+            icon: Icons.people_alt,
+            bgColor: Color(0XFFF4E2B8),
             ),
             const SizedBox(height: 20),
           ],

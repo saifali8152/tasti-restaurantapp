@@ -2,19 +2,24 @@ import 'package:flutter/material.dart';
 import '/config/constants/colors.dart';
 import '/core/utils/general_extentions.dart';
 
-class TodayCard extends StatelessWidget {
+class DashboardCard extends StatelessWidget {
   final String title;
-  final String approvedLabel;
+  final String count;
+  final IconData icon;
+  final Color bgColor;
 
-  const TodayCard({
+  const DashboardCard({
     super.key,
     required this.title,
-    this.approvedLabel = '2 Approved',
+    required this.count,
+    required this.icon,
+    required this.bgColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: bgColor,
       elevation: 0.5,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
@@ -31,53 +36,23 @@ class TodayCard extends StatelessWidget {
                   color: AppColors.lightOrange.withSafeOpacity(.5),
                   borderRadius: BorderRadius.circular(8)
                   ),
-                  child: const Icon(
-                    Icons.calendar_today,
+                  child: Icon(
+                    icon,
                     size: 15,
                     color: AppColors.darkOrange,
                   ),
                 ),
-                const Icon(Icons.open_in_new, color: Colors.grey, size: 20),
               ],
             ),
             const SizedBox(height: 10),
             Text(title, style: const TextStyle(fontWeight: FontWeight.w500)),
-            const SizedBox(height: 6),
             const SizedBox(height: 4),
-            Row(
-              children: [
-                Text(
-                  '12',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Spacer(),
-                Text(
-                  '2 ',
-                  style: const TextStyle(
-                      color: Colors.green,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'Approved',
-                  style: TextStyle(color: Colors.green, fontSize: 10),
-                ),
-                const SizedBox(width: 12),
-                const Text(
-                  '13 ',
-                  style: TextStyle(
-                      color: AppColors.pending,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold),
-                ),
-                const Text(
-                  'pending',
-                  style: TextStyle(color: AppColors.pending, fontSize: 10),
-                ),
-              ],
+            Text(
+              count,
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
             )
           ],
         ),
