@@ -11,8 +11,7 @@ import '/core/network/response.dart';
 import 'location_event.dart';
 import 'location_state.dart';
 
-class LocationBloc
-    extends Bloc<LocationEvent, LocationState> {
+class LocationBloc extends Bloc<LocationEvent, LocationState> {
   final GetPlacePredictionsUseCase getPlacePredictionsUseCase;
   final GetPlaceDetailsUseCase getPlaceDetailsUseCase;
 
@@ -24,6 +23,17 @@ class LocationBloc
         )) {
     on<LocationChanged>(_onLocationChanged);
     on<SelectLocation>(_onLocationSet);
+    on<SetLocationValues>((event, emit) {
+      emit(state.copyWith(
+        location: event.location,
+        locationSet: true,
+        selectedLocation: PredictionModel(
+          placeId: '', // empty since no API call
+          description: event.description,
+        ),
+        locationAddress: event.description,
+      ));
+    });
   }
 
   Future<void> _onLocationSet(

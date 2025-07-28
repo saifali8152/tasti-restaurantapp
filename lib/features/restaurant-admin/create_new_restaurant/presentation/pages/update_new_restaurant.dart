@@ -13,6 +13,7 @@ import 'package:tasti_restaurant_app/core/widgets/image_picker_widget.dart';
 import 'package:tasti_restaurant_app/core/widgets/phone_input_field.dart';
 import 'package:tasti_restaurant_app/core/widgets/themed_app_bar.dart';
 import 'package:tasti_restaurant_app/features/common/auth/domain/entities/user.dart';
+import 'package:tasti_restaurant_app/features/common/location/data/models/location_model.dart';
 import 'package:tasti_restaurant_app/features/common/location/presentation/bloc/location_bloc.dart';
 import 'package:tasti_restaurant_app/features/common/location/presentation/widgets/location_dropdown_field.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/bloc/create_new_restaurant_bloc.dart';
@@ -139,12 +140,16 @@ class _UpdateNewRestaurantState extends State<UpdateNewRestaurant> {
                     controller: websiteController,
                   ),
                   BlocProvider.value(
-                    value: locationBloc,
-                    child: LocationDropdownField(
-                      bloc: locationBloc,
-                      initialValue: locationBloc.state.locationAddress,
-                    ),
-                  ),
+                      value: locationBloc,
+                      child: LocationDropdownField(
+                        bloc: locationBloc,
+                        initialDescription: currentRestaurant?.address,
+                        initialLocation: LocationModel(
+                          lat: currentRestaurant?.lat ?? 0,
+                          lng: currentRestaurant?.lon ?? 0,
+                          city: currentRestaurant?.city ?? '',
+                        ),
+                      )),
                   CustomInputField(
                     icon: Icons.style,
                     hintText: "Restaurant dressing code",
@@ -186,8 +191,7 @@ class _UpdateNewRestaurantState extends State<UpdateNewRestaurant> {
                         );
                       }
                       if (state.updateRestaurantResponse.status ==
-                          Status.completed) {
-                      }
+                          Status.completed) {}
                     },
                     builder: (context, state) {
                       return CustomButton(

@@ -7,16 +7,21 @@ import 'package:tasti_restaurant_app/features/common/location/presentation/bloc/
 import 'package:tasti_restaurant_app/features/common/location/presentation/bloc/location_state.dart';
 import '/core/network/response.dart';
 import '/core/widgets/loading_widget.dart';
+import 'package:tasti_restaurant_app/features/common/location/data/models/location_model.dart';
+import 'package:tasti_restaurant_app/features/common/location/data/models/prediction_model.dart';
 
 class LocationDropdownField extends StatefulWidget {
   final LocationBloc bloc;
   final void Function(String)? onChanged;
-  final String? initialValue;
+  final String? initialDescription;
+  final LocationModel? initialLocation;
+
   const LocationDropdownField({
     required this.bloc,
     super.key,
     this.onChanged,
-    this.initialValue,
+    this.initialDescription,
+    this.initialLocation,
   });
 
   @override
@@ -30,8 +35,15 @@ class _LocationDropdownFieldState extends State<LocationDropdownField> {
 
   @override
   void initState() {
-    _mainController = TextEditingController(text: widget.initialValue);
     super.initState();
+    _mainController = TextEditingController(text: widget.initialDescription ?? '');
+
+    if (widget.initialLocation != null && widget.initialDescription != null) {
+      widget.bloc.add(SetLocationValues(
+        location: widget.initialLocation!,
+        description: widget.initialDescription!,
+      ));
+    }
   }
 
   @override
@@ -52,6 +64,8 @@ class _LocationDropdownFieldState extends State<LocationDropdownField> {
     } else if (value.isEmpty && _sheetOpen) {
       _closeSheet();
     }
+
+    widget.onChanged?.call(value);
   }
 
   void _openSheet() async {
@@ -115,9 +129,6 @@ class _LocationDropdownFieldState extends State<LocationDropdownField> {
                           locationSet: true,
                           selectedLocation: item,
                         ));
-                        print("this is the city: ${state.location?.lat}");
-                        print("this is the city: ${state.location?.lng}");
-                        print("this is the city: ${state.location?.city}");
                         _closeSheet();
                         FocusScope.of(context).unfocus();
                       },
@@ -126,7 +137,7 @@ class _LocationDropdownFieldState extends State<LocationDropdownField> {
                 ),
               )
             else if (state.locationResponse.status == Status.loading)
-              LoadingWidget()
+              const LoadingWidget()
             else
               const Padding(
                 padding: EdgeInsets.all(16),

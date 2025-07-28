@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:tasti_restaurant_app/core/network/response.dart';
 import 'package:tasti_restaurant_app/env.dart';
 import 'package:tasti_restaurant_app/features/common/location/data/models/location_model.dart';
@@ -50,8 +49,6 @@ class LocationRemoteApiImpl extends ILocationRemoteApi {
           response['result']['address_components'] as List;
 
       String? city;
-
-      log("this is the cityy: address: $addressComponents");
       for (final component in addressComponents) {
         final types = component['types'] as List;
         if (types.contains('locality')) {

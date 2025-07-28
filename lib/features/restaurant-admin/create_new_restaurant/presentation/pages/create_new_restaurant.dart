@@ -102,7 +102,6 @@ class _CreateNewRestaurantState extends State<CreateNewRestaurant> {
                   value: locationBloc,
                   child: LocationDropdownField(
                     bloc: locationBloc,
-                    initialValue: locationBloc.state.locationAddress,
                   ),
                 ),
                 CustomInputField(
