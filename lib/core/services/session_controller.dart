@@ -1,7 +1,8 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/foundation.dart';
-import '../../features/auth/data/models/user.dart';
-import '../../features/auth/domain/entities/user.dart';
+import '../../features/common/auth/data/models/user.dart';
+import '../../features/common/auth/domain/entities/user.dart';
 import 'local_storage.dart';
 
 class SessionController {
@@ -30,9 +31,9 @@ class SessionController {
       } else {
         _user = null;
       }
-      debugPrint('User session loaded: ${UserModel.fromEntity(_user!).toJson()}');
+      log('User session loaded: ${UserModel.fromEntity(_user!).toJson()}');
     } catch (e) {
-      debugPrint('Session load error: $e');
+      log('Session load error: $e');
     }
   }
 
@@ -44,9 +45,9 @@ class SessionController {
       await _localStorage.setValue('user', jsonEncode(userModel.toJson()));
       await _localStorage.setValue('isLogin', 'true');
       await setFirstVisit();
-      debugPrint('User session saved: ${userModel.toJson()}');
+      log('User session saved: ${userModel.toJson()}');
     } catch (e) {
-      debugPrint('Save session error: $e');
+      log('Save session error: $e');
     }
   }
 

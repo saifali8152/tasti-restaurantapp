@@ -5,11 +5,12 @@ import 'package:tasti_restaurant_app/core/parms/parms.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_input_field.dart';
 import 'package:tasti_restaurant_app/core/widgets/image_picker_widget.dart';
-import 'package:tasti_restaurant_app/features/auth/presentation/widgets/auth_stack.dart';
+import 'package:tasti_restaurant_app/core/widgets/phone_input_field.dart';
+import 'package:tasti_restaurant_app/features/common/auth/presentation/widgets/auth_stack.dart';
+import 'package:tasti_restaurant_app/features/common/location/presentation/bloc/location_bloc.dart';
+import 'package:tasti_restaurant_app/features/common/location/presentation/widgets/location_dropdown_field.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/bloc/create_new_restaurant_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/bloc/create_new_restaurant_state.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/widgets/location_dropdown_field.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/widgets/phone_field.dart';
 import '/core/network/response.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/dependency_injection.dart';
@@ -25,10 +26,12 @@ class CreateNewRestaurant extends StatefulWidget {
 class _CreateNewRestaurantState extends State<CreateNewRestaurant> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final bloc = sl<CreateNewRestaurantBloc>();
+  final locationBloc = sl<LocationBloc>();
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController websiteController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   final TextEditingController dressCodeController = TextEditingController();
   final TextEditingController minimumSpendController = TextEditingController();
   final TextEditingController cuisineController = TextEditingController();
@@ -49,7 +52,8 @@ class _CreateNewRestaurantState extends State<CreateNewRestaurant> {
   }
 
   void _handleLoginNavigation(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(context, AppRoutes.monthlyFee, (route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, AppRoutes.monthlyFee, (route) => false);
   }
 
   @override
@@ -84,17 +88,22 @@ class _CreateNewRestaurantState extends State<CreateNewRestaurant> {
                   controller: emailController,
                   keyboardInputType: TextInputType.emailAddress,
                 ),
-                CreateNewRestaurantPhoneField(
-                  bloc: bloc,
+                PhoneInputField(
+                  onChanged: (value) {
+                    phoneController.text = value;
+                  },
                 ),
                 CustomInputField(
                   icon: Icons.web,
                   hintText: "Restaurant website",
                   controller: websiteController,
                 ),
-                LocationDropdownField(
-                  bloc: bloc,
-                  initialValue: bloc.state.locationAddress,
+                BlocProvider.value(
+                  value: locationBloc,
+                  child: LocationDropdownField(
+                    bloc: locationBloc,
+                    initialValue: locationBloc.state.locationAddress,
+                  ),
                 ),
                 CustomInputField(
                   icon: Icons.style,
@@ -129,28 +138,34 @@ class _CreateNewRestaurantState extends State<CreateNewRestaurant> {
                   listener: (context, state) {
                     if (state.createRestaurantResponse.status == Status.error) {
                       context.flushBarErrorMessage(
-                        message: state.createRestaurantResponse.message ?? "Error Occurred",
+                        message: state.createRestaurantResponse.message ??
+                            "Error Occurred",
                       );
                     }
-                    if (state.createRestaurantResponse.status == Status.completed) {
+                    if (state.createRestaurantResponse.status ==
+                        Status.completed) {
                       _handleLoginNavigation(context);
                     }
                   },
                   builder: (context, state) {
                     return CustomButton(
-                      isLoading: state.createRestaurantResponse.status == Status.loading,
+                      isLoading: state.createRestaurantResponse.status ==
+                          Status.loading,
                       text: "Submit",
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          bloc.add(CreateNewRestaurantSubmitted(CreateRestaurantParms(
+                          bloc.add(CreateNewRestaurantSubmitted(
+                              CreateRestaurantParms(
                             name: nameController.text.trim(),
                             email: emailController.text.trim(),
-                            phone: state.phoneNumber,
+                            phone: emailController.text.trim(),
                             website: websiteController.text.trim(),
-                            address: bloc.state.locationAddress ?? '',
-                            city: state.location?.city??"",
-                            lat: state.location?.lat.toString()??"",
-                            lon: state.location?.lng.toString()??"",
+                            address: locationBloc.state.locationAddress ?? '',
+                            city: locationBloc.state.location?.city ?? "",
+                            lat: locationBloc.state.location?.lat.toString() ??
+                                "",
+                            lon: locationBloc.state.location?.lng.toString() ??
+                                "",
                             dressCode: dressCodeController.text.trim(),
                             minimumSpend: minimumSpendController.text.trim(),
                             description: descriptionController.text.trim(),
@@ -169,7 +184,8 @@ class _CreateNewRestaurantState extends State<CreateNewRestaurant> {
                     const Text("Already have a restaurant? "),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushReplacementNamed(context, AppRoutes.login);
+                        Navigator.pushReplacementNamed(
+                            context, AppRoutes.login);
                       },
                       child: const Text(
                         "Sign in",

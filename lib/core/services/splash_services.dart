@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/core/enum/subscription_status.dart';
-import '/features/skaleton/user_cubit/skaleton_cubit.dart';
+import '../../features/common/skaleton/user_cubit/skaleton_cubit.dart';
 import '/core/services/session_controller.dart';
 import '/dependency_injection.dart';
 import '../../config/routes/route_name.dart';
@@ -13,6 +13,11 @@ class SplashServices {
 
     await sC.loadSession();
     await Future.delayed(const Duration(seconds: 1));
+
+    if (sC.user == null) {
+      nav.pushNamedAndRemoveUntil(AppRoutes.login, (route)=>false);
+      return;
+    }
 
     if (sC.user != null) {
       userCubit.setUser(sC.user!);

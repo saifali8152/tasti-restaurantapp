@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/usecases/initialize_payment_fee.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_fee/domain/usecases/verify_payment.dart';
+import 'package:tasti_restaurant_app/features/common/manage_fee/domain/usecases/initialize_payment_fee.dart';
+import 'package:tasti_restaurant_app/features/common/manage_fee/domain/usecases/verify_payment.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/data/data_sources/restaurant_remote_source.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/data/repositories/restaurant_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/domain/repositories/restaurant_repo.dart';
@@ -8,14 +8,19 @@ import 'package:tasti_restaurant_app/features/admin/restaurants/domain/usecases/
 import 'package:tasti_restaurant_app/features/admin/restaurants/domain/usecases/fetch_restaurant.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/domain/usecases/suspend_restaurant.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/presentation/bloc/restaurant_bloc.dart';
-import 'package:tasti_restaurant_app/features/auth/domain/usecases/signup.dart';
-import 'package:tasti_restaurant_app/features/auth/presentation/bloc/signup/signup_bloc.dart';
+import 'package:tasti_restaurant_app/features/common/auth/domain/usecases/signup.dart';
+import 'package:tasti_restaurant_app/features/common/auth/presentation/bloc/signup/signup_bloc.dart';
+import 'package:tasti_restaurant_app/features/common/location/data/data_sources/location_repo.dart';
+import 'package:tasti_restaurant_app/features/common/location/data/repositories/location_repo.dart';
+import 'package:tasti_restaurant_app/features/common/location/domain/repositories/location_repo.dart';
+import 'package:tasti_restaurant_app/features/common/location/domain/usecases/get_location_usecase.dart';
+import 'package:tasti_restaurant_app/features/common/location/domain/usecases/get_predictions_usecase.dart';
+import 'package:tasti_restaurant_app/features/common/location/presentation/bloc/location_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/data/data_sources/create_restaurant_repo.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/data/repositories/auth_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/data/repositories/create_restaurant_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/domain/repositories/create_restaurant_repo.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/domain/usecases/create_new_restaurant.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/domain/usecases/get_location_usecase.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/domain/usecases/get_predictions_usecase.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/domain/usecases/update_restaurant.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/bloc/create_new_restaurant_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/data/data_sources/dashboard_remote_api.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/data/repositories/dashboard_repo_impl.dart';
@@ -44,12 +49,12 @@ import '/features/admin/events/domain/usecases/delete_event.dart';
 import '/features/admin/events/domain/usecases/fetch_events.dart';
 import '/features/admin/events/domain/usecases/update_event.dart';
 import '/features/admin/events/presentation/bloc/event_bloc.dart';
-import '/features/admin/manage_fee/data/data_sources/monthly_fee_remote_source.dart';
-import '/features/admin/manage_fee/data/repositories/monthly_fee_repo_impl.dart';
-import '/features/admin/manage_fee/domain/repositories/fee_repo.dart';
-import '/features/admin/manage_fee/domain/usecases/fetch_admin_fee.dart';
-import '/features/admin/manage_fee/domain/usecases/update_fee.dart';
-import '/features/admin/manage_fee/presentation/bloc/get_monthly_fee_bloc.dart';
+import 'features/common/manage_fee/data/data_sources/monthly_fee_remote_source.dart';
+import 'features/common/manage_fee/data/repositories/monthly_fee_repo_impl.dart';
+import 'features/common/manage_fee/domain/repositories/fee_repo.dart';
+import 'features/common/manage_fee/domain/usecases/fetch_admin_fee.dart';
+import 'features/common/manage_fee/domain/usecases/update_fee.dart';
+import 'features/common/manage_fee/presentation/bloc/get_monthly_fee_bloc.dart';
 import '/features/admin/manage_sms/data/data_sources/sms_bundle_remote_source.dart';
 import '/features/admin/manage_sms/data/repositories/sms_bundle_repo_impl.dart';
 import '/features/admin/manage_sms/domain/repositories/sms_bundle_repo.dart';
@@ -59,13 +64,13 @@ import '/features/admin/manage_sms/domain/usecases/fetch_admin_sms_bundle.dart';
 import '/features/admin/manage_sms/domain/usecases/manage_sms_bundle_discount.dart';
 import '/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_bloc.dart';
 import '/features/admin/manage_sms/presentation/bloc/manage_sms_bundle_discount/manage_sms_bundle_discount_bloc.dart';
-import '/features/admin/profile/data/data_sources/profile_remote_api.dart';
-import '/features/admin/profile/data/repositories/profile_repo_impl.dart';
-import '/features/admin/profile/domain/repositories/profile_repo.dart';
-import '/features/admin/profile/domain/usecases/change_password.dart';
-import '/features/admin/profile/domain/usecases/update_profile_usecase.dart';
-import '/features/admin/profile/presentation/bloc/change_password/change_password_bloc.dart';
-import '/features/admin/profile/presentation/bloc/update_profile/profile_bloc.dart';
+import 'features/common/profile/data/data_sources/profile_remote_api.dart';
+import 'features/common/profile/data/repositories/profile_repo_impl.dart';
+import 'features/common/profile/domain/repositories/profile_repo.dart';
+import 'features/common/profile/domain/usecases/change_password.dart';
+import 'features/common/profile/domain/usecases/update_profile_usecase.dart';
+import 'features/common/profile/presentation/bloc/change_password/change_password_bloc.dart';
+import 'features/common/profile/presentation/bloc/update_profile/profile_bloc.dart';
 import '/features/admin/reservations_database/data/data_sources/admin_reservation_remote_api.dart';
 import '/features/admin/reservations_database/data/repositories/admin_dashboard_repo_impl.dart';
 import '/features/admin/reservations_database/domain/repositories/admin_reservation_repo.dart';
@@ -89,21 +94,21 @@ import '/features/admin/transaction_history/data/repositories/transaction_histor
 import '/features/admin/transaction_history/domain/repositories/transaction_history_repo.dart';
 import '/features/admin/transaction_history/domain/usecases/fetch_admin_transaction_history.dart';
 import '/features/admin/transaction_history/presentation/bloc/transaction_history_bloc.dart';
-import '/features/auth/domain/usecases/delete_account.dart';
-import '/features/auth/domain/usecases/forgot_password.dart';
-import '/features/auth/presentation/bloc/delete_account/delete_account_bloc.dart';
-import '/features/auth/presentation/bloc/forgot_password/forgot_password_bloc.dart';
-import '/features/skaleton/cubit/skaleton_cubit.dart';
-import '/features/skaleton/user_cubit/skaleton_cubit.dart';
-import 'features/auth/data/data_sources/auth_remote_api.dart';
-import 'features/auth/data/repositories/auth_repo_impl.dart';
-import 'features/auth/domain/repositories/auth_repo.dart';
-import 'features/auth/domain/usecases/signout.dart';
-import 'features/auth/presentation/bloc/signout/signout_bloc.dart';
+import 'features/common/auth/domain/usecases/delete_account.dart';
+import 'features/common/auth/domain/usecases/forgot_password.dart';
+import 'features/common/auth/presentation/bloc/delete_account/delete_account_bloc.dart';
+import 'features/common/auth/presentation/bloc/forgot_password/forgot_password_bloc.dart';
+import 'features/common/skaleton/cubit/skaleton_cubit.dart';
+import 'features/common/skaleton/user_cubit/skaleton_cubit.dart';
+import 'features/common/auth/data/data_sources/auth_remote_api.dart';
+import 'features/common/auth/data/repositories/auth_repo_impl.dart';
+import 'features/common/auth/domain/repositories/auth_repo.dart';
+import 'features/common/auth/domain/usecases/signout.dart';
+import 'features/common/auth/presentation/bloc/signout/signout_bloc.dart';
 import '/core/network/api_services.dart';
 import '/core/network/network_service_imp.dart';
-import 'features/auth/domain/usecases/login.dart';
-import 'features/auth/presentation/bloc/login/login_bloc.dart';
+import 'features/common/auth/domain/usecases/login.dart';
+import 'features/common/auth/presentation/bloc/login/login_bloc.dart';
 import '/core/services/session_controller.dart';
 import 'package:dio/dio.dart';
 
@@ -143,9 +148,12 @@ Future<void> initializeDependencies() async {
       RestaurantSourceRemoteApiImpl(sl()));
   sl.registerSingleton<ICreateRestaurantRemoteApi>(
       CreateRestaurantRemoteApiImpl(sl()));
+  sl.registerSingleton<ILocationRemoteApi>(
+      LocationRemoteApiImpl(sl()));
 
   // Repository
   sl.registerSingleton<IAuthRepo>(AuthRepoImpl(sl()));
+  sl.registerSingleton<ILocationRepo>(LocationRepoImpl(sl()));
   sl.registerSingleton<IAdminDashboardRepo>(AdminDashboardRepoImpl(sl()));
   sl.registerSingleton<IDashboardRepo>(DashboardRepoImpl(sl()));
   sl.registerSingleton<IAdminReservationRepo>(AdminReservationRepoImpl(sl()));
@@ -208,10 +216,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<GetPlacePredictionsUseCase>(GetPlacePredictionsUseCase(sl()));
   sl.registerSingleton<InitializePaymentFeeUsecase>(InitializePaymentFeeUsecase(sl()));
   sl.registerSingleton<VerifyPaymentUsecase>(VerifyPaymentUsecase(sl()));
+  sl.registerSingleton<UpdateRestaurantUsecase>(UpdateRestaurantUsecase(sl()));
 
   // Bloc
-  sl.registerLazySingleton<CreateNewRestaurantBloc>(
-      () => CreateNewRestaurantBloc(sl(), sl(), sl()));
+  sl.registerLazySingleton<CreateNewRestaurantBloc>(() => CreateNewRestaurantBloc(sl(), sl()));
   sl.registerLazySingleton<CampaignBloc>(() => CampaignBloc(sl()));
   sl.registerLazySingleton<CampaignByResBloc>(
       () => CampaignByResBloc(sl(), sl()));
@@ -235,8 +243,8 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton<SignupBloc>(() => SignupBloc(sl()));
   sl.registerLazySingleton<FetchAdminSmsBloc>(
       () => FetchAdminSmsBloc(sl(), sl(), sl()));
-  sl.registerFactory<FetchTransactionHistoryBloc>(
-      () => FetchTransactionHistoryBloc(sl()));
+  sl.registerFactory<FetchTransactionHistoryBloc>(() => FetchTransactionHistoryBloc(sl()));
+  sl.registerLazySingleton<LocationBloc>(() => LocationBloc(sl(), sl()));
   sl.registerLazySingleton<AdminMonthlyFeeBloc>(() => AdminMonthlyFeeBloc(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<ManageSmsBundleDiscountBloc>(
       () => ManageSmsBundleDiscountBloc(sl()));

@@ -34,8 +34,41 @@ class CreateRestaurantParms{
   final String cuisines;
   final String image;
 
-
   CreateRestaurantParms({
+    required this.name,
+    required this.email,
+    required this.phone,
+    required this.website,
+    required this.address,
+    required this.city,
+    required this.lat,
+    required this.lon,
+    required this.dressCode,
+    required this.minimumSpend,
+    required this.description,
+    required this.cuisines,
+    required this.image,
+  });
+}
+
+class UpdateRestaurantParms{
+  final String name;
+  final String email;
+  final String phone;
+  final String website;
+  final String address;
+  final String city;
+  final String lat;
+  final String lon;
+  final String dressCode;
+  final String minimumSpend;
+  final String description;
+  final String cuisines;
+  final String image;
+  final String cost;
+
+  UpdateRestaurantParms({
+    required this.cost,
     required this.name,
     required this.email,
     required this.phone,

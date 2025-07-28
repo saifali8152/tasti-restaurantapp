@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/features/admin/dashboard/domain/entities/admin_dashboard.dart';
-import '/features/skaleton/cubit/skaleton_cubit.dart';
+import '../../../../common/skaleton/cubit/skaleton_cubit.dart';
 import '/config/constants/colors.dart';
 import '/core/utils/general_extentions.dart';
 

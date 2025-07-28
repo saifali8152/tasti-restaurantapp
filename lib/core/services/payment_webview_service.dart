@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/features/admin/manage_fee/presentation/pages/payment_webview_screen.dart';
+import 'package:tasti_restaurant_app/features/common/manage_fee/presentation/pages/payment_webview_screen.dart';
 
 class PaymentWebViewService {
   static void openPaymentPage({

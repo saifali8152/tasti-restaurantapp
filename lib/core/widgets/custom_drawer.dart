@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '/features/skaleton/user_cubit/skaleton_cubit.dart';
+import '../../features/common/skaleton/user_cubit/skaleton_cubit.dart';
 import '/config/constants/colors.dart';
 import '/core/utils/general_extentions.dart';
-import '../../features/skaleton/cubit/skaleton_cubit.dart';
+import '../../features/common/skaleton/cubit/skaleton_cubit.dart';
 
 class CustomDrawer extends StatelessWidget {
   final String userRole;
@@ -184,7 +184,7 @@ class DrawerConfig {
             ],
           ),
           DrawerItemModel(title: "Bundles and Billings", index: 10, icon: Icons.note),
-          DrawerItemModel(title: "Settings", index: 11, icon: Icons.settings),
+          DrawerItemModel(title: "Restaurant Settings", index: 11, icon: Icons.settings),
           DrawerItemModel(title: "Share Widget", index: 12, icon: Icons.share),
           DrawerItemModel(title: "Profile", index: 13, icon: Icons.person),
         ];

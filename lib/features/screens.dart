@@ -1,8 +1,8 @@
-export 'splash/splash.dart';
-export 'skaleton/pages/skaleton.dart';
-export 'auth/presentation/pages/login.dart';
-export 'auth/presentation/pages/signup.dart';
-export 'onboarding/onbording.dart';
+export 'common/splash/splash.dart';
+export 'common/skaleton/pages/skaleton.dart';
+export 'common/auth/presentation/pages/login.dart';
+export 'common/auth/presentation/pages/signup.dart';
+export 'common/onboarding/onbording.dart';
 export '/features/make_reservation/make_reservation.dart';
 export '/features/manage_booking_time/manage_booking_time.dart';
 export '/features/manage_booking_time/update_time_duration.dart';

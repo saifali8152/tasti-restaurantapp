@@ -4,11 +4,11 @@ import 'package:tasti_restaurant_app/features/admin/restaurants/presentation/blo
 import '/config/routes/route_name.dart';
 import '/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_bloc.dart';
 import '/features/admin/events/presentation/bloc/event_bloc.dart';
-import '/features/admin/profile/presentation/bloc/change_password/change_password_bloc.dart';
-import '/features/admin/profile/presentation/bloc/update_profile/profile_bloc.dart';
+import 'features/common/profile/presentation/bloc/change_password/change_password_bloc.dart';
+import 'features/common/profile/presentation/bloc/update_profile/profile_bloc.dart';
 import '/features/admin/queries/presentation/bloc/queries_bloc.dart';
 import '/features/admin/requests/presentation/bloc/request_bloc.dart';
-import '/features/skaleton/user_cubit/skaleton_cubit.dart';
+import 'features/common/skaleton/user_cubit/skaleton_cubit.dart';
 import '/dependency_injection.dart';
 import '/features/admin/manage_sms/presentation/bloc/get_sms_bundle/get_admin_sms_bloc.dart';
 import '/features/admin/manage_sms/presentation/bloc/manage_sms_bundle_discount/manage_sms_bundle_discount_bloc.dart';
@@ -16,7 +16,7 @@ import '/features/admin/reservations_database/presentation/bloc/admin_reservatio
 import '/features/admin/transaction_history/presentation/bloc/transaction_history_bloc.dart';
 import 'config/routes/routes.dart';
 import 'config/theme/theme.dart';
-import 'features/skaleton/cubit/skaleton_cubit.dart';
+import 'features/common/skaleton/cubit/skaleton_cubit.dart';
 
 void main() async {
   await initializeDependencies();

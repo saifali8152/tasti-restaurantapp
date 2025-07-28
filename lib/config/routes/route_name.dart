@@ -42,7 +42,7 @@ class AppRoutes {
   static const String stats = '/stats';
   static const String reservations = '/reservations';
   static const String billings = '/billings';
-  static const String settings = '/settings';
+  // static const String settings = '/settings';
   static const String setVanueCategory = '/settings/set-vanue-category';
   static const String share = '/share';
   static const String campaignDetailsByRes = '/campaign-details';
@@ -59,4 +59,5 @@ class AppRoutes {
   static const String updateMonthlyFee = '/update-monthly-fee';
   static const String addEvent = '/add-event';
   static const String updateEvent = '/update-event';
+  static const String updateRestaurant = '/update-restaurant';
 }

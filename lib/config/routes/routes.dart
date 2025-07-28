@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/domain/entities/restaurant.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/pages/create_new_restaurant.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/pages/update_new_restaurant.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/presentation/pages/dashboard_screen.dart';
 import '/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
 import '/features/admin/campaigns/presentation/pages/campaigns_by_res.dart';
 import '/features/admin/events/domain/entities/event.dart';
 import '/features/admin/events/presentation/pages/add_event.dart';
 import '/features/admin/events/presentation/pages/update_event.dart';
-import '/features/admin/manage_fee/presentation/pages/update_monthly_fee.dart';
-import '/features/admin/manage_fee/presentation/pages/monthly_fee.dart';
+import '../../features/common/manage_fee/presentation/pages/update_monthly_fee.dart';
+import '../../features/common/manage_fee/presentation/pages/monthly_fee.dart';
 import '/features/admin/manage_sms/domain/entities/admin_sms.dart';
 import '/features/admin/manage_sms/presentation/pages/manage_sms_bundle_discount.dart';
 import '/features/admin/manage_sms/presentation/pages/add_sms_bundle.dart';
-import '/features/admin/profile/presentation/pages/change_password.dart';
-import '/features/admin/profile/presentation/pages/personal_info.dart';
+import '../../features/common/profile/presentation/pages/change_password.dart';
+import '../../features/common/profile/presentation/pages/personal_info.dart';
 import '/features/admin/queries/domain/entities/queries.dart';
 import '/features/admin/reservations_database/domain/entities/reservation.dart';
 import '/features/admin/transaction_history/presentation/pages/transaction_history.dart';
@@ -29,6 +30,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const CreateNewRestaurant());
       case AppRoutes.addEvent:
         return MaterialPageRoute(builder: (_) => const AddEventScreen());
+      case AppRoutes.updateRestaurant:
+        return MaterialPageRoute(builder: (_) => const UpdateNewRestaurant());
       case AppRoutes.updateEvent:
         return MaterialPageRoute(builder: (_) => UpdateEventScreen(
           event: settings.arguments as EventItem,
@@ -111,8 +114,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const UpdateTimeDurationScreen());
       case AppRoutes.reservations:
         return MaterialPageRoute(builder: (_) => const ReservationsScreen());
-      case AppRoutes.settings:
-        return MaterialPageRoute(builder: (_) => const Settings());
+      // case AppRoutes.settings:
+      //   return MaterialPageRoute(builder: (_) => const Settings());
       case AppRoutes.setVanueCategory:
         return MaterialPageRoute(builder: (_) => const SetVanueCategory());
       case AppRoutes.share:
