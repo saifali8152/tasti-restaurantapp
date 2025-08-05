@@ -149,6 +149,13 @@ class ReplyQueryParms {
   ReplyQueryParms({required this.id, required this.message});
 }
 
+class AddVenueParms {
+  final int id;
+  final String names;
+
+  AddVenueParms({required this.id, required this.names});
+}
+
 class AddEventParms {
   final String title;
   final String link;

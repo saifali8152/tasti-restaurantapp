@@ -8,7 +8,6 @@ import 'package:tasti_restaurant_app/features/common/location/presentation/bloc/
 import '/core/network/response.dart';
 import '/core/widgets/loading_widget.dart';
 import 'package:tasti_restaurant_app/features/common/location/data/models/location_model.dart';
-import 'package:tasti_restaurant_app/features/common/location/data/models/prediction_model.dart';
 
 class LocationDropdownField extends StatefulWidget {
   final LocationBloc bloc;

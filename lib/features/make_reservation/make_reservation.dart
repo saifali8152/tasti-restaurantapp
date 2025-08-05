@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/core/widgets/field_label.dart';
 import '/core/utils/general_extentions.dart';
 import '/core/widgets/custom_app_bar.dart';
 import '/core/widgets/custom_button.dart';
@@ -106,18 +107,5 @@ class _MakeReservationScreenState extends State<MakeReservationScreen> {
         ),
       ),
     );
-  }
-}
-
-class FieldLabel extends StatelessWidget {
-  final String title;
-  const FieldLabel({
-    required this.title,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(title, style: TextStyle(fontWeight: FontWeight.bold));
   }
 }

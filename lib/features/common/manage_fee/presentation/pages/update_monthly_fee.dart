@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/core/widgets/field_label.dart';
 import '/core/network/response.dart';
 import '/core/parms/parms.dart';
 import '/core/utils/flushbar_extention.dart';
@@ -87,19 +88,5 @@ class _UpdateMonthlyFeeState extends State<UpdateMonthlyFee> {
         },
       ),
     );
-  }
-}
-
-
-class FieldLabel extends StatelessWidget {
-  final String title;
-  const FieldLabel({
-    required this.title,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(title, style: const TextStyle(fontWeight: FontWeight.bold));
   }
 }

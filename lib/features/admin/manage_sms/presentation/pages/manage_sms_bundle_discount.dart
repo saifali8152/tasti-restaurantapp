@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/core/widgets/field_label.dart';
 import '/features/admin/manage_sms/domain/entities/admin_sms.dart';
 import '/core/network/response.dart';
 import '/core/utils/flushbar_extention.dart';
@@ -114,19 +115,3 @@ class _ManageSmsBundleDiscountViewState
     );
   }
 }
-
-class FieldLabel extends StatelessWidget {
-  final String title;
-  const FieldLabel({
-    required this.title,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(title, style: const TextStyle(fontWeight: FontWeight.bold));
-  }
-}
-
-
-// TODO: Need to centeralize this label

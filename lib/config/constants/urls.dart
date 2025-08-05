@@ -46,4 +46,7 @@ class AppUrls{
   static final String getDashboard = "$base/restaurant/get-dashboard";
   static final String initializePayment = "$base/restaurant/initialize-payment";
   static final String verifyPayment = "$base/restaurant/verify-payment";
+  static final String getVenues = "$base/restaurant/get-spots";
+  static final String deleteVenues = "$base/restaurant/delete-spot";
+  static final String addVenues = "$base/restaurant/update-spot";
 }

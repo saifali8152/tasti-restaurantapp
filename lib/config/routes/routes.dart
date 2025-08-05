@@ -117,7 +117,7 @@ class Routes {
       // case AppRoutes.settings:
       //   return MaterialPageRoute(builder: (_) => const Settings());
       case AppRoutes.setVanueCategory:
-        return MaterialPageRoute(builder: (_) => const SetVanueCategory());
+        return MaterialPageRoute(builder: (_) => const SetVenueCategory());
       case AppRoutes.share:
         return MaterialPageRoute(builder: (_) => const ShareLinksScreen());
       case AppRoutes.campaignSummary:

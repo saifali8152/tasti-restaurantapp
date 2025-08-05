@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '/config/routes/route_name.dart';
 import '/core/widgets/curved_container.dart';
 import '/core/widgets/custom_button.dart';
-import '../../core/widgets/upload_image.dart';
 import '/core/widgets/themed_app_bar.dart';
 import '../../config/constants/icons.dart';
 import '../../core/widgets/icon_button.dart';
@@ -34,7 +33,7 @@ class FoodMenuScreen extends StatelessWidget {
       body: CurvedContainer(
         child: Column(
           children: [
-            const CustomUploadImageCard(),
+            // const CustomUploadImageCard(),
             const SizedBox(height: 20),
             CustomButton(onPressed: () {}, text: "Upload"),
             const SizedBox(height: 20),

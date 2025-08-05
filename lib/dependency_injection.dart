@@ -27,6 +27,13 @@ import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/data/re
 import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/domain/repositories/dashboard_repo.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/domain/usecases/fetch_dashboard.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/data/data_sources/venue_repo.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/data/repositories/venue_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/domain/repositories/venue_repo.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/domain/usecases/add_venue.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/domain/usecases/delete_venue.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/domain/usecases/fetch_venue.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/presentation/bloc/venue_bloc.dart';
 import '/core/services/picker_services.dart';
 import '/features/admin/campaigns/data/data_sources/campaign_remote_source.dart';
 import '/features/admin/campaigns/data/repositories/campaign_repo_impl.dart';
@@ -148,11 +155,12 @@ Future<void> initializeDependencies() async {
       RestaurantSourceRemoteApiImpl(sl()));
   sl.registerSingleton<ICreateRestaurantRemoteApi>(
       CreateRestaurantRemoteApiImpl(sl()));
-  sl.registerSingleton<ILocationRemoteApi>(
-      LocationRemoteApiImpl(sl()));
+  sl.registerSingleton<ILocationRemoteApi>(LocationRemoteApiImpl(sl()));
+  sl.registerSingleton<IVenueRemoteApi>(VenueRemoteApiImpl(sl()));
 
   // Repository
   sl.registerSingleton<IAuthRepo>(AuthRepoImpl(sl()));
+  sl.registerSingleton<IVenueRepo>(VenueRepoImpl(sl()));
   sl.registerSingleton<ILocationRepo>(LocationRepoImpl(sl()));
   sl.registerSingleton<IAdminDashboardRepo>(AdminDashboardRepoImpl(sl()));
   sl.registerSingleton<IDashboardRepo>(DashboardRepoImpl(sl()));
@@ -170,6 +178,9 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<ICreateRestaurantRepo>(CreateRestaurantRepoImpl(sl()));
 
   // UseCase
+  sl.registerSingleton<FetchVenueUsecase>(FetchVenueUsecase(sl()));
+  sl.registerSingleton<DeleteVenueUsecase>(DeleteVenueUsecase(sl()));
+  sl.registerSingleton<AddVenueUsecase>(AddVenueUsecase(sl()));
   sl.registerSingleton<LoginUseCase>(LoginUseCase(sl()));
   sl.registerSingleton<SignOutUseCase>(SignOutUseCase(sl()));
   sl.registerSingleton<FetchAdminDashboardUseCase>(FetchAdminDashboardUseCase(sl()));
@@ -219,6 +230,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<UpdateRestaurantUsecase>(UpdateRestaurantUsecase(sl()));
 
   // Bloc
+  sl.registerLazySingleton<VenueBloc>(() => VenueBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<CreateNewRestaurantBloc>(() => CreateNewRestaurantBloc(sl(), sl()));
   sl.registerLazySingleton<CampaignBloc>(() => CampaignBloc(sl()));
   sl.registerLazySingleton<CampaignByResBloc>(
