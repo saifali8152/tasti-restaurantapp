@@ -26,7 +26,6 @@ class SetVenueCategory extends StatefulWidget {
 class _SetVenueCategoryState extends State<SetVenueCategory> {
   final VenueBloc bloc = sl();
   final int id = SessionController().user!.restaurant?.id;
-  String selectedVanues = '';
 
   @override
   void initState() {
@@ -53,7 +52,8 @@ class _SetVenueCategoryState extends State<SetVenueCategory> {
                     children: [
                       state.fetchVenues.data == null
                           ? Center(
-                              child: Text(" No venue categories have been added yet"))
+                              child: Text(
+                                  " No venue categories have been added yet"))
                           : VenueData(
                               id: id.toString(),
                               venue: state.fetchVenues.data!,
@@ -63,11 +63,10 @@ class _SetVenueCategoryState extends State<SetVenueCategory> {
                       SizedBox(height: 10),
                       MultiSelectDropdown(
                         items: ['Bar', 'Restaurant', 'Night Club'],
-                        initialSelected: state.fetchVenues.data?.name.trim().split(',').toList(),
-                        hintText:
-                             "Select Places",
+                        initialSelected: state.selectedCategories.isNotEmpty ? state.selectedCategories.trim().split(',').toList() : null,
+                        hintText: "Select Places",
                         onChanged: (venues) {
-                          selectedVanues = venues;
+                          bloc.add(SetCategory(venues));
                         },
                       ),
                       const SizedBox(height: 30),
@@ -85,7 +84,7 @@ class _SetVenueCategoryState extends State<SetVenueCategory> {
                             onPressed: () {
                               bloc.add(AddVenueEvent(AddVenueParms(
                                 id: id,
-                                names: selectedVanues,
+                                names: state.selectedCategories,
                               )));
                             },
                             text: 'Save',

@@ -13,6 +13,12 @@ class FetchVenueEvent extends VenueEvent {
   const FetchVenueEvent(this.id);
 }
 
+class SetCategory extends VenueEvent {
+  final String category;
+
+  const SetCategory(this.category);
+}
+
 class DeleteVenueEvent extends VenueEvent {
   final String id;
 

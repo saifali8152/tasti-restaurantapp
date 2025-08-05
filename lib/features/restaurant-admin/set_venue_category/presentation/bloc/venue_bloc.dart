@@ -20,10 +20,17 @@ class VenueBloc extends Bloc<VenueEvent, VenueState> {
           addVenues: ApiResponse.initial(),
           fetchVenues: ApiResponse.initial(),
           deleteVenues: ApiResponse.initial(),
+          selectedCategories: '',
         )) {
     on<FetchVenueEvent>(_onFetchVenueEvent);
     on<DeleteVenueEvent>(_onDeleteVenueEvent);
     on<AddVenueEvent>(_onAddVenueEvent);
+    on<SetCategory>(_onSetCategory);
+  }
+
+  Future<void> _onSetCategory(
+      SetCategory event, Emitter<VenueState> emit) async {
+    emit(state.copyWith(selectedCategories: event.category));
   }
 
   Future<void> _onAddVenueEvent(
@@ -46,9 +53,9 @@ class VenueBloc extends Bloc<VenueEvent, VenueState> {
 
           emit(
             state.copyWith(
-              addVenues: ApiResponse.completed(result.data),
-              fetchVenues: ApiResponse.completed(updatedData),
-            ),
+                addVenues: ApiResponse.completed(result.data),
+                fetchVenues: ApiResponse.completed(updatedData),
+                selectedCategories: updatedData.name),
           );
         }
         break;
@@ -70,8 +77,10 @@ class VenueBloc extends Bloc<VenueEvent, VenueState> {
     switch (result) {
       case DataSuccess<String>():
         emit(state.copyWith(
-            deleteVenues: ApiResponse.completed(result.data),
-            fetchVenues: ApiResponse.completed(null)));
+          deleteVenues: ApiResponse.completed(result.data),
+          fetchVenues: ApiResponse.completed(null),
+          selectedCategories: ''
+        ));
         break;
       case DataFailure():
         emit(state.copyWith(deleteVenues: ApiResponse.error(result.error)));
@@ -88,7 +97,7 @@ class VenueBloc extends Bloc<VenueEvent, VenueState> {
 
     switch (result) {
       case DataSuccess<VenueModel>():
-        emit(state.copyWith(fetchVenues: ApiResponse.completed(result.data)));
+        emit(state.copyWith(fetchVenues: ApiResponse.completed(result.data), selectedCategories: result.data.name));
         break;
       case DataFailure():
         emit(state.copyWith(fetchVenues: ApiResponse.error(result.error)));

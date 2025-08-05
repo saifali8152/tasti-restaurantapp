@@ -23,6 +23,16 @@ class MultiSelectDropdownState extends State<MultiSelectDropdown> {
   late List<String> selectedItems;
 
   @override
+  void didUpdateWidget(covariant MultiSelectDropdown oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.initialSelected != oldWidget.initialSelected) {
+      setState(() {
+        selectedItems = widget.initialSelected ?? [];
+      });
+    }
+  }
+
+  @override
   void initState() {
     super.initState();
     selectedItems = widget.initialSelected ?? [];
@@ -62,7 +72,8 @@ class MultiSelectDropdownState extends State<MultiSelectDropdown> {
               ),
               actions: [
                 TextButton(
-                  child: const Text('CANCEL', style: TextStyle(color: Colors.black)),
+                  child: const Text('CANCEL',
+                      style: TextStyle(color: Colors.black)),
                   onPressed: () => Navigator.pop(context),
                 ),
                 CustomButton(
