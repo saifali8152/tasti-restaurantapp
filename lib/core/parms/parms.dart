@@ -156,6 +156,14 @@ class AddVenueParms {
   AddVenueParms({required this.id, required this.names});
 }
 
+class AddCuisineParms {
+  final int id;
+  final String name;
+  final String type;
+
+  AddCuisineParms({required this.id, required this.name, required this.type});
+}
+
 class AddEventParms {
   final String title;
   final String link;

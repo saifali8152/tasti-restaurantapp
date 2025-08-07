@@ -49,4 +49,7 @@ class AppUrls{
   static final String getVenues = "$base/restaurant/get-spots";
   static final String deleteVenues = "$base/restaurant/delete-spot";
   static final String addVenues = "$base/restaurant/update-spot";
+  static final String deleteCuisine = "$base/restaurant/delete-type";
+  static final String addCuisine = "$base/restaurant/update-type";
+  static final String getCuisine = "$base/restaurant/get-types";
 }

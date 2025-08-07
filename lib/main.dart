@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/presentation/bloc/restaurant_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/cuisines/presentation/bloc/cuisine_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/presentation/bloc/venue_bloc.dart';
 import '/config/routes/route_name.dart';
 import '/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_bloc.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => sl<RequestBloc>()),
           BlocProvider(create: (context) => sl<QueriesBloc>()),
           BlocProvider(create: (context) => sl<VenueBloc>()),
+          BlocProvider(create: (context) => sl<CuisineBloc>()),
         ],
         child: MaterialApp(
           title: 'Tasti Restaurant App',

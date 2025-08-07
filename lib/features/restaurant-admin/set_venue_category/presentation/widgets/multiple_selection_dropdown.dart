@@ -79,7 +79,7 @@ class MultiSelectDropdownState extends State<MultiSelectDropdown> {
                 CustomButton(
                   onPressed: () {
                     setState(() => selectedItems = tempSelected);
-                    widget.onChanged(selectedItems.join(', '));
+                    widget.onChanged(selectedItems.join(','));
                     Navigator.pop(context);
                   },
                   text: "Confirm",

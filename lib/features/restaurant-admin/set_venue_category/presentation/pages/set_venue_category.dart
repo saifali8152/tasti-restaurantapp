@@ -63,7 +63,11 @@ class _SetVenueCategoryState extends State<SetVenueCategory> {
                       SizedBox(height: 10),
                       MultiSelectDropdown(
                         items: ['Bar', 'Restaurant', 'Night Club'],
-                        initialSelected: state.selectedCategories.isNotEmpty ? state.selectedCategories.trim().split(',').toList() : null,
+                        initialSelected: state.selectedCategories.isNotEmpty
+                            ? state.selectedCategories
+                                .split(',')
+                                .toList()
+                            : null,
                         hintText: "Select Places",
                         onChanged: (venues) {
                           bloc.add(SetCategory(venues));
@@ -82,10 +86,15 @@ class _SetVenueCategoryState extends State<SetVenueCategory> {
                           return CustomButton(
                             isLoading: state.addVenues.status == Status.loading,
                             onPressed: () {
-                              bloc.add(AddVenueEvent(AddVenueParms(
-                                id: id,
-                                names: state.selectedCategories,
-                              )));
+                              if (state.selectedCategories.isEmpty) {
+                                context.flushBarErrorMessage(
+                                    message: "Select category to continue");
+                              } else {
+                                bloc.add(AddVenueEvent(AddVenueParms(
+                                  id: id,
+                                  names: state.selectedCategories,
+                                )));
+                              }
                             },
                             text: 'Save',
                           );

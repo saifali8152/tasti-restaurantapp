@@ -21,7 +21,7 @@ export 'admin/restaurants/presentation/pages/restaurants.dart';
 export 'admin/queries/presentation/pages/queries.dart';
 export 'admin/requests/presentation/pages/requests.dart';
 export 'admin/dashboard/presentation/pages/dashboard_screen.dart';
-export '/features/add_cuisines/add_cuisines.dart';
+export 'restaurant-admin/cuisines/presentation/pages/cuisines.dart';
 export '/features/reviews/reviews.dart';
 export 'restaurant-admin/share/share.dart';
 export '/features/food_menu/food_menu.dart';

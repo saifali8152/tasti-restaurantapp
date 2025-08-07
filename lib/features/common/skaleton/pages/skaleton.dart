@@ -125,7 +125,7 @@ class DrawerScreens {
           ManageBookingTimeScreen(),
           RestaurantWorkingHoursScreen(),
           SeatingAreaScreen(),
-          AddCuisinesScreen(),
+          CuisinesScreen(),
           FoodMenuScreen(),
           GalleryScreen(),
           CustomerReservations(),
