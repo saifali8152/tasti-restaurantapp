@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
 import '/core/utils/image_picker.dart';
 
-class ImagePickerField extends StatefulWidget {
+class ImagePickerWidget extends StatefulWidget {
   final ValueChanged<File> onImagePicked;
   final String placeholderText;
   final String? initialImage;
   final bool showButton;
 
-  const ImagePickerField({
+  const ImagePickerWidget({
     super.key,
     required this.onImagePicked,
     this.placeholderText = "Tap to pick image",
@@ -18,10 +18,10 @@ class ImagePickerField extends StatefulWidget {
   });
 
   @override
-  State<ImagePickerField> createState() => _ImagePickerFieldState();
+  State<ImagePickerWidget> createState() => _ImagePickerWidgetState();
 }
 
-class _ImagePickerFieldState extends State<ImagePickerField> {
+class _ImagePickerWidgetState extends State<ImagePickerWidget> {
   File? _imageFile;
 
   Future<void> _handlePickImage(BuildContext context) async {

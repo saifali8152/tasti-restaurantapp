@@ -19,7 +19,7 @@ class LoginParms {
   LoginParms({required this.email, required this.password});
 }
 
-class CreateRestaurantParms{
+class CreateRestaurantParms {
   final String name;
   final String email;
   final String phone;
@@ -51,7 +51,7 @@ class CreateRestaurantParms{
   });
 }
 
-class UpdateRestaurantParms{
+class UpdateRestaurantParms {
   final String name;
   final String email;
   final String phone;
@@ -85,7 +85,7 @@ class UpdateRestaurantParms{
   });
 }
 
-class SignupParms{
+class SignupParms {
   final String firstName;
   final String lastName;
   final String email;
@@ -162,6 +162,20 @@ class AddCuisineParms {
   final String type;
 
   AddCuisineParms({required this.id, required this.name, required this.type});
+}
+
+class AddGalleryParms {
+  final int id;
+  final String name;
+  final String notes;
+  final String image;
+
+  AddGalleryParms({
+    required this.id,
+    required this.name,
+    required this.notes,
+    required this.image,
+  });
 }
 
 class AddEventParms {

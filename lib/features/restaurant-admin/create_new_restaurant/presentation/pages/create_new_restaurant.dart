@@ -126,7 +126,7 @@ class _CreateNewRestaurantState extends State<CreateNewRestaurant> {
                   controller: descriptionController,
                   maxLines: 3,
                 ),
-                ImagePickerField(
+                ImagePickerWidget(
                   onImagePicked: (image) {
                     selectedImage = image.path;
                   },

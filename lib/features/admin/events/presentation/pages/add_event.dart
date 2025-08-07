@@ -64,7 +64,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                 icon: Icons.link,
               ),
               const SizedBox(height: 16),
-              ImagePickerField(
+              ImagePickerWidget(
                 onImagePicked: (file) => _pickedImage = file.path,
               ),
               const SizedBox(height: 30),

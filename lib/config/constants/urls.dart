@@ -52,4 +52,7 @@ class AppUrls{
   static final String deleteCuisine = "$base/restaurant/delete-type";
   static final String addCuisine = "$base/restaurant/update-type";
   static final String getCuisine = "$base/restaurant/get-types";
+  static final String addGallery = "$base/restaurant/add-gallery";
+  static final String fetchGalleries = "$base/restaurant/get-galleries";
+  static final String deleteGallery = "$base/restaurant/delete-gallery";
 }

@@ -59,7 +59,7 @@ class AuthRemoteApiImpl extends IAuthRemoteApi {
       return completeUser;
     } catch (e, stackTrace) {
       log("Stack trace: $stackTrace");
-      throw Exception("Login failed. Please try again.");
+      throw Exception(e.toString());
     }
   }
 

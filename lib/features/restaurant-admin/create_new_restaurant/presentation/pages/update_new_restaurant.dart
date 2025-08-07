@@ -109,7 +109,7 @@ class _UpdateNewRestaurantState extends State<UpdateNewRestaurant> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  ImagePickerField(
+                  ImagePickerWidget(
                     initialImage: selectedImage,
                     onImagePicked: (image) {
                       selectedImage = image.path;

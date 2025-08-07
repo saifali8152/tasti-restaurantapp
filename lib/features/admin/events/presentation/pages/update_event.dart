@@ -78,7 +78,7 @@ class _UpdateEventScreenState extends State<UpdateEventScreen> {
                 icon: Icons.link,
               ),
               const SizedBox(height: 16),
-              ImagePickerField(
+              ImagePickerWidget(
                 initialImage: _pickedImage,
                 onImagePicked: (file) => _pickedImage = file.path,
               ),
