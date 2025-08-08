@@ -20,6 +20,7 @@ class CustomInputField extends StatefulWidget {
   final EdgeInsets contentPadding;
   final double radius;
   final bool enableValidation;
+  final String? Function(String?)? validator;  // NEW
 
   const CustomInputField({
     this.hintText = '',
@@ -41,6 +42,7 @@ class CustomInputField extends StatefulWidget {
     this.contentPadding = const EdgeInsets.symmetric(
         horizontal: AppSpaces.screenHpad, vertical: 5),
     this.radius = 16,
+    this.validator, // NEW
     super.key,
   });
 
@@ -102,12 +104,13 @@ class _CustomInputFieldState extends State<CustomInputField> {
               focusedErrorBorder: border,
             ),
             validator: widget.enableValidation
-                ? (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Field can't be empty!";
-                    }
-                    return null;
-                  }
+                ? (widget.validator ??
+                    (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Field can't be empty!";
+                      }
+                      return null;
+                    })
                 : null,
           );
         },

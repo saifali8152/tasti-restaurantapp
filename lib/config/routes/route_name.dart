@@ -60,4 +60,5 @@ class AppRoutes {
   static const String addEvent = '/add-event';
   static const String updateEvent = '/update-event';
   static const String updateRestaurant = '/update-restaurant';
+  static const String updateWorkingHours = '/update-working-hours';
 }

@@ -55,4 +55,7 @@ class AppUrls{
   static final String addGallery = "$base/restaurant/add-gallery";
   static final String fetchGalleries = "$base/restaurant/get-galleries";
   static final String deleteGallery = "$base/restaurant/delete-gallery";
+  static final String addWorkingHours = "$base/restaurant/add-hours";
+  static final String updateWorkingHours = "$base/restaurant/update-hours";
+  static final String fetchWorkingHours = "$base/restaurant/get-hours";
 }

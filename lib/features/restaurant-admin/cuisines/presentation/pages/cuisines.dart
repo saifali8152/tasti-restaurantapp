@@ -89,7 +89,7 @@ class _CuisinesScreenState extends State<CuisinesScreen> {
                         ),
                         CuisineTabContent(
                           type: "attribute",
-                          dropdownItems: typesDropdownItems,
+                          dropdownItems: attribueDropdownItems,
                           selectedValue: attribute,
                           onChanged: (value) => setState(() => attribute = value),
                           bloc: bloc,

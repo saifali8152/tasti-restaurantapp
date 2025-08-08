@@ -48,6 +48,13 @@ import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_categor
 import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/domain/usecases/delete_venue.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/domain/usecases/fetch_venue.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/presentation/bloc/venue_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/data/data_sources/working_hour_repo.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/data/repositories/working_hour_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/domain/repositories/working_hour.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/domain/usecases/add_working_hour.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/domain/usecases/fetch_working_hour.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/domain/usecases/update_working_hour.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/presentation/bloc/working_hours_bloc.dart';
 import '/core/services/picker_services.dart';
 import '/features/admin/campaigns/data/data_sources/campaign_remote_source.dart';
 import '/features/admin/campaigns/data/repositories/campaign_repo_impl.dart';
@@ -173,8 +180,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IVenueRemoteApi>(VenueRemoteApiImpl(sl()));
   sl.registerSingleton<ICuisineRemoteApi>(CuisineRemoteApiImpl(sl()));
   sl.registerSingleton<IGalleryRemoteApi>(GalleryRemoteApiImpl(sl()));
+  sl.registerSingleton<IWorkingHourRemoteApi>(WorkingHourRemoteApiImpl(sl()));
 
   // Repository
+  sl.registerSingleton<IWorkingHourRepo>(WorkingHourRepoImpl(sl()));
   sl.registerSingleton<IAuthRepo>(AuthRepoImpl(sl()));
   sl.registerSingleton<IGalleryRepo>(GalleryRepoImpl(sl()));
   sl.registerSingleton<ICuisinesRepo>(CuisineRepoImpl(sl()));
@@ -252,8 +261,12 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FetchGalleryUsecase>(FetchGalleryUsecase(sl()));
   sl.registerSingleton<DeleteGalleryUsecase>(DeleteGalleryUsecase(sl()));
   sl.registerSingleton<AddGalleryUsecase>(AddGalleryUsecase(sl()));
+  sl.registerSingleton<AddWorkingHourUsecase>(AddWorkingHourUsecase(sl()));
+  sl.registerSingleton<UpdateWorkingHourUsecase>(UpdateWorkingHourUsecase(sl()));
+  sl.registerSingleton<FetchWorkingHourUsecase>(FetchWorkingHourUsecase(sl()));
 
   // Bloc
+  sl.registerLazySingleton<WorkingHoursBloc>(() => WorkingHoursBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<GalleryBloc>(() => GalleryBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<CuisineBloc>(() => CuisineBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<VenueBloc>(() => VenueBloc(sl(), sl(), sl()));

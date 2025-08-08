@@ -25,7 +25,6 @@ export 'restaurant-admin/cuisines/presentation/pages/cuisines.dart';
 export '/features/reviews/reviews.dart';
 export 'restaurant-admin/share/share.dart';
 export '/features/food_menu/food_menu.dart';
-export '/features/restaurant_working_hours/restaurant_working_hours.dart';
 export '/features/seating_area/seating_area.dart';
 export '/features/customer_reservations/customer_reservations.dart';
 export 'restaurant-admin/gallery/presentation/pages/gallery.dart';

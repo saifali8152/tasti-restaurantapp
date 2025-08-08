@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/core/services/session_controller.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/pages/update_new_restaurant.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/presentation/pages/dashboard_screen.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/presentation/pages/restaurant_working_hours.dart';
 import '/core/enum/query_type.dart';
 import '/core/enum/request_type.dart';
 import '/dependency_injection.dart';

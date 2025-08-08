@@ -3,6 +3,9 @@ import 'package:tasti_restaurant_app/features/admin/restaurants/domain/entities/
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/pages/create_new_restaurant.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/pages/update_new_restaurant.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/presentation/pages/dashboard_screen.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/domain/entities/working_hour.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/presentation/pages/restaurant_working_hours.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/presentation/pages/update_working_hours.dart';
 import '/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
 import '/features/admin/campaigns/presentation/pages/campaigns_by_res.dart';
 import '/features/admin/events/domain/entities/event.dart';
@@ -33,14 +36,16 @@ class Routes {
       case AppRoutes.updateRestaurant:
         return MaterialPageRoute(builder: (_) => const UpdateNewRestaurant());
       case AppRoutes.updateEvent:
-        return MaterialPageRoute(builder: (_) => UpdateEventScreen(
-          event: settings.arguments as EventItem,
-        ));
+        return MaterialPageRoute(
+            builder: (_) => UpdateEventScreen(
+                  event: settings.arguments as EventItem,
+                ));
       case AppRoutes.transactionHistory:
         return MaterialPageRoute(builder: (_) => const TransactionHistory());
       case AppRoutes.smsBundleDetails:
         return MaterialPageRoute(
-          builder: (_) => SmsBundleDetails(item: settings.arguments as AdminSmsItem),
+          builder: (_) =>
+              SmsBundleDetails(item: settings.arguments as AdminSmsItem),
         );
       case AppRoutes.monthlyFee:
         return MaterialPageRoute(builder: (_) => MonthlyFee());
@@ -50,33 +55,40 @@ class Routes {
         );
       case AppRoutes.manageSmsBundleDiscount:
         return MaterialPageRoute(
-          builder: (_) => ManageSmsBundleDiscountView(item: settings.arguments as AdminSmsItem),
+          builder: (_) => ManageSmsBundleDiscountView(
+              item: settings.arguments as AdminSmsItem),
         );
       case AppRoutes.queryDetails:
         return MaterialPageRoute(
-          builder: (_) => QueryDetails(query: settings.arguments as QueriesItem),
+          builder: (_) =>
+              QueryDetails(query: settings.arguments as QueriesItem),
         );
       case AppRoutes.reservationDbDetails:
         return MaterialPageRoute(
-          builder: (_) => ReservationDbDetails(item: settings.arguments as AdminReservationItem),
+          builder: (_) => ReservationDbDetails(
+              item: settings.arguments as AdminReservationItem),
         );
       case AppRoutes.restaurantDetails:
-        return MaterialPageRoute(builder: (_) => RestaurantDetails(
-          restaurant: settings.arguments as RestaurantItem,
-        ));
+        return MaterialPageRoute(
+            builder: (_) => RestaurantDetails(
+                  restaurant: settings.arguments as RestaurantItem,
+                ));
       case AppRoutes.requestDetails:
         return MaterialPageRoute(
-          builder: (_) => RequestDetails(data: settings.arguments as Map<String, dynamic>),
+          builder: (_) =>
+              RequestDetails(data: settings.arguments as Map<String, dynamic>),
         );
       case AppRoutes.notifications:
         return MaterialPageRoute(builder: (_) => const Notifications());
       case AppRoutes.campaignDetailsByRes:
-        return MaterialPageRoute(builder: (_) => CampaignByResDetails(
-          campaign: settings.arguments as CampaignsByResEntity,
-        ));
+        return MaterialPageRoute(
+            builder: (_) => CampaignByResDetails(
+                  campaign: settings.arguments as CampaignsByResEntity,
+                ));
       case AppRoutes.campaignByRes:
         return MaterialPageRoute(
-          builder: (_) => MarketingCampaignByRes(id: settings.arguments as String),
+          builder: (_) =>
+              MarketingCampaignByRes(id: settings.arguments as String),
         );
       case AppRoutes.splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
@@ -84,7 +96,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case AppRoutes.forgotPassword:
         return MaterialPageRoute(
-          builder: (_) => Scaffold(appBar: AppBar(title: Text("Forgot Password"))),
+          builder: (_) =>
+              Scaffold(appBar: AppBar(title: Text("Forgot Password"))),
         );
       case AppRoutes.signup:
         return MaterialPageRoute(builder: (_) => const SignupScreen());
@@ -98,20 +111,25 @@ class Routes {
         return MaterialPageRoute(builder: (_) => DashboardScreen());
       case AppRoutes.billings:
         return MaterialPageRoute(
-          builder: (_) => const Scaffold(body: Center(child: Text("Bundle and billings"))),
+          builder: (_) =>
+              const Scaffold(body: Center(child: Text("Bundle and billings"))),
         );
       case AppRoutes.makeReservation:
         return MaterialPageRoute(builder: (_) => MakeReservationScreen());
       case AppRoutes.workingHours:
-        return MaterialPageRoute(builder: (_) => const RestaurantWorkingHoursScreen());
+        return MaterialPageRoute(
+            builder: (_) => const RestaurantWorkingHoursScreen());
       case AppRoutes.manageBookingTime:
-        return MaterialPageRoute(builder: (_) => const ManageBookingTimeScreen());
+        return MaterialPageRoute(
+            builder: (_) => const ManageBookingTimeScreen());
       case AppRoutes.timeSlotManagement:
-        return MaterialPageRoute(builder: (_) => const TimeSlotManagementScreen());
+        return MaterialPageRoute(
+            builder: (_) => const TimeSlotManagementScreen());
       case AppRoutes.inactiveTimeSlots:
         return MaterialPageRoute(builder: (_) => const InactiveSlotsScreen());
       case AppRoutes.updateTimeDuration:
-        return MaterialPageRoute(builder: (_) => const UpdateTimeDurationScreen());
+        return MaterialPageRoute(
+            builder: (_) => const UpdateTimeDurationScreen());
       case AppRoutes.reservations:
         return MaterialPageRoute(builder: (_) => const ReservationsScreen());
       // case AppRoutes.settings:
@@ -120,12 +138,19 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const SetVenueCategory());
       case AppRoutes.share:
         return MaterialPageRoute(builder: (_) => const ShareLinksScreen());
+      case AppRoutes.updateWorkingHours:
+        return MaterialPageRoute(
+          builder: (_) => UpdateWorkingHours(
+            workingHours: settings.arguments as WorkingHourEntity,
+          ),
+        );
       case AppRoutes.campaignSummary:
         return MaterialPageRoute(builder: (_) => const CampaignSummary());
       case AppRoutes.targetedCampaign:
         return MaterialPageRoute(builder: (_) => const TargetedCampaign());
       case AppRoutes.customerReservationDetails:
-        return MaterialPageRoute(builder: (_) => const CustomerReservationDetails());
+        return MaterialPageRoute(
+            builder: (_) => const CustomerReservationDetails());
       case AppRoutes.addPhotos:
         return MaterialPageRoute(builder: (_) => const AddPhotosScreen());
       case AppRoutes.settingAreaDetails:

@@ -156,6 +156,48 @@ class AddVenueParms {
   AddVenueParms({required this.id, required this.names});
 }
 
+class AddWorkingHourParms {
+  final int id;
+  final String monday;
+  final String tuesday;
+  final String wednesday;
+  final String thursday;
+  final String friday;
+  final String saturday;
+  final String sunday;
+
+  AddWorkingHourParms({
+    required this.id,
+    required this.monday,
+    required this.tuesday,
+    required this.wednesday,
+    required this.thursday,
+    required this.friday,
+    required this.saturday,
+    required this.sunday,
+  });
+}
+
+class UpdateWorkingHourParms {
+  final int id;
+  final String monday;
+  final String tuesday;
+  final String wednesday;
+  final String thursday;
+  final String friday;
+  final String saturday;
+  final String sunday;
+
+  UpdateWorkingHourParms({required this.id,
+    required this.monday,
+    required this.tuesday,
+    required this.wednesday,
+    required this.thursday,
+    required this.friday,
+    required this.saturday,
+    required this.sunday,});
+}
+
 class AddCuisineParms {
   final int id;
   final String name;
