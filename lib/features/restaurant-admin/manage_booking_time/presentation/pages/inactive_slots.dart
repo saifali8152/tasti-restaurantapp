@@ -84,6 +84,7 @@ class _InactiveSlotsScreenState extends State<InactiveSlotsScreen> {
                     ),
                   ),
                   const SizedBox(height: 8),
+                  state.fetchResponse.data!.inActive.isEmpty? Text("Nothing Found!"):
                   Expanded(
                     child: ListView.builder(
                       itemCount: state.fetchResponse.data?.inActive.length ?? 0,

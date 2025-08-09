@@ -74,131 +74,165 @@ class BookingTimeBloc extends Bloc<BookingTimeEvent, BookingTimeState> {
   }
 
   Future<void> _onActivateBookingTimeEvent(
-    ActivateBookingTimeEvent event,
-    Emitter<BookingTimeState> emit,
-  ) async {
-    final currentData = state.fetchResponse.data;
+  ActivateBookingTimeEvent event,
+  Emitter<BookingTimeState> emit,
+) async {
+  final currentData = state.fetchResponse.data;
 
-    if (currentData != null) {
-      // Find the item in inactive list
-      final itemIndex = currentData.inActive
-          .indexWhere((e) => e.timeId == event.parms.timeId);
+  if (currentData != null) {
+    // Find the item in inactive list
+    final itemIndex = currentData.inActive
+        .indexWhere((e) => e.timeId == event.parms.timeId);
 
-      if (itemIndex != -1) {
-        final updatedInactive = List.of(currentData.inActive);
-        final updatedActive = List.of(currentData.active);
+    if (itemIndex != -1) {
+      final updatedInactive = List.of(currentData.inActive);
+      final updatedActive = List.of(currentData.active);
+      final updatedData = List.of(currentData.data);
 
-        // Change status to "on" when moving to active
-        final movedItem =
-            updatedInactive.removeAt(itemIndex).copyWith(status: 'on');
-        updatedActive.add(movedItem);
+      // Change status to "on" when moving to active
+      final movedItem =
+          updatedInactive.removeAt(itemIndex).copyWith(status: 'on');
+      updatedActive.add(movedItem);
 
-        final updatedEntity = currentData.copyWith(
-          active: updatedActive,
-          inActive: updatedInactive,
-        );
+      // ✅ Update only the changed item in `data`
+      final dataIndex =
+          updatedData.indexWhere((e) => e.timeId == event.parms.timeId);
+      if (dataIndex != -1) {
+        updatedData[dataIndex] = movedItem;
+      }
 
-        // Emit optimistic UI update
-        emit(state.copyWith(
-          fetchResponse: ApiResponse.completed(updatedEntity),
-          activateResponse: ApiResponse.loading(),
-        ));
+      final updatedEntity = currentData.copyWith(
+        active: updatedActive,
+        inActive: updatedInactive,
+        data: updatedData,
+      );
 
-        // Call API in background
-        final result = await _activateUsecase(event.parms);
+      // Emit optimistic UI update
+      emit(state.copyWith(
+        fetchResponse: ApiResponse.completed(updatedEntity),
+        activateResponse: ApiResponse.loading(),
+      ));
 
-        switch (result) {
-          case DataSuccess<String>():
-            emit(state.copyWith(
-              activateResponse: ApiResponse.completed(result.data),
-            ));
-            break;
+      // Call API in background
+      final result = await _activateUsecase(event.parms);
 
-          case DataFailure():
-            // Revert status back to "off" if activation fails
-            final revertedInactive = List.of(updatedEntity.inActive)
-              ..insert(itemIndex, movedItem.copyWith(status: 'off'));
-            final revertedActive = List.of(updatedEntity.active)
-              ..remove(movedItem);
+      switch (result) {
+        case DataSuccess<String>():
+          emit(state.copyWith(
+            activateResponse: ApiResponse.completed(result.data),
+          ));
+          break;
 
-            final revertedEntity = currentData.copyWith(
-              active: revertedActive,
-              inActive: revertedInactive,
-            );
+        case DataFailure():
+          // Revert status back to "off" if activation fails
+          final revertedInactive = List.of(updatedEntity.inActive)
+            ..insert(itemIndex, movedItem.copyWith(status: 'off'));
+          final revertedActive = List.of(updatedEntity.active)
+            ..remove(movedItem);
 
-            emit(state.copyWith(
-              fetchResponse: ApiResponse.completed(revertedEntity),
-              activateResponse: ApiResponse.error(result.error),
-            ));
-            break;
+          // ✅ Update only the changed item in `data` on revert
+          final revertedData = List.of(updatedEntity.data);
+          if (dataIndex != -1) {
+            revertedData[dataIndex] = movedItem.copyWith(status: 'off');
+          }
 
-          default:
-            emit(state.copyWith(activateResponse: ApiResponse.initial()));
-        }
+          final revertedEntity = currentData.copyWith(
+            active: revertedActive,
+            inActive: revertedInactive,
+            data: revertedData,
+          );
+
+          emit(state.copyWith(
+            fetchResponse: ApiResponse.completed(revertedEntity),
+            activateResponse: ApiResponse.error(result.error),
+          ));
+          break;
+
+        default:
+          emit(state.copyWith(activateResponse: ApiResponse.initial()));
       }
     }
   }
+}
+
 
   Future<void> _onDeactivateBookingTimeEvent(
-    DeactivateBookingTimeEvent event,
-    Emitter<BookingTimeState> emit,
-  ) async {
-    final currentData = state.fetchResponse.data;
+  DeactivateBookingTimeEvent event,
+  Emitter<BookingTimeState> emit,
+) async {
+  final currentData = state.fetchResponse.data;
 
-    if (currentData != null) {
-      final itemIndex =
-          currentData.active.indexWhere((e) => e.timeId == event.parms.timeId);
+  if (currentData != null) {
+    final itemIndex =
+        currentData.active.indexWhere((e) => e.timeId == event.parms.timeId);
 
-      if (itemIndex != -1) {
-        final updatedActive = List.of(currentData.active);
-        final updatedInactive = List.of(currentData.inActive);
+    if (itemIndex != -1) {
+      final updatedActive = List.of(currentData.active);
+      final updatedInactive = List.of(currentData.inActive);
+      final updatedData = List.of(currentData.data);
 
-        // Change status to "off" when moving to inactive
-        final movedItem =
-            updatedActive.removeAt(itemIndex).copyWith(status: 'off');
-        updatedInactive.add(movedItem);
+      // Change status to "off" when moving to inactive
+      final movedItem =
+          updatedActive.removeAt(itemIndex).copyWith(status: 'off');
+      updatedInactive.add(movedItem);
 
-        final updatedEntity = currentData.copyWith(
-          active: updatedActive,
-          inActive: updatedInactive,
-        );
+      // ✅ Update only the changed item in `data`
+      final dataIndex =
+          updatedData.indexWhere((e) => e.timeId == event.parms.timeId);
+      if (dataIndex != -1) {
+        updatedData[dataIndex] = movedItem;
+      }
 
-        emit(state.copyWith(
-          fetchResponse: ApiResponse.completed(updatedEntity),
-          deactivateResponse: ApiResponse.loading(),
-        ));
+      final updatedEntity = currentData.copyWith(
+        active: updatedActive,
+        inActive: updatedInactive,
+        data: updatedData,
+      );
 
-        final result = await _deactivateUsecase(event.parms);
+      emit(state.copyWith(
+        fetchResponse: ApiResponse.completed(updatedEntity),
+        deactivateResponse: ApiResponse.loading(),
+      ));
 
-        switch (result) {
-          case DataSuccess<String>():
-            emit(state.copyWith(
-              deactivateResponse: ApiResponse.completed(result.data),
-            ));
-            break;
+      final result = await _deactivateUsecase(event.parms);
 
-          case DataFailure():
-            // Revert status back to "on" when restoring
-            final revertedActive = List.of(updatedEntity.active)
-              ..insert(itemIndex, movedItem.copyWith(status: 'on'));
-            final revertedInactive = List.of(updatedEntity.inActive)
-              ..remove(movedItem);
+      switch (result) {
+        case DataSuccess<String>():
+          emit(state.copyWith(
+            deactivateResponse: ApiResponse.completed(result.data),
+          ));
+          break;
 
-            final revertedEntity = currentData.copyWith(
-              active: revertedActive,
-              inActive: revertedInactive,
-            );
+        case DataFailure():
+          // Revert status back to "on" when restoring
+          final revertedActive = List.of(updatedEntity.active)
+            ..insert(itemIndex, movedItem.copyWith(status: 'on'));
+          final revertedInactive = List.of(updatedEntity.inActive)
+            ..remove(movedItem);
 
-            emit(state.copyWith(
-              fetchResponse: ApiResponse.completed(revertedEntity),
-              deactivateResponse: ApiResponse.error(result.error),
-            ));
-            break;
+          // ✅ Update only the changed item in `data`
+          final revertedData = List.of(updatedEntity.data);
+          if (dataIndex != -1) {
+            revertedData[dataIndex] = movedItem.copyWith(status: 'on');
+          }
 
-          default:
-            emit(state.copyWith(deactivateResponse: ApiResponse.initial()));
-        }
+          final revertedEntity = currentData.copyWith(
+            active: revertedActive,
+            inActive: revertedInactive,
+            data: revertedData,
+          );
+
+          emit(state.copyWith(
+            fetchResponse: ApiResponse.completed(revertedEntity),
+            deactivateResponse: ApiResponse.error(result.error),
+          ));
+          break;
+
+        default:
+          emit(state.copyWith(deactivateResponse: ApiResponse.initial()));
       }
     }
   }
+}
+
 }

@@ -82,11 +82,12 @@ class ActivateTile extends StatelessWidget {
             },
             child: Container(
               width: 70,
-              padding: EdgeInsets.all(3),
+              padding: const EdgeInsets.all(3),
               decoration: BoxDecoration(
                 color: data.isActive
-                    ? AppColors.pending
-                    : color.withSafeOpacity(.2),
+                    ? AppColors.pending // Red-like bg for deactivate
+                    : workingColor
+                        .withSafeOpacity(.2), // Light green bg for activate
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Center(
@@ -95,7 +96,7 @@ class ActivateTile extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
-                    color: data.isActive ? AppColors.white : color,
+                    color: data.isActive ? AppColors.white : workingColor,
                   ),
                 ),
               ),

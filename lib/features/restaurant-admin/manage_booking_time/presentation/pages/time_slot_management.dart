@@ -98,6 +98,7 @@ class _TimeSlotManagementScreenState extends State<TimeSlotManagementScreen> {
                     ),
                   ),
                   const SizedBox(height: 8),
+                  state.fetchResponse.data!.active.isEmpty? Text("Nothing Found!"):
                   Expanded(
                     child: ListView.builder(
                       itemCount: state.fetchResponse.data?.active.length ?? 0,
