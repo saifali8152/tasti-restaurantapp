@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/features/manage_booking_time/domain/entities/booking_time.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/domain/repositories/booking_time.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/entities/booking_time.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/repositories/booking_time.dart';
 import '/core/network/response.dart';
 import '/core/usecase/usecase.dart';
 

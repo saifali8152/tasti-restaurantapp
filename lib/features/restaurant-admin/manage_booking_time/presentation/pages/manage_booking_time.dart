@@ -4,16 +4,17 @@ import 'package:tasti_restaurant_app/core/network/response.dart';
 import 'package:tasti_restaurant_app/core/services/session_controller.dart';
 import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
 import 'package:tasti_restaurant_app/dependency_injection.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/presentation/bloc/booking_time_bloc.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/presentation/bloc/booking_time_event.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/presentation/bloc/booking_time_state.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/presentation/widgets/booking_time_tile.dart';
+import 'package:tasti_restaurant_app/features/common/skaleton/user_cubit/skaleton_cubit.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/presentation/bloc/booking_time_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/presentation/bloc/booking_time_event.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/presentation/bloc/booking_time_state.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/presentation/widgets/booking_time_tile.dart';
 import '/config/routes/route_name.dart';
 import '/core/widgets/curved_container.dart';
 import '/core/widgets/header_cell.dart';
 import '/core/widgets/themed_app_bar.dart';
-import '../../../../config/constants/colors.dart';
-import '../../../../core/widgets/icon_button.dart';
+import '../../../../../config/constants/colors.dart';
+import '../../../../../core/widgets/icon_button.dart';
 
 class ManageBookingTimeScreen extends StatefulWidget {
   const ManageBookingTimeScreen({super.key});
@@ -46,18 +47,22 @@ class _ManageBookingTimeScreenState extends State<ManageBookingTimeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'Reservation Time slot:',
+              'Reservation Time slot: ',
               style: TextStyle(
                 fontSize: 12,
                 color: Colors.white,
               ),
             ),
-            Text(
-              '1 Hour',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+            BlocBuilder<UserCubit, UserCubitState>(
+              builder: (context, state) {
+                return Text(
+                  state.user?.restaurant.timeDuration ?? '0',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -124,7 +129,8 @@ class _ManageBookingTimeScreenState extends State<ManageBookingTimeScreen> {
                   child: ListView.builder(
                     itemCount: state.fetchResponse.data?.data.length ?? 0,
                     itemBuilder: (_, i) {
-                      return BookingTimeTile(data: state.fetchResponse.data!.data[i]);
+                      return BookingTimeTile(
+                          data: state.fetchResponse.data!.data[i]);
                     },
                   ),
                 ),

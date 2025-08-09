@@ -4,14 +4,14 @@ import 'package:tasti_restaurant_app/core/network/response.dart';
 import 'package:tasti_restaurant_app/core/services/session_controller.dart';
 import 'package:tasti_restaurant_app/core/utils/flushbar_extention.dart';
 import 'package:tasti_restaurant_app/dependency_injection.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/presentation/bloc/booking_time_bloc.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/presentation/bloc/booking_time_state.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/presentation/widgets/activate_tile.dart';
-import '../../../../core/widgets/header_cell.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/presentation/bloc/booking_time_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/presentation/bloc/booking_time_state.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/presentation/widgets/activate_tile.dart';
+import '../../../../../core/widgets/header_cell.dart';
 import '/config/routes/route_name.dart';
 import '/core/widgets/custom_app_bar.dart';
 import '/core/widgets/custom_button.dart';
-import '../../../../config/constants/colors.dart';
+import '../../../../../config/constants/colors.dart';
 
 class TimeSlotManagementScreen extends StatefulWidget {
   const TimeSlotManagementScreen({super.key});

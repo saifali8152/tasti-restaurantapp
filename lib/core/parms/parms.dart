@@ -230,6 +230,16 @@ class ActivateDeactivateTimeParms {
   });
 }
 
+class UpdateDurationParms {
+  final int id;
+  final String timeDuration;
+
+  UpdateDurationParms({
+    required this.id,
+    required this.timeDuration,
+  });
+}
+
 class AddEventParms {
   final String title;
   final String link;

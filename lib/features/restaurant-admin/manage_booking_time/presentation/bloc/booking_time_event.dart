@@ -24,3 +24,9 @@ class DeactivateBookingTimeEvent extends BookingTimeEvent {
 
   const DeactivateBookingTimeEvent(this.parms);
 }
+
+class UpdateDurationTimeEvent extends BookingTimeEvent {
+  final UpdateDurationParms parms;
+
+  const UpdateDurationTimeEvent(this.parms);
+}

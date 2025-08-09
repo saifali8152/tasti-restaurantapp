@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/domain/entities/booking_time.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/entities/booking_time.dart';
 
 class BookingTimeTile extends StatelessWidget {
   final BookingTimeDataEntity data;

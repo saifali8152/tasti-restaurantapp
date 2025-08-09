@@ -61,4 +61,5 @@ class AppUrls{
   static final String fetchTimes = "$base/restaurant/get-times";
   static final String deactivateTime = "$base/restaurant/deactivate-time";
   static final String activateTime = "$base/restaurant/activate-time";
+  static final String updateDuration = "$base/restaurant/update-duration";
 }

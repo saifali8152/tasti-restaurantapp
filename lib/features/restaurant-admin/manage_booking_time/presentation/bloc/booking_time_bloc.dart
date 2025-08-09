@@ -1,8 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/domain/entities/booking_time.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/domain/usecases/activate_time.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/domain/usecases/deactivate_time.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/domain/usecases/fetch_times_data.dart';
+import 'package:tasti_restaurant_app/core/services/session_controller.dart';
+import 'package:tasti_restaurant_app/features/common/auth/data/models/user.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/entities/booking_time.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/usecases/activate_time.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/usecases/deactivate_time.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/usecases/fetch_times_data.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/usecases/update_time_duration.dart';
 import '/core/network/response.dart';
 import 'booking_time_event.dart';
 import 'booking_time_state.dart';
@@ -11,21 +14,48 @@ class BookingTimeBloc extends Bloc<BookingTimeEvent, BookingTimeState> {
   final DeactivateTimeUsecase _deactivateUsecase;
   final ActivateTimeUsecase _activateUsecase;
   final FetchTimesDataUsecase _fetchUsecase;
+  final UpdateTimeDurationUsecase _updateTimeUsecase;
 
   BookingTimeBloc(
     this._fetchUsecase,
     this._deactivateUsecase,
     this._activateUsecase,
+    this._updateTimeUsecase,
   ) : super(BookingTimeState(
           deactivateResponse: ApiResponse.initial(),
           activateResponse: ApiResponse.initial(),
           fetchResponse: ApiResponse.initial(),
+          updateDurationResponse: ApiResponse.initial(),
         )) {
     on<FetchBookingTimeEvent>(_onFetchBookingTimeEvent);
     on<DeactivateBookingTimeEvent>(_onDeactivateBookingTimeEvent);
     on<ActivateBookingTimeEvent>(_onActivateBookingTimeEvent);
+    on<UpdateDurationTimeEvent>(_onUpdateDurationTimeEvent);
   }
 
+  Future<void> _onUpdateDurationTimeEvent(
+      UpdateDurationTimeEvent event, Emitter<BookingTimeState> emit) async {
+    emit(state.copyWith(updateDurationResponse: ApiResponse.loading()));
+    final result = await _updateTimeUsecase(event.parms);
+
+    switch (result) {
+      case DataSuccess<String>():
+      final currentUser = SessionController().user;
+      final userModel = UserModel.fromEntity(currentUser!);
+
+      final updatedUser = userModel.copyWith(restaurant: userModel.restaurant.copyWith(timeDuration: event.parms.timeDuration));
+      await SessionController().saveUserSession(updatedUser.toEntity());
+      
+        emit(state.copyWith(updateDurationResponse: ApiResponse.completed(result.data)));
+        break;
+      case DataFailure():
+        emit(state.copyWith(updateDurationResponse: ApiResponse.error(result.error)));
+        break;
+      default:
+        emit(state.copyWith(updateDurationResponse: ApiResponse.initial()));
+    }
+  }
+  
   Future<void> _onFetchBookingTimeEvent(
       FetchBookingTimeEvent event, Emitter<BookingTimeState> emit) async {
     emit(state.copyWith(fetchResponse: ApiResponse.loading()));

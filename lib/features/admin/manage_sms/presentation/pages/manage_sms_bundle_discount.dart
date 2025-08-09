@@ -41,7 +41,7 @@ class _ManageSmsBundleDiscountViewState
     percentageController = TextEditingController();
 
     // Parse initial price (supports values like "100", "100.0" or with currency characters)
-    final raw = widget.item.amount ?? '';
+    final raw = widget.item.amount;
     final cleaned = raw.replaceAll(RegExp(r'[^0-9.]'), '');
     final initialPriceDouble = double.tryParse(cleaned) ?? 0.0;
     final initialPrice = initialPriceDouble.round();

@@ -5,12 +5,14 @@ class CustomDropdown extends StatelessWidget {
   final List<DropdownMenuEntry<String>> items;
   final String hintText;
   final Function(String) onChanged;
+  final String? initialValue;
 
   const CustomDropdown({
     super.key,
     required this.items,
     required this.onChanged,
     required this.hintText,
+    this.initialValue,
   });
 
   @override
@@ -22,6 +24,7 @@ class CustomDropdown extends StatelessWidget {
       hintText: hintText,
       width: double.infinity,
       dropdownMenuEntries: items,
+      initialSelection: initialValue,
       inputDecorationTheme: InputDecorationTheme(
         contentPadding: EdgeInsets.symmetric(
             horizontal: AppSpaces.screenHpad, vertical: 5),

@@ -16,13 +16,14 @@ import 'package:tasti_restaurant_app/features/common/location/domain/repositorie
 import 'package:tasti_restaurant_app/features/common/location/domain/usecases/get_location_usecase.dart';
 import 'package:tasti_restaurant_app/features/common/location/domain/usecases/get_predictions_usecase.dart';
 import 'package:tasti_restaurant_app/features/common/location/presentation/bloc/location_bloc.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/data/data_sources/booking_time.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/data/repositories/booking_time_repo_impl.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/domain/repositories/booking_time.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/domain/usecases/activate_time.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/domain/usecases/deactivate_time.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/domain/usecases/fetch_times_data.dart';
-import 'package:tasti_restaurant_app/features/manage_booking_time/presentation/bloc/booking_time_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/data/data_sources/booking_time.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/data/repositories/booking_time_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/repositories/booking_time.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/usecases/activate_time.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/usecases/deactivate_time.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/usecases/fetch_times_data.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/usecases/update_time_duration.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/presentation/bloc/booking_time_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/data/data_sources/create_restaurant_repo.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/data/repositories/create_restaurant_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/domain/repositories/create_restaurant_repo.dart';
@@ -276,9 +277,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FetchTimesDataUsecase>(FetchTimesDataUsecase(sl()));
   sl.registerSingleton<ActivateTimeUsecase>(ActivateTimeUsecase(sl()));
   sl.registerSingleton<DeactivateTimeUsecase>(DeactivateTimeUsecase(sl()));
+  sl.registerSingleton<UpdateTimeDurationUsecase>(UpdateTimeDurationUsecase(sl()));
 
   // Bloc
-  sl.registerLazySingleton<BookingTimeBloc>(() => BookingTimeBloc(sl(), sl(), sl()));
+  sl.registerLazySingleton<BookingTimeBloc>(() => BookingTimeBloc(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<WorkingHoursBloc>(() => WorkingHoursBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<GalleryBloc>(() => GalleryBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<CuisineBloc>(() => CuisineBloc(sl(), sl(), sl()));

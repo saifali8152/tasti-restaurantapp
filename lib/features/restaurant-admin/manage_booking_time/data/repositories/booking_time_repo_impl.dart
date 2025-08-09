@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/manage_booking_time/data/models/booking_time.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/data/models/booking_time.dart';
 import '/core/parms/parms.dart';
 import '../data_sources/booking_time.dart';
 import '../../domain/repositories/booking_time.dart';
@@ -31,6 +31,16 @@ class BookingTimeRepoImpl extends IBookingTimeRepo {
   Future<DataState<String>> deactivateTime(ActivateDeactivateTimeParms parms)async {
     try {
       final result = await remote.deactivateTime(parms);
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
+  
+  @override
+  Future<DataState<String>> updateDuration(UpdateDurationParms parms)async {
+    try {
+      final result = await remote.updateTimeDuration(parms);
       return DataSuccess(result);
     } catch (error) {
       return DataFailure(error.toString());
