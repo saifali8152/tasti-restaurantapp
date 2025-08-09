@@ -31,7 +31,7 @@ class SessionController {
       } else {
         _user = null;
       }
-      log('User session loaded: ${UserModel.fromEntity(_user!).toJson()}');
+      log('User session loaded: ${user != null? UserModel.fromEntity(_user!).toJson() : null}');
     } catch (e) {
       log('Session load error: $e');
     }

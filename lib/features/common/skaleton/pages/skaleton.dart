@@ -26,6 +26,11 @@ class Skaleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userRole = SessionController().user?.type.toLowerCase() == 'admin'
+        ? 'admin'
+        : 'restaurant';
+    final items = DrawerScreens.drawerItemsForRole(userRole);
+
     return BlocBuilder<SkaletonCubit, SkaletonCubitState>(
       builder: (context, state) {
         return Scaffold(
@@ -41,7 +46,7 @@ class Skaleton extends StatelessWidget {
             ),
             actions: [
               Padding(
-                padding: EdgeInsets.only(right: 26),
+                padding: const EdgeInsets.only(right: 26),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, AppRoutes.notifications);
@@ -56,28 +61,23 @@ class Skaleton extends StatelessWidget {
             ],
           ),
           drawer: CustomDrawer(
-            userRole: SessionController().user?.type.toLowerCase() == 'admin'
-                ? 'admin'
-                : 'restaurant',
+            userRole: userRole,
           ),
           body: IndexedStack(
             index: state.index,
-            children: DrawerScreens.drawerItemsForRole(
-              SessionController().user?.type.toLowerCase() == 'admin' ? 'admin' : 'restaurant',
-            ),
+            children: items,
           ),
         );
       },
     );
   }
 }
-
 class DrawerScreens {
   static List<Widget> drawerItemsForRole(String role) {
     switch (role.toLowerCase()) {
       case "admin":
         return [
-          AdminDashboardScreen(), // 0
+          AdminDashboardScreen(),
           Restaurants(),
           BlocProvider(
             create: (_) => sl<RequestBloc>()
@@ -91,7 +91,7 @@ class DrawerScreens {
           ),
           BlocProvider(
             create: (_) => sl<RequestBloc>()
-              ..add(FetchInitialRequests(type: RequestType.todayRequests)),
+              ..add(FetchInitialRequests(type: RequestType.monthlyRequests)),
             child: Requests(type: RequestType.monthlyRequests),
           ),
           BlocProvider(
@@ -99,10 +99,9 @@ class DrawerScreens {
               ..add(FetchInitialQueries(type: QueryType.monthlyQueries)),
             child: Queries(type: QueryType.monthlyQueries),
           ),
-
           BlocProvider(
             create: (_) => sl<RequestBloc>()
-              ..add(FetchInitialRequests(type: RequestType.todayRequests)),
+              ..add(FetchInitialRequests(type: RequestType.overallRequests)),
             child: Requests(type: RequestType.overallRequests),
           ),
           BlocProvider(
@@ -110,13 +109,11 @@ class DrawerScreens {
               ..add(FetchInitialQueries(type: QueryType.overallQueries)),
             child: Queries(type: QueryType.overallQueries),
           ),
-
-          ReservationsDatabase(), // 8
-          Events(), // 9
-          ManageSMS(), // 10
-          MarketingCampain(), // 11
-          // UpdateNewRestaurant(), // 12 ✅ Settings screen here
-          ProfileScreen(), // 13 ✅ Profile screen here
+          ReservationsDatabase(),
+          Events(),
+          ManageSMS(),
+          MarketingCampain(),
+          ProfileScreen(), // ✅ This will always be the correct index
         ];
       case "restaurant":
       default:

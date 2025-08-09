@@ -95,7 +95,7 @@ class CustomDrawer extends StatelessWidget {
   Widget _nestedDrawerItem(BuildContext context,
       {required String title, required int index, required int currentIndex}) {
     return ListTile(
-      minTileHeight: 30,
+      minTileHeight: 40,
       minVerticalPadding: 0,
       contentPadding: const EdgeInsets.only(left: 54),
       title: Text(title,
@@ -161,7 +161,7 @@ class DrawerConfig {
           DrawerItemModel(icon: Icons.event, title: "Events", index: 9),
           DrawerItemModel(icon: Icons.sms, title: "Manage SMS & Fees", index: 10),
           DrawerItemModel(icon: Icons.campaign, title: "Campaigns", index: 11),
-          DrawerItemModel(icon: Icons.person, title: "Profile", index: 13),
+          DrawerItemModel(icon: Icons.person, title: "Profile", index: 12),
         ];
       case "restaurant":
       default:

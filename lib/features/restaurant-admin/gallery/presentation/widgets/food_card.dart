@@ -57,7 +57,7 @@ class FoodCard extends StatelessWidget {
                   right: 8,
                   child: GestureDetector(
                     onTap: (){
-                      context.showCustomDialog(DeleteGalleryDialog(id: ''));
+                      context.showCustomDialog(DeleteGalleryDialog(id: gallery.id));
                     },
                     child: Container(
                       padding: const EdgeInsets.all(4),

@@ -30,18 +30,31 @@ class _ManageSmsBundleDiscountViewState
 
   late TextEditingController priceController;
   late TextEditingController discountController;
+  late TextEditingController percentageController;
 
   @override
   void initState() {
+    super.initState();
+
     priceController = TextEditingController(text: widget.item.amount);
     discountController = TextEditingController(text: widget.item.discount);
-    super.initState();
+    percentageController = TextEditingController();
+
+    // Parse initial price (supports values like "100", "100.0" or with currency characters)
+    final raw = widget.item.amount ?? '';
+    final cleaned = raw.replaceAll(RegExp(r'[^0-9.]'), '');
+    final initialPriceDouble = double.tryParse(cleaned) ?? 0.0;
+    final initialPrice = initialPriceDouble.round();
+
+    // Ensure bloc has the initial price so subsequent percentage changes compute correctly
+    bloc.add(SetPriceEvent(initialPrice));
   }
 
   @override
   void dispose() {
     priceController.dispose();
     discountController.dispose();
+    percentageController.dispose();
     super.dispose();
   }
 
@@ -61,8 +74,14 @@ class _ManageSmsBundleDiscountViewState
         },
         bloc: bloc,
         builder: (context, state) {
+          // Keep the read-only discount field in sync with bloc state
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            discountController.text = state.discount.toString();
+            final discountText = state.discount.toString();
+            if (discountController.text != discountText) {
+              discountController.text = discountText;
+            }
+            // Optionally keep percentageController in sync if you store percentage in state
+            // percentageController.text = state.percentage > 0 ? state.percentage.toString() : '';
           });
 
           return SingleChildScrollView(
@@ -74,15 +93,25 @@ class _ManageSmsBundleDiscountViewState
                 children: [
                   const SizedBox(height: 10),
                   const FieldLabel(title: "Price"),
+                  // Make price editable and dispatch SetPriceEvent on changes
                   CustomInputField(
-                    hintText: priceController.text.isEmpty ? '0' : priceController.text,
+                    hintText: '0',
                     controller: priceController,
-                    readOnly: true,
+                    readOnly: false,
+                    keyboardInputType: TextInputType.numberWithOptions(decimal: true),
+                    onChanged: (val) {
+                      // parse decimals as well, round to nearest int
+                      final cleaned = val.replaceAll(RegExp(r'[^0-9.]'), '');
+                      final parsed = double.tryParse(cleaned) ?? 0.0;
+                      final newPrice = parsed.round();
+                      bloc.add(SetPriceEvent(newPrice));
+                    },
                   ),
                   const SizedBox(height: 10),
                   const FieldLabel(title: "Discount Percentage"),
                   CustomInputField(
                     hintText: 'Enter discount percentage',
+                    controller: percentageController,
                     keyboardInputType: TextInputType.number,
                     onChanged: (val) {
                       final percentage = int.tryParse(val) ?? 0;
@@ -91,6 +120,7 @@ class _ManageSmsBundleDiscountViewState
                   ),
                   const SizedBox(height: 10),
                   const FieldLabel(title: "Discount"),
+                  // read-only discounted amount
                   CustomInputField(
                     controller: discountController,
                     readOnly: true,

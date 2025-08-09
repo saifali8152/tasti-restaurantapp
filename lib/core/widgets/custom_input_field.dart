@@ -20,7 +20,7 @@ class CustomInputField extends StatefulWidget {
   final EdgeInsets contentPadding;
   final double radius;
   final bool enableValidation;
-  final String? Function(String?)? validator;  // NEW
+  final String? Function(String?)? validator; // NEW
 
   const CustomInputField({
     this.hintText = '',
@@ -80,9 +80,30 @@ class _CustomInputFieldState extends State<CustomInputField> {
               fillColor: Colors.white,
               filled: true,
               prefixIconColor: Colors.black,
-              contentPadding:
-                  widget.icon == null ? widget.contentPadding : EdgeInsets.zero,
-              prefixIcon: widget.icon == null ? null : Icon(widget.icon),
+
+              // Adjust the icon position
+              prefixIcon: widget.icon == null
+                  ? null
+                  : Padding(
+                      padding: EdgeInsets.only(
+                        top: widget.maxLines > 1
+                            ? 12
+                            : 0, // shift icon down for multiline
+                        left: 8,
+                        right: 8,
+                      ),
+                      child: Icon(widget.icon),
+                    ),
+              prefixIconConstraints: const BoxConstraints(
+                minWidth: 40,
+                minHeight: 0,
+              ),
+
+              // Adjust padding so text and icon align
+              contentPadding: widget.maxLines > 1
+                  ? const EdgeInsets.symmetric(vertical: 12, horizontal: 12)
+                  : widget.contentPadding,
+
               suffixIcon: widget.suffixIcon ??
                   (widget.isPasswordField
                       ? IconButton(
@@ -95,6 +116,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
                                 : Icons.visibility,
                           ))
                       : null),
+
               hintText: widget.hintText.isEmpty ? null : widget.hintText,
               hintStyle:
                   widget.hintStyle ?? TextStyle(color: Colors.grey.shade600),
@@ -103,6 +125,9 @@ class _CustomInputFieldState extends State<CustomInputField> {
               errorBorder: border,
               focusedErrorBorder: border,
             ),
+            textAlignVertical: widget.maxLines > 1
+                ? TextAlignVertical.top
+                : TextAlignVertical.center,
             validator: widget.enableValidation
                 ? (widget.validator ??
                     (value) {

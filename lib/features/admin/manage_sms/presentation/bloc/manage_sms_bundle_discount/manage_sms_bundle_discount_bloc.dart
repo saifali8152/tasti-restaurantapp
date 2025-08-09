@@ -16,29 +16,20 @@ class ManageSmsBundleDiscountBloc
       final newPrice = event.price;
       final percentage = state.percentage;
 
-      int discount = state.discount;
-
-      if (percentage != 0) {
-        final discountValue = newPrice - (newPrice * percentage / 100);
-        discount = double.parse(discountValue.toStringAsFixed(2)).toInt();
-      }
+      final int discount = (percentage > 0)
+          ? (newPrice - (newPrice * percentage / 100)).round()
+          : 0;
 
       emit(state.copyWith(price: newPrice, discount: discount));
     });
 
     on<SetManageDiscountPercentageEvent>((event, emit) {
-
       final newPercentage = event.percentage;
       final price = state.price;
 
-      int discount = state.discount;
-
-      if (newPercentage != 0) {
-        final discountValue = price - (price * newPercentage / 100);
-        discount = double.parse(discountValue.toStringAsFixed(2)).toInt();
-      } else {
-        discount = 0;
-      }
+      final int discount = (newPercentage > 0)
+          ? (price - (price * newPercentage / 100)).round()
+          : 0;
 
       emit(state.copyWith(percentage: newPercentage, discount: discount));
     });

@@ -220,6 +220,16 @@ class AddGalleryParms {
   });
 }
 
+class ActivateDeactivateTimeParms {
+  final int id;
+  final int timeId;
+
+  ActivateDeactivateTimeParms({
+    required this.id,
+    required this.timeId,
+  });
+}
+
 class AddEventParms {
   final String title;
   final String link;

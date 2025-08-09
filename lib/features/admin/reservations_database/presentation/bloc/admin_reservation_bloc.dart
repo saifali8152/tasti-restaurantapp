@@ -18,7 +18,15 @@ class AdminReservationBloc
 
   Future<void> _onSearchAdminReservation(
       SearchAdminReservation event, Emitter<AdminReservationState> emit) async {
+    // If search is empty, reload initial data
+    if (event.search.isEmpty) {
+      add(FetchInitialAdminReservation());
+      return;
+    }
+
+    // Optional: If you want to avoid searching with 1 character
     if (event.search.length < 2) return;
+
     emit(AdminReservationLoading());
 
     try {
@@ -32,6 +40,7 @@ class AdminReservationBloc
         emit(AdminReservationLoaded(
           data: result.data.data,
           pagination: result.data.pagination,
+          search: event.search, // Save search term for pagination
         ));
       } else if (result is DataFailure<AdminReservationEntity>) {
         emit(AdminReservationError(result.error.toString()));
