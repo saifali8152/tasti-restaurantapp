@@ -156,7 +156,9 @@ class Routes {
       case AppRoutes.settingAreaDetails:
         return MaterialPageRoute(builder: (_) => const SeatingAreaDetails());
       case AppRoutes.restaurantQRFoodMenu:
-        return MaterialPageRoute(builder: (_) => const RestaurantQrFoodMenu());
+        return MaterialPageRoute(builder: (_) => RestaurantQrFoodMenu(
+          menuUrl: settings.arguments as String,
+        ));
       case AppRoutes.skaleton:
         return MaterialPageRoute(builder: (_) => const Skaleton());
       default:

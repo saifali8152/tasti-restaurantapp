@@ -188,14 +188,26 @@ class UpdateWorkingHourParms {
   final String saturday;
   final String sunday;
 
-  UpdateWorkingHourParms({required this.id,
+  UpdateWorkingHourParms({
+    required this.id,
     required this.monday,
     required this.tuesday,
     required this.wednesday,
     required this.thursday,
     required this.friday,
     required this.saturday,
-    required this.sunday,});
+    required this.sunday,
+  });
+}
+
+class UploadMenuParms {
+  final String id;
+  final String menuFile;
+
+  UploadMenuParms({
+    required this.id,
+    required this.menuFile,
+  });
 }
 
 class AddCuisineParms {

@@ -16,6 +16,12 @@ import 'package:tasti_restaurant_app/features/common/location/domain/repositorie
 import 'package:tasti_restaurant_app/features/common/location/domain/usecases/get_location_usecase.dart';
 import 'package:tasti_restaurant_app/features/common/location/domain/usecases/get_predictions_usecase.dart';
 import 'package:tasti_restaurant_app/features/common/location/presentation/bloc/location_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/data/data_sources/menu_repo.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/data/repositories/menu_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/domain/repositories/menu_repo.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/domain/usecases/add_menu.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/domain/usecases/fetch_menu.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/presentation/bloc/menu_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/data/data_sources/booking_time.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/data/repositories/booking_time_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/repositories/booking_time.dart';
@@ -190,8 +196,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IGalleryRemoteApi>(GalleryRemoteApiImpl(sl()));
   sl.registerSingleton<IWorkingHourRemoteApi>(WorkingHourRemoteApiImpl(sl()));
   sl.registerSingleton<IBookingTimeRemoteApi>(BookingTimeRemoteApiImpl(sl()));
+  sl.registerSingleton<IMenuRemoteApi>(MenuRemoteApiImpl(sl()));
 
   // Repository
+  sl.registerSingleton<IMenuRepo>(MenuRepoImpl(sl()));
   sl.registerSingleton<IBookingTimeRepo>(BookingTimeRepoImpl(sl()));
   sl.registerSingleton<IWorkingHourRepo>(WorkingHourRepoImpl(sl()));
   sl.registerSingleton<IAuthRepo>(AuthRepoImpl(sl()));
@@ -278,8 +286,11 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<ActivateTimeUsecase>(ActivateTimeUsecase(sl()));
   sl.registerSingleton<DeactivateTimeUsecase>(DeactivateTimeUsecase(sl()));
   sl.registerSingleton<UpdateTimeDurationUsecase>(UpdateTimeDurationUsecase(sl()));
+  sl.registerSingleton<AddMenuUsecase>(AddMenuUsecase(sl()));
+  sl.registerSingleton<FetchMenuUsecase>(FetchMenuUsecase(sl()));
 
   // Bloc
+  sl.registerLazySingleton<MenuBloc>(() => MenuBloc(sl(), sl()));
   sl.registerLazySingleton<BookingTimeBloc>(() => BookingTimeBloc(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<WorkingHoursBloc>(() => WorkingHoursBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<GalleryBloc>(() => GalleryBloc(sl(), sl(), sl()));
