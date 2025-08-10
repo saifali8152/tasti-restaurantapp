@@ -17,7 +17,11 @@ class RestaurantQrFoodMenu extends StatelessWidget {
     final screenshotController = ScreenshotController();
 
     return BlocProvider(
-      create: (_) => RestaurantQrCubit(),
+      create: (_) {
+        final cubit = RestaurantQrCubit();
+        cubit.init(screenshotController);
+        return cubit;
+      },
       child: Scaffold(
         appBar: CustomAppBar(title: 'Restaurant QR Food Menu'),
         backgroundColor: Colors.grey.shade50,
@@ -42,19 +46,17 @@ class RestaurantQrFoodMenu extends StatelessWidget {
                   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 16),
-
                 Screenshot(
                   controller: screenshotController,
                   child: QrImageView(
+                    backgroundColor: Colors.white,
                     data: menuUrl,
                     version: QrVersions.auto,
                     size: 250,
                     gapless: false,
                   ),
                 ),
-
                 const SizedBox(height: 24),
-
                 BlocConsumer<RestaurantQrCubit, RestaurantQrState>(
                   listener: (context, state) {
                     if (state is RestaurantQrDownloaded) {
@@ -75,12 +77,13 @@ class RestaurantQrFoodMenu extends StatelessWidget {
                       onTap: isLoading
                           ? null
                           : () {
-                              context.read<RestaurantQrCubit>().downloadQr(menuUrl);
+                              context
+                                  .read<RestaurantQrCubit>()
+                                  .downloadQr(menuUrl);
                             },
                     );
                   },
                 ),
-
                 const SizedBox(height: 24),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
