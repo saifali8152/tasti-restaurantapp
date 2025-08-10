@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/reviews/domain/entities/reviews.dart';
-import 'package:tasti_restaurant_app/features/reviews/presentation/bloc/reviews_bloc.dart';
-import 'package:tasti_restaurant_app/features/reviews/presentation/bloc/reviews_event.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/domain/entities/reviews.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/presentation/bloc/reviews_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/presentation/bloc/reviews_event.dart';
 import '../widgets/review_card.dart';
-import '../../../../../../../config/constants/colors.dart';
+import '../../../../../../../../config/constants/colors.dart';
 
 class TabsSection extends StatelessWidget {
   final int id;

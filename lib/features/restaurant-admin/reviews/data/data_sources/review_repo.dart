@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/reviews/data/models/review.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/data/models/review.dart';
 import '/core/parms/parms.dart';
 import '/core/network/api_services.dart';
 import '/config/constants/urls.dart';

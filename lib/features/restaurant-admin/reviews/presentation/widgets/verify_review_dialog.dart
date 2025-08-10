@@ -1,8 +1,8 @@
 import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/reviews/domain/entities/reviews.dart';
-import 'package:tasti_restaurant_app/features/reviews/presentation/bloc/reviews_bloc.dart';
-import 'package:tasti_restaurant_app/features/reviews/presentation/bloc/reviews_event.dart';
-import 'package:tasti_restaurant_app/features/reviews/presentation/bloc/reviews_state.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/domain/entities/reviews.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/presentation/bloc/reviews_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/presentation/bloc/reviews_event.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/presentation/bloc/reviews_state.dart';
 import '/core/network/response.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/widgets/custom_button.dart';
