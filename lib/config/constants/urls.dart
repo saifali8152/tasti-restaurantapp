@@ -64,4 +64,7 @@ class AppUrls{
   static final String updateDuration = "$base/restaurant/update-duration";
   static final String addMenu = "$base/restaurant/update-menu";
   static final String fetchMenu = "$base/restaurant/get-menu";
+  static final String fetchReviews = "$base/restaurant/get-reviews";
+  static final String verifyReview = "$base/restaurant/verify-review";
+  static final String unverifyReview = "$base/restaurant/unverify-review";
 }

@@ -69,6 +69,13 @@ import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/dom
 import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/domain/usecases/fetch_working_hour.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/domain/usecases/update_working_hour.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/presentation/bloc/working_hours_bloc.dart';
+import 'package:tasti_restaurant_app/features/reviews/data/data_sources/review_repo.dart';
+import 'package:tasti_restaurant_app/features/reviews/data/repositories/review_repo_impl.dart';
+import 'package:tasti_restaurant_app/features/reviews/domain/repositories/review_repo.dart';
+import 'package:tasti_restaurant_app/features/reviews/domain/usecases/fetch_reviews.dart';
+import 'package:tasti_restaurant_app/features/reviews/domain/usecases/unverify_review.dart';
+import 'package:tasti_restaurant_app/features/reviews/domain/usecases/verify_review.dart';
+import 'package:tasti_restaurant_app/features/reviews/presentation/bloc/reviews_bloc.dart';
 import '/core/services/picker_services.dart';
 import '/features/admin/campaigns/data/data_sources/campaign_remote_source.dart';
 import '/features/admin/campaigns/data/repositories/campaign_repo_impl.dart';
@@ -197,8 +204,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IWorkingHourRemoteApi>(WorkingHourRemoteApiImpl(sl()));
   sl.registerSingleton<IBookingTimeRemoteApi>(BookingTimeRemoteApiImpl(sl()));
   sl.registerSingleton<IMenuRemoteApi>(MenuRemoteApiImpl(sl()));
+  sl.registerSingleton<IReviewsRemoteApi>(ReviewsRemoteApiImpl(sl()));
 
   // Repository
+  sl.registerSingleton<IReviewsRepo>(ReviewsRepoImpl(sl()));
   sl.registerSingleton<IMenuRepo>(MenuRepoImpl(sl()));
   sl.registerSingleton<IBookingTimeRepo>(BookingTimeRepoImpl(sl()));
   sl.registerSingleton<IWorkingHourRepo>(WorkingHourRepoImpl(sl()));
@@ -288,8 +297,12 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<UpdateTimeDurationUsecase>(UpdateTimeDurationUsecase(sl()));
   sl.registerSingleton<AddMenuUsecase>(AddMenuUsecase(sl()));
   sl.registerSingleton<FetchMenuUsecase>(FetchMenuUsecase(sl()));
+  sl.registerSingleton<FetchReviewsUsecase>(FetchReviewsUsecase(sl()));
+  sl.registerSingleton<VerifyReviewUsecase>(VerifyReviewUsecase(sl()));
+  sl.registerSingleton<UnVerifyReviewUsecase>(UnVerifyReviewUsecase(sl()));
 
   // Bloc
+  sl.registerLazySingleton<ReviewsBloc>(() => ReviewsBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<MenuBloc>(() => MenuBloc(sl(), sl()));
   sl.registerLazySingleton<BookingTimeBloc>(() => BookingTimeBloc(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<WorkingHoursBloc>(() => WorkingHoursBloc(sl(), sl(), sl()));

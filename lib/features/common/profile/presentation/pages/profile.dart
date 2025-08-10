@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/config/constants/colors.dart';
+import 'package:tasti_restaurant_app/core/widgets/curved_container.dart';
+import 'package:tasti_restaurant_app/core/widgets/themed_app_bar.dart';
 import '../../../skaleton/user_cubit/skaleton_cubit.dart';
 import '/config/routes/route_name.dart';
 import '/core/widgets/custom_tile.dart';
@@ -13,77 +16,93 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: BlocBuilder<UserCubit, UserCubitState>(
-        builder: (context, state) {
-          final user = state.user;
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final width = size.width;
 
-          return SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return BlocBuilder<UserCubit, UserCubitState>(
+      builder: (context, state) {
+        final user = state.user;
+        return Scaffold(
+          appBar: ThemedAppBar(
+            height: height * 0.25, // responsive height
+            subTitle: Column(
               children: [
                 ProfileImage(
-                  networkImageUrl: user?.profilePic??'',
+                  networkImageUrl: user?.profilePic ?? '',
                   isEditable: false,
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: height * 0.015),
                 Center(
                   child: Text(
-                    user?.name??'',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    user?.name ?? '',
+                    style: TextStyle(
+                      fontSize: width * 0.045, // responsive font
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                SizedBox(height: 30),
-                Text("About You",
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                CustomTile(
-                  leading: Icon(Icons.person_outline),
-                  title: "Personal Information",
-                  onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.profile);
-                  },
-                ),
-                CustomTile(
-                  leading: Icon(Icons.lock_outline),
-                  title: "Change Password",
-                  onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.changePassword);
-                  },
-                ),
-                SizedBox(height: 20),
-                SizedBox(height: 20),
-                Text("Help Center",
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                CustomTile(
-                  leading: Icon(Icons.help_outline_outlined),
-                  title: "Contact Us",
-                  onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.contactUs);
-                  },
-                ),
-                SizedBox(height: 20),
-                Text("Account",
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                CustomTile(
-                  leading: Icon(Icons.logout),
-                  title: "Logout",
-                  onTap: () => context.showCustomDialog(LogoutDialog()),
-                ),
-                CustomTile(
-                  leading: Icon(Icons.delete_forever),
-                  title: "Delete Account",
-                  onTap: () => context.showCustomDialog(DeleteAccountDialog()),
                 ),
               ],
             ),
-          );
-        },
-      ),
+          ),
+          backgroundColor: AppColors.darkOrange,
+          body: CurvedContainer(
+            child: BlocBuilder<UserCubit, UserCubitState>(
+              builder: (context, state) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: height * 0.03),
+                    Text(
+                      "About You",
+                      style: TextStyle(
+                        fontSize: width * 0.045,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    CustomTile(
+                      leading: Icon(Icons.person_outline, size: width * 0.06),
+                      title: "Personal Information",
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.profile);
+                      },
+                    ),
+                    CustomTile(
+                      leading: Icon(Icons.lock_outline, size: width * 0.06),
+                      title: "Change Password",
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, AppRoutes.changePassword);
+                      },
+                    ),
+                    SizedBox(height: height * 0.025),
+                    Text(
+                      "Account",
+                      style: TextStyle(
+                        fontSize: width * 0.045,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    CustomTile(
+                      leading: Icon(Icons.logout, size: width * 0.06),
+                      title: "Logout",
+                      onTap: () => context.showCustomDialog(LogoutDialog()),
+                    ),
+                    CustomTile(
+                      leading:
+                          Icon(Icons.delete_forever, size: width * 0.06),
+                      title: "Delete Account",
+                      onTap: () =>
+                          context.showCustomDialog(DeleteAccountDialog()),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }

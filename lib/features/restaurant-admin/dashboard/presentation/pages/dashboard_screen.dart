@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/domain/entities/dashboard.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/presentation/bloc/dashboard_event.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/presentation/bloc/dashboard_state.dart';
@@ -38,7 +39,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           child: BlocBuilder<DashboardBloc, DashboardState>(
             builder: (context, state) {
               if (state is DashboardLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: LoadingWidget());
               } else if (state is DashboardSuccess) {
                 return buildDashboardContent(context, state.data);
               } else if (state is DashboardError) {
@@ -54,7 +55,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget buildDashboardContent(
       BuildContext context, DashboardEntity data) {
-    return RefreshIndicator(
+    return RefreshIndicator.adaptive(
       onRefresh: ()async{
         _bloc.add(FetchDashboard());
       },

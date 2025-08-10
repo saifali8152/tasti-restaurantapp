@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
 import '/core/widgets/themed_app_bar.dart';
 import '/dependency_injection.dart';
 import '/features/admin/dashboard/domain/entities/admin_dashboard.dart';
@@ -39,7 +40,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           child: BlocBuilder<AdminDashboardBloc, AdminDashboardState>(
             builder: (context, state) {
               if (state is AdminDashboardLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: LoadingWidget());
               } else if (state is AdminDashboardSuccess) {
                 return buildDashboardContent(context, state.data);
               } else if (state is AdminDashboardError) {

@@ -5,6 +5,11 @@ import '../constants/colors.dart';
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
       useMaterial3: true,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: AppColors.darkOrange,
+        primary: AppColors.darkOrange,
+        secondary: AppColors.darkOrange,
+      ),
       brightness: Brightness.light,
       primaryColor: AppColors.white,
       appBarTheme: CustomAppBarTheme.lightTheme,

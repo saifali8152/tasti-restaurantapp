@@ -22,7 +22,7 @@ export 'admin/queries/presentation/pages/queries.dart';
 export 'admin/requests/presentation/pages/requests.dart';
 export 'admin/dashboard/presentation/pages/dashboard_screen.dart';
 export 'restaurant-admin/cuisines/presentation/pages/cuisines.dart';
-export '/features/reviews/reviews.dart';
+export 'reviews/presentation/pages/reviews.dart';
 export 'restaurant-admin/share/share.dart';
 export 'restaurant-admin/food_menu/presentation/pages/food_menu.dart';
 export '/features/seating_area/seating_area.dart';

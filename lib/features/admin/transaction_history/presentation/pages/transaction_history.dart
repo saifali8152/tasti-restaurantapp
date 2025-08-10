@@ -29,7 +29,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
       appBar: CustomAppBar(title: "Transaction History"),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal:20.0),
-        child: RefreshIndicator(
+        child: RefreshIndicator.adaptive(
           onRefresh: ()async{
             bloc.add(FetchInitialTransactionHistory());
           },

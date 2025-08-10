@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
 import '/config/constants/spaces.dart';
 import '/core/widgets/custom_input_field.dart';
 import '../bloc/update_profile/profile_bloc.dart';
@@ -40,7 +41,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: CustomAppBar(title: ''),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppSpaces.screenHpad),

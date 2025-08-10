@@ -232,6 +232,16 @@ class AddGalleryParms {
   });
 }
 
+class VerifyUnverifyReviewParms {
+  final int id;
+  final String reviewId;
+
+  VerifyUnverifyReviewParms({
+    required this.id,
+    required this.reviewId,
+  });
+}
+
 class ActivateDeactivateTimeParms {
   final int id;
   final int timeId;
