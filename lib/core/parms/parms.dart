@@ -1,6 +1,61 @@
 import '/core/enum/query_type.dart';
 import '/core/enum/request_type.dart';
 
+class TableData {
+  final int maxCapacity;
+  final int minCapacity;
+  final int tableMax;
+  final bool isMoveable;
+  final String type;
+  final String shape;
+
+  TableData({
+    required this.maxCapacity,
+    required this.minCapacity,
+    required this.tableMax,
+    required this.isMoveable,
+    required this.type,
+    required this.shape,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "max_capacity": maxCapacity,
+      "min_capacity": minCapacity,
+      "table_max": tableMax,
+      "is_moveable": isMoveable,
+      "type": type,
+      "shape": shape,
+    };
+  }
+}
+
+class SeatingAreaParms {
+  final int? id;
+  final int restaurantId;
+  final String seatingAreaName;
+  final String abbreviation;
+  final List<TableData> tables;
+
+  SeatingAreaParms({
+    this.id,
+    required this.restaurantId,
+    required this.seatingAreaName,
+    required this.abbreviation,
+    List<TableData>? tables,
+  }) : tables = tables ?? [];
+
+  Map<String, dynamic> toJson() {
+    return {
+      if(id != null) "id": id,
+      "restaurant_id": restaurantId,
+      "seating_area_name": seatingAreaName,
+      "abbreviation": abbreviation,
+      "tables": tables.map((t) => t.toJson()).toList(),
+    };
+  }
+}
+
 class GetPlaceDetailsParms {
   final String placeId;
 

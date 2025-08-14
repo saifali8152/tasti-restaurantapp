@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/features/seating_area/domain/entities/seating_area.dart';
+import 'package:tasti_restaurant_app/features/seating_area/presentation/widgets/delete_seating_area_dialog.dart';
 import '/config/constants/colors.dart';
 import '/config/routes/route_name.dart';
 import '/core/utils/general_extentions.dart';
 import '/core/widgets/card_details_row.dart';
-import '../../../core/widgets/custom_button.dart';
+import '../../../../core/widgets/custom_button.dart';
 
 class SeatingAreaCard extends StatelessWidget {
-  final int index;
+  final SeatingAreaEntity seatingArea;
   const SeatingAreaCard({
     super.key,
-    required this.index,
+    required this.seatingArea,
   });
 
   @override
@@ -39,7 +41,7 @@ class SeatingAreaCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '#$index',
+                  '#${seatingArea.id}',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 IconButton(
@@ -52,11 +54,10 @@ class SeatingAreaCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            CardDetailsRow(label: 'Seating Area Name', value: 'Value'),
-            CardDetailsRow(label: 'Abbreviation', value: 'Value'),
-            SizedBox(height: 5),
-            const Divider(),
-            SizedBox(height: 5),
+            CardDetailsRow(label: 'Seating Area Name', value: seatingArea.seatingAreaName),
+            CardDetailsRow(label: 'Abbreviation', value: seatingArea.abbreviation),
+            CardDetailsRow(label: 'Capacity', value: "${seatingArea.capacity} PAX"),
+            SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -72,7 +73,9 @@ class SeatingAreaCard extends StatelessWidget {
                 const SizedBox(width: 10),
                 Expanded(
                   child: CustomButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.showCustomDialog(DeleteSeatingAreaDialog(id: seatingArea.id));
+                    },
                     text: "Delete",
                   ),
                 ),

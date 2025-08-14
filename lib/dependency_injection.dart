@@ -76,6 +76,14 @@ import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/domain/us
 import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/domain/usecases/unverify_review.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/domain/usecases/verify_review.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/presentation/bloc/reviews_bloc.dart';
+import 'package:tasti_restaurant_app/features/seating_area/data/data_sources/seating_area_remote_repo.dart';
+import 'package:tasti_restaurant_app/features/seating_area/data/repositories/seating_area_impl.dart';
+import 'package:tasti_restaurant_app/features/seating_area/domain/repositories/seating_area.dart';
+import 'package:tasti_restaurant_app/features/seating_area/domain/usecases/add_seating_area.dart';
+import 'package:tasti_restaurant_app/features/seating_area/domain/usecases/delete_seating_area.dart';
+import 'package:tasti_restaurant_app/features/seating_area/domain/usecases/fetch_seating_area.dart';
+import 'package:tasti_restaurant_app/features/seating_area/domain/usecases/update_seating_area.dart';
+import 'package:tasti_restaurant_app/features/seating_area/presentation/bloc/seating_area_bloc.dart';
 import '/core/services/picker_services.dart';
 import '/features/admin/campaigns/data/data_sources/campaign_remote_source.dart';
 import '/features/admin/campaigns/data/repositories/campaign_repo_impl.dart';
@@ -205,8 +213,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IBookingTimeRemoteApi>(BookingTimeRemoteApiImpl(sl()));
   sl.registerSingleton<IMenuRemoteApi>(MenuRemoteApiImpl(sl()));
   sl.registerSingleton<IReviewsRemoteApi>(ReviewsRemoteApiImpl(sl()));
+  sl.registerSingleton<ISeatingAreaRemoteApi>(SeatingAreaRemoteApiImpl(sl()));
 
   // Repository
+  sl.registerSingleton<ISeatingAreaRepo>(SeatingAreaRepoImpl(sl()));
   sl.registerSingleton<IReviewsRepo>(ReviewsRepoImpl(sl()));
   sl.registerSingleton<IMenuRepo>(MenuRepoImpl(sl()));
   sl.registerSingleton<IBookingTimeRepo>(BookingTimeRepoImpl(sl()));
@@ -300,8 +310,13 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FetchReviewsUsecase>(FetchReviewsUsecase(sl()));
   sl.registerSingleton<VerifyReviewUsecase>(VerifyReviewUsecase(sl()));
   sl.registerSingleton<UnVerifyReviewUsecase>(UnVerifyReviewUsecase(sl()));
+  sl.registerSingleton<AddSeatingAreaUsecase>(AddSeatingAreaUsecase(sl()));
+  sl.registerSingleton<FetchSeatingAreaUsecase>(FetchSeatingAreaUsecase(sl()));
+  sl.registerSingleton<UpdateSeatingAreaUsecase>(UpdateSeatingAreaUsecase(sl()));
+  sl.registerSingleton<DeleteSeatingAreaUsecase>(DeleteSeatingAreaUsecase(sl()));
 
   // Bloc
+  sl.registerLazySingleton<SeatingAreaBloc>(() => SeatingAreaBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<ReviewsBloc>(() => ReviewsBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<MenuBloc>(() => MenuBloc(sl(), sl()));
   sl.registerLazySingleton<BookingTimeBloc>(() => BookingTimeBloc(sl(), sl(), sl(), sl()));

@@ -8,7 +8,7 @@ export 'restaurant-admin/manage_booking_time/presentation/pages/manage_booking_t
 export 'restaurant-admin/manage_booking_time/presentation/pages/update_time_duration.dart';
 export 'restaurant-admin/manage_booking_time/presentation/pages/time_slot_management.dart';
 export 'restaurant-admin/manage_booking_time/presentation/pages/inactive_slots.dart';
-export '../../features/seating_area/seating_area_details.dart';
+export 'seating_area/presentation/pages/seating_area_details.dart';
 export 'restaurant-admin/food_menu/presentation/pages/restaurant_qr_food_menu.dart';
 export 'restaurant-admin/gallery/presentation/pages/add_photos.dart';
 export '/features/customer_reservations/customer_reservation_details.dart';
@@ -25,7 +25,7 @@ export 'restaurant-admin/cuisines/presentation/pages/cuisines.dart';
 export 'restaurant-admin/reviews/presentation/pages/reviews.dart';
 export 'restaurant-admin/share/share.dart';
 export 'restaurant-admin/food_menu/presentation/pages/food_menu.dart';
-export '/features/seating_area/seating_area.dart';
+export 'seating_area/presentation/pages/seating_area.dart';
 export '/features/customer_reservations/customer_reservations.dart';
 export 'restaurant-admin/gallery/presentation/pages/gallery.dart';
 export 'restaurant-admin/dashboard/dashboard_screen.dart';

@@ -67,4 +67,9 @@ class AppUrls{
   static final String fetchReviews = "$base/restaurant/get-reviews";
   static final String verifyReview = "$base/restaurant/verify-review";
   static final String unverifyReview = "$base/restaurant/unverify-review";
+  static final String fetchSeatingAreas = "$base/restaurant/get-seating-areas";
+  static final String addSeatingAreas = "$base/restaurant/add-seating-area";
+  static final String updateSeatingAreas = "$base/restaurant/update-seating-area";
+  static final String deleteSeatingAreas = "$base/restaurant/delete-seating-area";
+
 }
