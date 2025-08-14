@@ -6,6 +6,7 @@ import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/present
 import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/domain/entities/working_hour.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/presentation/pages/restaurant_working_hours.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/presentation/pages/update_working_hours.dart';
+import 'package:tasti_restaurant_app/features/seating_area/presentation/pages/add_seating_area.dart';
 import '/features/admin/campaigns/domain/entities/campaigns_by_res.dart';
 import '/features/admin/campaigns/presentation/pages/campaigns_by_res.dart';
 import '/features/admin/events/domain/entities/event.dart';
@@ -155,6 +156,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const AddPhotosScreen());
       case AppRoutes.settingAreaDetails:
         return MaterialPageRoute(builder: (_) => const SeatingAreaDetails());
+      case AppRoutes.addSeatingArea:
+        return MaterialPageRoute(builder: (_) => const AddSeatingAreaScreen());
       case AppRoutes.restaurantQRFoodMenu:
         return MaterialPageRoute(builder: (_) => RestaurantQrFoodMenu(
           menuUrl: settings.arguments as String,

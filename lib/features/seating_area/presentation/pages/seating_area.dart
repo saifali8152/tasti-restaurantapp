@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/config/routes/route_name.dart';
 import 'package:tasti_restaurant_app/core/network/response.dart';
 import 'package:tasti_restaurant_app/core/services/session_controller.dart';
 import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
@@ -59,8 +60,10 @@ class _SeatingAreaScreenState extends State<SeatingAreaScreen> {
         subTitle: ButtonWithIcon(
           icon: Image.asset(AppIcons.seatingArea,
               color: Colors.white, height: 15),
-          title: 'Create Seating Areas',
-          onTap: () {},
+          title: 'Add Seating Areas',
+          onTap: () {
+            Navigator.pushNamed(context, AppRoutes.addSeatingArea);
+          },
           bgColor: const Color(0xFF5A73E2),
         ),
       ),
