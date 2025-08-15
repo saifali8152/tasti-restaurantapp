@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/seating_area/domain/entities/seating_area.dart';
-import 'package:tasti_restaurant_app/features/seating_area/presentation/widgets/delete_seating_area_dialog.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/domain/entities/seating_area.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/widgets/delete_seating_area_dialog.dart';
 import '/config/constants/colors.dart';
 import '/config/routes/route_name.dart';
 import '/core/utils/general_extentions.dart';
 import '/core/widgets/card_details_row.dart';
-import '../../../../core/widgets/custom_button.dart';
+import '../../../../../core/widgets/custom_button.dart';
 
 class SeatingAreaCard extends StatelessWidget {
   final SeatingAreaEntity seatingArea;
@@ -19,7 +19,7 @@ class SeatingAreaCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, AppRoutes.settingAreaDetails);
+        Navigator.pushNamed(context, AppRoutes.settingAreaDetails, arguments: seatingArea.tables);
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),

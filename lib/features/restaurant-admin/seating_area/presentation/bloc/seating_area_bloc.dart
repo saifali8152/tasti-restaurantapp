@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/seating_area/domain/entities/seating_area.dart';
-import 'package:tasti_restaurant_app/features/seating_area/domain/usecases/add_seating_area.dart';
-import 'package:tasti_restaurant_app/features/seating_area/domain/usecases/delete_seating_area.dart';
-import 'package:tasti_restaurant_app/features/seating_area/domain/usecases/fetch_seating_area.dart';
-import 'package:tasti_restaurant_app/features/seating_area/domain/usecases/update_seating_area.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/domain/entities/seating_area.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/domain/usecases/add_seating_area.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/domain/usecases/delete_seating_area.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/domain/usecases/fetch_seating_area.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/domain/usecases/update_seating_area.dart';
 import '/core/network/response.dart';
 import 'seating_area_event.dart';
 import 'seating_area_state.dart';

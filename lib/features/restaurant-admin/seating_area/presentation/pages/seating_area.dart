@@ -5,13 +5,13 @@ import 'package:tasti_restaurant_app/core/network/response.dart';
 import 'package:tasti_restaurant_app/core/services/session_controller.dart';
 import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
 import 'package:tasti_restaurant_app/dependency_injection.dart';
-import 'package:tasti_restaurant_app/features/seating_area/presentation/bloc/seating_area_bloc.dart';
-import 'package:tasti_restaurant_app/features/seating_area/presentation/bloc/seating_area_event.dart';
-import 'package:tasti_restaurant_app/features/seating_area/presentation/bloc/seating_area_state.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_event.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_state.dart';
 import '/core/widgets/curved_container.dart';
 import '/core/widgets/themed_app_bar.dart';
-import '../../../../config/constants/icons.dart';
-import '../../../../core/widgets/icon_button.dart';
+import '../../../../../config/constants/icons.dart';
+import '../../../../../core/widgets/icon_button.dart';
 import '/config/constants/colors.dart';
 import '../widgets/seating_area_card.dart';
 

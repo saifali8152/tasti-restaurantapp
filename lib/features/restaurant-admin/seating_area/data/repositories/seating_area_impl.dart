@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/seating_area/data/models/seating_area.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/data/models/seating_area.dart';
 import '/core/parms/parms.dart';
 import '../data_sources/seating_area_remote_repo.dart';
 import '../../domain/repositories/seating_area.dart';

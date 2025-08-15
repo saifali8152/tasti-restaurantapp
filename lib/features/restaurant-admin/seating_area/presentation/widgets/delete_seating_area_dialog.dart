@@ -1,6 +1,6 @@
-import 'package:tasti_restaurant_app/features/seating_area/presentation/bloc/seating_area_bloc.dart';
-import 'package:tasti_restaurant_app/features/seating_area/presentation/bloc/seating_area_event.dart';
-import 'package:tasti_restaurant_app/features/seating_area/presentation/bloc/seating_area_state.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_event.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_state.dart';
 import '/core/network/response.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/widgets/custom_button.dart';

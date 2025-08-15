@@ -9,10 +9,10 @@ import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_input_field.dart';
 import 'package:tasti_restaurant_app/core/widgets/field_label.dart';
 import 'package:tasti_restaurant_app/dependency_injection.dart';
-import 'package:tasti_restaurant_app/features/seating_area/presentation/bloc/seating_area_bloc.dart';
-import 'package:tasti_restaurant_app/features/seating_area/presentation/bloc/seating_area_event.dart';
-import 'package:tasti_restaurant_app/features/seating_area/presentation/bloc/seating_area_state.dart';
-import 'package:tasti_restaurant_app/features/seating_area/presentation/widgets/pax_tile.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_event.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_state.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/widgets/pax_tile.dart';
 
 class AddSeatingAreaScreen extends StatefulWidget {
   final SeatingAreaParms? initialData;
