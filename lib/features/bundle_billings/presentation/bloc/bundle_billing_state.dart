@@ -8,6 +8,7 @@ import '/core/network/response.dart';
 
 class BundleBillingState extends Equatable {
   final ApiResponse<InitPaymentEntity> initPaymentResponse;
+  final ApiResponse<String> verifyPaymentResponse;
   final ApiResponse<List<SMSEntity>> fetchSMSResponse;
   final ApiResponse<List<BundleItem>> fetchBundleResponse;
   final PaginationModel? bundlePagination;
@@ -19,6 +20,7 @@ class BundleBillingState extends Equatable {
 
   const BundleBillingState({
     required this.initPaymentResponse,
+    required this.verifyPaymentResponse,
     required this.fetchBundleResponse,
     required this.fetchSMSResponse,
     required this.fetchTransactionHistoryResponse,
@@ -33,6 +35,7 @@ class BundleBillingState extends Equatable {
         fetchTransactionHistoryResponse,
     final ApiResponse<List<SMSEntity>>? fetchSMSResponse,
     final ApiResponse<List<BundleItem>>? fetchBundleResponse,
+    final ApiResponse<String>? verifyPaymentResponse,
     final ApiResponse<InitPaymentEntity>? initPaymentResponse,
     final PaginationModel? bundlePagination,
     final PaginationModel? transactionPagination,
@@ -45,9 +48,10 @@ class BundleBillingState extends Equatable {
       isTransactionLoadingMore:
           isTransactionLoadingMore ?? this.isTransactionLoadingMore,
       bundlePagination: bundlePagination ?? this.bundlePagination,
+      verifyPaymentResponse: verifyPaymentResponse ?? ApiResponse.initial(),
       isBundleLoadingMore: isBundleLoadingMore ?? this.isBundleLoadingMore,
       fetchBundleResponse: fetchBundleResponse ?? this.fetchBundleResponse,
-      initPaymentResponse: initPaymentResponse ?? this.initPaymentResponse,
+      initPaymentResponse: initPaymentResponse ?? ApiResponse.initial(),
       fetchSMSResponse: fetchSMSResponse ?? this.fetchSMSResponse,
       fetchTransactionHistoryResponse: fetchTransactionHistoryResponse ??
           this.fetchTransactionHistoryResponse,
@@ -57,6 +61,7 @@ class BundleBillingState extends Equatable {
   @override
   List<Object?> get props => [
         initPaymentResponse,
+        verifyPaymentResponse,
         fetchBundleResponse,
         fetchSMSResponse,
         fetchTransactionHistoryResponse,

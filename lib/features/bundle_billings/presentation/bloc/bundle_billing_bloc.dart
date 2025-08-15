@@ -8,6 +8,7 @@ import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/fe
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/fetch_sms.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/fetch_transaction_histroy.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/init_sms_payment.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/verify_sms_payment.dart';
 import '/core/network/response.dart';
 import 'bundle_billing_event.dart';
 import 'bundle_billing_state.dart';
@@ -17,16 +18,19 @@ class BundleBillingBloc extends Bloc<BundleBillingEvent, BundleBillingState> {
   final FetchBundlesUsecase _fetchBundleUsecase;
   final FetchTransactionHistroyUsecase _fetchTransactionHistoryBundleUsecase;
   final InitSmsPaymentUsecase _initSmsPaymentUsecase;
+  final VerifySmsPaymentUsecase _verifySmsPaymentUsecase;
 
   BundleBillingBloc(
     this._fetchBundleUsecase,
     this._fetchSMSUsecase,
     this._fetchTransactionHistoryBundleUsecase,
     this._initSmsPaymentUsecase,
+    this._verifySmsPaymentUsecase,
   ) : super(BundleBillingState(
           initPaymentResponse: ApiResponse.initial(),
           fetchBundleResponse: ApiResponse.initial(),
           fetchSMSResponse: ApiResponse.initial(),
+          verifyPaymentResponse: ApiResponse.initial(),
           fetchTransactionHistoryResponse: ApiResponse.initial(),
         )) {
     on<FetchInitialBundleBillingEvent>(_onFetchInitialBundleBillingEvent);
@@ -35,6 +39,21 @@ class BundleBillingBloc extends Bloc<BundleBillingEvent, BundleBillingState> {
     on<FetchInitialRestaurantTransactions>(_onFetchInitialRestaurantTransactions);
     on<FetchMoreRestaurantTransactions>(_onFetchMoreRestaurantTransactions);
     on<InitSmsPayment>(_onInitSmsPayment);
+    on<VerifySmsPayment>(_onVerifySmsPayment);
+  }
+  Future<void> _onVerifySmsPayment(
+      VerifySmsPayment event, Emitter<BundleBillingState> emit) async {
+    emit(state.copyWith(verifyPaymentResponse: ApiResponse.loading()));
+    try {
+      final result = await _verifySmsPaymentUsecase.call(event.parms);
+      if (result is DataSuccess<String>) {
+        emit(state.copyWith(verifyPaymentResponse: ApiResponse.completed(result.data)));
+      } else if (result is DataFailure<String>) {
+        emit(state.copyWith(verifyPaymentResponse: ApiResponse.error(result.error)));
+      }
+    } catch (e) {
+      emit(state.copyWith(verifyPaymentResponse: ApiResponse.error(e.toString())));
+    }
   }
 
   Future<void> _onInitSmsPayment(

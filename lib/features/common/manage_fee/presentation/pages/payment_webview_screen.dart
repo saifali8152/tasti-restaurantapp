@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class PaymentWebViewScreen extends StatefulWidget {
@@ -31,12 +32,11 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onPageFinished: (url) async {
-            // Check if we're being redirected back to a known domain (like your callback domain)
             if (!_hasVerified && url.contains('verify-payment') || url.contains("verify-sms-payment")) {
               _hasVerified = true;
 
-              Navigator.pop(context); // Close the webview first
-              widget.onVerify(widget.reference); // Then verify the payment
+              Navigator.pop(context);
+              widget.onVerify(widget.reference);
             }
           },
         ),
@@ -47,7 +47,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Complete Payment')),
+      appBar: CustomAppBar(title: 'Complete Payment'),
       body: WebViewWidget(controller: _controller),
     );
   }

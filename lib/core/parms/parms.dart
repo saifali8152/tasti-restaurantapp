@@ -294,10 +294,12 @@ class UploadMenuParms {
 class VerifySmsPaymentParms {
   final String restaurantId;
   final String reference;
+  final String bundleId;
 
   VerifySmsPaymentParms({
     required this.restaurantId,
     required this.reference,
+    required this.bundleId,
   });
 }
 

@@ -70,15 +70,19 @@ class BundleBillingRemoteApiImpl extends IBundleBillingRemoteApi {
     var response = await networkApiService
         .post(AppUrls.initializeSmsPayment, {"bundle_id": bundleId});
 
-    final InitPaymentModel initPayment = InitPaymentModel.fromJson(response['data']);
+    final InitPaymentModel initPayment =
+        InitPaymentModel.fromJson(response['data']);
     return initPayment;
   }
-  
+
   @override
   Future<String> verifySmsPayment(VerifySmsPaymentParms parms) async {
-    var response = await networkApiService
-        .post(AppUrls.verifySmsPayment, {"restaurant_id": parms.restaurantId, "reference": parms.reference});
+    var response = await networkApiService.post(AppUrls.verifySmsPayment, {
+      "restaurant_id": parms.restaurantId,
+      "reference": parms.reference,
+      "bundle_id": parms.bundleId,
+    });
 
-    return response['date'];
+    return response['message'];
   }
 }

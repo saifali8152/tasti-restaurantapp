@@ -6,6 +6,7 @@ import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/fe
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/fetch_sms.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/fetch_transaction_histroy.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/init_sms_payment.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/verify_sms_payment.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/presentation/bloc/bundle_billing_bloc.dart';
 import 'package:tasti_restaurant_app/features/common/manage_fee/domain/usecases/initialize_payment_fee.dart';
 import 'package:tasti_restaurant_app/features/common/manage_fee/domain/usecases/verify_payment.dart';
@@ -328,9 +329,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FetchBundlesUsecase>(FetchBundlesUsecase(sl()));
   sl.registerSingleton<FetchTransactionHistroyUsecase>(FetchTransactionHistroyUsecase(sl()));
   sl.registerSingleton<InitSmsPaymentUsecase>(InitSmsPaymentUsecase(sl()));
+  sl.registerSingleton<VerifySmsPaymentUsecase>(VerifySmsPaymentUsecase(sl()));
 
   // Bloc
-  sl.registerLazySingleton<BundleBillingBloc>(() => BundleBillingBloc(sl(), sl(), sl(), sl()));
+  sl.registerLazySingleton<BundleBillingBloc>(() => BundleBillingBloc(sl(), sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<SeatingAreaBloc>(() => SeatingAreaBloc(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<ReviewsBloc>(() => ReviewsBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<MenuBloc>(() => MenuBloc(sl(), sl()));

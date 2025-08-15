@@ -1,7 +1,7 @@
 import 'package:tasti_restaurant_app/config/constants/colors.dart';
 import 'package:tasti_restaurant_app/config/routes/route_name.dart';
-import 'package:tasti_restaurant_app/core/enum/subscription_status.dart';
 import 'package:tasti_restaurant_app/core/network/response.dart';
+import 'package:tasti_restaurant_app/core/parms/parms.dart';
 import 'package:tasti_restaurant_app/core/services/payment_webview_service.dart';
 import 'package:tasti_restaurant_app/core/services/session_controller.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/presentation/bloc/bundle_billing_bloc.dart';
@@ -18,39 +18,13 @@ class InitPaymentDialog extends StatelessWidget {
   const InitPaymentDialog({super.key, required this.bundleId});
 
   void _handleLoginNavigation(BuildContext context) {
-    final user = SessionController().user;
-    if (user == null) return;
-
-    if (user.type == 'admin') {
-      Navigator.pushNamedAndRemoveUntil(
-          context, AppRoutes.skaleton, (route) => false);
-    } else if (user.type == 'restaurant') {
-      final status = user.subscriptionStatus;
-      if (status == SubscriptionStatus.active.title) {
-        Navigator.pushNamedAndRemoveUntil(
-            context, AppRoutes.skaleton, (route) => false);
-      }
-      if (status == SubscriptionStatus.noRestaurant.title) {
-        Navigator.pushNamedAndRemoveUntil(
-            context, AppRoutes.createNewRestaurant, (route) => false);
-      }
-      if (status == SubscriptionStatus.restaurantSuspended.title) {
-        Navigator.pushNamedAndRemoveUntil(
-            context, AppRoutes.createNewRestaurant, (route) => false);
-      }
-      if (status == SubscriptionStatus.inactive.title) {
-        Navigator.pushNamedAndRemoveUntil(
-            context, AppRoutes.monthlyFee, (route) => false);
-      }
-      if (status == SubscriptionStatus.expired.title) {
-        Navigator.pushNamedAndRemoveUntil(
-            context, AppRoutes.monthlyFee, (route) => false);
-      }
-    }
+    Navigator.pop(context);
+    Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route)=>false);
   }
 
   @override
   Widget build(BuildContext context) {
+    final int id = SessionController().user?.restaurant.id ?? 0;
     final BundleBillingBloc bloc = sl();
     return BlocProvider(
       create: (_) => bloc,
@@ -85,29 +59,36 @@ class InitPaymentDialog extends StatelessWidget {
               BlocConsumer<BundleBillingBloc, BundleBillingState>(
                 bloc: bloc,
                 listener: (context, state) {
-                    print('object: ${state.initPaymentResponse.status}');
                   if (state.initPaymentResponse.status == Status.completed) {
-                    final url = state.initPaymentResponse.data?.authorizationUrl ?? '';
-                    final reference = state.initPaymentResponse.data?.reference ?? '';
+                    final url =
+                        state.initPaymentResponse.data?.authorizationUrl ?? '';
+                    final reference =
+                        state.initPaymentResponse.data?.reference ?? '';
 
                     PaymentWebViewService.openPaymentPage(
                       context: context,
                       paymentUrl: url,
                       reference: reference,
                       onVerify: (ref) {
-                        // bloc.add(VerifyPaymentSubmitted(state.initPaymentResponse.data?.reference??''));
+                        bloc.add(VerifySmsPayment(VerifySmsPaymentParms(
+                          reference:
+                              state.initPaymentResponse.data?.reference ?? "",
+                          restaurantId: id.toString(),
+                          bundleId: bundleId.toString(),
+                        )));
                       },
                     );
                   }
-                  // if (state.verifyResponse.status == Status.completed) {
-                  //   _handleLoginNavigation(context);
-                  // }
-                  // if (state.verifyResponse.status == Status.error) {
-                  //   context.flushBarErrorMessage(message: 'this is the error');
-                  //   _handleLoginNavigation(context);
-                  // }
                   if (state.initPaymentResponse.status == Status.error) {
                     context.flushBarErrorMessage(message: state.initPaymentResponse.message.toString());
+                  }
+                  if (state.verifyPaymentResponse.status == Status.completed) {
+                    _handleLoginNavigation(context);
+                    context.flushBarSuccessMessage(message: state.verifyPaymentResponse.data.toString());
+                  }
+                  if (state.verifyPaymentResponse.status == Status.error) {
+                    context.flushBarErrorMessage(message:state.verifyPaymentResponse.message.toString());
+                    _handleLoginNavigation(context);
                   }
                 },
                 builder: (context, state) {
@@ -128,7 +109,8 @@ class InitPaymentDialog extends StatelessWidget {
                             bloc.add(InitSmsPayment(bundleId));
                           },
                           text: "Continue",
-                          isLoading: state.initPaymentResponse.status == Status.loading,
+                          isLoading: state.initPaymentResponse.status ==
+                              Status.loading,
                           bgColor: AppColors.darkOrange,
                         ),
                       ),
