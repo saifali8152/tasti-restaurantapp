@@ -1,4 +1,11 @@
 import 'package:get_it/get_it.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/data/data_sources/bundle_billing_remote_repo.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/data/repositories/bundle_billing_repo.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/domain/repositories/bundle_billing.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/fetch_bundles.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/fetch_sms.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/fetch_transaction_histroy.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/presentation/bloc/bundle_billing_bloc.dart';
 import 'package:tasti_restaurant_app/features/common/manage_fee/domain/usecases/initialize_payment_fee.dart';
 import 'package:tasti_restaurant_app/features/common/manage_fee/domain/usecases/verify_payment.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/data/data_sources/restaurant_remote_source.dart';
@@ -214,8 +221,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IMenuRemoteApi>(MenuRemoteApiImpl(sl()));
   sl.registerSingleton<IReviewsRemoteApi>(ReviewsRemoteApiImpl(sl()));
   sl.registerSingleton<ISeatingAreaRemoteApi>(SeatingAreaRemoteApiImpl(sl()));
+  sl.registerSingleton<IBundleBillingRemoteApi>(BundleBillingRemoteApiImpl(sl()));
 
   // Repository
+  sl.registerSingleton<IBundleBillingRepo>(BundleBillingRepoImpl(sl()));
   sl.registerSingleton<ISeatingAreaRepo>(SeatingAreaRepoImpl(sl()));
   sl.registerSingleton<IReviewsRepo>(ReviewsRepoImpl(sl()));
   sl.registerSingleton<IMenuRepo>(MenuRepoImpl(sl()));
@@ -314,8 +323,12 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FetchSeatingAreaUsecase>(FetchSeatingAreaUsecase(sl()));
   sl.registerSingleton<UpdateSeatingAreaUsecase>(UpdateSeatingAreaUsecase(sl()));
   sl.registerSingleton<DeleteSeatingAreaUsecase>(DeleteSeatingAreaUsecase(sl()));
+  sl.registerSingleton<FetchSmsUsecase>(FetchSmsUsecase(sl()));
+  sl.registerSingleton<FetchBundlesUsecase>(FetchBundlesUsecase(sl()));
+  sl.registerSingleton<FetchTransactionHistroyUsecase>(FetchTransactionHistroyUsecase(sl()));
 
   // Bloc
+  sl.registerLazySingleton<BundleBillingBloc>(() => BundleBillingBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<SeatingAreaBloc>(() => SeatingAreaBloc(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<ReviewsBloc>(() => ReviewsBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<MenuBloc>(() => MenuBloc(sl(), sl()));

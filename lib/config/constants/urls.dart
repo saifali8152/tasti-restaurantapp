@@ -71,5 +71,7 @@ class AppUrls{
   static final String addSeatingAreas = "$base/restaurant/add-seating-area";
   static final String updateSeatingAreas = "$base/restaurant/update-seating-area";
   static final String deleteSeatingAreas = "$base/restaurant/delete-seating-area";
-
+  static final String fetchBundles = "$base/restaurant/get-bundles";
+  static final String fetchTransactionHistory = "$base/restaurant/get-transaction-history";
+  static final String fetchSMS = "$base/restaurant/get-sms";
 }
