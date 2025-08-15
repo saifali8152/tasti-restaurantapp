@@ -15,8 +15,8 @@ extension FlushBarErrorMessage on BuildContext {
         borderRadius: BorderRadius.circular(4),
         icon: const Icon(Icons.error_outline,
             color: Color(0xFFB91C1C), size: 24), // deep brick red
-        messageText: const Text(
-          "Something went wrong",
+        messageText: Text(
+          message,
           style: TextStyle(
             color: Color(0xFFB91C1C),
             fontWeight: FontWeight.w700,
@@ -50,8 +50,8 @@ extension FlushBarSuccessMessage on BuildContext {
         borderRadius: BorderRadius.circular(4),
         icon: const Icon(Icons.check_circle_outline,
             color: Color(0xFF047857), size: 28), // deep teal
-        messageText: const Text(
-          "Operation Successful",
+        messageText: Text(
+          message,
           style: TextStyle(
             color: Color(0xFF047857),
             fontWeight: FontWeight.w700,
