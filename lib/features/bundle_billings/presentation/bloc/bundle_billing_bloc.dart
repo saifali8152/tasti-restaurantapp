@@ -27,8 +27,8 @@ class BundleBillingBloc extends Bloc<BundleBillingEvent, BundleBillingState> {
     on<FetchInitialBundleBillingEvent>(_onFetchInitialBundleBillingEvent);
     on<FetchMoreBundleBillingEvent>(_onFetchMoreBundleBillingEvent);
     on<FetchSMSBundleBillingEvent>(_onFetchSMSBundleBillingEvent);
-    on<FetchRestaurantTransactionHistoryBundleBillingEvent>(
-        _onFetchRestaurantTransactionHistoryBundleBillingEvent);
+    on<FetchInitialRestaurantTransactions>(_onFetchInitialRestaurantTransactions);
+    on<FetchMoreRestaurantTransactions>(_onFetchMoreRestaurantTransactions);
   }
 
   Future<void> _onFetchMoreBundleBillingEvent(FetchMoreBundleBillingEvent event,
@@ -60,12 +60,48 @@ class BundleBillingBloc extends Bloc<BundleBillingEvent, BundleBillingState> {
       }
     }
   }
+  
+  Future<void> _onFetchMoreRestaurantTransactions(
+    FetchMoreRestaurantTransactions event,
+    Emitter<BundleBillingState> emit) async {
+  if (state.transactionPagination?.hasNext == true &&
+      !state.isTransactionLoadingMore) {
+    emit(state.copyWith(isTransactionLoadingMore: true));
+
+    try {
+      final nextPage = state.transactionPagination!.currentPage + 1;
+      final parms = PaginationParms(page: nextPage.toString());
+
+      final result = await _fetchTransactionHistoryBundleUsecase.call(parms);
+
+      if (result is DataSuccess<ReataurantTransactionHistoryEntity>) {
+        final newData = result.data;
+
+        // Get the current transaction list from the correct state
+        final currentList = state.fetchTransactionHistoryResponse.data ?? [];
+
+        // Append new data
+        final updatedList = List<RestaurantTransactionHistoryItem>.from(currentList)
+          ..addAll(newData.data);
+
+        emit(state.copyWith(
+          fetchTransactionHistoryResponse: ApiResponse.completed(updatedList),
+          transactionPagination: newData.pagination,
+          isTransactionLoadingMore: false,
+        ));
+      } else if (result is DataFailure<ReataurantTransactionHistoryEntity>) {
+        emit(state.copyWith(isTransactionLoadingMore: false));
+      }
+    } catch (e) {
+      emit(state.copyWith(isTransactionLoadingMore: false));
+    }
+  }
+}
+
 
   Future<void> _onFetchInitialBundleBillingEvent(
       FetchInitialBundleBillingEvent event,
       Emitter<BundleBillingState> emit) async {
-    emit(state.copyWith(fetchBundleResponse: ApiResponse.loading()));
-
     emit(state.copyWith(fetchBundleResponse: ApiResponse.loading()));
 
     try {
@@ -88,27 +124,29 @@ class BundleBillingBloc extends Bloc<BundleBillingEvent, BundleBillingState> {
           state.copyWith(fetchBundleResponse: ApiResponse.error(e.toString())));
     }
   }
-
-  Future<void> _onFetchRestaurantTransactionHistoryBundleBillingEvent(
-      FetchRestaurantTransactionHistoryBundleBillingEvent event,
+  
+  Future<void> _onFetchInitialRestaurantTransactions(
+      FetchInitialRestaurantTransactions event,
       Emitter<BundleBillingState> emit) async {
-    emit(
-        state.copyWith(fetchTransactionHistoryResponse: ApiResponse.loading()));
-    final result = await _fetchTransactionHistoryBundleUsecase(event.parms);
+    emit(state.copyWith(fetchTransactionHistoryResponse: ApiResponse.loading()));
 
-    switch (result) {
-      case DataSuccess<ReataurantTransactionHistoryEntity>():
-        emit(state.copyWith(
-            fetchTransactionHistoryResponse:
-                ApiResponse.completed(result.data)));
-        break;
-      case DataFailure():
-        emit(state.copyWith(
-            fetchTransactionHistoryResponse: ApiResponse.error(result.error)));
-        break;
-      default:
-        emit(state.copyWith(
-            fetchTransactionHistoryResponse: ApiResponse.initial()));
+    try {
+      final parms = PaginationParms(page: '1');
+      final result = await _fetchTransactionHistoryBundleUsecase(parms);
+
+      if (result is DataSuccess<ReataurantTransactionHistoryEntity>) {
+        emit(
+          state.copyWith(
+            fetchTransactionHistoryResponse: ApiResponse.completed(result.data.data),
+            transactionPagination: result.data.pagination,
+          ),
+        );
+      } else if (result is DataFailure<ReataurantTransactionHistoryEntity>) {
+        emit(state.copyWith(fetchTransactionHistoryResponse: ApiResponse.error(result.error)));
+      }
+    } catch (e) {
+      emit(
+          state.copyWith(fetchTransactionHistoryResponse: ApiResponse.error(e.toString())));
     }
   }
 

@@ -7,7 +7,7 @@ class CardDetailsRow extends StatelessWidget {
   const CardDetailsRow({
     required this.label,
     required this.value,
-    this.flex = 0,
+    this.flex = 1, // default to 1 for better space sharing
     super.key,
   });
 
@@ -16,10 +16,17 @@ class CardDetailsRow extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: Colors.grey[700], fontSize: 12)),
-          SizedBox(width: 10),
+          Expanded(
+            flex: 1,
+            child: Text(
+              label,
+              style: TextStyle(color: Colors.grey[700], fontSize: 12),
+              overflow: TextOverflow.ellipsis, // prevent overflow
+              maxLines: 1,
+            ),
+          ),
+          const SizedBox(width: 10),
           Expanded(
             flex: flex,
             child: Text(
@@ -29,6 +36,8 @@ class CardDetailsRow extends StatelessWidget {
                 fontSize: 12,
               ),
               textAlign: TextAlign.end,
+              overflow: TextOverflow.ellipsis, // prevent overflow
+              maxLines: 1,
             ),
           ),
         ],

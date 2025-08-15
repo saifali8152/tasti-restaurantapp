@@ -10,26 +10,36 @@ class BundleBillingState extends Equatable {
   final ApiResponse<List<BundleItem>> fetchBundleResponse;
   final PaginationModel? bundlePagination;
   final bool isBundleLoadingMore;
-  final ApiResponse<ReataurantTransactionHistoryEntity>
+  final ApiResponse<List<RestaurantTransactionHistoryItem>>
       fetchTransactionHistoryResponse;
+  final PaginationModel? transactionPagination;
+  final bool isTransactionLoadingMore;
 
   const BundleBillingState({
     required this.fetchBundleResponse,
     required this.fetchSMSResponse,
     required this.fetchTransactionHistoryResponse,
     this.bundlePagination,
+    this.transactionPagination,
     this.isBundleLoadingMore = false,
+    this.isTransactionLoadingMore = false,
   });
 
   BundleBillingState copyWith({
-    ApiResponse<ReataurantTransactionHistoryEntity>?
+    ApiResponse<List<RestaurantTransactionHistoryItem>>?
         fetchTransactionHistoryResponse,
     final ApiResponse<List<SMSEntity>>? fetchSMSResponse,
     final ApiResponse<List<BundleItem>>? fetchBundleResponse,
     final PaginationModel? bundlePagination,
+    final PaginationModel? transactionPagination,
     final bool? isBundleLoadingMore,
+    final bool? isTransactionLoadingMore,
   }) {
     return BundleBillingState(
+      transactionPagination:
+          transactionPagination ?? this.transactionPagination,
+      isTransactionLoadingMore:
+          isTransactionLoadingMore ?? this.isTransactionLoadingMore,
       bundlePagination: bundlePagination ?? this.bundlePagination,
       isBundleLoadingMore: isBundleLoadingMore ?? this.isBundleLoadingMore,
       fetchBundleResponse: fetchBundleResponse ?? this.fetchBundleResponse,
@@ -40,6 +50,13 @@ class BundleBillingState extends Equatable {
   }
 
   @override
-  List<Object?> get props =>
-      [fetchBundleResponse, fetchSMSResponse, fetchTransactionHistoryResponse, isBundleLoadingMore, bundlePagination];
+  List<Object?> get props => [
+        fetchBundleResponse,
+        fetchSMSResponse,
+        fetchTransactionHistoryResponse,
+        isBundleLoadingMore,
+        bundlePagination,
+        transactionPagination,
+        isTransactionLoadingMore,
+      ];
 }

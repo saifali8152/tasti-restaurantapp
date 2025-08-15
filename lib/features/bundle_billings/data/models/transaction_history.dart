@@ -1,7 +1,5 @@
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/entities/transaction_history.dart';
-
 import '/core/models/pagination.dart';
-import '/features/admin/events/domain/entities/event.dart';
 
 class RestaurantTransactionHistoryModel extends ReataurantTransactionHistoryEntity {
   const RestaurantTransactionHistoryModel({
@@ -28,27 +26,30 @@ class RestaurantTransactionHistoryModel extends ReataurantTransactionHistoryEnti
 
 class RestaurantTransactionHistoryItemModel extends RestaurantTransactionHistoryItem {
   const RestaurantTransactionHistoryItemModel({
-    required super.eventId,
-    required super.eventTitle,
-    required super.eventImage,
-    required super.eventLink,
+    required super.id,
+    required super.reference,
+    required super.amount,
+    required super.status,
+    required super.date,
   });
 
   factory RestaurantTransactionHistoryItemModel.fromJson(Map<String, dynamic> json) {
     return RestaurantTransactionHistoryItemModel(
-      eventId: json['event_id'] ?? 0,
-      eventTitle: json['event_title'] ?? '',
-      eventImage: json['event_image'] ?? '',
-      eventLink: json['event_link'] ?? '',
+      id: json['id'] ?? 0,
+      reference: json['reference'] ?? '',
+      amount: json['amount'] ?? '',
+      status: json['status'] ?? '',
+      date: json['transaction_date'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'event_id': eventId,
-      'event_title': eventTitle,
-      'event_image': eventImage,
-      'event_link': eventLink,
+      'id': id,
+      'reference': reference,
+      'amount': amount,
+      'status': status,
+      'transaction_date': date,
     };
   }
 }

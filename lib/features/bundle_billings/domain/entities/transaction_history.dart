@@ -14,25 +14,19 @@ class ReataurantTransactionHistoryEntity extends Equatable {
   List<Object?> get props => [data, pagination];
 }
 
-class RestaurantTransactionHistoryItem extends Equatable {
-  final int eventId;
-  final String eventTitle;
-  final String eventImage;
-  final String eventLink;
+class RestaurantTransactionHistoryItem {
+  final int id;
+  final String reference;
+  final String amount;
+  final String status;
+  final String date;
 
   const RestaurantTransactionHistoryItem({
-    required this.eventId,
-    required this.eventTitle,
-    required this.eventImage,
-    required this.eventLink,
+    required this.id,
+    required this.reference,
+    required this.amount,
+    required this.status,
+    required this.date,
   });
-
-  @override
-  List<Object?> get props => [
-        eventId,
-        eventTitle,
-        eventImage,
-        eventLink,
-      ];
 }
 

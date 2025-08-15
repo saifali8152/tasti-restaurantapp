@@ -10,6 +10,19 @@ class SMSModel extends SMSEntity {
     required super.amount,
   });
 
+  @override
+  bool get hasDiscount {
+    final discountValue = double.tryParse(discount.toString()) ?? 0;
+    return discountValue > 0;
+  }
+
+  @override
+  String get originalPrice => amount.toString();
+
+  @override
+  String get displayPrice =>
+      hasDiscount ? discount.toString() : amount.toString();
+
   factory SMSModel.fromJson(Map<String, dynamic> json) {
     return SMSModel(
       id: json['id'] ?? 0,

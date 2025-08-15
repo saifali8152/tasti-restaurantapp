@@ -14,4 +14,16 @@ class SMSEntity {
     required this.bundles,
     required this.amount,
   });
+
+  /// Returns true if discount is greater than 0
+  bool get hasDiscount {
+    final discountValue = double.tryParse(discount) ?? 0;
+    return discountValue > 0;
+  }
+
+  /// Original price (before discount)
+  String get originalPrice => percentage;
+
+  /// Price to display (discounted if available)
+  String get displayPrice => hasDiscount ? discount : percentage;
 }

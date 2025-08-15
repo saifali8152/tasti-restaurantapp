@@ -60,7 +60,7 @@ class BundleBillingRemoteApiImpl extends IBundleBillingRemoteApi {
     );
 
     final RestaurantTransactionHistoryModel transactionHistory =
-        RestaurantTransactionHistoryModel.fromJson(response['data']);
+        RestaurantTransactionHistoryModel.fromJson(response);
     return transactionHistory;
   }
 

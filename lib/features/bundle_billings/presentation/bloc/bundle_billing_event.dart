@@ -1,6 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-
 abstract class BundleBillingEvent extends Equatable {
   const BundleBillingEvent();
 
@@ -20,8 +18,5 @@ class FetchMoreBundleBillingEvent extends BundleBillingEvent {
 
 class FetchSMSBundleBillingEvent extends BundleBillingEvent {}
 
-class FetchRestaurantTransactionHistoryBundleBillingEvent extends BundleBillingEvent {
-  final PaginationParms parms;
-
-  const FetchRestaurantTransactionHistoryBundleBillingEvent(this.parms);
-}
+class FetchInitialRestaurantTransactions extends BundleBillingEvent {}
+class FetchMoreRestaurantTransactions extends BundleBillingEvent {}

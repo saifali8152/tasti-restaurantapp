@@ -6,12 +6,12 @@ import 'package:tasti_restaurant_app/core/services/session_controller.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
 import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
 import 'package:tasti_restaurant_app/dependency_injection.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_event.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_state.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/presentation/bloc/bundle_billing_bloc.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/presentation/bloc/bundle_billing_event.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/presentation/bloc/bundle_billing_state.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/presentation/widgets/transaction_card.dart';
 import '../../../../../config/constants/icons.dart';
 import '../../../../../core/widgets/icon_button.dart';
-import '../widgets/billing_card.dart';
 
 class RestaurantTransactionHistory extends StatefulWidget {
   const RestaurantTransactionHistory({super.key});
@@ -23,28 +23,22 @@ class RestaurantTransactionHistory extends StatefulWidget {
 
 class _RestaurantTransactionHistoryState
     extends State<RestaurantTransactionHistory> {
-  final SeatingAreaBloc bloc = sl();
+  final BundleBillingBloc bloc = sl();
   final int id = SessionController().user?.restaurant.id ?? 0;
 
   @override
   void initState() {
     super.initState();
-    bloc.add(FetchSeatingAreaEvent(id.toString()));
+    bloc.add(FetchInitialRestaurantTransactions());
   }
 
-  Widget _messageList(String message, {Color? color}) {
+  Widget _buildScrollContent(Widget child) {
     return ListView(
       physics: const AlwaysScrollableScrollPhysics(),
       children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Center(
-            child: Text(
-              message,
-              style: TextStyle(fontSize: 16, color: color ?? Colors.grey[700]),
-              textAlign: TextAlign.center,
-            ),
-          ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.7,
+          child: child,
         ),
       ],
     );
@@ -53,9 +47,7 @@ class _RestaurantTransactionHistoryState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: "SMS Bundles & Transactions",
-      ),
+      appBar: CustomAppBar(title: "Transaction History"),
       body: Column(
         children: [
           SizedBox(height: 10),
@@ -71,45 +63,83 @@ class _RestaurantTransactionHistoryState
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
-              child: BlocBuilder<SeatingAreaBloc, SeatingAreaState>(
+              child: BlocBuilder<BundleBillingBloc, BundleBillingState>(
                 bloc: bloc,
                 builder: (context, state) {
                   return RefreshIndicator.adaptive(
                     onRefresh: () async {
-                      bloc.add(FetchSeatingAreaEvent(id.toString()));
+                      bloc.add(FetchInitialRestaurantTransactions());
                     },
                     child: Builder(
                       builder: (context) {
-                        if (state.fetchResponse.status == Status.loading) {
-                          return const Center(child: LoadingWidget());
-                        }
-              
-                        if (state.fetchResponse.status == Status.error) {
-                          return _messageList(
-                            state.fetchResponse.message.toString(),
-                            color: Colors.red,
+                        if (state.fetchTransactionHistoryResponse.status ==
+                            Status.loading) {
+                          return _buildScrollContent(
+                            const Center(child: LoadingWidget()),
                           );
                         }
-              
-                        if (state.fetchResponse.status == Status.completed) {
-                          final data = state.fetchResponse.data ?? [];
-                          if (data.isEmpty) {
-                            return _messageList("No Seating Area Found.");
+                    
+                        if (state.fetchTransactionHistoryResponse.status == Status.error) {
+                          return _buildScrollContent(
+                            Center(
+                              child: Text(
+                                state.fetchTransactionHistoryResponse.message.toString(),
+                                style: const TextStyle(
+                                    color: Colors.red, fontSize: 16),
+                              ),
+                            ),
+                          );
+                        }
+                    
+                        if (state.fetchTransactionHistoryResponse.status ==
+                            Status.completed) {
+                          if (state.fetchTransactionHistoryResponse.data!.isEmpty) {
+                            return _buildScrollContent(
+                              Center(
+                                child: Text(
+                                  "Nothing Found.",
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.grey[700]),
+                                ),
+                              ),
+                            );
                           }
-              
-                          return ListView.separated(
-                            physics: const AlwaysScrollableScrollPhysics(),
-                            itemCount: data.length,
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(height: 10),
-                            itemBuilder: (context, index) {
-                              final seatingArea = data[index];
-                              return BillingCard(seatingArea: seatingArea);
+                    
+                          return NotificationListener<ScrollNotification>(
+                            onNotification: (scrollInfo) {
+                              if (!state.isTransactionLoadingMore &&
+                                  state.transactionPagination!.hasNext &&
+                                  scrollInfo.metrics.pixels >=
+                                      scrollInfo.metrics.maxScrollExtent -
+                                          100) {
+                                bloc.add(FetchMoreRestaurantTransactions());
+                              }
+                              return false;
                             },
+                            child: ListView.separated(
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              itemCount:
+                                  state.fetchTransactionHistoryResponse.data!.length +
+                                      (state.isTransactionLoadingMore ? 1 : 0),
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(height: 10),
+                              itemBuilder: (context, index) {
+                                if (index <
+                                    state.fetchTransactionHistoryResponse.data!.length) {
+                                  final transactionHistory =
+                                      state.fetchTransactionHistoryResponse.data![index];
+                                  return TransactionCard(transactionHistory: transactionHistory);
+                                } else {
+                                  return const Center(child: LoadingWidget());
+                                }
+                              },
+                            ),
                           );
                         }
-              
-                        return _messageList("Something went wrong.");
+                    
+                        return _buildScrollContent(
+                          const Center(child: Text("Something went wrong.")),
+                        );
                       },
                     ),
                   );
