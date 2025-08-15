@@ -30,25 +30,9 @@ class SmsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                '#${sms.id}',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              IconButton(
-                icon: const Icon(
-                  Icons.open_in_new,
-                  size: 18,
-                ),
-                onPressed: () {},
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
+          CardDetailsRow(label: 'S.No', value: sms.id.toString()),
           CardDetailsRow(label: 'Provider', value: sms.productOwner),
-          CardDetailsRow(label: 'SMS Quantity', value: sms.bundles),
+          CardDetailsRow(label: 'SMS Quantity', value: "${sms.bundles} SMS"),
           CardDetailsRow(label: 'Price', value: sms.percentage),
           CardDetailsRow(label: 'Discount', value: sms.discount),
           SizedBox(height: 20),

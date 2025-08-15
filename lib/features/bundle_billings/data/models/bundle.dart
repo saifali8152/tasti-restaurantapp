@@ -25,28 +25,42 @@ class BundleModel extends BundleEntity {
 }
 
 class BundleItemModel extends BundleItem {
+  final String? extraNote; // Example of additional property
+
   const BundleItemModel({
-    required super.eventId,
-    required super.eventTitle,
-    required super.eventImage,
-    required super.eventLink,
+    required super.bundleId,
+    required super.productB,
+    required super.productQ,
+    required super.source,
+    required super.methods,
+    required super.amount,
+    required super.dates,
+    required super.times,
+    required super.resId,
+    required super.reference,
+    this.extraNote,
   });
 
   factory BundleItemModel.fromJson(Map<String, dynamic> json) {
     return BundleItemModel(
-      eventId: json['event_id'] ?? 0,
-      eventTitle: json['event_title'] ?? '',
-      eventImage: json['event_image'] ?? '',
-      eventLink: json['event_link'] ?? '',
+      bundleId: json['bundle_id'] as int,
+      productB: json['product_b'] as String,
+      productQ: json['product_q'] as int,
+      source: json['source_'] as String,
+      methods: json['methods'] as String,
+      amount: (json['amount'] as num).toDouble(),
+      dates: json['dates'] as String,
+      times: json['times'] as String,
+      resId: json['res_id'] as int,
+      reference: json['reference'] as String,
+      extraNote: json['extra_note'] as String?,
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
-    return {
-      'event_id': eventId,
-      'event_title': eventTitle,
-      'event_image': eventImage,
-      'event_link': eventLink,
-    };
+    final map = super.toJson();
+    map['extra_note'] = extraNote;
+    return map;
   }
 }

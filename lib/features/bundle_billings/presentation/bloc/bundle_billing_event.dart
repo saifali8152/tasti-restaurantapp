@@ -7,11 +7,17 @@ abstract class BundleBillingEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
-class FetchBundleBillingEvent extends BundleBillingEvent {
-  final PaginationParms parms;
+class FetchInitialBundleBillingEvent extends BundleBillingEvent {
+  final int id;
 
-  const FetchBundleBillingEvent(this.parms);
+  const FetchInitialBundleBillingEvent(this.id);
 }
+class FetchMoreBundleBillingEvent extends BundleBillingEvent {
+  final int id;
+
+  const FetchMoreBundleBillingEvent(this.id);
+}
+
 class FetchSMSBundleBillingEvent extends BundleBillingEvent {}
 
 class FetchRestaurantTransactionHistoryBundleBillingEvent extends BundleBillingEvent {

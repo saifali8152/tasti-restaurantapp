@@ -5,15 +5,15 @@ import 'package:tasti_restaurant_app/core/network/response.dart';
 import 'package:tasti_restaurant_app/core/services/session_controller.dart';
 import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
 import 'package:tasti_restaurant_app/dependency_injection.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_event.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_state.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/presentation/bloc/bundle_billing_bloc.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/presentation/bloc/bundle_billing_event.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/presentation/bloc/bundle_billing_state.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/presentation/widgets/bundle_card.dart';
 import '/core/widgets/curved_container.dart';
 import '/core/widgets/themed_app_bar.dart';
 import '../../../../../config/constants/icons.dart';
 import '../../../../../core/widgets/icon_button.dart';
 import '/config/constants/colors.dart';
-import '../widgets/billing_card.dart';
 
 class BundleBillingsScreen extends StatefulWidget {
   const BundleBillingsScreen({super.key});
@@ -23,28 +23,22 @@ class BundleBillingsScreen extends StatefulWidget {
 }
 
 class _BundleBillingsScreenState extends State<BundleBillingsScreen> {
-  final SeatingAreaBloc bloc = sl();
+  final BundleBillingBloc bloc = sl();
   final int id = SessionController().user?.restaurant.id ?? 0;
 
   @override
   void initState() {
     super.initState();
-    bloc.add(FetchSeatingAreaEvent(id.toString()));
+    bloc.add(FetchInitialBundleBillingEvent(id));
   }
 
-  Widget _messageList(String message, {Color? color}) {
+  Widget _buildScrollContent(Widget child) {
     return ListView(
       physics: const AlwaysScrollableScrollPhysics(),
       children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Center(
-            child: Text(
-              message,
-              style: TextStyle(fontSize: 16, color: color ?? Colors.grey[700]),
-              textAlign: TextAlign.center,
-            ),
-          ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.7,
+          child: child,
         ),
       ],
     );
@@ -64,7 +58,8 @@ class _BundleBillingsScreenState extends State<BundleBillingsScreen> {
                   color: Colors.white, height: 15),
               title: 'Transaction History',
               onTap: () {
-                Navigator.pushNamed(context, AppRoutes.restaurantTransactionHistory);
+                Navigator.pushNamed(
+                    context, AppRoutes.restaurantTransactionHistory);
               },
               bgColor: const Color(0xFF5A73E2),
             ),
@@ -72,45 +67,79 @@ class _BundleBillingsScreenState extends State<BundleBillingsScreen> {
         ),
       ),
       body: CurvedContainer(
-        child: BlocBuilder<SeatingAreaBloc, SeatingAreaState>(
+        child: BlocBuilder<BundleBillingBloc, BundleBillingState>(
           bloc: bloc,
           builder: (context, state) {
             return RefreshIndicator.adaptive(
               onRefresh: () async {
-                bloc.add(FetchSeatingAreaEvent(id.toString()));
+                bloc.add(FetchInitialBundleBillingEvent(id));
               },
               child: Builder(
                 builder: (context) {
-                  if (state.fetchResponse.status == Status.loading) {
-                    return const Center(child: LoadingWidget());
-                  }
-
-                  if (state.fetchResponse.status == Status.error) {
-                    return _messageList(
-                      state.fetchResponse.message.toString(),
-                      color: Colors.red,
+                  if (state.fetchBundleResponse.status == Status.loading) {
+                    return _buildScrollContent(
+                      const Center(child: LoadingWidget()),
                     );
                   }
 
-                  if (state.fetchResponse.status == Status.completed) {
-                    final data = state.fetchResponse.data ?? [];
-                    if (data.isEmpty) {
-                      return _messageList("No Seating Area Found.");
+                  if (state.fetchBundleResponse.status == Status.error) {
+                    return _buildScrollContent(
+                      Center(
+                        child: Text(
+                          state.fetchBundleResponse.message.toString(),
+                          style: const TextStyle(
+                              color: Colors.red, fontSize: 16),
+                        ),
+                      ),
+                    );
+                  }
+
+                  if (state.fetchBundleResponse.status == Status.completed) {
+                    if (state.fetchBundleResponse.data!.isEmpty) {
+                      return _buildScrollContent(
+                        Center(
+                          child: Text(
+                            "No Event Found.",
+                            style: TextStyle(
+                                fontSize: 16, color: Colors.grey[700]),
+                          ),
+                        ),
+                      );
                     }
 
-                    return ListView.separated(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      itemCount: data.length,
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 10),
-                      itemBuilder: (context, index) {
-                        final seatingArea = data[index];
-                        return BillingCard(seatingArea: seatingArea);
+                    return NotificationListener<ScrollNotification>(
+                      onNotification: (scrollInfo) {
+                        if (!state.isBundleLoadingMore &&
+                            state.bundlePagination!.hasNext &&
+                            scrollInfo.metrics.pixels >=
+                                scrollInfo.metrics.maxScrollExtent - 100) {
+                          bloc.add(FetchMoreBundleBillingEvent(id));
+                        }
+                        return false;
                       },
+                      child: ListView.separated(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        itemCount: state.fetchBundleResponse.data!.length +
+                            (state.isBundleLoadingMore ? 1 : 0),
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 10),
+                        itemBuilder: (context, index) {
+                          if (index <
+                              state.fetchBundleResponse.data!.length) {
+                            final bundle =
+                                state.fetchBundleResponse.data![index];
+                            return BundleCard(bundle: bundle);
+                          } else {
+                            return const Center(child: LoadingWidget());
+                          }
+                        },
+                      ),
                     );
                   }
 
-                  return _messageList("Something went wrong.");
+                  return _buildScrollContent(
+                    const Center(child: Text("Something went wrong.")),
+                  );
                 },
               ),
             );

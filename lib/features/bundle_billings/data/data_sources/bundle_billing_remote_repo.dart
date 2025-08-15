@@ -42,7 +42,7 @@ class BundleBillingRemoteApiImpl extends IBundleBillingRemoteApi {
       queryParams: data,
     );
 
-    final BundleModel bundles = BundleModel.fromJson(response['data']);
+    final BundleModel bundles = BundleModel.fromJson(response);
     return bundles;
   }
 
