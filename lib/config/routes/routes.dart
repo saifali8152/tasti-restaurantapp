@@ -157,11 +157,19 @@ class Routes {
       case AppRoutes.settingAreaDetails:
         return MaterialPageRoute(builder: (_) => const SeatingAreaDetails());
       case AppRoutes.addSeatingArea:
-        return MaterialPageRoute(builder: (_) => const AddSeatingAreaScreen());
+        final args = settings.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(
+          builder: (_) => AddSeatingAreaScreen(
+            isEdit: args?['isEdit'] ?? false,
+            initialData: args?['initialData'],
+          ),
+        );
+
       case AppRoutes.restaurantQRFoodMenu:
-        return MaterialPageRoute(builder: (_) => RestaurantQrFoodMenu(
-          menuUrl: settings.arguments as String,
-        ));
+        return MaterialPageRoute(
+            builder: (_) => RestaurantQrFoodMenu(
+                  menuUrl: settings.arguments as String,
+                ));
       case AppRoutes.skaleton:
         return MaterialPageRoute(builder: (_) => const Skaleton());
       default:

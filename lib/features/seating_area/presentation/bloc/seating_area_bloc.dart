@@ -3,7 +3,7 @@ import 'package:tasti_restaurant_app/features/seating_area/domain/entities/seati
 import 'package:tasti_restaurant_app/features/seating_area/domain/usecases/add_seating_area.dart';
 import 'package:tasti_restaurant_app/features/seating_area/domain/usecases/delete_seating_area.dart';
 import 'package:tasti_restaurant_app/features/seating_area/domain/usecases/fetch_seating_area.dart';
-// import 'package:tasti_restaurant_app/features/seating_area/domain/usecases/update_seating_area.dart';
+import 'package:tasti_restaurant_app/features/seating_area/domain/usecases/update_seating_area.dart';
 import '/core/network/response.dart';
 import 'seating_area_event.dart';
 import 'seating_area_state.dart';
@@ -11,14 +11,14 @@ import 'seating_area_state.dart';
 class SeatingAreaBloc extends Bloc<SeatingAreaEvent, SeatingAreaState> {
   final DeleteSeatingAreaUsecase _deleteUsecase;
   final AddSeatingAreaUsecase _addUsecase;
-  // final UpdateSeatingAreaUsecase _updateUsecase;
+  final UpdateSeatingAreaUsecase _updateUsecase;
   final FetchSeatingAreaUsecase _fetchUsecase;
 
   SeatingAreaBloc(
     this._fetchUsecase,
     this._deleteUsecase,
     this._addUsecase,
-    // this._updateUsecase,
+    this._updateUsecase,
   ) : super(SeatingAreaState(
           deleteResponse: ApiResponse.initial(),
           addResponse: ApiResponse.initial(),
@@ -28,6 +28,7 @@ class SeatingAreaBloc extends Bloc<SeatingAreaEvent, SeatingAreaState> {
     on<FetchSeatingAreaEvent>(_onFetchSeatingAreaEvent);
     on<DeleteSeatingAreaEvent>(_onDeleteSeatingAreaEvent);
     on<AddSeatingAreaEvent>(_onAddSeatingAreaEvent);
+    on<UpdateSeatingAreaEvent>(_onUpdateSeatingAreaEvent);
   }
 
   Future<void> _onFetchSeatingAreaEvent(
@@ -54,7 +55,27 @@ class SeatingAreaBloc extends Bloc<SeatingAreaEvent, SeatingAreaState> {
 
   switch (result) {
     case DataSuccess<String>():
-      add(FetchSeatingAreaEvent(event.parms.id.toString()));
+      add(FetchSeatingAreaEvent(event.parms.restaurantId.toString()));
+      emit(state.copyWith(addResponse: ApiResponse.completed(result.data)));
+      break;
+
+    case DataFailure():
+      emit(state.copyWith(addResponse: ApiResponse.error(result.error)));
+      break;
+
+    default:
+      emit(state.copyWith(addResponse: ApiResponse.initial()));
+  }
+}
+  
+  Future<void> _onUpdateSeatingAreaEvent(
+    UpdateSeatingAreaEvent event, Emitter<SeatingAreaState> emit) async {
+  emit(state.copyWith(addResponse: ApiResponse.loading()));
+  final result = await _updateUsecase(event.parms);
+
+  switch (result) {
+    case DataSuccess<String>():
+      add(FetchSeatingAreaEvent(event.parms.restaurantId.toString()));
       emit(state.copyWith(addResponse: ApiResponse.completed(result.data)));
       break;
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/core/parms/parms.dart';
 import 'package:tasti_restaurant_app/features/seating_area/domain/entities/seating_area.dart';
 import 'package:tasti_restaurant_app/features/seating_area/presentation/widgets/delete_seating_area_dialog.dart';
 import '/config/constants/colors.dart';
@@ -54,16 +55,29 @@ class SeatingAreaCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            CardDetailsRow(label: 'Seating Area Name', value: seatingArea.seatingAreaName),
-            CardDetailsRow(label: 'Abbreviation', value: seatingArea.abbreviation),
-            CardDetailsRow(label: 'Capacity', value: "${seatingArea.capacity} PAX"),
+            CardDetailsRow(
+                label: 'Seating Area Name', value: seatingArea.seatingAreaName),
+            CardDetailsRow(
+                label: 'Abbreviation', value: seatingArea.abbreviation),
+            CardDetailsRow(
+                label: 'Capacity', value: "${seatingArea.capacity} PAX"),
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
                   child: CustomButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.addSeatingArea,
+                        arguments: {
+                          "isEdit": true,
+                          "initialData":
+                              SeatingAreaParms.fromEntity(entity: seatingArea, restaurantId: seatingArea.id),
+                        },
+                      );
+                    },
                     text: 'Update',
                     bgColor: Colors.white,
                     textColor: AppColors.darkOrange,
@@ -74,7 +88,8 @@ class SeatingAreaCard extends StatelessWidget {
                 Expanded(
                   child: CustomButton(
                     onPressed: () {
-                      context.showCustomDialog(DeleteSeatingAreaDialog(id: seatingArea.id));
+                      context.showCustomDialog(
+                          DeleteSeatingAreaDialog(id: seatingArea.id));
                     },
                     text: "Delete",
                   ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/core/network/response.dart';
 import 'package:tasti_restaurant_app/core/parms/parms.dart';
+import 'package:tasti_restaurant_app/core/services/session_controller.dart';
 import 'package:tasti_restaurant_app/core/utils/flushbar_extention.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
@@ -14,7 +15,14 @@ import 'package:tasti_restaurant_app/features/seating_area/presentation/bloc/sea
 import 'package:tasti_restaurant_app/features/seating_area/presentation/widgets/pax_tile.dart';
 
 class AddSeatingAreaScreen extends StatefulWidget {
-  const AddSeatingAreaScreen({super.key});
+  final SeatingAreaParms? initialData;
+  final bool isEdit;
+
+  const AddSeatingAreaScreen({
+    super.key,
+    this.initialData,
+    this.isEdit = false,
+  });
 
   @override
   State<AddSeatingAreaScreen> createState() => _AddSeatingAreaScreenState();
@@ -22,6 +30,7 @@ class AddSeatingAreaScreen extends StatefulWidget {
 
 class _AddSeatingAreaScreenState extends State<AddSeatingAreaScreen> {
   final SeatingAreaBloc bloc = sl();
+  final int id = SessionController().user?.restaurant.id ?? 0;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController abbreviationController = TextEditingController();
 
@@ -29,9 +38,31 @@ class _AddSeatingAreaScreenState extends State<AddSeatingAreaScreen> {
       List.generate(15, (index) => TableCapacityData(pax: index + 1));
 
   @override
+  void initState() {
+    super.initState();
+
+    if (widget.isEdit && widget.initialData != null) {
+      nameController.text = widget.initialData!.seatingAreaName;
+      abbreviationController.text = widget.initialData!.abbreviation;
+
+      for (var table in widget.initialData!.tables) {
+        final data = capacities.firstWhere((c) => c.pax == table.maxCapacity);
+        data.isSelected = true;
+        data.minCapacityController.text = table.minCapacity.toString();
+        data.numberOfTablesController.text = table.tableMax.toString();
+        data.isMoveable = table.isMoveable;
+        data.type = table.type;
+        data.shape = table.shape;
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Add Restaurant Seating Area"),
+      appBar: CustomAppBar(
+        title: widget.isEdit ? "Edit Restaurant Seating Area" : "Add Restaurant Seating Area",
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -55,6 +86,8 @@ class _AddSeatingAreaScreenState extends State<AddSeatingAreaScreen> {
               listener: (context, state) {
                 if (state.addResponse.status == Status.error) {
                   _showSnackBar(state.addResponse.message.toString());
+                } else if (state.addResponse.status == Status.completed) {
+                  Navigator.pop(context, true); // Return success flag
                 }
               },
               builder: (context, state) {
@@ -75,15 +108,11 @@ class _AddSeatingAreaScreenState extends State<AddSeatingAreaScreen> {
                             data.numberOfTablesController.text.isEmpty ||
                             data.type == null ||
                             data.shape == null) {
-                          _showSnackBar(
-                              "Please fill all details for ${data.pax} PAX");
+                          _showSnackBar("Please fill all details for ${data.pax} PAX");
                           return;
                         }
 
-                        final minCapacity =
-                            int.tryParse(data.minCapacityController.text) ?? 0;
-
-                        // ✅ Validation: minCapacity should not exceed pax (max capacity)
+                        final minCapacity = int.tryParse(data.minCapacityController.text) ?? 0;
                         if (minCapacity > data.pax) {
                           _showSnackBar(
                             "Min Capacity for ${data.pax} PAX cannot exceed ${data.pax}",
@@ -95,8 +124,7 @@ class _AddSeatingAreaScreenState extends State<AddSeatingAreaScreen> {
                           TableData(
                             maxCapacity: data.pax,
                             minCapacity: minCapacity,
-                            tableMax:
-                                int.parse(data.numberOfTablesController.text),
+                            tableMax: int.parse(data.numberOfTablesController.text),
                             isMoveable: data.isMoveable,
                             type: data.type!,
                             shape: data.shape!,
@@ -106,15 +134,20 @@ class _AddSeatingAreaScreenState extends State<AddSeatingAreaScreen> {
                     }
 
                     final parms = SeatingAreaParms(
-                      restaurantId: 123,
+                      id: widget.isEdit ? widget.initialData?.id : null,
+                      restaurantId: id,
                       seatingAreaName: name,
                       abbreviation: abbreviation,
                       tables: tables,
                     );
 
-                    bloc.add(AddSeatingAreaEvent(parms));
+                    if (widget.isEdit) {
+                      bloc.add(UpdateSeatingAreaEvent(parms));
+                    } else {
+                      bloc.add(AddSeatingAreaEvent(parms));
+                    }
                   },
-                  text: "Save Seating Area",
+                  text: widget.isEdit ? "Update Seating Area" : "Save Seating Area",
                   isLoading: state.addResponse.status == Status.loading,
                 );
               },

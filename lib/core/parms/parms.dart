@@ -1,3 +1,5 @@
+import 'package:tasti_restaurant_app/features/seating_area/domain/entities/seating_area.dart';
+
 import '/core/enum/query_type.dart';
 import '/core/enum/request_type.dart';
 
@@ -45,9 +47,32 @@ class SeatingAreaParms {
     List<TableData>? tables,
   }) : tables = tables ?? [];
 
+  /// Factory constructor to build from an entity
+  factory SeatingAreaParms.fromEntity({
+    required SeatingAreaEntity entity,
+    required int restaurantId,
+  }) {
+    return SeatingAreaParms(
+      id: entity.id,
+      restaurantId: restaurantId,
+      seatingAreaName: entity.seatingAreaName,
+      abbreviation: entity.abbreviation,
+      tables: entity.tables.map((t) {
+        return TableData(
+          maxCapacity: t.maxCapacity,
+          minCapacity: t.minCapacity,
+          tableMax: t.tableMax,
+          isMoveable: t.isMoveable == 1,
+          type: t.type,
+          shape: t.shape,
+        );
+      }).toList(),
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
-      if(id != null) "id": id,
+      if (id != null) "id": id,
       "restaurant_id": restaurantId,
       "seating_area_name": seatingAreaName,
       "abbreviation": abbreviation,
@@ -55,6 +80,7 @@ class SeatingAreaParms {
     };
   }
 }
+
 
 class GetPlaceDetailsParms {
   final String placeId;
