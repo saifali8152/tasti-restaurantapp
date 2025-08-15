@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/entities/sms.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/presentation/widgets/init_payment_dialog.dart';
 import '/core/utils/general_extentions.dart';
 import '/core/widgets/card_details_row.dart';
 
@@ -73,7 +74,9 @@ class SmsCard extends StatelessWidget {
           const SizedBox(height: 20),
           Center(
             child: CustomButton(
-              onPressed: () {},
+              onPressed: () {
+                context.showCustomDialog(InitPaymentDialog(bundleId: sms.id));
+              },
               text: "Purchase",
               isFullWidth: false,
             ),

@@ -5,6 +5,12 @@ abstract class BundleBillingEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
+class InitSmsPayment extends BundleBillingEvent {
+  final int bundleId;
+
+  const InitSmsPayment(this.bundleId);
+}
+
 class FetchInitialBundleBillingEvent extends BundleBillingEvent {
   final int id;
 

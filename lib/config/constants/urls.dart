@@ -74,4 +74,6 @@ class AppUrls{
   static final String fetchBundles = "$base/restaurant/get-bundles";
   static final String fetchTransactionHistory = "$base/restaurant/get-transaction-history";
   static final String fetchSMS = "$base/restaurant/get-sms";
+  static final String initializeSmsPayment = "$base/restaurant/initialize-sms-payment";
+  static final String verifySmsPayment = "$base/restaurant/verify-sms-payment";
 }

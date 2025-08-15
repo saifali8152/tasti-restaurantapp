@@ -291,6 +291,16 @@ class UploadMenuParms {
   });
 }
 
+class VerifySmsPaymentParms {
+  final String restaurantId;
+  final String reference;
+
+  VerifySmsPaymentParms({
+    required this.restaurantId,
+    required this.reference,
+  });
+}
+
 class AddCuisineParms {
   final int id;
   final String name;

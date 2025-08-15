@@ -1,4 +1,5 @@
 import 'package:tasti_restaurant_app/features/bundle_billings/data/models/bundle.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/data/models/init_payment.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/data/models/sms.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/data/models/transaction_history.dart';
 import '/core/parms/parms.dart';
@@ -11,9 +12,8 @@ abstract class IBundleBillingRemoteApi {
   Future<RestaurantTransactionHistoryModel> fetchTransactionHistory(
       PaginationParms parms);
 
-  Future<String> deleteSeatingArea(String id);
-  Future<String> addSeatingArea(SeatingAreaParms parms);
-  Future<String> updateSeatingArea(SeatingAreaParms parms);
+  Future<InitPaymentModel> initSmsPayment(String bundleId);
+  Future<String> verifySmsPayment(VerifySmsPaymentParms parms);
 }
 
 class BundleBillingRemoteApiImpl extends IBundleBillingRemoteApi {
@@ -25,7 +25,8 @@ class BundleBillingRemoteApiImpl extends IBundleBillingRemoteApi {
     var response = await networkApiService.get(AppUrls.fetchSMS);
     final List<dynamic> rawList = response['data'];
 
-    final List<SMSModel> sms = rawList.map((sms) => SMSModel.fromJson(sms)).toList();
+    final List<SMSModel> sms =
+        rawList.map((sms) => SMSModel.fromJson(sms)).toList();
     return sms;
   }
 
@@ -65,25 +66,19 @@ class BundleBillingRemoteApiImpl extends IBundleBillingRemoteApi {
   }
 
   @override
-  Future<String> addSeatingArea(SeatingAreaParms parms) async {
-    var response =
-        await networkApiService.post(AppUrls.addSeatingAreas, parms.toJson());
-    return response['message'];
+  Future<InitPaymentModel> initSmsPayment(String bundleId) async {
+    var response = await networkApiService
+        .post(AppUrls.initializeSmsPayment, {"bundle_id": bundleId});
+
+    final InitPaymentModel initPayment = InitPaymentModel.fromJson(response['data']);
+    return initPayment;
   }
-
+  
   @override
-  Future<String> updateSeatingArea(SeatingAreaParms parms) async {
-    var response = await networkApiService.post(
-        AppUrls.updateSeatingAreas, parms.toJson());
-    return response['message'];
-  }
+  Future<String> verifySmsPayment(VerifySmsPaymentParms parms) async {
+    var response = await networkApiService
+        .post(AppUrls.verifySmsPayment, {"restaurant_id": parms.restaurantId, "reference": parms.reference});
 
-  @override
-  Future<String> deleteSeatingArea(String id) async {
-    Map<String, String> data = {"id": id};
-
-    var response =
-        await networkApiService.post(AppUrls.deleteSeatingAreas, data);
-    return response['message'];
+    return response['date'];
   }
 }

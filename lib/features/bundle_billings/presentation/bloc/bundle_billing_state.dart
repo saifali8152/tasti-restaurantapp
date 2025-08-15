@@ -1,11 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:tasti_restaurant_app/core/models/pagination.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/entities/bundle.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/domain/entities/init_payment.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/entities/sms.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/entities/transaction_history.dart';
 import '/core/network/response.dart';
 
 class BundleBillingState extends Equatable {
+  final ApiResponse<InitPaymentEntity> initPaymentResponse;
   final ApiResponse<List<SMSEntity>> fetchSMSResponse;
   final ApiResponse<List<BundleItem>> fetchBundleResponse;
   final PaginationModel? bundlePagination;
@@ -16,6 +18,7 @@ class BundleBillingState extends Equatable {
   final bool isTransactionLoadingMore;
 
   const BundleBillingState({
+    required this.initPaymentResponse,
     required this.fetchBundleResponse,
     required this.fetchSMSResponse,
     required this.fetchTransactionHistoryResponse,
@@ -30,6 +33,7 @@ class BundleBillingState extends Equatable {
         fetchTransactionHistoryResponse,
     final ApiResponse<List<SMSEntity>>? fetchSMSResponse,
     final ApiResponse<List<BundleItem>>? fetchBundleResponse,
+    final ApiResponse<InitPaymentEntity>? initPaymentResponse,
     final PaginationModel? bundlePagination,
     final PaginationModel? transactionPagination,
     final bool? isBundleLoadingMore,
@@ -43,6 +47,7 @@ class BundleBillingState extends Equatable {
       bundlePagination: bundlePagination ?? this.bundlePagination,
       isBundleLoadingMore: isBundleLoadingMore ?? this.isBundleLoadingMore,
       fetchBundleResponse: fetchBundleResponse ?? this.fetchBundleResponse,
+      initPaymentResponse: initPaymentResponse ?? this.initPaymentResponse,
       fetchSMSResponse: fetchSMSResponse ?? this.fetchSMSResponse,
       fetchTransactionHistoryResponse: fetchTransactionHistoryResponse ??
           this.fetchTransactionHistoryResponse,
@@ -51,6 +56,7 @@ class BundleBillingState extends Equatable {
 
   @override
   List<Object?> get props => [
+        initPaymentResponse,
         fetchBundleResponse,
         fetchSMSResponse,
         fetchTransactionHistoryResponse,

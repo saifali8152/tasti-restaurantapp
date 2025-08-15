@@ -32,7 +32,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
         NavigationDelegate(
           onPageFinished: (url) async {
             // Check if we're being redirected back to a known domain (like your callback domain)
-            if (!_hasVerified && url.contains('verify-payment')) {
+            if (!_hasVerified && url.contains('verify-payment') || url.contains("verify-sms-payment")) {
               _hasVerified = true;
 
               Navigator.pop(context); // Close the webview first

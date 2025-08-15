@@ -1,11 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/core/parms/parms.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/entities/bundle.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/domain/entities/init_payment.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/entities/sms.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/entities/transaction_history.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/fetch_bundles.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/fetch_sms.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/fetch_transaction_histroy.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/init_sms_payment.dart';
 import '/core/network/response.dart';
 import 'bundle_billing_event.dart';
 import 'bundle_billing_state.dart';
@@ -14,12 +16,15 @@ class BundleBillingBloc extends Bloc<BundleBillingEvent, BundleBillingState> {
   final FetchSmsUsecase _fetchSMSUsecase;
   final FetchBundlesUsecase _fetchBundleUsecase;
   final FetchTransactionHistroyUsecase _fetchTransactionHistoryBundleUsecase;
+  final InitSmsPaymentUsecase _initSmsPaymentUsecase;
 
   BundleBillingBloc(
     this._fetchBundleUsecase,
     this._fetchSMSUsecase,
     this._fetchTransactionHistoryBundleUsecase,
+    this._initSmsPaymentUsecase,
   ) : super(BundleBillingState(
+          initPaymentResponse: ApiResponse.initial(),
           fetchBundleResponse: ApiResponse.initial(),
           fetchSMSResponse: ApiResponse.initial(),
           fetchTransactionHistoryResponse: ApiResponse.initial(),
@@ -29,6 +34,24 @@ class BundleBillingBloc extends Bloc<BundleBillingEvent, BundleBillingState> {
     on<FetchSMSBundleBillingEvent>(_onFetchSMSBundleBillingEvent);
     on<FetchInitialRestaurantTransactions>(_onFetchInitialRestaurantTransactions);
     on<FetchMoreRestaurantTransactions>(_onFetchMoreRestaurantTransactions);
+    on<InitSmsPayment>(_onInitSmsPayment);
+  }
+
+  Future<void> _onInitSmsPayment(
+      InitSmsPayment event, Emitter<BundleBillingState> emit) async {
+    emit(state.copyWith(initPaymentResponse: ApiResponse.loading()));
+
+    try {
+      final result = await _initSmsPaymentUsecase(event.bundleId.toString());
+
+      if (result is DataSuccess<InitPaymentEntity>) {
+        emit(state.copyWith(initPaymentResponse: ApiResponse.completed(result.data)));
+      } else if (result is DataFailure<InitPaymentEntity>) {
+        emit(state.copyWith(initPaymentResponse: ApiResponse.error(result.error)));
+      }
+    } catch (e) {
+      emit(state.copyWith(initPaymentResponse: ApiResponse.error(e.toString())));
+    }
   }
 
   Future<void> _onFetchMoreBundleBillingEvent(FetchMoreBundleBillingEvent event,

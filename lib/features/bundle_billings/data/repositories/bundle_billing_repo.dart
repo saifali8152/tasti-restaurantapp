@@ -1,4 +1,5 @@
 import 'package:tasti_restaurant_app/features/bundle_billings/data/models/bundle.dart';
+import 'package:tasti_restaurant_app/features/bundle_billings/data/models/init_payment.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/data/models/sms.dart';
 import 'package:tasti_restaurant_app/features/bundle_billings/data/models/transaction_history.dart';
 import '/core/parms/parms.dart';
@@ -11,9 +12,9 @@ class BundleBillingRepoImpl extends IBundleBillingRepo {
   BundleBillingRepoImpl(this.remote);
 
   @override
-  Future<DataState<String>> addSeatingAreas(SeatingAreaParms parms) async {
+  Future<DataState<InitPaymentModel>> initSmsPayment(String bundleId) async {
     try {
-      final result = await remote.addSeatingArea(parms);
+      final result = await remote.initSmsPayment(bundleId);
       return DataSuccess(result);
     } catch (error) {
       return DataFailure(error.toString());
@@ -21,19 +22,9 @@ class BundleBillingRepoImpl extends IBundleBillingRepo {
   }
   
   @override
-  Future<DataState<String>> updateSeatingAreas(SeatingAreaParms parms) async {
+  Future<DataState<String>> verifySmsPayment(VerifySmsPaymentParms parms) async {
     try {
-      final result = await remote.updateSeatingArea(parms);
-      return DataSuccess(result);
-    } catch (error) {
-      return DataFailure(error.toString());
-    }
-  }
-
-  @override
-  Future<DataState<String>> deleteSeatingArea(String id) async {
-    try {
-      final result = await remote.deleteSeatingArea(id);
+      final result = await remote.verifySmsPayment(parms);
       return DataSuccess(result);
     } catch (error) {
       return DataFailure(error.toString());
