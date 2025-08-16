@@ -1,4 +1,11 @@
 import 'package:get_it/get_it.dart';
+import 'package:tasti_restaurant_app/features/make_reservation/data/data_sources/make_reservation_remote_repo.dart';
+import 'package:tasti_restaurant_app/features/make_reservation/data/repositories/make_reservations.dart';
+import 'package:tasti_restaurant_app/features/make_reservation/domain/repositories/make_reservations.dart';
+import 'package:tasti_restaurant_app/features/make_reservation/domain/usecases/fetch_restaurant_seating_area.dart';
+import 'package:tasti_restaurant_app/features/make_reservation/domain/usecases/fetch_restaurant_tables.dart';
+import 'package:tasti_restaurant_app/features/make_reservation/domain/usecases/fetch_restaurant_time_slots.dart';
+import 'package:tasti_restaurant_app/features/make_reservation/presentation/bloc/make_reservation_bloc.dart';
 import 'package:tasti_restaurant_app/features/reservations/data/data_sources/reservations_remote_repo.dart';
 import 'package:tasti_restaurant_app/features/reservations/data/repositories/reservations.dart';
 import 'package:tasti_restaurant_app/features/reservations/domain/repositories/reservation.dart';
@@ -237,8 +244,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IBundleBillingRemoteApi>(BundleBillingRemoteApiImpl(sl()));
   sl.registerSingleton<IReservationDbRemoteApi>(ReservationDbRemoteApiImpl(sl()));
   sl.registerSingleton<IReservationRemoteApi>(ReservationRemoteApiImpl(sl()));
+  sl.registerSingleton<IMakeReservationRemoteApi>(MakeReservationRemoteApiImpl(sl()));
 
   // Repository
+  sl.registerSingleton<IMakeReservationRepo>(MakeReservationRepoImpl(sl()));
   sl.registerSingleton<IReservationRepo>(ReservationRepoImpl(sl()));
   sl.registerSingleton<IReservationDbRepo>(ReservationDbRepoImpl(sl()));
   sl.registerSingleton<IBundleBillingRepo>(BundleBillingRepoImpl(sl()));
@@ -348,8 +357,12 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FetchRestaurantCampaignsUsecase>(FetchRestaurantCampaignsUsecase(sl()));
   sl.registerSingleton<FetchReservationsUsecase>(FetchReservationsUsecase(sl()));
   sl.registerSingleton<AddUpdateWaiterUsecase>(AddUpdateWaiterUsecase(sl()));
+  sl.registerSingleton<FetchRestaurantSeatingAreaUsecase>(FetchRestaurantSeatingAreaUsecase(sl()));
+  sl.registerSingleton<FetchRestaurantTablesUsecase>(FetchRestaurantTablesUsecase(sl()));
+  sl.registerSingleton<FetchRestaurantTimeSlotsUsecase>(FetchRestaurantTimeSlotsUsecase(sl()));
 
   // Bloc
+  sl.registerLazySingleton<MakeReservationBloc>(() => MakeReservationBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<ReservationBloc>(() => ReservationBloc(sl(), sl()));
   sl.registerLazySingleton<RestaurantCampaignsBloc>(() => RestaurantCampaignsBloc(sl()));
   sl.registerLazySingleton<BundleBillingBloc>(() => BundleBillingBloc(sl(), sl(), sl(), sl(), sl()));

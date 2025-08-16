@@ -1,0 +1,54 @@
+import 'package:tasti_restaurant_app/core/parms/parms.dart';
+import 'package:tasti_restaurant_app/features/make_reservation/data/models/restaurant_seating_area.dart';
+import 'package:tasti_restaurant_app/features/make_reservation/data/models/restaurant_time_slots.dart';
+import '/core/network/api_services.dart';
+import '/config/constants/urls.dart';
+
+abstract class IMakeReservationRemoteApi {
+  Future<List<RestaurantSeatingAreaModel>> fetchSeatingArea(String id);
+  Future<RestaurantTimeSlotModel> fetchTimeSlots(FetchTimeSlotParms parms);
+  Future<List<String>> fetchTables(String id);
+}
+
+class MakeReservationRemoteApiImpl extends IMakeReservationRemoteApi {
+  final IApiService networkApiService;
+
+  MakeReservationRemoteApiImpl(this.networkApiService);
+
+  @override
+  Future<List<RestaurantSeatingAreaModel>> fetchSeatingArea(String id) async {
+    final response = await networkApiService.get(
+      AppUrls.fetchSeatingAreaForReservation,
+      queryParams: {"id": id},
+    );
+
+    final seatingAreas = (response['data'] as List)
+        .map((e) => RestaurantSeatingAreaModel.fromJson(e))
+        .toList();
+
+    return seatingAreas;
+  }
+
+  @override
+  Future<RestaurantTimeSlotModel> fetchTimeSlots(FetchTimeSlotParms parms) async {
+    final response = await networkApiService.get(
+      AppUrls.fetchTimeSlotByDate,
+      queryParams: {
+        "id": parms.id.toString(),
+        "date": parms.date.toString(),
+      },
+    );
+
+    return RestaurantTimeSlotModel.fromJson(response);
+  }
+
+  @override
+  Future<List<String>> fetchTables(String id) async {
+    final response = await networkApiService.get(
+      AppUrls.fetchTablesBySeating,
+      queryParams: {"id": id},
+    );
+    final tables = (response['tables'] as List<dynamic>).map((e) => e.toString()).toList();
+    return tables;
+  }
+}

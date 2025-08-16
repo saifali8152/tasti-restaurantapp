@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/presentation/bloc/restaurant_bloc.dart';
+import 'package:tasti_restaurant_app/features/make_reservation/presentation/bloc/make_reservation_bloc.dart';
 import 'package:tasti_restaurant_app/features/reservations/presentation/bloc/reservation_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/presentation/bloc/bundle_billing_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/presentation/bloc/menu_bloc.dart';
@@ -67,6 +68,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => sl<SeatingAreaBloc>()),
           BlocProvider(create: (context) => sl<BundleBillingBloc>()),
           BlocProvider(create: (context) => sl<ReservationBloc>()),
+          BlocProvider(create: (context) => sl<MakeReservationBloc>()),
         ],
         child: MaterialApp(
           title: 'Tasti Restaurant App',

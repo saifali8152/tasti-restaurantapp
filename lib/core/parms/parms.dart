@@ -2,6 +2,16 @@ import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/doma
 import '/core/enum/query_type.dart';
 import '/core/enum/request_type.dart';
 
+class FetchTimeSlotParms {
+  final int id;
+  final String date;
+  
+  FetchTimeSlotParms({
+    required this.id,
+    required this.date,
+  });
+}
+
 class AddUpdateWaiterParms {
   final int restaurantId;
   final int reservationId;
@@ -12,13 +22,6 @@ class AddUpdateWaiterParms {
     required this.reservationId,
     required this.waiterName,
   });
-
-  Map<String, dynamic> toJson() {
-    return {
-      "reservation_id ": reservationId,
-      "waiter_name": waiterName,
-    };
-  }
 }
 
 class TableData {

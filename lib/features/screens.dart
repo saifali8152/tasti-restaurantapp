@@ -3,7 +3,7 @@ export 'common/skaleton/pages/skaleton.dart';
 export 'common/auth/presentation/pages/login.dart';
 export 'common/auth/presentation/pages/signup.dart';
 export 'common/onboarding/onbording.dart';
-export '/features/make_reservation/make_reservation.dart';
+export 'make_reservation/presentation/pages/make_reservation.dart';
 export 'restaurant-admin/manage_booking_time/presentation/pages/manage_booking_time.dart';
 export 'restaurant-admin/manage_booking_time/presentation/pages/update_time_duration.dart';
 export 'restaurant-admin/manage_booking_time/presentation/pages/time_slot_management.dart';
