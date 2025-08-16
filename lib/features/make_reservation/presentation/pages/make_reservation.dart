@@ -137,16 +137,22 @@ class _MakeReservationScreenState extends State<MakeReservationScreen> {
                   const SizedBox(height: 15),
 
                   // Table
-                  FieldLabel(title: "Table"),
+                  FieldLabel(title: "Number of Guests"),
                   const SizedBox(height: 5),
                   CustomDropdown(
-                    items: state.tableResponse.data
-                            ?.map((e) => DropdownMenuEntry(
-                                  value: e,
-                                  label: e,
-                                ))
-                            .toList() ??
-                        [],
+                    items: [
+                      ...(state.tableResponse.data
+                              ?.map((e) => DropdownMenuEntry(
+                                    value: e,
+                                    label: "$e Guests",
+                                  ))
+                              .toList() ??
+                          []),
+                      DropdownMenuEntry(
+                        value: 'large',
+                        label: 'Large Booking',
+                      ),
+                    ],
                     initialValue: selectedTable,
                     hintText: 'Select Table',
                     onChanged: (val) {
@@ -195,6 +201,7 @@ class _MakeReservationScreenState extends State<MakeReservationScreen> {
                       DropdownMenuEntry(
                           value: 'Gluten intolerant',
                           label: 'Gluten intolerant'),
+                      DropdownMenuEntry(value: 'Other', label: 'Other'),
                     ],
                     initialValue: selectedDiet,
                     hintText: 'Select',
@@ -212,8 +219,8 @@ class _MakeReservationScreenState extends State<MakeReservationScreen> {
                   CustomDropdown(
                     items: [
                       DropdownMenuEntry(value: 'Birthday', label: 'Birthday'),
-                      DropdownMenuEntry(
-                          value: 'Anniversary', label: 'Anniversary'),
+                      DropdownMenuEntry(value: 'Anniversary', label: 'Anniversary'),
+                      DropdownMenuEntry(value: 'Proposal', label: 'Proposal'),
                       DropdownMenuEntry(value: 'Other', label: 'Other'),
                     ],
                     initialValue: selectedOccasion,
