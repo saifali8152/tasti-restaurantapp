@@ -11,7 +11,9 @@ import 'package:tasti_restaurant_app/features/reservations/data/data_sources/res
 import 'package:tasti_restaurant_app/features/reservations/data/repositories/reservations.dart';
 import 'package:tasti_restaurant_app/features/reservations/domain/repositories/reservation.dart';
 import 'package:tasti_restaurant_app/features/reservations/domain/usecases/add_update_waiter.dart';
+import 'package:tasti_restaurant_app/features/reservations/domain/usecases/cancel_reservations.dart';
 import 'package:tasti_restaurant_app/features/reservations/domain/usecases/fetch_reservations.dart';
+import 'package:tasti_restaurant_app/features/reservations/domain/usecases/update_reservations_status.dart';
 import 'package:tasti_restaurant_app/features/reservations/presentation/bloc/reservation_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/data/data_sources/bundle_billing_remote_repo.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/data/repositories/bundle_billing_repo.dart';
@@ -362,10 +364,12 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FetchRestaurantTablesUsecase>(FetchRestaurantTablesUsecase(sl()));
   sl.registerSingleton<FetchRestaurantTimeSlotsUsecase>(FetchRestaurantTimeSlotsUsecase(sl()));
   sl.registerSingleton<MakeReservationsUsecase>(MakeReservationsUsecase(sl()));
+  sl.registerSingleton<CancelReservationsUsecase>(CancelReservationsUsecase(sl()));
+  sl.registerSingleton<UpdateReservationsStatusUsecase>(UpdateReservationsStatusUsecase(sl()));
 
   // Bloc
   sl.registerLazySingleton<MakeReservationBloc>(() => MakeReservationBloc(sl(), sl(), sl(), sl()));
-  sl.registerLazySingleton<ReservationBloc>(() => ReservationBloc(sl(), sl()));
+  sl.registerLazySingleton<ReservationBloc>(() => ReservationBloc(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<RestaurantCampaignsBloc>(() => RestaurantCampaignsBloc(sl()));
   sl.registerLazySingleton<BundleBillingBloc>(() => BundleBillingBloc(sl(), sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<SeatingAreaBloc>(() => SeatingAreaBloc(sl(), sl(), sl(), sl()));

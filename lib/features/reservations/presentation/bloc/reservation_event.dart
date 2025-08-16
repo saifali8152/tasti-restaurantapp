@@ -19,3 +19,14 @@ class AddUpdateWaiter extends ReservationEvent {
 
   const AddUpdateWaiter(this.parms);
 }
+
+class UpdateReservationStatus extends ReservationEvent {
+  final UpdateReservationStatusParms parms;
+
+  const UpdateReservationStatus(this.parms);
+}
+class CancelReservation extends ReservationEvent {
+  final String id;
+
+  const CancelReservation(this.id);
+}

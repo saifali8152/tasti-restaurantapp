@@ -52,6 +52,16 @@ class AddUpdateWaiterParms {
   });
 }
 
+class UpdateReservationStatusParms {
+  final int reservationId;
+  final String status;
+
+  UpdateReservationStatusParms({
+    required this.reservationId,
+    required this.status,
+  });
+}
+
 class TableData {
   final int maxCapacity;
   final int minCapacity;

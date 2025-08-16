@@ -9,6 +9,26 @@ class ReservationRepoImpl extends IReservationRepo {
   ReservationRepoImpl(this.remote);
 
   @override
+  Future<DataState<String>> updateReservationStatus(UpdateReservationStatusParms parms) async {
+    try {
+      final result = await remote.updateReservationStatus(parms);
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
+  
+  @override
+  Future<DataState<String>> cancelReservation(String id) async {
+    try {
+      final result = await remote.cancelReservation(id);
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
+ 
+  @override
   Future<DataState<ReservationModel>> fetchReservations(FetchReservationParms parms) async {
     try {
       final result = await remote.fetchReservations(parms);

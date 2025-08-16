@@ -25,7 +25,7 @@ class ReservationItem {
   final String waiter;
   final String? status;
   final int canceled;
-  final String? actionDate; // <-- Added
+  final String? actionDate;
   final String createdAt;
   final String updatedAt;
   final double? profitMoney;
@@ -51,7 +51,7 @@ class ReservationItem {
     required this.waiter,
     required this.status,
     required this.canceled,
-    required this.actionDate,   // <-- Added
+    required this.actionDate,
     required this.createdAt,
     required this.updatedAt,
     required this.profitMoney,
@@ -62,6 +62,37 @@ class ReservationItem {
     required this.statusDisplay,
     required this.canAssignWaiter,
   });
+
+  ReservationItem copyWith({
+    String? statusDisplay,
+  }) {
+    return ReservationItem(
+      id: id,
+      name: name,
+      phone: phone,
+      guests: guests,
+      reservation: reservation,
+      reservationStarts: reservationStarts,
+      reservationEnds: reservationEnds,
+      notes: notes,
+      dietary: dietary,
+      occasion: occasion,
+      request: request,
+      waiter: waiter,
+      status: status,
+      canceled: canceled,
+      actionDate: actionDate,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+      profitMoney: profitMoney,
+      formattedStartTime: formattedStartTime,
+      formattedEndTime: formattedEndTime,
+      formattedDateTime: formattedDateTime,
+      hasSpecialNotes: hasSpecialNotes,
+      statusDisplay: statusDisplay ?? this.statusDisplay,
+      canAssignWaiter: canAssignWaiter,
+    );
+  }
 }
 
 class StatsItem {
