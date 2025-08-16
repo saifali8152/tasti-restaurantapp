@@ -26,7 +26,7 @@ class ReservationsScreen extends StatefulWidget {
 class _ReservationsScreenState extends State<ReservationsScreen> {
   final ReservationBloc bloc = sl();
   final int id = SessionController().user?.restaurant.id ?? 0;
-  String date = '';
+  String date = DateTime.now().toString();
 
   @override
   void initState() {

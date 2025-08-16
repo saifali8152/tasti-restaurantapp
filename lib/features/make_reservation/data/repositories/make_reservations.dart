@@ -10,6 +10,16 @@ class MakeReservationRepoImpl extends IMakeReservationRepo {
   MakeReservationRepoImpl(this.remote);
 
   @override
+  Future<DataState<String>> makeReservation(MakeReservationParms parms) async {
+    try {
+      final response = await remote.makeReservation(parms);
+      return DataSuccess(response);
+    } catch (e) {
+      return DataFailure(e.toString());
+    }
+  }
+
+  @override
   Future<DataState<List<RestaurantSeatingAreaEntity>>> fetchSeatingArea(String id) async {
     try {
       final response = await remote.fetchSeatingArea(id);

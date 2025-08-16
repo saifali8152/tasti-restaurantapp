@@ -2,6 +2,34 @@ import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/doma
 import '/core/enum/query_type.dart';
 import '/core/enum/request_type.dart';
 
+class MakeReservationParms {
+  final int restaurantId;
+  final String date;
+  final String time;
+  final String seatingAreaId;
+  final String guests;
+  final String customGuests;
+  final String dietary;
+  final String occasion;
+  final String specialRequests;
+  final String name;
+  final String phone;
+  
+  MakeReservationParms({
+    required this.restaurantId,
+    required this.date,
+    required this.time,
+    required this.seatingAreaId,
+    required this.guests,
+    required this.customGuests,
+    required this.dietary,
+    required this.occasion,
+    required this.specialRequests,
+    required this.name,
+    required this.phone,
+  });
+}
+
 class FetchTimeSlotParms {
   final int id;
   final String date;

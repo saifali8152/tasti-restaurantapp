@@ -7,4 +7,5 @@ abstract class IMakeReservationRepo {
   Future<DataState<List<RestaurantSeatingAreaEntity>>> fetchSeatingArea(String id);
   Future<DataState<RestaurantTimeSlotEntity>> fetchTimeSlots(FetchTimeSlotParms parms);
   Future<DataState<List<String>>> fetchTables(String id);
+  Future<DataState<String>> makeReservation(MakeReservationParms parms);
 }

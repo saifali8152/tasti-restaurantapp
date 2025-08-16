@@ -41,4 +41,8 @@ class FetchTimeSlots extends MakeReservationEvent {
 }
 
 /// Event to make a reservation
-class MakeReservation extends MakeReservationEvent {}
+class MakeReservation extends MakeReservationEvent {
+  final MakeReservationParms parms;
+
+  const MakeReservation(this.parms);
+}

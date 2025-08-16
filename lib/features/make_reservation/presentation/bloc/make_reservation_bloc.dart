@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/features/make_reservation/domain/entities/restaurant_time_slots.dart';
+import 'package:tasti_restaurant_app/features/make_reservation/domain/usecases/make_reservations.dart';
 import '/core/network/response.dart';
 import 'make_reservation_event.dart';
 import 'make_reservation_state.dart';
@@ -8,23 +9,23 @@ import 'package:tasti_restaurant_app/features/make_reservation/domain/usecases/f
 import 'package:tasti_restaurant_app/features/make_reservation/domain/usecases/fetch_restaurant_tables.dart';
 import 'package:tasti_restaurant_app/features/make_reservation/domain/usecases/fetch_restaurant_time_slots.dart';
 
-
-
-
 class MakeReservationBloc
     extends Bloc<MakeReservationEvent, MakeReservationState> {
   final FetchRestaurantSeatingAreaUsecase _fetchSeatingAreasUsecase;
   final FetchRestaurantTablesUsecase _fetchTablesUsecase;
   final FetchRestaurantTimeSlotsUsecase _fetchTimeSlotsUsecase;
+  final MakeReservationsUsecase _makeReservationUsecase;
 
   MakeReservationBloc(
     this._fetchSeatingAreasUsecase,
     this._fetchTablesUsecase,
     this._fetchTimeSlotsUsecase,
+    this._makeReservationUsecase,
   ) : super(MakeReservationState(
           seatingAreaResponse: ApiResponse.initial(),
           tableResponse: ApiResponse.initial(),
           timeSlotResponse: ApiResponse.initial(),
+          reservationResponse: ApiResponse.initial(),
         )) {
     on<FetchSeatingAreas>(_onFetchSeatingAreas);
     on<FetchTables>(_onFetchTables);
@@ -39,10 +40,12 @@ class MakeReservationBloc
 
     switch (result) {
       case DataSuccess<List<RestaurantSeatingAreaEntity>>():
-        emit(state.copyWith(seatingAreaResponse: ApiResponse.completed(result.data)));
+        emit(state.copyWith(
+            seatingAreaResponse: ApiResponse.completed(result.data)));
         break;
       case DataFailure<List<RestaurantSeatingAreaEntity>>():
-        emit(state.copyWith(seatingAreaResponse: ApiResponse.error(result.error)));
+        emit(state.copyWith(
+            seatingAreaResponse: ApiResponse.error(result.error)));
         break;
       default:
         emit(state.copyWith(seatingAreaResponse: ApiResponse.initial()));
@@ -85,5 +88,19 @@ class MakeReservationBloc
   }
 
   Future<void> _onMakeReservation(
-      MakeReservation event, Emitter<MakeReservationState> emit) async {}
+      MakeReservation event, Emitter<MakeReservationState> emit) async {
+    emit(state.copyWith(reservationResponse: ApiResponse.loading()));
+    final result = await _makeReservationUsecase(event.parms);
+
+    switch (result) {
+      case DataSuccess<String>():
+        emit(state.copyWith(reservationResponse: ApiResponse.completed(result.data)));
+        break;
+      case DataFailure<String>():
+        emit(state.copyWith(reservationResponse: ApiResponse.error(result.error)));
+        break;
+      default:
+        emit(state.copyWith(reservationResponse: ApiResponse.initial()));
+    }
+  }
 }

@@ -5,6 +5,7 @@ import 'package:tasti_restaurant_app/features/make_reservation/domain/repositori
 import 'package:tasti_restaurant_app/features/make_reservation/domain/usecases/fetch_restaurant_seating_area.dart';
 import 'package:tasti_restaurant_app/features/make_reservation/domain/usecases/fetch_restaurant_tables.dart';
 import 'package:tasti_restaurant_app/features/make_reservation/domain/usecases/fetch_restaurant_time_slots.dart';
+import 'package:tasti_restaurant_app/features/make_reservation/domain/usecases/make_reservations.dart';
 import 'package:tasti_restaurant_app/features/make_reservation/presentation/bloc/make_reservation_bloc.dart';
 import 'package:tasti_restaurant_app/features/reservations/data/data_sources/reservations_remote_repo.dart';
 import 'package:tasti_restaurant_app/features/reservations/data/repositories/reservations.dart';
@@ -360,9 +361,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FetchRestaurantSeatingAreaUsecase>(FetchRestaurantSeatingAreaUsecase(sl()));
   sl.registerSingleton<FetchRestaurantTablesUsecase>(FetchRestaurantTablesUsecase(sl()));
   sl.registerSingleton<FetchRestaurantTimeSlotsUsecase>(FetchRestaurantTimeSlotsUsecase(sl()));
+  sl.registerSingleton<MakeReservationsUsecase>(MakeReservationsUsecase(sl()));
 
   // Bloc
-  sl.registerLazySingleton<MakeReservationBloc>(() => MakeReservationBloc(sl(), sl(), sl()));
+  sl.registerLazySingleton<MakeReservationBloc>(() => MakeReservationBloc(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<ReservationBloc>(() => ReservationBloc(sl(), sl()));
   sl.registerLazySingleton<RestaurantCampaignsBloc>(() => RestaurantCampaignsBloc(sl()));
   sl.registerLazySingleton<BundleBillingBloc>(() => BundleBillingBloc(sl(), sl(), sl(), sl(), sl()));

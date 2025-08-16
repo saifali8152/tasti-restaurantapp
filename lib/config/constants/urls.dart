@@ -82,4 +82,5 @@ class AppUrls{
   static final String fetchSeatingAreaForReservation = "$base/restaurant/get-seating-area-for-reservation";
   static final String fetchTimeSlotByDate = "$base/restaurant/get-time-slot-by-date";
   static final String fetchTablesBySeating = "$base/restaurant/get-tables-by-seating";
+  static final String makeReservation = "$base/restaurant/make-reservation";
 }

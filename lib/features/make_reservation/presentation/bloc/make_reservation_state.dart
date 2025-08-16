@@ -7,22 +7,26 @@ class MakeReservationState extends Equatable {
   final ApiResponse<List<RestaurantSeatingAreaEntity>> seatingAreaResponse;
   final ApiResponse<List<String>> tableResponse;
   final ApiResponse<RestaurantTimeSlotEntity> timeSlotResponse;
+  final ApiResponse<String> reservationResponse;
 
   const MakeReservationState({
     required this.seatingAreaResponse,
     required this.tableResponse,
     required this.timeSlotResponse,
+    required this.reservationResponse,
   });
 
   MakeReservationState copyWith({
     final ApiResponse<List<RestaurantSeatingAreaEntity>>? seatingAreaResponse,
     final ApiResponse<List<String>>? tableResponse,
     final ApiResponse<RestaurantTimeSlotEntity>? timeSlotResponse,
+    final ApiResponse<String>? reservationResponse,
   }) {
     return MakeReservationState(
       seatingAreaResponse: seatingAreaResponse ?? this.seatingAreaResponse,
       tableResponse: tableResponse ?? this.tableResponse,
       timeSlotResponse: timeSlotResponse ?? this.timeSlotResponse,
+      reservationResponse: reservationResponse ?? this.reservationResponse,
     );
   }
 
@@ -31,5 +35,6 @@ class MakeReservationState extends Equatable {
         seatingAreaResponse,
         tableResponse,
         timeSlotResponse,
+        reservationResponse,
       ];
 }

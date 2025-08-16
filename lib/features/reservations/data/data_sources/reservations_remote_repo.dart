@@ -19,7 +19,8 @@ class ReservationRemoteApiImpl extends IReservationRemoteApi {
       AppUrls.fetchReservations,
       queryParams: {
         "id": parms.id,
-        "date": parms.date,
+        "date": DateTime.parse(parms.date).toIso8601String().split("T").first,
+
       },
     );
 
