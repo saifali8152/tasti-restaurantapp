@@ -30,7 +30,7 @@ export 'reservations_db/presentation/pages/customer_reservations.dart';
 export 'restaurant-admin/gallery/presentation/pages/gallery.dart';
 export 'restaurant-admin/dashboard/dashboard_screen.dart';
 export '../core/widgets/custom_drawer.dart';
-export '/features/reservations/reservations.dart';
+export 'reservations/presentation/pages/reservations.dart';
 export 'admin/campaigns/presentation/pages/campaign_by_res_details.dart';
 export 'admin/manage_sms/presentation/pages/sms_bundle_details.dart';
 export 'admin/reservations_database/presentation/pages/reservation_db_details.dart';

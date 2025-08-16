@@ -1,4 +1,9 @@
 import 'package:get_it/get_it.dart';
+import 'package:tasti_restaurant_app/features/reservations/data/data_sources/reservations_remote_repo.dart';
+import 'package:tasti_restaurant_app/features/reservations/data/repositories/reservations.dart';
+import 'package:tasti_restaurant_app/features/reservations/domain/repositories/reservation.dart';
+import 'package:tasti_restaurant_app/features/reservations/domain/usecases/fetch_reservations.dart';
+import 'package:tasti_restaurant_app/features/reservations/presentation/bloc/reservation_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/data/data_sources/bundle_billing_remote_repo.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/data/repositories/bundle_billing_repo.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/repositories/bundle_billing.dart';
@@ -230,8 +235,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<ISeatingAreaRemoteApi>(SeatingAreaRemoteApiImpl(sl()));
   sl.registerSingleton<IBundleBillingRemoteApi>(BundleBillingRemoteApiImpl(sl()));
   sl.registerSingleton<IReservationDbRemoteApi>(ReservationDbRemoteApiImpl(sl()));
+  sl.registerSingleton<IReservationRemoteApi>(ReservationRemoteApiImpl(sl()));
 
   // Repository
+  sl.registerSingleton<IReservationRepo>(ReservationRepoImpl(sl()));
   sl.registerSingleton<IReservationDbRepo>(ReservationDbRepoImpl(sl()));
   sl.registerSingleton<IBundleBillingRepo>(BundleBillingRepoImpl(sl()));
   sl.registerSingleton<ISeatingAreaRepo>(SeatingAreaRepoImpl(sl()));
@@ -338,8 +345,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<InitSmsPaymentUsecase>(InitSmsPaymentUsecase(sl()));
   sl.registerSingleton<VerifySmsPaymentUsecase>(VerifySmsPaymentUsecase(sl()));
   sl.registerSingleton<FetchRestaurantCampaignsUsecase>(FetchRestaurantCampaignsUsecase(sl()));
+  sl.registerSingleton<FetchReservationsUsecase>(FetchReservationsUsecase(sl()));
 
   // Bloc
+  sl.registerLazySingleton<ReservationBloc>(() => ReservationBloc(sl()));
   sl.registerLazySingleton<RestaurantCampaignsBloc>(() => RestaurantCampaignsBloc(sl()));
   sl.registerLazySingleton<BundleBillingBloc>(() => BundleBillingBloc(sl(), sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<SeatingAreaBloc>(() => SeatingAreaBloc(sl(), sl(), sl(), sl()));

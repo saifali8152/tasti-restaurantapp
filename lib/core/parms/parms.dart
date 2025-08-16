@@ -1,5 +1,4 @@
 import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/domain/entities/seating_area.dart';
-
 import '/core/enum/query_type.dart';
 import '/core/enum/request_type.dart';
 
@@ -25,7 +24,7 @@ class TableData {
       "max_capacity": maxCapacity,
       "min_capacity": minCapacity,
       "table_max": tableMax,
-      "is_moveable": isMoveable,
+      "is_moveable": isMoveable == true? 1: 0,
       "type": type,
       "shape": shape,
     };
@@ -80,7 +79,6 @@ class SeatingAreaParms {
     };
   }
 }
-
 
 class GetPlaceDetailsParms {
   final String placeId;
@@ -407,6 +405,13 @@ class AllRestaurantParms {
     this.search = '',
     this.filter = '',
   });
+}
+
+class FetchReservationParms {
+  final String id;
+  final String date;
+
+  FetchReservationParms({required this.id, this.date = ''});
 }
 
 class RequestParms {

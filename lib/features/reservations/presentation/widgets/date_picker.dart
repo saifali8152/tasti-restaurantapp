@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '/core/utils/general_extentions.dart';
-import '../../../config/constants/colors.dart';
-import '../../../config/constants/icons.dart';
+import '../../../../config/constants/colors.dart';
+import '../../../../config/constants/icons.dart';
 
 class ReservationsDatePicker extends StatefulWidget {
-  const ReservationsDatePicker({super.key});
+  final void Function(String formattedDate)? onDateChanged;
+
+  const ReservationsDatePicker({super.key, this.onDateChanged});
 
   @override
   State<ReservationsDatePicker> createState() => _ReservationsDatePickerState();
@@ -14,16 +16,33 @@ class ReservationsDatePicker extends StatefulWidget {
 class _ReservationsDatePickerState extends State<ReservationsDatePicker> {
   DateTime selectedDate = DateTime.now();
 
-  void _goToPreviousDate() {
+  @override
+  void initState() {
+    super.initState();
+    // Emit today’s date when the widget first builds
+    final formatted = DateFormat('yyyy-MM-dd').format(selectedDate);
+    if (widget.onDateChanged != null) {
+      widget.onDateChanged!(formatted);
+    }
+  }
+
+  void _updateDate(DateTime newDate) {
     setState(() {
-      selectedDate = selectedDate.subtract(const Duration(days: 1));
+      selectedDate = newDate;
     });
+
+    final formatted = DateFormat('yyyy-MM-dd').format(newDate);
+    if (widget.onDateChanged != null) {
+      widget.onDateChanged!(formatted);
+    }
+  }
+
+  void _goToPreviousDate() {
+    _updateDate(selectedDate.subtract(const Duration(days: 1)));
   }
 
   void _goToNextDate() {
-    setState(() {
-      selectedDate = selectedDate.add(const Duration(days: 1));
-    });
+    _updateDate(selectedDate.add(const Duration(days: 1)));
   }
 
   @override
@@ -51,6 +70,7 @@ class _ReservationsDatePickerState extends State<ReservationsDatePicker> {
           child: Row(
             children: [
               Text(
+                // Pretty UI format
                 DateFormat('dd/MM/yyyy').format(selectedDate),
                 style: const TextStyle(
                   fontSize: 12,
@@ -63,9 +83,7 @@ class _ReservationsDatePickerState extends State<ReservationsDatePicker> {
                   context.showCustomDatePicker(
                     initialDate: selectedDate,
                     onDateSelected: (picked) {
-                      setState(() {
-                        selectedDate = picked;
-                      });
+                      _updateDate(picked);
                     },
                   );
                 },

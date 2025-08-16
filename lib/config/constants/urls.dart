@@ -77,4 +77,5 @@ class AppUrls{
   static final String initializeSmsPayment = "$base/restaurant/initialize-sms-payment";
   static final String verifySmsPayment = "$base/restaurant/verify-sms-payment";
   static final String fetchCampaigns = "$base/restaurant/get-campaigns";
+  static final String fetchReservations = "$base/restaurant/get-reservations";
 }
