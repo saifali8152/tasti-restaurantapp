@@ -1,13 +1,13 @@
 import 'package:get_it/get_it.dart';
-import 'package:tasti_restaurant_app/features/bundle_billings/data/data_sources/bundle_billing_remote_repo.dart';
-import 'package:tasti_restaurant_app/features/bundle_billings/data/repositories/bundle_billing_repo.dart';
-import 'package:tasti_restaurant_app/features/bundle_billings/domain/repositories/bundle_billing.dart';
-import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/fetch_bundles.dart';
-import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/fetch_sms.dart';
-import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/fetch_transaction_histroy.dart';
-import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/init_sms_payment.dart';
-import 'package:tasti_restaurant_app/features/bundle_billings/domain/usecases/verify_sms_payment.dart';
-import 'package:tasti_restaurant_app/features/bundle_billings/presentation/bloc/bundle_billing_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/data/data_sources/bundle_billing_remote_repo.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/data/repositories/bundle_billing_repo.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/repositories/bundle_billing.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/usecases/fetch_bundles.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/usecases/fetch_sms.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/usecases/fetch_transaction_histroy.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/usecases/init_sms_payment.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/usecases/verify_sms_payment.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/presentation/bloc/bundle_billing_bloc.dart';
 import 'package:tasti_restaurant_app/features/common/manage_fee/domain/usecases/initialize_payment_fee.dart';
 import 'package:tasti_restaurant_app/features/common/manage_fee/domain/usecases/verify_payment.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/data/data_sources/restaurant_remote_source.dart';
@@ -25,6 +25,11 @@ import 'package:tasti_restaurant_app/features/common/location/domain/repositorie
 import 'package:tasti_restaurant_app/features/common/location/domain/usecases/get_location_usecase.dart';
 import 'package:tasti_restaurant_app/features/common/location/domain/usecases/get_predictions_usecase.dart';
 import 'package:tasti_restaurant_app/features/common/location/presentation/bloc/location_bloc.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/data/data_sources/reservations_db_remote_repo.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/data/repositories/reservations_db.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/domain/repositories/reservations_db.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/domain/usecases/fetch_restaurant_campaigns.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/presentation/bloc/restaurant_campaigns_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/data/data_sources/menu_repo.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/data/repositories/menu_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/domain/repositories/menu_repo.dart';
@@ -224,8 +229,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IReviewsRemoteApi>(ReviewsRemoteApiImpl(sl()));
   sl.registerSingleton<ISeatingAreaRemoteApi>(SeatingAreaRemoteApiImpl(sl()));
   sl.registerSingleton<IBundleBillingRemoteApi>(BundleBillingRemoteApiImpl(sl()));
+  sl.registerSingleton<IReservationDbRemoteApi>(ReservationDbRemoteApiImpl(sl()));
 
   // Repository
+  sl.registerSingleton<IReservationDbRepo>(ReservationDbRepoImpl(sl()));
   sl.registerSingleton<IBundleBillingRepo>(BundleBillingRepoImpl(sl()));
   sl.registerSingleton<ISeatingAreaRepo>(SeatingAreaRepoImpl(sl()));
   sl.registerSingleton<IReviewsRepo>(ReviewsRepoImpl(sl()));
@@ -330,8 +337,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FetchTransactionHistroyUsecase>(FetchTransactionHistroyUsecase(sl()));
   sl.registerSingleton<InitSmsPaymentUsecase>(InitSmsPaymentUsecase(sl()));
   sl.registerSingleton<VerifySmsPaymentUsecase>(VerifySmsPaymentUsecase(sl()));
+  sl.registerSingleton<FetchRestaurantCampaignsUsecase>(FetchRestaurantCampaignsUsecase(sl()));
 
   // Bloc
+  sl.registerLazySingleton<RestaurantCampaignsBloc>(() => RestaurantCampaignsBloc(sl()));
   sl.registerLazySingleton<BundleBillingBloc>(() => BundleBillingBloc(sl(), sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<SeatingAreaBloc>(() => SeatingAreaBloc(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<ReviewsBloc>(() => ReviewsBloc(sl(), sl(), sl()));

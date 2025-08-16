@@ -64,4 +64,6 @@ class AppRoutes {
   static const String addSeatingArea = '/add-seating-area';
   static const String restaurantTransactionHistory = '/restaurant-transaction-history';
   static const String buySmsBundles = '/buy-sms-bundles';
+  static const String campaigns = '/campaigns';
+  static const String campaignDetails = '/campaigns-details';
 }

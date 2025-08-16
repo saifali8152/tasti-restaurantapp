@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/domain/entities/restaurant.dart';
-import 'package:tasti_restaurant_app/features/bundle_billings/presentation/pages/buy_sms_bundle.dart';
-import 'package:tasti_restaurant_app/features/bundle_billings/presentation/pages/restaurant_transaction_history.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/presentation/pages/buy_sms_bundle.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/presentation/pages/restaurant_transaction_history.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/domain/entities/restaurant_campaign.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/presentation/pages/restaurant_campaign_details.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/presentation/pages/restaurant_campaigns.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/pages/create_new_restaurant.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/presentation/pages/update_new_restaurant.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/presentation/pages/dashboard_screen.dart';
@@ -50,6 +53,12 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const BuySmsBundle());
       case AppRoutes.restaurantTransactionHistory:
         return MaterialPageRoute(builder: (_) => const RestaurantTransactionHistory());
+      case AppRoutes.campaigns:
+        return MaterialPageRoute(builder: (_) => RestaurantCampaignsScreen());
+      case AppRoutes.campaignDetails:
+        return MaterialPageRoute(builder: (_) => RestaurantCampaignDetails(
+          campaign: settings.arguments as RestaurantCampaignEntity,
+        ));
       case AppRoutes.smsBundleDetails:
         return MaterialPageRoute(
           builder: (_) =>
