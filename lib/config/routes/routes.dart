@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/domain/entities/restaurant.dart';
+import 'package:tasti_restaurant_app/features/reservations/domain/entities/reservation.dart';
+import 'package:tasti_restaurant_app/features/reservations/presentation/pages/reservation_details.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/presentation/pages/buy_sms_bundle.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/presentation/pages/restaurant_transaction_history.dart';
 import 'package:tasti_restaurant_app/features/reservations_db/domain/entities/restaurant_campaign.dart';
@@ -58,6 +60,10 @@ class Routes {
       case AppRoutes.campaignDetails:
         return MaterialPageRoute(builder: (_) => RestaurantCampaignDetails(
           campaign: settings.arguments as RestaurantCampaignEntity,
+        ));
+      case AppRoutes.reservationDetails:
+        return MaterialPageRoute(builder: (_) => ReservationDetails(
+          reservation: settings.arguments as ReservationItem,
         ));
       case AppRoutes.smsBundleDetails:
         return MaterialPageRoute(

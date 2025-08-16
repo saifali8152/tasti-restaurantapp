@@ -17,4 +17,14 @@ class ReservationRepoImpl extends IReservationRepo {
       return DataFailure(error.toString());
     }
   }
+ 
+  @override
+  Future<DataState<String>> addUpdateWaiter(AddUpdateWaiterParms parms) async {
+    try {
+      final result = await remote.addUpdateWaiter(parms);
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
 }

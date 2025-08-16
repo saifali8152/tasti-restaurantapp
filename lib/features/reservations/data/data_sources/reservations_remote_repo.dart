@@ -5,6 +5,7 @@ import '/config/constants/urls.dart';
 
 abstract class IReservationRemoteApi {
   Future<ReservationModel> fetchReservations(FetchReservationParms parms);
+  Future<String> addUpdateWaiter(AddUpdateWaiterParms parms);
 }
 
 class ReservationRemoteApiImpl extends IReservationRemoteApi {
@@ -24,5 +25,15 @@ class ReservationRemoteApiImpl extends IReservationRemoteApi {
 
     final ReservationModel reservations = ReservationModel.fromJson(response);
     return reservations;
+  }
+
+  @override
+  Future<String> addUpdateWaiter(AddUpdateWaiterParms parms) async {
+    var response = await networkApiService.post(AppUrls.assignWaiter, {
+      "reservation_id": parms.reservationId,
+      "waiter_name": parms.waiterName,
+    });
+
+    return response['message'];
   }
 }

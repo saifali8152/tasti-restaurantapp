@@ -13,3 +13,9 @@ class FetchReservationEvent extends ReservationEvent {
 
   const FetchReservationEvent(this.parms);
 }
+
+class AddUpdateWaiter extends ReservationEvent {
+  final AddUpdateWaiterParms parms;
+
+  const AddUpdateWaiter(this.parms);
+}
