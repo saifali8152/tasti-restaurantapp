@@ -15,7 +15,7 @@ class CustomerReservations extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.darkOrange,
       appBar: ThemedAppBar(
-        height: 200,
+        height: 250,
         title: "Customer Reservations",
         subTitle: Column(
           children: [
@@ -41,6 +41,15 @@ class CustomerReservations extends StatelessWidget {
               title: 'View Campaigns',
               onTap: () {
                 Navigator.pushNamed(context, AppRoutes.campaigns);
+              },
+              bgColor: Color(0xFF0D49AA),
+            ),
+            ButtonWithIcon(
+              icon: Image.asset(AppIcons.envelop,
+                  color: Colors.white, height: 15),
+              title: 'Import Database',
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.importDatabase);
               },
               bgColor: Color(0xFF0D49AA),
             ),

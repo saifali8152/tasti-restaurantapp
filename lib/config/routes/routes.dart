@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/domain/entities/restaurant.dart';
 import 'package:tasti_restaurant_app/features/reservations/domain/entities/reservation.dart';
 import 'package:tasti_restaurant_app/features/reservations/presentation/pages/reservation_details.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/presentation/pages/import_database.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/presentation/pages/buy_sms_bundle.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/presentation/pages/restaurant_transaction_history.dart';
 import 'package:tasti_restaurant_app/features/reservations_db/domain/entities/restaurant_campaign.dart';
@@ -54,17 +55,22 @@ class Routes {
       case AppRoutes.buySmsBundles:
         return MaterialPageRoute(builder: (_) => const BuySmsBundle());
       case AppRoutes.restaurantTransactionHistory:
-        return MaterialPageRoute(builder: (_) => const RestaurantTransactionHistory());
+        return MaterialPageRoute(
+            builder: (_) => const RestaurantTransactionHistory());
       case AppRoutes.campaigns:
         return MaterialPageRoute(builder: (_) => RestaurantCampaignsScreen());
       case AppRoutes.campaignDetails:
-        return MaterialPageRoute(builder: (_) => RestaurantCampaignDetails(
-          campaign: settings.arguments as RestaurantCampaignEntity,
-        ));
+        return MaterialPageRoute(
+            builder: (_) => RestaurantCampaignDetails(
+                  campaign: settings.arguments as RestaurantCampaignEntity,
+                ));
       case AppRoutes.reservationDetails:
-        return MaterialPageRoute(builder: (_) => ReservationDetails(
-          reservation: settings.arguments as ReservationItem,
-        ));
+        return MaterialPageRoute(
+            builder: (_) => ReservationDetails(
+                  reservation: settings.arguments as ReservationItem,
+                ));
+      case AppRoutes.importDatabase:
+        return MaterialPageRoute(builder: (_) => ImportDatabase());
       case AppRoutes.smsBundleDetails:
         return MaterialPageRoute(
           builder: (_) =>
@@ -177,9 +183,10 @@ class Routes {
       case AppRoutes.addPhotos:
         return MaterialPageRoute(builder: (_) => const AddPhotosScreen());
       case AppRoutes.settingAreaDetails:
-        return MaterialPageRoute(builder: (_) => SeatingAreaDetails(
-          tables: settings.arguments as List<TableEntity>,
-        ));
+        return MaterialPageRoute(
+            builder: (_) => SeatingAreaDetails(
+                  tables: settings.arguments as List<TableEntity>,
+                ));
       case AppRoutes.addSeatingArea:
         final args = settings.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(

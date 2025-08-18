@@ -67,4 +67,5 @@ class AppRoutes {
   static const String campaigns = '/campaigns';
   static const String campaignDetails = '/campaigns-details';
   static const String reservationDetails = '/reservation-details';
+  static const String importDatabase = '/import-database';
 }

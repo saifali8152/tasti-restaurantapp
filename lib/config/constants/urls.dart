@@ -85,4 +85,5 @@ class AppUrls{
   static final String makeReservation = "$base/restaurant/make-reservation";
   static final String updateReservationStatus = "$base/restaurant/update-reservation-status";
   static final String cancelReservation = "$base/restaurant/cancel-reservation";
+  static final String importCSV = "$base/restaurant/import-csv";
 }

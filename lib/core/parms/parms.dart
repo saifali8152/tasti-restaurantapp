@@ -52,6 +52,16 @@ class AddUpdateWaiterParms {
   });
 }
 
+class ImportCSVFileParms {
+  final int restaurantId;
+  final String file;
+
+  ImportCSVFileParms({
+    required this.restaurantId,
+    required this.file,
+  });
+}
+
 class UpdateReservationStatusParms {
   final int reservationId;
   final String status;

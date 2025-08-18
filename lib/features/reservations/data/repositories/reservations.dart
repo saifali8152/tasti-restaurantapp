@@ -9,7 +9,7 @@ class ReservationRepoImpl extends IReservationRepo {
   ReservationRepoImpl(this.remote);
 
   @override
-  Future<DataState<String>> updateReservationStatus(UpdateReservationStatusParms parms) async {
+  Future<DataState<ReservationItemModel>> updateReservationStatus(UpdateReservationStatusParms parms) async {
     try {
       final result = await remote.updateReservationStatus(parms);
       return DataSuccess(result);
@@ -19,7 +19,7 @@ class ReservationRepoImpl extends IReservationRepo {
   }
   
   @override
-  Future<DataState<String>> cancelReservation(String id) async {
+  Future<DataState<ReservationItemModel>> cancelReservation(String id) async {
     try {
       final result = await remote.cancelReservation(id);
       return DataSuccess(result);

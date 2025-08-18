@@ -70,20 +70,20 @@ class ReservationBloc extends Bloc<ReservationEvent, ReservationState> {
   }
 
   Future<void> _onCancelReservation(
-      CancelReservation event, Emitter<ReservationState> emit) async {
+    CancelReservation event,
+    Emitter<ReservationState> emit,
+  ) async {
     emit(state.copyWith(cancelResponse: ApiResponse.loading()));
     final result = await _cancelUsecase(event.id);
 
     switch (result) {
-      case DataSuccess<String>():
+      case DataSuccess<ReservationItem>():
         final currentEntity = state.fetchResponse.data;
 
         if (currentEntity != null) {
           final updatedList = currentEntity.data.map((reservation) {
             if (reservation.id.toString() == event.id) {
-              return reservation.copyWith(
-                statusDisplay: "cancelled",
-              );
+              return result.data; // ✅ replace with updated item from API
             }
             return reservation;
           }).toList();
@@ -102,7 +102,8 @@ class ReservationBloc extends Bloc<ReservationEvent, ReservationState> {
           );
         } else {
           emit(state.copyWith(
-              cancelResponse: ApiResponse.completed(result.data)));
+            cancelResponse: ApiResponse.completed(result.data),
+          ));
         }
         break;
 
@@ -116,20 +117,21 @@ class ReservationBloc extends Bloc<ReservationEvent, ReservationState> {
   }
 
   Future<void> _onUpdateReservationStatus(
-      UpdateReservationStatus event, Emitter<ReservationState> emit) async {
-    emit(state.copyWith(cancelResponse: ApiResponse.loading()));
+    UpdateReservationStatus event,
+    Emitter<ReservationState> emit,
+  ) async {
+    emit(state.copyWith(updateResponse: ApiResponse.loading()));
     final result = await _updateUsecase(event.parms);
 
     switch (result) {
-      case DataSuccess<String>():
+      case DataSuccess<ReservationItem>():
         final currentEntity = state.fetchResponse.data;
 
         if (currentEntity != null) {
           final updatedList = currentEntity.data.map((reservation) {
-            if (reservation.id.toString() == event.parms.reservationId.toString()) {
-              return reservation.copyWith(
-                statusDisplay: event.parms.status == 'yes'? "arrived": "no_show",
-              );
+            if (reservation.id.toString() ==
+                event.parms.reservationId.toString()) {
+              return result.data; // ✅ replace with updated item from API
             }
             return reservation;
           }).toList();
@@ -142,22 +144,23 @@ class ReservationBloc extends Bloc<ReservationEvent, ReservationState> {
 
           emit(
             state.copyWith(
-              cancelResponse: ApiResponse.completed(result.data),
+              updateResponse: ApiResponse.completed(result.data),
               fetchResponse: ApiResponse.completed(updatedEntity),
             ),
           );
         } else {
           emit(state.copyWith(
-              cancelResponse: ApiResponse.completed(result.data)));
+            updateResponse: ApiResponse.completed(result.data),
+          ));
         }
         break;
 
       case DataFailure():
-        emit(state.copyWith(cancelResponse: ApiResponse.error(result.error)));
+        emit(state.copyWith(updateResponse: ApiResponse.error(result.error)));
         break;
 
       default:
-        emit(state.copyWith(cancelResponse: ApiResponse.initial()));
+        emit(state.copyWith(updateResponse: ApiResponse.initial()));
     }
   }
 }

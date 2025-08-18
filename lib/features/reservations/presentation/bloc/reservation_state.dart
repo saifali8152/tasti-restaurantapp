@@ -5,8 +5,8 @@ import '/core/network/response.dart';
 class ReservationState extends Equatable {
   final ApiResponse<ReservationEntity> fetchResponse;
   final ApiResponse<String> addUpdateWaiter;
-  final ApiResponse<String> cancelResponse;
-  final ApiResponse<String> updateResponse;
+  final ApiResponse<ReservationItem> cancelResponse;
+  final ApiResponse<ReservationItem> updateResponse;
 
   const ReservationState({
     required this.fetchResponse,
@@ -17,8 +17,8 @@ class ReservationState extends Equatable {
 
   ReservationState copyWith({
     final ApiResponse<ReservationEntity>? fetchResponse,
-    final ApiResponse<String>? cancelResponse,
-    final ApiResponse<String>? updateResponse,
+    final ApiResponse<ReservationItem>? cancelResponse,
+    final ApiResponse<ReservationItem>? updateResponse,
     final ApiResponse<String>? addUpdateWaiter,
   }) {
     return ReservationState(

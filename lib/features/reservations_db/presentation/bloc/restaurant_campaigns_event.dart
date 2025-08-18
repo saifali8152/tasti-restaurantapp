@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:tasti_restaurant_app/core/parms/parms.dart';
 
 abstract class RestaurantCampaignsEvent extends Equatable {
   const RestaurantCampaignsEvent();
@@ -11,4 +12,10 @@ class FetchRestaurantCampaignsEvent extends RestaurantCampaignsEvent {
   final String id;
 
   const FetchRestaurantCampaignsEvent(this.id);
+}
+
+class ImportCSVFile extends RestaurantCampaignsEvent {
+  final ImportCSVFileParms parms;
+
+  const ImportCSVFile(this.parms);
 }

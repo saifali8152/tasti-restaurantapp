@@ -6,8 +6,8 @@ import '/config/constants/urls.dart';
 abstract class IReservationRemoteApi {
   Future<ReservationModel> fetchReservations(FetchReservationParms parms);
   Future<String> addUpdateWaiter(AddUpdateWaiterParms parms);
-  Future<String> cancelReservation(String id);
-  Future<String> updateReservationStatus(UpdateReservationStatusParms parms);
+  Future<ReservationItemModel> cancelReservation(String id);
+  Future<ReservationItemModel> updateReservationStatus(UpdateReservationStatusParms parms);
 }
 
 class ReservationRemoteApiImpl extends IReservationRemoteApi {
@@ -15,13 +15,13 @@ class ReservationRemoteApiImpl extends IReservationRemoteApi {
   ReservationRemoteApiImpl(this.networkApiService);
 
   @override
-  Future<String> cancelReservation(String id) async {
+  Future<ReservationItemModel> cancelReservation(String id) async {
     var response = await networkApiService.post(
       AppUrls.cancelReservation,
       {"reservation_id": id},
     );
 
-    return response['message'];
+    return ReservationItemModel.fromJson(response['data']);
   }
 
   @override
@@ -40,7 +40,7 @@ class ReservationRemoteApiImpl extends IReservationRemoteApi {
   }
   
   @override
-  Future<String> updateReservationStatus(
+  Future<ReservationItemModel> updateReservationStatus(
       UpdateReservationStatusParms parms) async {
     var response = await networkApiService.post(
       AppUrls.updateReservationStatus,
@@ -49,8 +49,8 @@ class ReservationRemoteApiImpl extends IReservationRemoteApi {
         "status": parms.status,
       },
     );
-
-    return response['message'];
+    
+    return ReservationItemModel.fromJson(response['data']);
   }
 
   @override

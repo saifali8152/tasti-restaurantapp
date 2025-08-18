@@ -5,6 +5,6 @@ import '/core/network/response.dart';
 abstract class IReservationRepo {
   Future<DataState<ReservationEntity>> fetchReservations(FetchReservationParms parms);
   Future<DataState<String>> addUpdateWaiter(AddUpdateWaiterParms parms);
-  Future<DataState<String>> cancelReservation(String id);
-  Future<DataState<String>> updateReservationStatus(UpdateReservationStatusParms parms);
+  Future<DataState<ReservationItem>> cancelReservation(String id);
+  Future<DataState<ReservationItem>> updateReservationStatus(UpdateReservationStatusParms parms);
 }
