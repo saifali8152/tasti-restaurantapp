@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import '/config/routes/route_name.dart';
 import '/core/widgets/curved_container.dart';
 import '/core/widgets/themed_app_bar.dart';
-import '../../../../config/constants/icons.dart';
-import '../../../../core/widgets/icon_button.dart';
 import '/config/constants/colors.dart';
 import '../widgets/customer_reservation_card.dart';
 
@@ -15,47 +13,61 @@ class CustomerReservations extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.darkOrange,
       appBar: ThemedAppBar(
-        height: 250,
+        height: 100,
         title: "Customer Reservations",
-        subTitle: Column(
-          children: [
-            ButtonWithIcon(
-              icon: Image.asset(AppIcons.envelop,
-                  color: Colors.white, height: 15),
-              title: 'SMS/Email Customers',
-              onTap: () {},
-              bgColor: Color(0xFF0D49AA),
-            ),
-            ButtonWithIcon(
-              icon: Image.asset(AppIcons.target,
-                  color: Colors.white, height: 15),
-              title: 'Targeted Campaign',
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.targetedCampaign);
+        actions: [
+            PopupMenuButton<String>(
+              icon: const Icon(Icons.more_vert, color: Colors.white),
+              onSelected: (value) {
+                switch (value) {
+                  case 'csv':
+                    // handle CSV Imported Data
+                    break;
+                  case 'sms':
+                    // handle SMS/Email Customers
+                    break;
+                  case 'targeted':
+                    Navigator.pushNamed(context, AppRoutes.targetedCampaign);
+                    break;
+                  case 'view_campaigns':
+                    Navigator.pushNamed(context, AppRoutes.campaigns);
+                    break;
+                  case 'single_sms':
+                    // handle SMS/Email Customer
+                    break;
+                  case 'import':
+                    Navigator.pushNamed(context, AppRoutes.importDatabase);
+                    break;
+                }
               },
-              bgColor: Color(0xFFD97700),
+              itemBuilder: (BuildContext context) => [
+                const PopupMenuItem(
+                  value: 'csv',
+                  child: Text('CSV Imported Data'),
+                ),
+                const PopupMenuItem(
+                  value: 'sms',
+                  child: Text('SMS/Email Customers'),
+                ),
+                const PopupMenuItem(
+                  value: 'targeted',
+                  child: Text('Targeted Campaign'),
+                ),
+                const PopupMenuItem(
+                  value: 'view_campaigns',
+                  child: Text('View Campaigns'),
+                ),
+                const PopupMenuItem(
+                  value: 'single_sms',
+                  child: Text('SMS/Email Customer'),
+                ),
+                const PopupMenuItem(
+                  value: 'import',
+                  child: Text('Import Database'),
+                ),
+              ],
             ),
-            ButtonWithIcon(
-              icon: Image.asset(AppIcons.envelop,
-                  color: Colors.white, height: 15),
-              title: 'View Campaigns',
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.campaigns);
-              },
-              bgColor: Color(0xFF0D49AA),
-            ),
-            ButtonWithIcon(
-              icon: Image.asset(AppIcons.envelop,
-                  color: Colors.white, height: 15),
-              title: 'Import Database',
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.importDatabase);
-              },
-              bgColor: Color(0xFF0D49AA),
-            ),
-            
           ],
-        ),
       ),
       body: CurvedContainer(
         child: Column(

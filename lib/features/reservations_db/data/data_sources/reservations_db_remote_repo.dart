@@ -14,24 +14,35 @@ class ReservationDbRemoteApiImpl extends IReservationDbRemoteApi {
   ReservationDbRemoteApiImpl(this.networkApiService);
 
   @override
-  Future<List<RestaurantCampaignModel>> fetchRestaurantCampaigns(String id) async {
-    var response = await networkApiService.get(AppUrls.fetchCampaigns, queryParams: {"id": id});
+  Future<List<RestaurantCampaignModel>> fetchRestaurantCampaigns(
+      String id) async {
+    var response = await networkApiService
+        .get(AppUrls.fetchCampaigns, queryParams: {"id": id});
     final List<dynamic> rawList = response['data'];
 
-    final List<RestaurantCampaignModel> campaigns = rawList.map((campaign) => RestaurantCampaignModel.fromJson(campaign)).toList();
+    final List<RestaurantCampaignModel> campaigns = rawList
+        .map((campaign) => RestaurantCampaignModel.fromJson(campaign))
+        .toList();
     return campaigns;
   }
-  
+
   @override
   Future<String> importCSVFile(ImportCSVFileParms parms) async {
     Map<String, MultipartFile> files = {};
-    if (parms.file.isNotEmpty && !(parms.file.contains("http"))) {
+    Map<String, String> data = {};
+
+    if (parms.file.isNotEmpty) {
       files = {
-        "file": await MultipartFile.fromFile(parms.file,
-            filename: parms.file.split('/').last),
+        "file": await MultipartFile.fromFile(
+          parms.file,
+          filename: parms.file.split('/').last,
+          contentType: DioMediaType('text', 'csv'), // <- important!
+        ),
       };
     }
-    var response = await networkApiService.postMultipart(AppUrls.importCSV, {"restaurant_id": parms.restaurantId}, files);
+    data = {"restaurant_id": parms.restaurantId.toString()};
+    var response =
+        await networkApiService.postMultipart(AppUrls.importCSV, data, files);
     return response['message'];
   }
 }

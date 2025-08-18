@@ -5,13 +5,10 @@ class ThemedAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final double? height;
   final Widget? subTitle;
+  final List<Widget>? actions;
 
-  const ThemedAppBar({
-    super.key,
-    this.title,
-    this.subTitle,
-    this.height,
-  });
+  const ThemedAppBar(
+      {super.key, this.title, this.subTitle, this.height, this.actions});
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +20,22 @@ class ThemedAppBar extends StatelessWidget implements PreferredSizeWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (title != null)
-              Text(
-                title!,
-                style: const TextStyle(
-                  fontSize: 24,
-                  color: Colors.white,
-                ),
+              Row(
+                children: [
+                  Spacer(flex: actions == null ? 1 : 3),
+                  Text(
+                    title!,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Spacer(),
+                  if (actions != null) ...[
+                    ...actions ?? [],
+                    SizedBox(width: 10)
+                  ]
+                ],
               ),
             if (subTitle != null) ...[
               const SizedBox(height: 8),
