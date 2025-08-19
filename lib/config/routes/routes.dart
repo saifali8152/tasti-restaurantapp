@@ -3,6 +3,7 @@ import 'package:tasti_restaurant_app/core/parms/parms.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/domain/entities/restaurant.dart';
 import 'package:tasti_restaurant_app/features/reservations/domain/entities/reservation.dart';
 import 'package:tasti_restaurant_app/features/reservations/presentation/pages/reservation_details.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/presentation/pages/cvc_imported_data.dart';
 import 'package:tasti_restaurant_app/features/reservations_db/presentation/pages/import_database.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/presentation/pages/buy_sms_bundle.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/presentation/pages/restaurant_transaction_history.dart';
@@ -168,6 +169,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const SetVenueCategory());
       case AppRoutes.share:
         return MaterialPageRoute(builder: (_) => const ShareLinksScreen());
+      case AppRoutes.csvImportedData:
+        return MaterialPageRoute(builder: (_) => const CvcImportedDataScreen());
       case AppRoutes.updateWorkingHours:
         return MaterialPageRoute(
           builder: (_) => UpdateWorkingHours(

@@ -15,7 +15,11 @@ import 'package:tasti_restaurant_app/features/reservations/domain/usecases/cance
 import 'package:tasti_restaurant_app/features/reservations/domain/usecases/fetch_reservations.dart';
 import 'package:tasti_restaurant_app/features/reservations/domain/usecases/update_reservations_status.dart';
 import 'package:tasti_restaurant_app/features/reservations/presentation/bloc/reservation_bloc.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/domain/usecases/fetch_csv_data.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/domain/usecases/fetch_reservation_data.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/domain/usecases/fetch_reservation_data_by_email.dart';
 import 'package:tasti_restaurant_app/features/reservations_db/domain/usecases/import_scv_file.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/presentation/bloc/customer_reservations/customer_reservations_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/data/data_sources/bundle_billing_remote_repo.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/data/repositories/bundle_billing_repo.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/repositories/bundle_billing.dart';
@@ -46,7 +50,7 @@ import 'package:tasti_restaurant_app/features/reservations_db/data/data_sources/
 import 'package:tasti_restaurant_app/features/reservations_db/data/repositories/reservations_db.dart';
 import 'package:tasti_restaurant_app/features/reservations_db/domain/repositories/reservations_db.dart';
 import 'package:tasti_restaurant_app/features/reservations_db/domain/usecases/fetch_restaurant_campaigns.dart';
-import 'package:tasti_restaurant_app/features/reservations_db/presentation/bloc/restaurant_campaigns_bloc.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/presentation/bloc/restaurant_campaigns/restaurant_campaigns_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/data/data_sources/menu_repo.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/data/repositories/menu_repo_impl.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/domain/repositories/menu_repo.dart';
@@ -290,6 +294,9 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<ICreateRestaurantRepo>(CreateRestaurantRepoImpl(sl()));
 
   // UseCase
+  sl.registerSingleton<FetchCsvDataUsecase>(FetchCsvDataUsecase(sl()));
+  sl.registerSingleton<FetchReservationDataByEmailUsecase>(FetchReservationDataByEmailUsecase(sl()));
+  sl.registerSingleton<FetchReservationDataUsecase>(FetchReservationDataUsecase(sl()));
   sl.registerSingleton<FetchVenueUsecase>(FetchVenueUsecase(sl()));
   sl.registerSingleton<DeleteVenueUsecase>(DeleteVenueUsecase(sl()));
   sl.registerSingleton<AddVenueUsecase>(AddVenueUsecase(sl()));
@@ -382,6 +389,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<VerifyCampaignPaymentUsecase>(VerifyCampaignPaymentUsecase(sl()));
 
   // Bloc
+  sl.registerLazySingleton<CustomerReservationsBloc>(() => CustomerReservationsBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<TargetedCampaignBloc>(() => TargetedCampaignBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<MakeReservationBloc>(() => MakeReservationBloc(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<ReservationBloc>(() => ReservationBloc(sl(), sl(), sl(), sl()));

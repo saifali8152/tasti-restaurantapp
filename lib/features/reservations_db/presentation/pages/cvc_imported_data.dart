@@ -5,26 +5,26 @@ import 'package:tasti_restaurant_app/core/services/session_controller.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
 import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
 import 'package:tasti_restaurant_app/dependency_injection.dart';
-import 'package:tasti_restaurant_app/features/reservations_db/presentation/bloc/restaurant_campaigns/restaurant_campaigns_bloc.dart';
-import 'package:tasti_restaurant_app/features/reservations_db/presentation/bloc/restaurant_campaigns/restaurant_campaigns_event.dart';
-import 'package:tasti_restaurant_app/features/reservations_db/presentation/bloc/restaurant_campaigns/restaurant_campaigns_state.dart';
-import 'package:tasti_restaurant_app/features/reservations_db/presentation/widgets/restaurant_campaign_card.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/presentation/bloc/customer_reservations/customer_reservations_bloc.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/presentation/bloc/customer_reservations/customer_reservations_event.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/presentation/bloc/customer_reservations/customer_reservations_state.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/presentation/widgets/csv_data_card.dart';
 
-class RestaurantCampaignsScreen extends StatefulWidget {
-  const RestaurantCampaignsScreen({super.key});
+class CvcImportedDataScreen extends StatefulWidget {
+  const CvcImportedDataScreen({super.key});
 
   @override
-  State<RestaurantCampaignsScreen> createState() => _RestaurantCampaignsScreenState();
+  State<CvcImportedDataScreen> createState() => _CvcImportedDataScreenState();
 }
 
-class _RestaurantCampaignsScreenState extends State<RestaurantCampaignsScreen> {
-  final RestaurantCampaignsBloc bloc = sl();
+class _CvcImportedDataScreenState extends State<CvcImportedDataScreen> {
+  final CustomerReservationsBloc bloc = sl();
   final int id = SessionController().user?.restaurant.id ?? 0;
 
   @override
   void initState() {
     super.initState();
-    bloc.add(FetchRestaurantCampaignsEvent(id.toString()));
+    bloc.add(FetchCsvDataEvent(id.toString()));
   }
 
   Widget _messageList(String message, {Color? color}) {
@@ -48,31 +48,31 @@ class _RestaurantCampaignsScreenState extends State<RestaurantCampaignsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Campaign Records"),
-      body: BlocBuilder<RestaurantCampaignsBloc, RestaurantCampaignsState>(
+      appBar: CustomAppBar(title: "CSV Imported Data"),
+      body: BlocBuilder<CustomerReservationsBloc, CustomerReservationsState>(
         bloc: bloc,
         builder: (context, state) {
           return RefreshIndicator.adaptive(
             onRefresh: () async {
-              bloc.add(FetchRestaurantCampaignsEvent(id.toString()));
+              bloc.add(FetchCsvDataEvent(id.toString()));
             },
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Builder(
                 builder: (context) {
-                  if (state.fetchResponse.status == Status.loading) {
+                  if (state.fetchCSVResponse.status == Status.loading) {
                     return const Center(child: LoadingWidget());
                   }
                     
-                  if (state.fetchResponse.status == Status.error) {
+                  if (state.fetchCSVResponse.status == Status.error) {
                     return _messageList(
-                      state.fetchResponse.message.toString(),
+                      state.fetchCSVResponse.message.toString(),
                       color: Colors.red,
                     );
                   }
                     
-                  if (state.fetchResponse.status == Status.completed) {
-                    final data = state.fetchResponse.data ?? [];
+                  if (state.fetchCSVResponse.status == Status.completed) {
+                    final data = state.fetchCSVResponse.data ?? [];
                     if (data.isEmpty) {
                       return _messageList("Nothing Found.");
                     }
@@ -83,8 +83,8 @@ class _RestaurantCampaignsScreenState extends State<RestaurantCampaignsScreen> {
                       separatorBuilder: (context, index) =>
                           const SizedBox(height: 10),
                       itemBuilder: (context, index) {
-                        final campaign = data[index];
-                        return RestaurantCampaignCard(campaign: campaign);
+                        final csvData = data[index];
+                        return CsvDataCard(data: csvData);
                       },
                     );
                   }

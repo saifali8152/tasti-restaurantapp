@@ -89,4 +89,7 @@ class AppUrls{
   static final String addTargetCampaign = "$base/restaurant/add-target-campaign";
   static final String initCampaignPayment = "$base/restaurant/initialize-campaign-payment";
   static final String verifyCampaignPayment = "$base/restaurant/verify-campaign-payment";
+  static final String getCsvData = "$base/restaurant/get-csv-data";
+  static final String getReservationsByEmail = "$base/restaurant/get-reservations-by-email";
+  static final String getRestaurantDatabase = "$base/restaurant/get-restaurant-database";
 }

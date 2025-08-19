@@ -21,7 +21,7 @@ class CustomerReservations extends StatelessWidget {
               onSelected: (value) {
                 switch (value) {
                   case 'csv':
-                    // handle CSV Imported Data
+                    Navigator.pushNamed(context, AppRoutes.csvImportedData);
                     break;
                   case 'sms':
                     // handle SMS/Email Customers
