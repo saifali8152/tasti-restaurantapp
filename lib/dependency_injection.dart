@@ -1,5 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:tasti_restaurant_app/features/reservations_db/domain/usecases/fetch_sms_availability.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/domain/usecases/send_csv_data.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/domain/usecases/send_restaurant_data.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/data/data_sources/make_reservation_remote_repo.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/data/repositories/make_reservations.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/domain/repositories/make_reservations.dart';
@@ -389,9 +391,11 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<InitCampaignPaymentUsecase>(InitCampaignPaymentUsecase(sl()));
   sl.registerSingleton<VerifyCampaignPaymentUsecase>(VerifyCampaignPaymentUsecase(sl()));
   sl.registerSingleton<FetchSmsAvailabilityUsecase>(FetchSmsAvailabilityUsecase(sl()));
+  sl.registerSingleton<SendCsvDataUsecase>(SendCsvDataUsecase(sl()));
+  sl.registerSingleton<SendRestaurantDataUsecase>(SendRestaurantDataUsecase(sl()));
 
   // Bloc
-  sl.registerLazySingleton<CustomerReservationsBloc>(() => CustomerReservationsBloc(sl(), sl(), sl(), sl()));
+  sl.registerLazySingleton<CustomerReservationsBloc>(() => CustomerReservationsBloc(sl(), sl(), sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<TargetedCampaignBloc>(() => TargetedCampaignBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<MakeReservationBloc>(() => MakeReservationBloc(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<ReservationBloc>(() => ReservationBloc(sl(), sl(), sl(), sl()));

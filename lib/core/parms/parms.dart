@@ -40,6 +40,48 @@ class FetchTimeSlotParms {
   });
 }
 
+class CustomerDetail {
+  final String name;
+  final String email;
+  final String phone;
+  final String type;
+
+  CustomerDetail({
+    required this.name,
+    required this.email,
+    required this.phone,
+    required this.type,
+  });
+}
+
+class SendRestaurantDataParms {
+  final int restaurantId;
+  final String subject;
+  final String message;
+  final List<CustomerDetail> customerDetails;
+
+  SendRestaurantDataParms({
+    required this.restaurantId,
+    required this.subject,
+    required this.message,
+    required this.customerDetails,
+  });
+}
+
+class SendCSVDataParams {
+  final int restaurantId;
+  final String subject;
+  final String message;
+  final List<String> selectedIds;
+
+  SendCSVDataParams({
+    required this.restaurantId,
+    required this.subject,
+    required this.message,
+    required this.selectedIds,
+  });
+}
+
 class AddUpdateWaiterParms {
   final int restaurantId;
   final int reservationId;
@@ -62,7 +104,7 @@ class ImportCSVFileParms {
   });
 }
 
-class FetchSmsAvailabilityParms{
+class FetchSmsAvailabilityParms {
   final int restaurantId;
   final String recipients;
 
@@ -71,7 +113,6 @@ class FetchSmsAvailabilityParms{
     required this.recipients,
   });
 }
-
 
 class FetchReservationByEmailParms {
   final int restaurantId;

@@ -45,3 +45,14 @@ class ToggleReservationSelectionEvent extends CustomerReservationsEvent {
 
   const ToggleReservationSelectionEvent(this.reservation);
 }
+class SendData extends CustomerReservationsEvent {
+  final SendRestaurantDataParms parms;
+
+  const SendData(this.parms);
+}
+
+class SendCSVData extends CustomerReservationsEvent {
+  final SendCSVDataParams parms;
+
+  const SendCSVData(this.parms);
+}

@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/config/routes/route_name.dart';
+import 'package:tasti_restaurant_app/core/network/response.dart';
+import 'package:tasti_restaurant_app/core/parms/parms.dart';
+import 'package:tasti_restaurant_app/core/services/session_controller.dart';
+import 'package:tasti_restaurant_app/core/utils/flushbar_extention.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_input_field.dart';
 import 'package:tasti_restaurant_app/features/reservations_db/domain/entities/csv_data.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/presentation/bloc/customer_reservations/customer_reservations_bloc.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/presentation/bloc/customer_reservations/customer_reservations_event.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/presentation/bloc/customer_reservations/customer_reservations_state.dart';
 
 class CsvSentCampaignArguments {
   final List<CSVDataEntity> data;
@@ -22,6 +31,7 @@ class CsvSentCampaign extends StatefulWidget {
 class _CsvSentCampaignState extends State<CsvSentCampaign> {
   final TextEditingController _subjectController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
+  final int id = SessionController().user?.restaurant.id ?? 0;
 
   @override
   Widget build(BuildContext context) {
@@ -107,32 +117,58 @@ class _CsvSentCampaignState extends State<CsvSentCampaign> {
             const Spacer(),
 
             // Send button
-            Hero(
-              tag: "Send SMS/Email",
-              child: Material(
-                type: MaterialType.transparency,
-                child: CustomButton(
-                  onPressed: () {
-                    final subject = _subjectController.text.trim();
-                    final message = _messageController.text.trim();
+            BlocConsumer<CustomerReservationsBloc, CustomerReservationsState>(
+              bloc: context.read<CustomerReservationsBloc>(),
+              listener: (context, state) {
+                if (state.sendCSVResponse.status == Status.error) {
+                  context.flushBarErrorMessage(
+                      message: state.sendCSVResponse.message.toString());
+                }
+                if (state.sendCSVResponse.status == Status.completed) {
+                  Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route)=>false);
+                  context.flushBarErrorMessage(message: state.sendCSVResponse.message.toString());
+                }
+              },
+              builder: (context, state) {
+                return Hero(
+                  tag: "Send SMS/Email",
+                  child: Material(
+                    type: MaterialType.transparency,
+                    child: CustomButton(
+                      isLoading: state.sendCSVResponse.status == Status.loading,
+                      onPressed: () {
+                        final subject = _subjectController.text.trim();
+                        final message = _messageController.text.trim();
 
-                    if (subject.isEmpty || message.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Please enter subject and message"),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                      return;
-                    }
+                        if (subject.isEmpty || message.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Please enter subject and message"),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                          return;
+                        }
+                        context.read<CustomerReservationsBloc>().add(
+                              SendCSVData(
+                                SendCSVDataParams(
+                                  restaurantId: id,
+                                  subject: subject,
+                                  message: message,
+                                  selectedIds: widget.arguments.data.map((e)=>e.id.toString()).toList(),
+                                ),
+                              ),
+                            );
 
-                    debugPrint("Sending campaign to $recipients users...");
-                    debugPrint("Subject: $subject");
-                    debugPrint("Message: $message");
-                  },
-                  text: "Send Campaign",
-                ),
-              ),
+                        debugPrint("Sending campaign to $recipients users...");
+                        debugPrint("Subject: $subject");
+                        debugPrint("Message: $message");
+                      },
+                      text: "Send Campaign",
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),

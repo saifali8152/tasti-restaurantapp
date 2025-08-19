@@ -6,6 +6,8 @@ import 'package:tasti_restaurant_app/features/reservations_db/domain/usecases/fe
 import 'package:tasti_restaurant_app/features/reservations_db/domain/usecases/fetch_reservation_data.dart';
 import 'package:tasti_restaurant_app/features/reservations_db/domain/usecases/fetch_reservation_data_by_email.dart';
 import 'package:tasti_restaurant_app/features/reservations_db/domain/usecases/fetch_sms_availability.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/domain/usecases/send_csv_data.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/domain/usecases/send_restaurant_data.dart';
 import '/core/network/response.dart';
 import 'customer_reservations_event.dart';
 import 'customer_reservations_state.dart';
@@ -16,13 +18,19 @@ class CustomerReservationsBloc
   final FetchReservationDataByEmailUsecase _fetchReservationByEmailUsecase;
   final FetchReservationDataUsecase _fetchReservationUsecase;
   final FetchSmsAvailabilityUsecase _fetchSmsAvailabilityUsecase;
+  final SendRestaurantDataUsecase _sendUsecase;
+  final SendCsvDataUsecase _sendCSVUsecase;
 
   CustomerReservationsBloc(
     this._fetchCSVUsecase,
     this._fetchReservationUsecase,
     this._fetchReservationByEmailUsecase,
     this._fetchSmsAvailabilityUsecase,
+    this._sendUsecase,
+    this._sendCSVUsecase,
   ) : super(CustomerReservationsState(
+          sendResponse: ApiResponse.initial(),
+          sendCSVResponse: ApiResponse.initial(),
           fetchCSVResponse: ApiResponse.initial(),
           fetchRevervationResponse: ApiResponse.initial(),
           fetchRevervationByEmailResponse: ApiResponse.initial(),
@@ -34,6 +42,8 @@ class CustomerReservationsBloc
     on<FetchReservationDataByEmailEvent>(_onFetchReservationDataByEvent);
     on<FetchReservationEvent>(_onFetchReservationEvent);
     on<FetchSmsAvailability>(_onFetchSmsAvailability);
+    on<SendData>(_onSendData);
+    on<SendCSVData>(_onSendCSVData);
     on<ToggleCSVReservationSelectionEvent>((event, emit) {
       final updatedList =
           List<CSVDataEntity>.from(state.selectedCVCRevervations);
@@ -83,6 +93,41 @@ class CustomerReservationsBloc
       default:
         emit(state.copyWith(
             fetchSmsAvailabilityResponse: ApiResponse.initial()));
+    }
+  }
+
+  Future<void> _onSendData(
+      SendData event, Emitter<CustomerReservationsState> emit) async {
+    emit(state.copyWith(sendResponse: ApiResponse.loading()));
+    final result = await _sendUsecase(event.parms);
+
+    switch (result) {
+      case DataSuccess<String>():
+        emit(state.copyWith(sendResponse: ApiResponse.completed(result.data)));
+        break;
+      case DataFailure():
+        emit(state.copyWith(sendResponse: ApiResponse.error(result.error)));
+        break;
+      default:
+        emit(state.copyWith(sendResponse: ApiResponse.initial()));
+    }
+  }
+
+  Future<void> _onSendCSVData(
+      SendCSVData event, Emitter<CustomerReservationsState> emit) async {
+    emit(state.copyWith(sendCSVResponse: ApiResponse.loading()));
+    final result = await _sendCSVUsecase(event.parms);
+
+    switch (result) {
+      case DataSuccess<String>():
+        emit(state.copyWith(
+            sendCSVResponse: ApiResponse.completed(result.data)));
+        break;
+      case DataFailure():
+        emit(state.copyWith(sendCSVResponse: ApiResponse.error(result.error)));
+        break;
+      default:
+        emit(state.copyWith(sendCSVResponse: ApiResponse.initial()));
     }
   }
 

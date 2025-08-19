@@ -74,4 +74,24 @@ class ReservationDbRepoImpl extends IReservationDbRepo {
       return DataFailure(error.toString());
     }
   }
+  
+  @override
+  Future<DataState<String>> sendCSVData(SendCSVDataParams parms)async {
+    try {
+      final result = await remote.sendCSVData(parms);
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
+  
+  @override
+  Future<DataState<String>> sendRestaurantData(SendRestaurantDataParms parms)async{
+    try {
+      final result = await remote.sendRestaurantData(parms);
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
 }

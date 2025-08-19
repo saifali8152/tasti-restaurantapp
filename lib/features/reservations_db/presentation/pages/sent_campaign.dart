@@ -135,18 +135,12 @@ class _SentCampaignState extends State<SentCampaign> {
 
             // Campaign Subject
             const SizedBox(height: 20),
-            Row(
-              children: [
-                const Icon(Icons.subject),
-                const SizedBox(width: 8),
-                const Text(
-                  "Campaign Subject",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-              ],
+            const Text(
+              "Campaign Subject",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
             ),
             CustomInputField(
               controller: _subjectController,
@@ -154,18 +148,12 @@ class _SentCampaignState extends State<SentCampaign> {
             ),
             const SizedBox(height: 20),
             // Message Content
-            Row(
-              children: [
-                const Icon(Icons.message),
-                const SizedBox(width: 8),
-                const Text(
-                  "Message Content",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-              ],
+            const Text(
+              "Message Content",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
             ),
             CustomInputField(
               controller: _messageController,

@@ -12,4 +12,6 @@ abstract class IReservationDbRepo {
   Future<DataState<List<ReservationDataEntity>>> fetchReservations(String id);
   Future<DataState<List<ReservationDataEmailEntity>>> fetchReservationsByEmail(FetchReservationByEmailParms parms);
   Future<DataState<String>> fetchSmsAvailability(FetchSmsAvailabilityParms parms);
+  Future<DataState<String>> sendCSVData(SendCSVDataParams parms);
+  Future<DataState<String>> sendRestaurantData(SendRestaurantDataParms parms);
 }
