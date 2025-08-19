@@ -486,6 +486,7 @@ class AddTargetedCampaignParms {
   final String province;
   final String campaignMessage;
   final double cost;
+  final String tempId;
 
   AddTargetedCampaignParms({
     required this.restaurantId,
@@ -498,6 +499,7 @@ class AddTargetedCampaignParms {
     required this.province,
     required this.campaignMessage,
     required this.cost,
+    required this.tempId,
   });
 
   Map<String, dynamic> toJson() {

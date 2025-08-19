@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/core/network/response.dart';
 import 'package:tasti_restaurant_app/core/parms/parms.dart';
 import 'package:tasti_restaurant_app/core/services/session_controller.dart';
+import 'package:tasti_restaurant_app/core/utils/flushbar_extention.dart';
 import 'package:tasti_restaurant_app/core/widgets/field_label.dart';
+import 'package:tasti_restaurant_app/dependency_injection.dart';
+import 'package:tasti_restaurant_app/features/targeted_campaign/presentation/bloc/targeted_campaign_bloc.dart';
+import 'package:tasti_restaurant_app/features/targeted_campaign/presentation/bloc/targeted_campaign_event.dart';
+import 'package:tasti_restaurant_app/features/targeted_campaign/presentation/bloc/targeted_campaign_state.dart';
 import '/config/routes/route_name.dart';
 import '/core/widgets/custom_app_bar.dart';
 import '/core/widgets/custom_button.dart';
@@ -17,6 +24,7 @@ class TargetedCampaign extends StatefulWidget {
 
 class _TargetedCampaignState extends State<TargetedCampaign> {
   final _formKey = GlobalKey<FormState>();
+  AddTargetedCampaignParms? campaignData;
 
   final TextEditingController recipientsController = TextEditingController();
   String? selectedMinAge;
@@ -26,6 +34,7 @@ class _TargetedCampaignState extends State<TargetedCampaign> {
   String? selectedProvince;
   final TextEditingController cityController = TextEditingController();
   final TextEditingController messageController = TextEditingController();
+  final TargetedCampaignBloc bloc = sl();
   final int id = SessionController().user?.restaurant.id ?? 0;
   double estimatedCost = 0;
 
@@ -238,30 +247,46 @@ class _TargetedCampaignState extends State<TargetedCampaign> {
               ),
 
               const SizedBox(height: 30),
-              CustomButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    final campaignData = AddTargetedCampaignParms(
-                      restaurantId: id.toString(),
-                      people: int.parse(recipientsController.text),
-                      minAge: int.parse(selectedMinAge ?? "18"),
-                      maxAge: int.parse(selectedMaxAge ?? "120"),
-                      gender: selectedGender ?? "all",
-                      smsTo: selectedMessageType ?? "sms",
-                      province: selectedProvince ?? "",
-                      city: cityController.text,
-                      campaignMessage: messageController.text,
-                      cost: estimatedCost,
-                    );
-
+              BlocConsumer<TargetedCampaignBloc, TargetedCampaignState>(
+                bloc: bloc,
+                listener: (context, state) {
+                  if (state.addResponse.status == Status.error) {
+                    context.flushBarErrorMessage(
+                        message: state.addResponse.message.toString());
+                  }
+                  if (state.addResponse.status == Status.completed) {
                     Navigator.pushNamed(
                       context,
                       AppRoutes.campaignSummary,
                       arguments: campaignData,
                     );
+                    context.flushBarSuccessMessage(message: state.addResponse.data?.message.toString() ??'');
                   }
                 },
-                text: 'Send Campaign',
+                builder: (context, state) {
+                  return CustomButton(
+                    isLoading: state.addResponse.status == Status.loading,
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        campaignData = AddTargetedCampaignParms(
+                          restaurantId: id.toString(),
+                          people: int.parse(recipientsController.text),
+                          minAge: int.parse(selectedMinAge ?? "18"),
+                          maxAge: int.parse(selectedMaxAge ?? "120"),
+                          gender: selectedGender ?? "all",
+                          smsTo: selectedMessageType ?? "sms",
+                          province: selectedProvince ?? "",
+                          city: cityController.text,
+                          campaignMessage: messageController.text,
+                          cost: estimatedCost,
+                          tempId: state.addResponse.data?.tempId ?? ''
+                        );
+                        bloc.add(AddTargetedCampaignEvent(campaignData!));
+                      }
+                    },
+                    text: 'Send Campaign',
+                  );
+                },
               ),
             ],
           ),

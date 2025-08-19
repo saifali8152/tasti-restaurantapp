@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/entities/init_payment.dart';
+import 'package:tasti_restaurant_app/features/targeted_campaign/domain/entities/targeted_campaign.dart';
 import 'package:tasti_restaurant_app/features/targeted_campaign/domain/usecases/add_targeted_campaign.dart';
 import 'package:tasti_restaurant_app/features/targeted_campaign/domain/usecases/init_campaign_payment.dart';
 import 'package:tasti_restaurant_app/features/targeted_campaign/domain/usecases/verify_campaign_payment.dart';
@@ -31,9 +32,9 @@ class TargetedCampaignBloc extends Bloc<TargetedCampaignEvent, TargetedCampaignS
     emit(state.copyWith(addResponse: ApiResponse.loading()));
     try {
       final result = await _addUsecase.call(event.parms);
-      if (result is DataSuccess<String>) {
+      if (result is DataSuccess<TargetedCampaignEntity>) {
         emit(state.copyWith(addResponse: ApiResponse.completed(result.data)));
-      } else if (result is DataFailure<String>) {
+      } else if (result is DataFailure<TargetedCampaignEntity>) {
         emit(state.copyWith(addResponse: ApiResponse.error(result.error)));
       }
     } catch (e) {

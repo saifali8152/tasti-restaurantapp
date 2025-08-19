@@ -1,10 +1,11 @@
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/data/models/init_payment.dart';
+import 'package:tasti_restaurant_app/features/targeted_campaign/data/models/targeted_campaign.dart';
 import '/core/parms/parms.dart';
 import '/core/network/api_services.dart';
 import '/config/constants/urls.dart';
 
 abstract class ITargetedCampaignRemoteApi {
-  Future<String> addTargetedCampaign(AddTargetedCampaignParms parms);
+  Future<TargetedCampaignModel> addTargetedCampaign(AddTargetedCampaignParms parms);
   Future<InitPaymentModel> initCampaignPayment(String tempId);
   Future<String> verifyCampaignPayment(VerifyCampaignPaymentParms parms);
 }
@@ -14,9 +15,10 @@ class TargetedCampaignRemoteApiImpl extends ITargetedCampaignRemoteApi {
   TargetedCampaignRemoteApiImpl(this.networkApiService);
 
   @override
-  Future<String> addTargetedCampaign(AddTargetedCampaignParms parms) async {
+  Future<TargetedCampaignModel> addTargetedCampaign(AddTargetedCampaignParms parms) async {
     var response = await networkApiService.post(AppUrls.addTargetCampaign, parms.toJson());
-    return response['message'];
+    final campaignResponse = TargetedCampaignModel.fromJson(response);
+    return campaignResponse;
   }
 
   @override

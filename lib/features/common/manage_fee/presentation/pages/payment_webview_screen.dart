@@ -32,7 +32,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onPageFinished: (url) async {
-            if (!_hasVerified && url.contains('verify-payment') || url.contains("verify-sms-payment")) {
+            if (!_hasVerified && url.contains('verify-payment') || url.contains("verify-sms-payment") || url.contains("verify-campaign-payment")) {
               _hasVerified = true;
 
               Navigator.pop(context);
