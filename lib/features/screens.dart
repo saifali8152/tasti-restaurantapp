@@ -12,8 +12,8 @@ export 'restaurant-admin/seating_area/presentation/pages/seating_area_details.da
 export 'restaurant-admin/food_menu/presentation/pages/restaurant_qr_food_menu.dart';
 export 'restaurant-admin/gallery/presentation/pages/add_photos.dart';
 export 'reservations_db/presentation/pages/customer_reservation_details.dart';
-export 'reservations_db/presentation/pages/targeted_campaign.dart';
-export 'reservations_db/presentation/pages/campaign_summary.dart';
+export 'targeted_campaign/presentation/pages/targeted_campaign.dart';
+export 'targeted_campaign/presentation/pages/campaign_summary.dart';
 export 'restaurant-admin/set_venue_category/presentation/pages/set_venue_category.dart';
 export 'admin/manage_sms/presentation/pages/manage_sms_bundle.dart';
 export 'admin/reservations_database/presentation/pages/reservations_database.dart';

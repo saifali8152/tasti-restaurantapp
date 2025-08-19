@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/core/parms/parms.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/domain/entities/restaurant.dart';
 import 'package:tasti_restaurant_app/features/reservations/domain/entities/reservation.dart';
 import 'package:tasti_restaurant_app/features/reservations/presentation/pages/reservation_details.dart';
@@ -174,7 +175,9 @@ class Routes {
           ),
         );
       case AppRoutes.campaignSummary:
-        return MaterialPageRoute(builder: (_) => const CampaignSummary());
+        return MaterialPageRoute(builder: (_) => CampaignSummary(
+          parms: settings.arguments as AddTargetedCampaignParms,
+        ));
       case AppRoutes.targetedCampaign:
         return MaterialPageRoute(builder: (_) => const TargetedCampaign());
       case AppRoutes.customerReservationDetails:

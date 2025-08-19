@@ -32,9 +32,6 @@ class CustomerReservations extends StatelessWidget {
                   case 'view_campaigns':
                     Navigator.pushNamed(context, AppRoutes.campaigns);
                     break;
-                  case 'single_sms':
-                    // handle SMS/Email Customer
-                    break;
                   case 'import':
                     Navigator.pushNamed(context, AppRoutes.importDatabase);
                     break;
@@ -56,10 +53,6 @@ class CustomerReservations extends StatelessWidget {
                 const PopupMenuItem(
                   value: 'view_campaigns',
                   child: Text('View Campaigns'),
-                ),
-                const PopupMenuItem(
-                  value: 'single_sms',
-                  child: Text('SMS/Email Customer'),
                 ),
                 const PopupMenuItem(
                   value: 'import',

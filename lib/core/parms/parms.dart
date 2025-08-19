@@ -14,7 +14,7 @@ class MakeReservationParms {
   final String specialRequests;
   final String name;
   final String phone;
-  
+
   MakeReservationParms({
     required this.restaurantId,
     required this.date,
@@ -33,7 +33,7 @@ class MakeReservationParms {
 class FetchTimeSlotParms {
   final int id;
   final String date;
-  
+
   FetchTimeSlotParms({
     required this.id,
     required this.date,
@@ -94,7 +94,7 @@ class TableData {
       "max_capacity": maxCapacity,
       "min_capacity": minCapacity,
       "table_max": tableMax,
-      "is_moveable": isMoveable == true? 1: 0,
+      "is_moveable": isMoveable == true ? 1 : 0,
       "type": type,
       "shape": shape,
     };
@@ -371,6 +371,18 @@ class VerifySmsPaymentParms {
   });
 }
 
+class VerifyCampaignPaymentParms {
+  final String restaurantId;
+  final String reference;
+  final String tempId;
+
+  VerifyCampaignPaymentParms({
+    required this.restaurantId,
+    required this.reference,
+    required this.tempId,
+  });
+}
+
 class AddCuisineParms {
   final int id;
   final String name;
@@ -461,6 +473,46 @@ class PaginationParms {
     this.search = '',
     this.id = '',
   });
+}
+
+class AddTargetedCampaignParms {
+  final String restaurantId;
+  final int people;
+  final String smsTo;
+  final int minAge;
+  final int maxAge;
+  final String gender;
+  final String city;
+  final String province;
+  final String campaignMessage;
+  final double cost;
+
+  AddTargetedCampaignParms({
+    required this.restaurantId,
+    required this.people,
+    required this.smsTo,
+    required this.minAge,
+    required this.maxAge,
+    required this.gender,
+    required this.city,
+    required this.province,
+    required this.campaignMessage,
+    required this.cost,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "restaurant_id": restaurantId,
+      "people": people,
+      "sms_to": smsTo,
+      "min_age": minAge,
+      "max_age": maxAge,
+      "gender": gender,
+      "city": city,
+      "province": province,
+      "campaign_message": campaignMessage,
+    };
+  }
 }
 
 class AllRestaurantParms {

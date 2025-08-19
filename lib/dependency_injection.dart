@@ -115,6 +115,13 @@ import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/doma
 import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/domain/usecases/fetch_seating_area.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/domain/usecases/update_seating_area.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_bloc.dart';
+import 'package:tasti_restaurant_app/features/targeted_campaign/data/data_sources/bundle_billing_remote_repo.dart';
+import 'package:tasti_restaurant_app/features/targeted_campaign/data/repositories/bundle_billing_repo.dart';
+import 'package:tasti_restaurant_app/features/targeted_campaign/domain/repositories/targeted_campaign.dart';
+import 'package:tasti_restaurant_app/features/targeted_campaign/domain/usecases/add_targeted_campaign.dart';
+import 'package:tasti_restaurant_app/features/targeted_campaign/domain/usecases/init_campaign_payment.dart';
+import 'package:tasti_restaurant_app/features/targeted_campaign/domain/usecases/verify_campaign_payment.dart';
+import 'package:tasti_restaurant_app/features/targeted_campaign/presentation/bloc/targeted_campaign_bloc.dart';
 import '/core/services/picker_services.dart';
 import '/features/admin/campaigns/data/data_sources/campaign_remote_source.dart';
 import '/features/admin/campaigns/data/repositories/campaign_repo_impl.dart';
@@ -249,8 +256,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IReservationDbRemoteApi>(ReservationDbRemoteApiImpl(sl()));
   sl.registerSingleton<IReservationRemoteApi>(ReservationRemoteApiImpl(sl()));
   sl.registerSingleton<IMakeReservationRemoteApi>(MakeReservationRemoteApiImpl(sl()));
+  sl.registerSingleton<ITargetedCampaignRemoteApi>(TargetedCampaignRemoteApiImpl(sl()));
 
   // Repository
+  sl.registerSingleton<ITargetedCampaignRepo>(TargetedCampaignRepoImpl(sl()));
   sl.registerSingleton<IMakeReservationRepo>(MakeReservationRepoImpl(sl()));
   sl.registerSingleton<IReservationRepo>(ReservationRepoImpl(sl()));
   sl.registerSingleton<IReservationDbRepo>(ReservationDbRepoImpl(sl()));
@@ -368,8 +377,12 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<CancelReservationsUsecase>(CancelReservationsUsecase(sl()));
   sl.registerSingleton<UpdateReservationsStatusUsecase>(UpdateReservationsStatusUsecase(sl()));
   sl.registerSingleton<ImportScvFileUsecase>(ImportScvFileUsecase(sl()));
+  sl.registerSingleton<AddTargetedCampaignUsecase>(AddTargetedCampaignUsecase(sl()));
+  sl.registerSingleton<InitCampaignPaymentUsecase>(InitCampaignPaymentUsecase(sl()));
+  sl.registerSingleton<VerifyCampaignPaymentUsecase>(VerifyCampaignPaymentUsecase(sl()));
 
   // Bloc
+  sl.registerLazySingleton<TargetedCampaignBloc>(() => TargetedCampaignBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<MakeReservationBloc>(() => MakeReservationBloc(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<ReservationBloc>(() => ReservationBloc(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<RestaurantCampaignsBloc>(() => RestaurantCampaignsBloc(sl(), sl()));
