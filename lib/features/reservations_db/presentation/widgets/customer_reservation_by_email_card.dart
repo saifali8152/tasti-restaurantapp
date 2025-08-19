@@ -35,8 +35,7 @@ class CustomerReservationByEmailCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CardDetailsRow(label: 'Name', value: data.name),
-            CardDetailsRow(label: 'Email', value: "data.email"),
-            CardDetailsRow(label: 'Number of people', value: data.reservation.toString()),
+            CardDetailsRow(label: 'Number of people', value: data.guests.toString()),
             CardDetailsRow(label: 'Time', value: data.formattedEndTime),
             // Custom price row
           ],

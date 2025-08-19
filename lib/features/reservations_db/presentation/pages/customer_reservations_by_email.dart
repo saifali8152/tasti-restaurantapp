@@ -50,7 +50,7 @@ class _CustomerReservationsByEmailState extends State<CustomerReservationsByEmai
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "CSV Imported Data"),
+      appBar: CustomAppBar(title: "Reservations"),
       body: BlocBuilder<CustomerReservationsBloc, CustomerReservationsState>(
         bloc: bloc,
         builder: (context, state) {

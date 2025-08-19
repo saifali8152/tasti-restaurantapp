@@ -62,6 +62,17 @@ class ImportCSVFileParms {
   });
 }
 
+class FetchSmsAvailabilityParms{
+  final int restaurantId;
+  final String recipients;
+
+  FetchSmsAvailabilityParms({
+    required this.restaurantId,
+    required this.recipients,
+  });
+}
+
+
 class FetchReservationByEmailParms {
   final int restaurantId;
   final String email;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/presentation/bloc/restaurant_bloc.dart';
-import 'package:tasti_restaurant_app/features/make_reservation/presentation/bloc/make_reservation_bloc.dart';
-import 'package:tasti_restaurant_app/features/reservations/presentation/bloc/reservation_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/presentation/bloc/make_reservation_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/presentation/bloc/reservation_bloc.dart';
 import 'package:tasti_restaurant_app/features/reservations_db/presentation/bloc/customer_reservations/customer_reservations_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/presentation/bloc/bundle_billing_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/presentation/bloc/menu_bloc.dart';
@@ -13,7 +13,7 @@ import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_categor
 import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/presentation/bloc/working_hours_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/presentation/bloc/reviews_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/presentation/bloc/seating_area_bloc.dart';
-import 'package:tasti_restaurant_app/features/targeted_campaign/presentation/bloc/targeted_campaign_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/targeted_campaign/presentation/bloc/targeted_campaign_bloc.dart';
 import '/config/routes/route_name.dart';
 import '/features/admin/campaigns/presentation/bloc/campaign_by_res/campaign_by_res_bloc.dart';
 import '/features/admin/events/presentation/bloc/event_bloc.dart';

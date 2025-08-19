@@ -8,22 +8,30 @@ class CustomerReservationsState extends Equatable {
   final ApiResponse<List<CSVDataEntity>> fetchCSVResponse;
   final ApiResponse<List<ReservationDataEntity>> fetchRevervationResponse;
   final ApiResponse<List<ReservationDataEmailEntity>> fetchRevervationByEmailResponse;
+  final ApiResponse<String> fetchSmsAvailabilityResponse;
+  final List<CSVDataEntity> selectedCVCRevervations;
 
   const CustomerReservationsState({
     required this.fetchCSVResponse,
     required this.fetchRevervationResponse,
     required this.fetchRevervationByEmailResponse,
+    required this.fetchSmsAvailabilityResponse,
+    required this.selectedCVCRevervations,
   });
 
   CustomerReservationsState copyWith({
     final ApiResponse<List<CSVDataEntity>>? fetchCSVResponse,
   final ApiResponse<List<ReservationDataEntity>>? fetchRevervationResponse,
-  final ApiResponse<List<ReservationDataEmailEntity>>? fetchRevervationByEmailResponse
+  final ApiResponse<List<ReservationDataEmailEntity>>? fetchRevervationByEmailResponse,
+  final ApiResponse<String>? fetchSmsAvailabilityResponse,
+  final List<CSVDataEntity>? selectedCVCRevervations,
   }) {
     return CustomerReservationsState(
       fetchCSVResponse: fetchCSVResponse ?? this.fetchCSVResponse,
       fetchRevervationResponse: fetchRevervationResponse ?? this.fetchRevervationResponse,
       fetchRevervationByEmailResponse: fetchRevervationByEmailResponse ?? this.fetchRevervationByEmailResponse,
+      fetchSmsAvailabilityResponse: fetchSmsAvailabilityResponse ?? ApiResponse.initial(),
+      selectedCVCRevervations: selectedCVCRevervations ?? this.selectedCVCRevervations,
     );
   }
 
@@ -31,6 +39,8 @@ class CustomerReservationsState extends Equatable {
   List<Object?> get props => [
         fetchCSVResponse,
         fetchRevervationResponse,
-        fetchRevervationByEmailResponse
+        fetchRevervationByEmailResponse,
+        fetchSmsAvailabilityResponse,
+        selectedCVCRevervations
       ];
 }

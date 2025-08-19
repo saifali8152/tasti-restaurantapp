@@ -13,6 +13,7 @@ abstract class IReservationDbRemoteApi {
   Future<List<CSVDataModel>> fetchCSVData(String id);
   Future<List<ReservationDataModel>> fetchReservations(String id);
   Future<List<ReservationDataEmailModel>> fetchReservationsByEmail(FetchReservationByEmailParms parms);
+  Future<String> fetchSmsAvailability(FetchSmsAvailabilityParms parms);
 }
 
 class ReservationDbRemoteApiImpl extends IReservationDbRemoteApi {
@@ -27,6 +28,12 @@ class ReservationDbRemoteApiImpl extends IReservationDbRemoteApi {
 
     final List<RestaurantCampaignModel> campaigns = rawList.map((campaign) => RestaurantCampaignModel.fromJson(campaign)).toList();
     return campaigns;
+  }
+  
+  @override
+  Future<String> fetchSmsAvailability(FetchSmsAvailabilityParms parms) async {
+    var response = await networkApiService.get(AppUrls.fetchSmsAvailibility, queryParams: {"id": parms.restaurantId.toString(), "recipients": parms.recipients});
+    return response['data'].toString();
   }
 
   @override

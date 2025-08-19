@@ -70,4 +70,5 @@ class AppRoutes {
   static const String importDatabase = '/import-database';
   static const String csvImportedData = '/csv-imported-data';
   static const String reservationsByEmail = '/reservations-by-email';
+  static const String csvSentCampaign = '/csv-sent-campaign';
 }

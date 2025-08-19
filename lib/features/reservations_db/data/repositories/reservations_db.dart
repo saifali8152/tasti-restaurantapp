@@ -12,6 +12,17 @@ class ReservationDbRepoImpl extends IReservationDbRepo {
   ReservationDbRepoImpl(this.remote);
 
   @override
+  Future<DataState<String>> fetchSmsAvailability(
+      FetchSmsAvailabilityParms parms) async {
+    try {
+      final result = await remote.fetchSmsAvailability(parms);
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
+
+  @override
   Future<DataState<List<RestaurantCampaignModel>>> fetchRestaurantCampaigns(
       String id) async {
     try {

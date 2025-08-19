@@ -92,4 +92,5 @@ class AppUrls{
   static final String getCsvData = "$base/restaurant/get-csv-data";
   static final String getReservationsByEmail = "$base/restaurant/get-reservations-by-email";
   static final String getRestaurantDatabase = "$base/restaurant/get-restaurant-database";
+  static final String fetchSmsAvailibility = "$base/restaurant/get-sms-availibility";
 }
