@@ -3,6 +3,8 @@ import 'package:tasti_restaurant_app/core/parms/parms.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/domain/entities/restaurant.dart';
 import 'package:tasti_restaurant_app/features/reservations/domain/entities/reservation.dart';
 import 'package:tasti_restaurant_app/features/reservations/presentation/pages/reservation_details.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/domain/entities/reservation_data_email.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/presentation/pages/customer_reservations_by_email.dart';
 import 'package:tasti_restaurant_app/features/reservations_db/presentation/pages/cvc_imported_data.dart';
 import 'package:tasti_restaurant_app/features/reservations_db/presentation/pages/import_database.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/presentation/pages/buy_sms_bundle.dart';
@@ -163,6 +165,10 @@ class Routes {
             builder: (_) => const UpdateTimeDurationScreen());
       case AppRoutes.reservations:
         return MaterialPageRoute(builder: (_) => const ReservationsScreen());
+      case AppRoutes.reservationsByEmail:
+        return MaterialPageRoute(builder: (_) => CustomerReservationsByEmail(
+          email: settings.arguments as String,
+        ));
       // case AppRoutes.settings:
       //   return MaterialPageRoute(builder: (_) => const Settings());
       case AppRoutes.setVanueCategory:
@@ -185,7 +191,7 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const TargetedCampaign());
       case AppRoutes.customerReservationDetails:
         return MaterialPageRoute(
-            builder: (_) => const CustomerReservationDetails());
+            builder: (_) => CustomerReservationDetails(data: settings.arguments as ReservationDataEmailEntity));
       case AppRoutes.addPhotos:
         return MaterialPageRoute(builder: (_) => const AddPhotosScreen());
       case AppRoutes.settingAreaDetails:
