@@ -3,24 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:csv/csv.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:tasti_restaurant_app/core/utils/flushbar_extention.dart';
 
-class CsvDownloadButton extends StatelessWidget {
+class CsvDownloadButton extends StatefulWidget {
   const CsvDownloadButton({super.key});
 
-  Future<void> _generateAndSaveCsv(BuildContext context) async {
+  @override
+  State<CsvDownloadButton> createState() => _CsvDownloadButtonState();
+}
+
+class _CsvDownloadButtonState extends State<CsvDownloadButton> {
+  Future<void> _generateAndSaveCsv() async {
     // Request storage permission
     var status = await Permission.storage.request();
     if (!status.isGranted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Storage permission denied")),
-      );
+      if (!mounted) return;
+      context.flushBarErrorMessage(message: "Storage permission denied");
       return;
     }
 
     // Example CSV data (template with headers)
     List<List<dynamic>> rows = [
-      ['Name', 'Email', 'Phone', 'City', 'Province', 'Country'], // headers
-      ["", "", "", "", "", ""], // empty row for user input
+      ['Name', 'Email', 'Phone', 'City', 'Province', 'Country'],
+      ["", "", "", "", "", ""],
     ];
 
     String csvData = const ListToCsvConverter().convert(rows);
@@ -46,10 +51,8 @@ class CsvDownloadButton extends StatelessWidget {
     // Save file
     await file.writeAsString(csvData);
 
-    // Show confirmation
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("CSV saved at ${targetDir.path}")),
-    );
+    if (!mounted) return;
+    context.flushBarSuccessMessage(message: "CSV saved at ${targetDir.path}");
 
     debugPrint("✅ CSV saved at $filePath");
   }
@@ -57,7 +60,7 @@ class CsvDownloadButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => _generateAndSaveCsv(context),
+      onPressed: _generateAndSaveCsv,
       child: const Text("Download CSV Template"),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:tasti_restaurant_app/core/parms/parms.dart';
 import 'package:tasti_restaurant_app/features/reservations_db/domain/entities/csv_data.dart';
-import 'package:tasti_restaurant_app/features/reservations_db/domain/entities/reservation_data_email.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/domain/entities/resevation_data.dart';
 
 abstract class CustomerReservationsEvent extends Equatable {
   const CustomerReservationsEvent();
@@ -34,8 +34,14 @@ class FetchSmsAvailability extends CustomerReservationsEvent {
   const FetchSmsAvailability(this.parms);
 }
 
-class ToggleReservationSelectionEvent extends CustomerReservationsEvent {
+class ToggleCSVReservationSelectionEvent extends CustomerReservationsEvent {
   final CSVDataEntity reservation;
+
+  const ToggleCSVReservationSelectionEvent(this.reservation);
+}
+
+class ToggleReservationSelectionEvent extends CustomerReservationsEvent {
+  final ReservationDataEntity reservation;
 
   const ToggleReservationSelectionEvent(this.reservation);
 }

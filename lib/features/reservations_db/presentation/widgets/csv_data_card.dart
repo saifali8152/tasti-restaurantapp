@@ -42,7 +42,7 @@ class CsvDataCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             onTap: () {
               context.read<CustomerReservationsBloc>().add(
-                    ToggleReservationSelectionEvent(data),
+                    ToggleCSVReservationSelectionEvent(data),
                   );
             },
             child: Padding(
@@ -108,7 +108,7 @@ class CsvDataCard extends StatelessWidget {
                         value: isSelected,
                         onChanged: (_) {
                           context.read<CustomerReservationsBloc>().add(
-                                ToggleReservationSelectionEvent(data),
+                                ToggleCSVReservationSelectionEvent(data),
                               );
                         },
                         checkColor: Colors.white,

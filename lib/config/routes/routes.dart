@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/core/parms/parms.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/domain/entities/restaurant.dart';
 import 'package:tasti_restaurant_app/features/reservations_db/presentation/pages/csv_sent_campaign.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/presentation/pages/sent_campaign.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/domain/entities/reservation.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/presentation/pages/reservation_details.dart';
 import 'package:tasti_restaurant_app/features/reservations_db/domain/entities/reservation_data_email.dart';
@@ -180,6 +181,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const CvcImportedDataScreen());
       case AppRoutes.csvSentCampaign:
         return MaterialPageRoute(builder: (_) => CsvSentCampaign(arguments: settings.arguments as CsvSentCampaignArguments));
+      case AppRoutes.sentCampaign:
+        return MaterialPageRoute(builder: (_) => SentCampaign(arguments: settings.arguments as SentCampaignArguments));
       case AppRoutes.updateWorkingHours:
         return MaterialPageRoute(
           builder: (_) => UpdateWorkingHours(

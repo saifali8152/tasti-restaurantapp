@@ -1,4 +1,3 @@
-// ENTITY
 class ReservationDataEntity {
   final String customerName;
   final String? customerEmail;
@@ -8,7 +7,7 @@ class ReservationDataEntity {
   final String lastReservationFormatted;
   final bool isManual;
   final String type;
-  final String groupKey;
+  final String groupKey; 
   final bool hasEmail;
   final bool hasPhone;
 
@@ -25,4 +24,36 @@ class ReservationDataEntity {
     required this.hasEmail,
     required this.hasPhone,
   });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is ReservationDataEntity &&
+        other.customerName == customerName &&
+        other.customerEmail == customerEmail &&
+        other.customerPhone == customerPhone &&
+        other.reservationCount == reservationCount &&
+        other.lastReservation == lastReservation &&
+        other.lastReservationFormatted == lastReservationFormatted &&
+        other.isManual == isManual &&
+        other.type == type &&
+        other.groupKey == groupKey &&
+        other.hasEmail == hasEmail &&
+        other.hasPhone == hasPhone;
+  }
+
+  @override
+  int get hashCode => Object.hash(
+        customerName,
+        customerEmail,
+        customerPhone,
+        reservationCount,
+        lastReservation,
+        lastReservationFormatted,
+        isManual,
+        type,
+        groupKey,
+        hasEmail,
+        hasPhone,
+      );
 }

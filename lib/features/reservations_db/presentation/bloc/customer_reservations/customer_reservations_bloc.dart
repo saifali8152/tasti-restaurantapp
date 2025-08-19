@@ -28,14 +28,15 @@ class CustomerReservationsBloc
           fetchRevervationByEmailResponse: ApiResponse.initial(),
           fetchSmsAvailabilityResponse: ApiResponse.initial(),
           selectedCVCRevervations: [],
+          selectedRevervations: [],
         )) {
     on<FetchCsvDataEvent>(_onFetchCsvDataEvent);
     on<FetchReservationDataByEmailEvent>(_onFetchReservationDataByEvent);
     on<FetchReservationEvent>(_onFetchReservationEvent);
     on<FetchSmsAvailability>(_onFetchSmsAvailability);
-    on<ToggleReservationSelectionEvent>((event, emit) {
-      final updatedList = List<CSVDataEntity>.from(
-          state.selectedCVCRevervations);
+    on<ToggleCSVReservationSelectionEvent>((event, emit) {
+      final updatedList =
+          List<CSVDataEntity>.from(state.selectedCVCRevervations);
 
       if (updatedList.contains(event.reservation)) {
         updatedList.remove(event.reservation);
@@ -44,6 +45,24 @@ class CustomerReservationsBloc
       }
 
       emit(state.copyWith(selectedCVCRevervations: updatedList));
+    });
+
+    on<ToggleReservationSelectionEvent>((event, emit) {
+      // copy current selected list
+      final updatedList =
+          List<ReservationDataEntity>.from(state.selectedRevervations);
+
+      // check if this reservation is already selected
+      if (updatedList.contains(event.reservation)) {
+        // remove it
+        updatedList.remove(event.reservation);
+      } else {
+        // add it
+        updatedList.add(event.reservation);
+      }
+
+      // emit new state
+      emit(state.copyWith(selectedRevervations: updatedList));
     });
   }
 
@@ -69,7 +88,8 @@ class CustomerReservationsBloc
 
   Future<void> _onFetchCsvDataEvent(
       FetchCsvDataEvent event, Emitter<CustomerReservationsState> emit) async {
-    emit(state.copyWith(fetchCSVResponse: ApiResponse.loading(), selectedCVCRevervations: []));
+    emit(state.copyWith(
+        fetchCSVResponse: ApiResponse.loading(), selectedCVCRevervations: []));
     final result = await _fetchCSVUsecase(event.id);
 
     switch (result) {
@@ -110,7 +130,9 @@ class CustomerReservationsBloc
 
   Future<void> _onFetchReservationEvent(FetchReservationEvent event,
       Emitter<CustomerReservationsState> emit) async {
-    emit(state.copyWith(fetchRevervationResponse: ApiResponse.loading()));
+    emit(state.copyWith(
+        fetchRevervationResponse: ApiResponse.loading(),
+        selectedRevervations: []));
     final result = await _fetchReservationUsecase(event.id);
 
     switch (result) {
