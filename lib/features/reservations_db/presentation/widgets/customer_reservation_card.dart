@@ -1,28 +1,40 @@
 import 'package:flutter/material.dart';
-import '../../../../core/widgets/card_details_row.dart';
-import '/config/routes/route_name.dart';
+import 'package:tasti_restaurant_app/config/constants/colors.dart';
+import 'package:tasti_restaurant_app/features/reservations_db/domain/entities/resevation_data.dart';
 import '/core/utils/general_extentions.dart';
-import '../../../../core/widgets/custom_button.dart';
+import '/core/widgets/card_details_row.dart';
 
-class CustomerReservationCard extends StatelessWidget {
-  final int index;
+class CustomerReservationCard extends StatefulWidget {
+  final ReservationDataEntity data;
+
   const CustomerReservationCard({
     super.key,
-    required this.index,
+    required this.data,
   });
+
+  @override
+  State<CustomerReservationCard> createState() => _CustomerReservationCardState();
+}
+
+class _CustomerReservationCardState extends State<CustomerReservationCard> {
+  bool _isSelected = false; // internal state
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, AppRoutes.customerReservationDetails);
+        setState(() => _isSelected = !_isSelected);
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.grey[50],
+          color: _isSelected ? AppColors.darkOrange.withSafeOpacity(.01) : Colors.grey[50],
           borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: _isSelected ? AppColors.darkOrange.withSafeOpacity(.5) : Colors.transparent,
+            width: 1.5,
+          ),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withSafeOpacity(0.2),
@@ -31,31 +43,34 @@ class CustomerReservationCard extends StatelessWidget {
             ),
           ],
         ),
-        child: Column(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Checkbox(value: false, onChanged: (value) {}),
-                IconButton(
-                  icon: const Icon(
-                    Icons.open_in_new,
-                    size: 18,
-                  ),
-                  onPressed: () {},
-                ),
-              ],
+            // Checkbox
+            Checkbox(
+              value: _isSelected,
+              onChanged: (val) {
+                setState(() => _isSelected = val ?? false);
+              },
+              checkColor: AppColors.darkOrange,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6),
+              ),
             ),
-            const SizedBox(height: 8),
-            CardDetailsRow(label: 'Customer Name', value:'Value'),
-            CardDetailsRow(label: 'Total Reservations', value:'Value'),
-            SizedBox(height: 5),
-            const Divider(),
-            SizedBox(height: 5),
-            CustomButton(
-              onPressed: () {},
-              text: "Delete",
+            const SizedBox(width: 8),
+            // Details Column
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CardDetailsRow(label: 'Customer Name', value: widget.data.customerName),
+                  CardDetailsRow(label: 'Email', value: widget.data.customerEmail.toString()),
+                  CardDetailsRow(label: 'Phone', value: widget.data.customerPhone),
+                  CardDetailsRow(label: 'Total Reservations', value: widget.data.reservationCount.toString()),
+                  CardDetailsRow(label: 'Last Visit', value: widget.data.lastReservationFormatted),
+                  CardDetailsRow(label: 'Type', value: widget.data.type),
+                ],
+              ),
             ),
           ],
         ),
@@ -63,5 +78,3 @@ class CustomerReservationCard extends StatelessWidget {
     );
   }
 }
-
-
