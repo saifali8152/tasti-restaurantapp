@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import '/features/common/auth/data/models/user.dart';
 import '/features/common/auth/domain/entities/user.dart';
 import '/core/parms/parms.dart';
@@ -47,6 +48,7 @@ class CreateRestaurantRemoteApiImpl extends ICreateRestaurantRemoteApi {
   
   @override
   Future<UserRestaurantEntity> createRestaurant(CreateRestaurantParms parms) async {
+  try {
     Map<String, dynamic> data = {
       "name": parms.name,
       "email": parms.email,
@@ -61,16 +63,32 @@ class CreateRestaurantRemoteApiImpl extends ICreateRestaurantRemoteApi {
       "description": parms.description,
       "cuisines": parms.cuisines,
     };
+
     Map<String, MultipartFile> files = {};
     if (parms.image.isNotEmpty && !(parms.image.contains("http"))) {
       files = {
-        "image": await MultipartFile.fromFile(parms.image,
-            filename: parms.image.split('/').last),
+        "image": await MultipartFile.fromFile(
+          parms.image,
+          filename: parms.image.split('/').last,
+        ),
       };
     }
 
     var response = await networkApiService.postMultipart(
-        AppUrls.createRestaurant, data, files);
-    return response['message'];
+      AppUrls.createRestaurant,
+      data,
+      files,
+    );
+
+    final UserRestaurantEntity userRestaurantEntity =  UserRestaurantEntity.fromJson(response['data']['restaurant']);
+    return userRestaurantEntity;
+  } catch (e, s) {
+    // Print error + stacktrace
+    debugPrint("❌ [CreateRestaurant] Error: $e");
+    debugPrint("📌 Stacktrace:\n$s");
+
+    rethrow; // rethrow if you still want the caller to handle it
   }
+}
+
 }

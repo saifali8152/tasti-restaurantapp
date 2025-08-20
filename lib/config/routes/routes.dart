@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/features/common/auth/presentation/pages/forgot_password.dart';
 import '/core/parms/parms.dart';
 import '/features/admin/restaurants/domain/entities/restaurant.dart';
 import '/features/restaurant-admin/reservations_db/presentation/pages/csv_sent_campaign.dart';
@@ -113,8 +114,8 @@ class Routes {
           builder: (_) =>
               RequestDetails(data: settings.arguments as Map<String, dynamic>),
         );
-      case AppRoutes.notifications:
-        return MaterialPageRoute(builder: (_) => const Notifications());
+      // case AppRoutes.notifications:
+      //   return MaterialPageRoute(builder: (_) => const Notifications());
       case AppRoutes.campaignDetailsByRes:
         return MaterialPageRoute(
             builder: (_) => CampaignByResDetails(
@@ -130,12 +131,9 @@ class Routes {
       case AppRoutes.login:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case AppRoutes.forgotPassword:
-        return MaterialPageRoute(
-          builder: (_) =>
-              Scaffold(appBar: AppBar(title: Text("Forgot Password"))),
-        );
-      case AppRoutes.signup:
-        return MaterialPageRoute(builder: (_) => const SignupScreen());
+        return MaterialPageRoute(builder: (_) => const ForgotPasswordScreen());
+      // case AppRoutes.signup:
+      //   return MaterialPageRoute(builder: (_) => const SignupScreen());
       case AppRoutes.onboarding:
         return MaterialPageRoute(builder: (_) => OnboardingScreen());
       case AppRoutes.profile:

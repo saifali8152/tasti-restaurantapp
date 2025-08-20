@@ -2,12 +2,12 @@ class AppRoutes {
   // ✅ Auth Routes
   static const String splash = '/splash';
   static const String login = '/login';
-  static const String signup = '/signup';
+  // static const String signup = '/signup';
   static const String onboarding = '/onboarding';
   static const String forgotPassword = '/forgot-password';
   static const String changePassword = 'changePassword';
 
-  static const String notifications = '/notifications';
+  // static const String notifications = '/notifications';
 
   // ✅ Profile / Info
   static const String profile = '/personal-info';

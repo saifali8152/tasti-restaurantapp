@@ -121,7 +121,6 @@ class _CreateNewRestaurantState extends State<CreateNewRestaurant> {
                   controller: cuisineController,
                 ),
                 CustomInputField(
-                  icon: Icons.description,
                   hintText: "Restaurant description",
                   controller: descriptionController,
                   maxLines: 3,

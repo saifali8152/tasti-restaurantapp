@@ -145,28 +145,54 @@ class UserRestaurantModel extends UserRestaurantEntity {
 
   factory UserRestaurantModel.fromJson(Map<String, dynamic> json) {
     return UserRestaurantModel(
-      id: json['id'],
-      name: json['name'],
-      phone: json['phone'],
-      email: json['email'],
-      description: json['description'],
-      minimumSpend: json['minimum_spend'],
-      address: json['address'],
-      city: json['city'],
-      cost: json['cost'].toString(),
-      status: json['status'],
-      paid: json['paid'],
-      lat: (json['lat'] as num).toDouble(),
-      lon: (json['lon'] as num).toDouble(),
-      rating: json['rating'],
-      website: json['website'],
-      cuisineImage: json['cuisine'],
-      cuisines: json['cuisines'],
-      dressCode: json['dress_code'],
-      attributes: json['attributes'],
-      bookedTimesToday: json['booked_times_today'],
-      tablesLeft: json['tables_left'],
-      timeDuration: json['time_duration'],
+      id: (json['id'] ?? 0) is int
+          ? json['id'] as int
+          : int.tryParse(json['id'].toString()) ?? 0,
+      name: (json['name'] ?? '').toString(),
+      phone: (json['phone_number'] ?? '').toString(),
+      email: (json['email'] ?? '').toString(),
+      address: (json['address'] ?? '').toString(),
+      cost: (json['cost'] ?? '').toString(),
+      city: (json['city'] ?? '').toString(),
+      description: (json['description'] ?? '').toString(),
+      minimumSpend: (json['minimum_spend'] ?? '').toString(),
+      status: (json['status'] ?? '').toString(),
+      paid: (json['paid'] ?? '').toString(),
+      lat: (json['lat'] == null || json['lat'].toString().isEmpty)
+          ? 0.0
+          : (json['lat'] as num).toDouble(),
+      lon: (json['lon'] == null || json['lon'].toString().isEmpty)
+          ? 0.0
+          : (json['lon'] as num).toDouble(),
+      rating: (json['rating'] == null || json['rating'].toString().isEmpty)
+          ? 0
+          : int.tryParse(json['rating'].toString()) ?? 0,
+      website: (json['website']?.toString().isNotEmpty ?? false)
+          ? json['website'].toString()
+          : null,
+      cuisineImage: (json['cuisine_image']?.toString().isNotEmpty ?? false)
+          ? json['cuisine_image'].toString()
+          : null,
+      cuisines: (json['cuisines']?.toString().isNotEmpty ?? false)
+          ? json['cuisines'].toString()
+          : null,
+      dressCode: (json['dress_code']?.toString().isNotEmpty ?? false)
+          ? json['dress_code'].toString()
+          : null,
+      attributes: (json['attributes']?.toString().isNotEmpty ?? false)
+          ? json['attributes'].toString()
+          : null,
+      bookedTimesToday: (json['booked_times_today'] == null ||
+              json['booked_times_today'].toString().isEmpty)
+          ? null
+          : int.tryParse(json['booked_times_today'].toString()),
+      tablesLeft: (json['tables_left'] == null ||
+              json['tables_left'].toString().isEmpty)
+          ? null
+          : int.tryParse(json['tables_left'].toString()),
+      timeDuration: (json['time_duration']?.toString().isNotEmpty ?? false)
+          ? json['time_duration'].toString()
+          : null,
     );
   }
 

@@ -19,7 +19,6 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String userType = "admin";
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -68,13 +67,7 @@ class OnboardingScreen extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   if (_controller.page == pages.length - 1) {
-                    switch (userType) {
-                      case "admin":
                         Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login, (route) => false);
-                        break;
-                      case 'restaurant':
-                        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.signup, (route) => false);
-                    }
                   } else {
                     _controller.nextPage(
                       duration: const Duration(milliseconds: 300),

@@ -16,9 +16,9 @@ import '/features/admin/queries/presentation/bloc/queries_event.dart';
 import '/features/admin/requests/presentation/bloc/request_bloc.dart';
 import '/features/admin/requests/presentation/bloc/request_event.dart';
 import '/features/screens.dart';
-import '/config/routes/route_name.dart';
-import '../../../../config/constants/icons.dart';
-import '../../../../config/constants/spaces.dart';
+// import '/config/routes/route_name.dart';
+// import '../../../../config/constants/icons.dart';
+// import '../../../../config/constants/spaces.dart';
 import '/config/constants/colors.dart';
 import '../cubit/skaleton_cubit.dart';
 
@@ -45,21 +45,21 @@ class Skaleton extends StatelessWidget {
                 },
               ),
             ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 26),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.notifications);
-                  },
-                  child: Image.asset(
-                    AppIcons.noti,
-                    height: AppSpaces.iconsHeight,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
+            // actions: [
+              // Padding(
+              //   padding: const EdgeInsets.only(right: 26),
+              //   child: GestureDetector(
+              //     onTap: () {
+              //       Navigator.pushNamed(context, AppRoutes.notifications);
+              //     },
+              //     child: Image.asset(
+              //       AppIcons.noti,
+              //       height: AppSpaces.iconsHeight,
+              //       color: Colors.white,
+              //     ),
+              //   ),
+              // ),
+            // ],
           ),
           drawer: CustomDrawer(
             userRole: userRole,

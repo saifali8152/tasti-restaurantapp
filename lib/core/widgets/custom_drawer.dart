@@ -23,7 +23,7 @@ class CustomDrawer extends StatelessWidget {
             builder: (context, state) {
               return GestureDetector(
                 onTap: (){
-                  context.read<SkaletonCubit>().changeTab(13);
+                  context.read<SkaletonCubit>().changeTab(userRole == 'admin'? 12 : 13);
                   Navigator.pop(context);
                 },
                 child: UserAccountsDrawerHeader(

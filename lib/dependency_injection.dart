@@ -423,7 +423,7 @@ Future<void> initializeDependencies() async {
       sC: sl(),
       userCubit: sl()));
   sl.registerLazySingleton<LoginBloc>(() => LoginBloc(sl()));
-  sl.registerLazySingleton<SignOutBloc>(() => SignOutBloc(sl()));
+  sl.registerFactory<SignOutBloc>(() => SignOutBloc(sl()));
   sl.registerLazySingleton<DeleteAccountBloc>(() => DeleteAccountBloc(sl()));
   sl.registerLazySingleton<ForgotPasswordBloc>(() => ForgotPasswordBloc(sl()));
   sl.registerLazySingleton<AdminDashboardBloc>(() => AdminDashboardBloc(sl()));

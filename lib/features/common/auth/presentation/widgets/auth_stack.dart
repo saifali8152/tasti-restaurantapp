@@ -35,25 +35,31 @@ class AuthStack extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                   Container(
-                    color:
-                        Colors.black54,
+                    color: Colors.black54,
                   ),
                 ],
               ),
             ),
             Column(
               children: [
-                SizedBox(height: 40),
+                SizedBox(height: 50),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(AppImages.logo),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(
+                        AppImages.launcher,
+                        height: 50,
+                        width: 50,
+                      ),
+                    ),
                     SizedBox(width: 5),
                     Image.asset(AppImages.testi),
                   ],
                 ),
-                SizedBox(height: 50),
-        
+                SizedBox(height: 40),
+
                 // Welcome Text
                 Text(
                   title,
@@ -76,7 +82,7 @@ class AuthStack extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 30),
-        
+
                 child,
               ],
             ),

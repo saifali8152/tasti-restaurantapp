@@ -1,4 +1,4 @@
-package com.example.tasti_restaurant_app
+package com.tasti.tasti_restaurant_app
 
 import io.flutter.embedding.android.FlutterActivity
 

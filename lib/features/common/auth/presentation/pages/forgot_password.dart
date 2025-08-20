@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
 import '../widgets/forgot_password_email_sent_dialog.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/utils/general_extentions.dart';
@@ -25,7 +26,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: CustomAppBar(title: ''),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppSpaces.screenHpad),
         child: Column(
