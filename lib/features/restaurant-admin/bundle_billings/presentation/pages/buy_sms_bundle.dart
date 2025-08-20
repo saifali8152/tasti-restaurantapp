@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/core/services/session_controller.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
-import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
-import 'package:tasti_restaurant_app/dependency_injection.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/presentation/bloc/bundle_billing_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/presentation/bloc/bundle_billing_event.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/presentation/bloc/bundle_billing_state.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/presentation/widgets/sms_card.dart';
+import '/core/network/response.dart';
+import '/core/services/session_controller.dart';
+import '/core/widgets/custom_app_bar.dart';
+import '/core/widgets/loading_widget.dart';
+import '/dependency_injection.dart';
+import '/features/restaurant-admin/bundle_billings/presentation/bloc/bundle_billing_bloc.dart';
+import '/features/restaurant-admin/bundle_billings/presentation/bloc/bundle_billing_event.dart';
+import '/features/restaurant-admin/bundle_billings/presentation/bloc/bundle_billing_state.dart';
+import '/features/restaurant-admin/bundle_billings/presentation/widgets/sms_card.dart';
 
 class BuySmsBundle extends StatefulWidget {
   const BuySmsBundle({super.key});

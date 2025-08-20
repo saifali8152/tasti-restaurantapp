@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/domain/entities/restaurant_campaign.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/domain/usecases/fetch_restaurant_campaigns.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/domain/usecases/import_scv_file.dart';
+import '/features/restaurant-admin/reservations_db/domain/entities/restaurant_campaign.dart';
+import '/features/restaurant-admin/reservations_db/domain/usecases/fetch_restaurant_campaigns.dart';
+import '/features/restaurant-admin/reservations_db/domain/usecases/import_scv_file.dart';
 import '/core/network/response.dart';
 import 'restaurant_campaigns_event.dart';
 import 'restaurant_campaigns_state.dart';

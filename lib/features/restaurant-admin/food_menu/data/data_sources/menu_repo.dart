@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/data/models/menu.dart';
+import '/features/restaurant-admin/food_menu/data/models/menu.dart';
 import '/core/parms/parms.dart';
 import '/core/network/api_services.dart';
 import '/config/constants/urls.dart';

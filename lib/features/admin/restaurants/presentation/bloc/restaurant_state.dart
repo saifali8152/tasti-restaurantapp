@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/core/enum/restaurant_filter.dart';
-import 'package:tasti_restaurant_app/features/admin/restaurants/domain/entities/restaurant.dart';
+import '/core/enum/restaurant_filter.dart';
+import '/features/admin/restaurants/domain/entities/restaurant.dart';
 import '/core/models/pagination.dart';
 import '/core/network/response.dart';
 

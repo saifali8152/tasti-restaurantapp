@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_search_field.dart';
-import 'package:tasti_restaurant_app/features/common/location/presentation/bloc/location_bloc.dart';
-import 'package:tasti_restaurant_app/features/common/location/presentation/bloc/location_event.dart';
-import 'package:tasti_restaurant_app/features/common/location/presentation/bloc/location_state.dart';
+import '/core/widgets/custom_search_field.dart';
+import '/features/common/location/presentation/bloc/location_bloc.dart';
+import '/features/common/location/presentation/bloc/location_event.dart';
+import '/features/common/location/presentation/bloc/location_state.dart';
 import '/core/network/response.dart';
 import '/core/widgets/loading_widget.dart';
-import 'package:tasti_restaurant_app/features/common/location/data/models/location_model.dart';
+import '/features/common/location/data/models/location_model.dart';
 
 class LocationDropdownField extends StatefulWidget {
   final LocationBloc bloc;

@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:tasti_restaurant_app/config/routes/route_name.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/domain/entities/working_hour.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/presentation/widgets/working_hour_tile.dart';
+import '/config/routes/route_name.dart';
+import '/core/widgets/custom_button.dart';
+import '/features/restaurant-admin/working_hours/domain/entities/working_hour.dart';
+import '/features/restaurant-admin/working_hours/presentation/widgets/working_hour_tile.dart';
 import '../widgets/add_hours_header.dart';
 
 class HasWorkingHour extends StatelessWidget {

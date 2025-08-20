@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/gallery/data/models/gallery.dart';
+import '/features/restaurant-admin/gallery/data/models/gallery.dart';
 import '/core/parms/parms.dart';
 import '../data_sources/gallery_repo.dart';
 import '../../domain/repositories/gallery.dart';

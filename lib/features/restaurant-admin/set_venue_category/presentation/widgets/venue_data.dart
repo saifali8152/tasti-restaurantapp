@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
-import 'package:tasti_restaurant_app/core/widgets/header_cell.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/domain/entities/venue.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/presentation/widgets/delete_venue_dialog.dart';
+import '/config/constants/colors.dart';
+import '/core/utils/general_extentions.dart';
+import '/core/widgets/custom_button.dart';
+import '/core/widgets/header_cell.dart';
+import '/features/restaurant-admin/set_venue_category/domain/entities/venue.dart';
+import '/features/restaurant-admin/set_venue_category/presentation/widgets/delete_venue_dialog.dart';
 
 class VenueData extends StatelessWidget {
   final VenueEntity venue;

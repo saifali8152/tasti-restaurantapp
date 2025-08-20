@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/domain/entities/dashboard.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/domain/usecases/fetch_dashboard.dart';
+import '/features/restaurant-admin/dashboard/domain/entities/dashboard.dart';
+import '/features/restaurant-admin/dashboard/domain/usecases/fetch_dashboard.dart';
 import '/core/network/response.dart';
 import 'dashboard_event.dart';
 import 'dashboard_state.dart';

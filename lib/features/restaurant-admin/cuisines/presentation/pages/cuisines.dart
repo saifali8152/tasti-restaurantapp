@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/services/session_controller.dart';
-import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
-import 'package:tasti_restaurant_app/dependency_injection.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/cuisines/presentation/bloc/cuisine_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/cuisines/presentation/bloc/cuisine_event.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/cuisines/presentation/bloc/cuisine_state.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/cuisines/presentation/widgets/attributes_dropdown.dart';
-import 'package:tasti_restaurant_app/core/widgets/curved_container.dart';
-import 'package:tasti_restaurant_app/core/widgets/themed_app_bar.dart';
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/cuisines/presentation/widgets/tab_content.dart';
+import '/core/services/session_controller.dart';
+import '/core/widgets/loading_widget.dart';
+import '/dependency_injection.dart';
+import '/features/restaurant-admin/cuisines/presentation/bloc/cuisine_bloc.dart';
+import '/features/restaurant-admin/cuisines/presentation/bloc/cuisine_event.dart';
+import '/features/restaurant-admin/cuisines/presentation/bloc/cuisine_state.dart';
+import '/features/restaurant-admin/cuisines/presentation/widgets/attributes_dropdown.dart';
+import '/core/widgets/curved_container.dart';
+import '/core/widgets/themed_app_bar.dart';
+import '/core/network/response.dart';
+import '/config/constants/colors.dart';
+import '/features/restaurant-admin/cuisines/presentation/widgets/tab_content.dart';
 
 class CuisinesScreen extends StatefulWidget {
   const CuisinesScreen({super.key});

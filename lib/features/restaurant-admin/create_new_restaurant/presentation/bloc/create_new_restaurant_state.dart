@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tasti_restaurant_app/features/common/auth/domain/entities/user.dart';
+import '/features/common/auth/domain/entities/user.dart';
 import '/core/network/response.dart';
 
 class CreateNewRestaurantState extends Equatable {

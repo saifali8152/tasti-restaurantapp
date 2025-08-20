@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/targeted_campaign/presentation/widgets/init_payment_dialog.dart';
+import '/core/parms/parms.dart';
+import '/core/utils/general_extentions.dart';
+import '/features/restaurant-admin/targeted_campaign/presentation/widgets/init_payment_dialog.dart';
 import '/config/constants/icons.dart';
 import '/core/widgets/icon_button.dart';
 import '/core/widgets/custom_app_bar.dart';

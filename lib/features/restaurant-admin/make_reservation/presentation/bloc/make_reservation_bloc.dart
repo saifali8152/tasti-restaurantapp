@@ -1,13 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/domain/entities/restaurant_time_slots.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/domain/usecases/make_reservations.dart';
+import '/features/restaurant-admin/make_reservation/domain/entities/restaurant_time_slots.dart';
+import '/features/restaurant-admin/make_reservation/domain/usecases/make_reservations.dart';
 import '/core/network/response.dart';
 import 'make_reservation_event.dart';
 import 'make_reservation_state.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/domain/entities/restaurant_seating_area.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/domain/usecases/fetch_restaurant_seating_area.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/domain/usecases/fetch_restaurant_tables.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/domain/usecases/fetch_restaurant_time_slots.dart';
+import '/features/restaurant-admin/make_reservation/domain/entities/restaurant_seating_area.dart';
+import '/features/restaurant-admin/make_reservation/domain/usecases/fetch_restaurant_seating_area.dart';
+import '/features/restaurant-admin/make_reservation/domain/usecases/fetch_restaurant_tables.dart';
+import '/features/restaurant-admin/make_reservation/domain/usecases/fetch_restaurant_time_slots.dart';
 
 class MakeReservationBloc
     extends Bloc<MakeReservationEvent, MakeReservationState> {

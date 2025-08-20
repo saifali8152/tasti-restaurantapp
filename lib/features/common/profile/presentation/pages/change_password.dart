@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
+import '/core/widgets/custom_app_bar.dart';
 import '/config/constants/colors.dart';
 import '/config/constants/spaces.dart';
 import '/core/widgets/custom_button.dart';

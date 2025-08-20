@@ -1,7 +1,7 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/data/models/bundle.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/data/models/init_payment.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/data/models/sms.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/data/models/transaction_history.dart';
+import '/features/restaurant-admin/bundle_billings/data/models/bundle.dart';
+import '/features/restaurant-admin/bundle_billings/data/models/init_payment.dart';
+import '/features/restaurant-admin/bundle_billings/data/models/sms.dart';
+import '/features/restaurant-admin/bundle_billings/data/models/transaction_history.dart';
 import '/core/parms/parms.dart';
 import '../data_sources/bundle_billing_remote_repo.dart';
 import '../../domain/repositories/bundle_billing.dart';

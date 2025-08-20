@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/gallery/domain/entities/gallery.dart';
+import '/features/restaurant-admin/gallery/domain/entities/gallery.dart';
 import '/core/network/response.dart';
 
 class GalleryState extends Equatable {

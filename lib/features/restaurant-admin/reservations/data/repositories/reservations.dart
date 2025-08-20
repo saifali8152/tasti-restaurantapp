@@ -1,6 +1,6 @@
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/data/data_sources/reservations_remote_repo.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/data/models/reservation.dart';
+import '/core/parms/parms.dart';
+import '/features/restaurant-admin/reservations/data/data_sources/reservations_remote_repo.dart';
+import '/features/restaurant-admin/reservations/data/models/reservation.dart';
 import '../../domain/repositories/reservation.dart';
 import '/core/network/response.dart';
 

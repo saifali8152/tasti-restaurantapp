@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/config/routes/route_name.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/domain/entities/reservation_data_email.dart';
+import '/config/routes/route_name.dart';
+import '/features/restaurant-admin/reservations_db/domain/entities/reservation_data_email.dart';
 import '/core/utils/general_extentions.dart';
 import '/core/widgets/card_details_row.dart';
 

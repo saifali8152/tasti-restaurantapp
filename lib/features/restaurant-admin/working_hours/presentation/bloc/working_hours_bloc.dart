@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/data/models/working_hour.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/domain/usecases/add_working_hour.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/domain/usecases/fetch_working_hour.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/domain/usecases/update_working_hour.dart';
+import '/features/restaurant-admin/working_hours/data/models/working_hour.dart';
+import '/features/restaurant-admin/working_hours/domain/usecases/add_working_hour.dart';
+import '/features/restaurant-admin/working_hours/domain/usecases/fetch_working_hour.dart';
+import '/features/restaurant-admin/working_hours/domain/usecases/update_working_hour.dart';
 import '/core/network/response.dart';
 import 'working_hours_event.dart';
 import 'working_hours_state.dart';

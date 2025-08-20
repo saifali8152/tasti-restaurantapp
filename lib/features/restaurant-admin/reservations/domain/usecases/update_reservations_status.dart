@@ -1,6 +1,6 @@
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/domain/entities/reservation.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/domain/repositories/reservation.dart';
+import '/core/parms/parms.dart';
+import '/features/restaurant-admin/reservations/domain/entities/reservation.dart';
+import '/features/restaurant-admin/reservations/domain/repositories/reservation.dart';
 import '/core/network/response.dart';
 import '/core/usecase/usecase.dart';
 

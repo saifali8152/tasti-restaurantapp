@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/common/manage_fee/domain/entities/initialize_payment.dart';
+import '/features/common/manage_fee/domain/entities/initialize_payment.dart';
 
 class InitializePaymentModel extends InitializePaymentEntity {
   const InitializePaymentModel({

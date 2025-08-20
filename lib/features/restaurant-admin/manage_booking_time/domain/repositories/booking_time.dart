@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/entities/booking_time.dart';
+import '/features/restaurant-admin/manage_booking_time/domain/entities/booking_time.dart';
 import '/core/parms/parms.dart';
 import '/core/network/response.dart';
 

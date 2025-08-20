@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/domain/entities/restaurant_seating_area.dart';
+import '/features/restaurant-admin/make_reservation/domain/entities/restaurant_seating_area.dart';
 
 class RestaurantSeatingAreaModel extends RestaurantSeatingAreaEntity {
   RestaurantSeatingAreaModel({

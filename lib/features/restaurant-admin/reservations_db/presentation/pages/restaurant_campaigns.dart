@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/core/services/session_controller.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
-import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
-import 'package:tasti_restaurant_app/dependency_injection.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/presentation/bloc/restaurant_campaigns/restaurant_campaigns_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/presentation/bloc/restaurant_campaigns/restaurant_campaigns_event.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/presentation/bloc/restaurant_campaigns/restaurant_campaigns_state.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/presentation/widgets/restaurant_campaign_card.dart';
+import '/core/network/response.dart';
+import '/core/services/session_controller.dart';
+import '/core/widgets/custom_app_bar.dart';
+import '/core/widgets/loading_widget.dart';
+import '/dependency_injection.dart';
+import '/features/restaurant-admin/reservations_db/presentation/bloc/restaurant_campaigns/restaurant_campaigns_bloc.dart';
+import '/features/restaurant-admin/reservations_db/presentation/bloc/restaurant_campaigns/restaurant_campaigns_event.dart';
+import '/features/restaurant-admin/reservations_db/presentation/bloc/restaurant_campaigns/restaurant_campaigns_state.dart';
+import '/features/restaurant-admin/reservations_db/presentation/widgets/restaurant_campaign_card.dart';
 
 class RestaurantCampaignsScreen extends StatefulWidget {
   const RestaurantCampaignsScreen({super.key});

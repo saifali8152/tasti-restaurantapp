@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/core/utils/flushbar_extention.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/domain/entities/reservation.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/presentation/bloc/reservation_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/presentation/bloc/reservation_event.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/presentation/bloc/reservation_state.dart';
+import '/config/constants/colors.dart';
+import '/core/network/response.dart';
+import '/core/parms/parms.dart';
+import '/core/utils/flushbar_extention.dart';
+import '/core/widgets/custom_button.dart';
+import '/features/restaurant-admin/reservations/domain/entities/reservation.dart';
+import '/features/restaurant-admin/reservations/presentation/bloc/reservation_bloc.dart';
+import '/features/restaurant-admin/reservations/presentation/bloc/reservation_event.dart';
+import '/features/restaurant-admin/reservations/presentation/bloc/reservation_state.dart';
 import '/core/widgets/details_row.dart';
 import '/core/widgets/custom_app_bar.dart';
 

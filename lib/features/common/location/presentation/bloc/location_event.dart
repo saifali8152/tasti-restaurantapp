@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:tasti_restaurant_app/features/common/location/data/models/location_model.dart';
-import 'package:tasti_restaurant_app/features/common/location/data/models/prediction_model.dart';
+import '/features/common/location/data/models/location_model.dart';
+import '/features/common/location/data/models/prediction_model.dart';
 
 abstract class LocationEvent extends Equatable {
   const LocationEvent();

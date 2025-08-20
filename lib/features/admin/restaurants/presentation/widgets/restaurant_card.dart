@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/features/admin/restaurants/domain/entities/restaurant.dart';
-import 'package:tasti_restaurant_app/features/admin/restaurants/presentation/widgets/labeled_badge.dart';
+import '/features/admin/restaurants/domain/entities/restaurant.dart';
+import '/features/admin/restaurants/presentation/widgets/labeled_badge.dart';
 import '/config/routes/route_name.dart';
 
 class RestaurantCard extends StatelessWidget {

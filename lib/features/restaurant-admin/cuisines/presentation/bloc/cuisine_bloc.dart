@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/cuisines/domain/entities/cuisine.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/cuisines/domain/usecases/add_cuisine.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/cuisines/domain/usecases/delete_cuisine.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/cuisines/domain/usecases/fetch_cuisine.dart';
+import '/features/restaurant-admin/cuisines/domain/entities/cuisine.dart';
+import '/features/restaurant-admin/cuisines/domain/usecases/add_cuisine.dart';
+import '/features/restaurant-admin/cuisines/domain/usecases/delete_cuisine.dart';
+import '/features/restaurant-admin/cuisines/domain/usecases/fetch_cuisine.dart';
 import '/core/network/response.dart';
 import 'cuisine_event.dart';
 import 'cuisine_state.dart';

@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/data/models/venue.dart';
+import '/features/restaurant-admin/set_venue_category/data/models/venue.dart';
 import '/core/parms/parms.dart';
 import '../data_sources/venue_repo.dart';
 import '../../domain/repositories/venue_repo.dart';

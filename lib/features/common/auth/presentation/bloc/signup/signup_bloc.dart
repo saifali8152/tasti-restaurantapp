@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/common/auth/domain/usecases/signup.dart';
+import '/features/common/auth/domain/usecases/signup.dart';
 import '../../../../skaleton/user_cubit/skaleton_cubit.dart';
 import '../../../domain/entities/user.dart';
 import '/core/services/session_controller.dart';

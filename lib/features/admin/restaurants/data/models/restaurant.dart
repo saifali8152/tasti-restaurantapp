@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/admin/restaurants/domain/entities/restaurant.dart';
+import '/features/admin/restaurants/domain/entities/restaurant.dart';
 import '/core/models/pagination.dart';
 
 class RestaurantModel extends RestaurantEntity {

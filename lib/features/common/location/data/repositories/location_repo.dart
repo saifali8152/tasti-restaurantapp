@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/features/common/location/domain/entities/location_entity.dart';
-import 'package:tasti_restaurant_app/features/common/location/domain/entities/prediction_entity.dart';
+import '/features/common/location/domain/entities/location_entity.dart';
+import '/features/common/location/domain/entities/prediction_entity.dart';
 import '/core/parms/parms.dart';
 import '../data_sources/location_repo.dart';
 import '../../domain/repositories/location_repo.dart';

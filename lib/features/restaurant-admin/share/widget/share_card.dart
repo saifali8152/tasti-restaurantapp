@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/services/share_service.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
+import '/core/services/share_service.dart';
+import '/core/utils/general_extentions.dart';
 
 class ShareCard extends StatelessWidget {
   final String imageUrl;

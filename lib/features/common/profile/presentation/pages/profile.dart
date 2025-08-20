@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
-import 'package:tasti_restaurant_app/core/widgets/curved_container.dart';
-import 'package:tasti_restaurant_app/core/widgets/themed_app_bar.dart';
+import '/config/constants/colors.dart';
+import '/core/widgets/curved_container.dart';
+import '/core/widgets/themed_app_bar.dart';
 import '../../../skaleton/user_cubit/skaleton_cubit.dart';
 import '/config/routes/route_name.dart';
 import '/core/widgets/custom_tile.dart';

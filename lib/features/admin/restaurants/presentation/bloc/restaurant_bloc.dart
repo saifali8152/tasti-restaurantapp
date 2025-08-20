@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/enum/restaurant_filter.dart';
-import 'package:tasti_restaurant_app/features/admin/restaurants/domain/entities/restaurant.dart';
-import 'package:tasti_restaurant_app/features/admin/restaurants/domain/usecases/active_restaurant.dart';
-import 'package:tasti_restaurant_app/features/admin/restaurants/domain/usecases/fetch_restaurant.dart';
-import 'package:tasti_restaurant_app/features/admin/restaurants/domain/usecases/suspend_restaurant.dart';
+import '/core/enum/restaurant_filter.dart';
+import '/features/admin/restaurants/domain/entities/restaurant.dart';
+import '/features/admin/restaurants/domain/usecases/active_restaurant.dart';
+import '/features/admin/restaurants/domain/usecases/fetch_restaurant.dart';
+import '/features/admin/restaurants/domain/usecases/suspend_restaurant.dart';
 import '/core/parms/parms.dart';
 import '/core/network/response.dart';
 import 'restaurant_event.dart';

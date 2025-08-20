@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/enum/account_type.dart';
-import 'package:tasti_restaurant_app/dependency_injection.dart';
-import 'package:tasti_restaurant_app/features/common/skaleton/user_cubit/skaleton_cubit.dart';
+import '/core/enum/account_type.dart';
+import '/dependency_injection.dart';
+import '/features/common/skaleton/user_cubit/skaleton_cubit.dart';
 import '../../../domain/usecases/delete_account.dart';
 import '/core/network/response.dart';
 import '/core/services/session_controller.dart';

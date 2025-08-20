@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/services/session_controller.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/share/widget/share_card.dart';
+import '/core/services/session_controller.dart';
+import '/features/restaurant-admin/share/widget/share_card.dart';
 import '/config/constants/colors.dart';
 import '/core/widgets/curved_container.dart';
 import '/core/widgets/themed_app_bar.dart';

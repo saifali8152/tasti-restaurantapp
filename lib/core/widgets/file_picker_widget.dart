@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
-import 'package:tasti_restaurant_app/core/services/file_picker_services.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/core/widgets/icon_button.dart';
+import '/config/constants/colors.dart';
+import '/core/services/file_picker_services.dart';
+import '/core/utils/general_extentions.dart';
+import '/core/widgets/icon_button.dart';
 
 class FilePickerWidget extends StatefulWidget {
   final void Function(PlatformFile file)? onFileSelected;

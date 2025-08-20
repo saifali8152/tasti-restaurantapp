@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
-import 'package:tasti_restaurant_app/config/routes/route_name.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/domain/entities/restaurant_campaign.dart';
+import '/config/constants/colors.dart';
+import '/config/routes/route_name.dart';
+import '/features/restaurant-admin/reservations_db/domain/entities/restaurant_campaign.dart';
 import '/core/utils/general_extentions.dart';
 import '/core/widgets/card_details_row.dart';
 

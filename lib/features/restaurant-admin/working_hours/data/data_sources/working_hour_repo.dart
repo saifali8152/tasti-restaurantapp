@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/data/models/working_hour.dart';
+import '/features/restaurant-admin/working_hours/data/models/working_hour.dart';
 import '/core/parms/parms.dart';
 import '/core/network/api_services.dart';
 import '/config/constants/urls.dart';

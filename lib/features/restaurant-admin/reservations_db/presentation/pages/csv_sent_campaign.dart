@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/config/routes/route_name.dart';
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/core/services/session_controller.dart';
-import 'package:tasti_restaurant_app/core/utils/flushbar_extention.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_input_field.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/domain/entities/csv_data.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/presentation/bloc/customer_reservations/customer_reservations_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/presentation/bloc/customer_reservations/customer_reservations_event.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/presentation/bloc/customer_reservations/customer_reservations_state.dart';
+import '/config/routes/route_name.dart';
+import '/core/network/response.dart';
+import '/core/parms/parms.dart';
+import '/core/services/session_controller.dart';
+import '/core/utils/flushbar_extention.dart';
+import '/core/widgets/custom_app_bar.dart';
+import '/core/widgets/custom_button.dart';
+import '/core/widgets/custom_input_field.dart';
+import '/features/restaurant-admin/reservations_db/domain/entities/csv_data.dart';
+import '/features/restaurant-admin/reservations_db/presentation/bloc/customer_reservations/customer_reservations_bloc.dart';
+import '/features/restaurant-admin/reservations_db/presentation/bloc/customer_reservations/customer_reservations_event.dart';
+import '/features/restaurant-admin/reservations_db/presentation/bloc/customer_reservations/customer_reservations_state.dart';
 
 class CsvSentCampaignArguments {
   final List<CSVDataEntity> data;
@@ -143,8 +143,8 @@ class _CsvSentCampaignState extends State<CsvSentCampaign> {
                     if (state.sendCSVResponse.status == Status.completed) {
                       Navigator.pushNamedAndRemoveUntil(
                           context, AppRoutes.skaleton, (route) => false);
-                      context.flushBarErrorMessage(
-                          message: state.sendCSVResponse.message.toString());
+                      context.flushBarSuccessMessage(
+                          message: state.sendCSVResponse.data.toString());
                     }
                   },
                   builder: (context, state) {

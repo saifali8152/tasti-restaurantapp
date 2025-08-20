@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/entities/sms.dart';
+import '/features/restaurant-admin/bundle_billings/domain/entities/sms.dart';
 
 class SMSModel extends SMSEntity {
   SMSModel({

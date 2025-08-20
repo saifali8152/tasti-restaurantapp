@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/data/models/csv_data.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/data/models/resevation_data.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/data/models/resevation_data_email.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/data/models/restaurant_campaign.dart';
+import '/core/parms/parms.dart';
+import '/features/restaurant-admin/reservations_db/data/models/csv_data.dart';
+import '/features/restaurant-admin/reservations_db/data/models/resevation_data.dart';
+import '/features/restaurant-admin/reservations_db/data/models/resevation_data_email.dart';
+import '/features/restaurant-admin/reservations_db/data/models/restaurant_campaign.dart';
 import '/core/network/api_services.dart';
 import '/config/constants/urls.dart';
 

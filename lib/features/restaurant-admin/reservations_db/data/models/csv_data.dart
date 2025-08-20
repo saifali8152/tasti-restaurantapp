@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/domain/entities/csv_data.dart';
+import '/features/restaurant-admin/reservations_db/domain/entities/csv_data.dart';
 
 class CSVDataModel extends CSVDataEntity {
   CSVDataModel({

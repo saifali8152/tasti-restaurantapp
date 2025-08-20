@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/domain/entities/reviews.dart';
+import '/features/restaurant-admin/reviews/domain/entities/reviews.dart';
 
 class ReviewModel extends ReviewEntity {
   const ReviewModel({

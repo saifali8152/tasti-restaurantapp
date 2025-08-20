@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/core/widgets/image_widget.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/gallery/domain/entities/gallery.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/gallery/presentation/widgets/delete_gallery_dialog.dart';
+import '/core/utils/general_extentions.dart';
+import '/core/widgets/image_widget.dart';
+import '/features/restaurant-admin/gallery/domain/entities/gallery.dart';
+import '/features/restaurant-admin/gallery/presentation/widgets/delete_gallery_dialog.dart';
 
 class FoodCard extends StatelessWidget {
   final GalleryEntity gallery;

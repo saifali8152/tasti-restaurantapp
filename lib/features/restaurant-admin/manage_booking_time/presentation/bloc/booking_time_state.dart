@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/entities/booking_time.dart';
+import '/features/restaurant-admin/manage_booking_time/domain/entities/booking_time.dart';
 import '/core/network/response.dart';
 
 class BookingTimeState extends Equatable {

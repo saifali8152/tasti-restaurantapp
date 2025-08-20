@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/common/location/domain/entities/prediction_entity.dart';
+import '/features/common/location/domain/entities/prediction_entity.dart';
 
 class PredictionModel extends PredictionEntity {
   PredictionModel({required super.description, required super.placeId});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/widgets/field_label.dart';
+import '/core/widgets/field_label.dart';
 import '/features/admin/manage_sms/domain/entities/admin_sms.dart';
 import '/core/network/response.dart';
 import '/core/utils/flushbar_extention.dart';

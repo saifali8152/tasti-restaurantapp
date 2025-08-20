@@ -1,7 +1,7 @@
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/data/data_sources/make_reservation_remote_repo.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/domain/entities/restaurant_seating_area.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/domain/entities/restaurant_time_slots.dart';
+import '/core/parms/parms.dart';
+import '/features/restaurant-admin/make_reservation/data/data_sources/make_reservation_remote_repo.dart';
+import '/features/restaurant-admin/make_reservation/domain/entities/restaurant_seating_area.dart';
+import '/features/restaurant-admin/make_reservation/domain/entities/restaurant_time_slots.dart';
 import '../../domain/repositories/make_reservations.dart';
 import '/core/network/response.dart';
 

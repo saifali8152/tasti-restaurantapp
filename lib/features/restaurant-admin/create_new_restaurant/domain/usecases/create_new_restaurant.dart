@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/features/common/auth/domain/entities/user.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/create_new_restaurant/domain/repositories/create_restaurant_repo.dart';
+import '/features/common/auth/domain/entities/user.dart';
+import '/features/restaurant-admin/create_new_restaurant/domain/repositories/create_restaurant_repo.dart';
 import '/core/network/response.dart';
 import '/core/parms/parms.dart';
 import '/core/usecase/usecase.dart';

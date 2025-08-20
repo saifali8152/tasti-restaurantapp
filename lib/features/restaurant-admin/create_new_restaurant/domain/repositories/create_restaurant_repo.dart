@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/common/auth/domain/entities/user.dart';
+import '/features/common/auth/domain/entities/user.dart';
 import '/core/parms/parms.dart';
 import '/core/network/response.dart';
 

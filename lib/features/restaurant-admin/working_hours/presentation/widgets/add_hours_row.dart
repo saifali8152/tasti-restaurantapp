@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_input_field.dart';
+import '/core/widgets/custom_input_field.dart';
 
 class AddHoursRow extends StatelessWidget {
   final String title;

@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/domain/entities/venue.dart';
+import '/features/restaurant-admin/set_venue_category/domain/entities/venue.dart';
 
 class VenueModel extends VenueEntity {
   VenueModel({

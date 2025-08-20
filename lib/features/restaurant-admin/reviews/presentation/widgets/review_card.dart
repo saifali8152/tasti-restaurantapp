@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/domain/entities/reviews.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/presentation/widgets/unverify_review_dialog.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/presentation/widgets/verify_review_dialog.dart';
+import '/core/utils/general_extentions.dart';
+import '/features/restaurant-admin/reviews/domain/entities/reviews.dart';
+import '/features/restaurant-admin/reviews/presentation/widgets/unverify_review_dialog.dart';
+import '/features/restaurant-admin/reviews/presentation/widgets/verify_review_dialog.dart';
 import '/config/constants/colors.dart';
 import '/core/widgets/custom_button.dart';
 

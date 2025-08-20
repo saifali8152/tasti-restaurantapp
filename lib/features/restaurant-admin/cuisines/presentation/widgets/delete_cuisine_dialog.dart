@@ -1,6 +1,6 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/cuisines/presentation/bloc/cuisine_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/cuisines/presentation/bloc/cuisine_event.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/cuisines/presentation/bloc/cuisine_state.dart';
+import '/features/restaurant-admin/cuisines/presentation/bloc/cuisine_bloc.dart';
+import '/features/restaurant-admin/cuisines/presentation/bloc/cuisine_event.dart';
+import '/features/restaurant-admin/cuisines/presentation/bloc/cuisine_state.dart';
 
 import '/core/network/response.dart';
 import '/core/utils/flushbar_extention.dart';

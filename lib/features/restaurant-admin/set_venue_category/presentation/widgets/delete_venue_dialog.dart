@@ -1,6 +1,6 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/presentation/bloc/venue_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/presentation/bloc/venue_event.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/presentation/bloc/venue_state.dart';
+import '/features/restaurant-admin/set_venue_category/presentation/bloc/venue_bloc.dart';
+import '/features/restaurant-admin/set_venue_category/presentation/bloc/venue_event.dart';
+import '/features/restaurant-admin/set_venue_category/presentation/bloc/venue_state.dart';
 import '/core/network/response.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/widgets/custom_button.dart';

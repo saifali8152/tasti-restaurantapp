@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
+import '/core/parms/parms.dart';
 
 abstract class CuisineEvent extends Equatable {
   const CuisineEvent();

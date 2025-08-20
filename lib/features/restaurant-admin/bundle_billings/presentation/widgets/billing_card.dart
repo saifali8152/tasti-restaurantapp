@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/domain/entities/seating_area.dart';
+import '/features/restaurant-admin/seating_area/domain/entities/seating_area.dart';
 import '/config/routes/route_name.dart';
 import '/core/utils/general_extentions.dart';
 import '/core/widgets/card_details_row.dart';

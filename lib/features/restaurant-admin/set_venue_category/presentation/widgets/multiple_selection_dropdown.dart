@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
+import '/core/widgets/custom_button.dart';
 
 class MultiSelectDropdown extends StatefulWidget {
   final List<String> items;

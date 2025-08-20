@@ -1,6 +1,6 @@
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/entities/transaction_history.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/repositories/bundle_billing.dart';
+import '/core/parms/parms.dart';
+import '/features/restaurant-admin/bundle_billings/domain/entities/transaction_history.dart';
+import '/features/restaurant-admin/bundle_billings/domain/repositories/bundle_billing.dart';
 import '/core/network/response.dart';
 import '/core/usecase/usecase.dart';
 

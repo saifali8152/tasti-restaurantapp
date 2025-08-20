@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
+import '/core/widgets/loading_widget.dart';
 import '/core/widgets/themed_app_bar.dart';
 import '/dependency_injection.dart';
 import '/features/admin/dashboard/domain/entities/admin_dashboard.dart';

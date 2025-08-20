@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/widgets/details_row.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/domain/entities/seating_area.dart';
+import '/core/widgets/details_row.dart';
+import '/features/restaurant-admin/seating_area/domain/entities/seating_area.dart';
 import '/core/utils/general_extentions.dart';
 
 class TableCard extends StatelessWidget {

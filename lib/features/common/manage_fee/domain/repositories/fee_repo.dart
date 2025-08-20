@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/features/common/manage_fee/domain/entities/initialize_payment.dart';
-import 'package:tasti_restaurant_app/features/common/auth/data/models/user.dart';
+import '/features/common/manage_fee/domain/entities/initialize_payment.dart';
+import '/features/common/auth/data/models/user.dart';
 import '../entities/monthly_fee.dart';
 import '/core/parms/parms.dart';
 import '/core/network/response.dart';

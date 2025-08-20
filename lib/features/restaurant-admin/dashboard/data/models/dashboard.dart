@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/domain/entities/dashboard.dart';
+import '/features/restaurant-admin/dashboard/domain/entities/dashboard.dart';
 
 class DashboardModel extends DashboardEntity {
   DashboardModel({

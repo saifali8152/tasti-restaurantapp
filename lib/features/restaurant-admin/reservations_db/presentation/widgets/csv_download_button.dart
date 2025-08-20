@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:csv/csv.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:tasti_restaurant_app/core/utils/flushbar_extention.dart';
+import '/core/utils/flushbar_extention.dart';
 
 class CsvDownloadButton extends StatefulWidget {
   const CsvDownloadButton({super.key});

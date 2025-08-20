@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/data/models/venue.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/domain/usecases/add_venue.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/domain/usecases/delete_venue.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/domain/usecases/fetch_venue.dart';
+import '/features/restaurant-admin/set_venue_category/data/models/venue.dart';
+import '/features/restaurant-admin/set_venue_category/domain/usecases/add_venue.dart';
+import '/features/restaurant-admin/set_venue_category/domain/usecases/delete_venue.dart';
+import '/features/restaurant-admin/set_venue_category/domain/usecases/fetch_venue.dart';
 import '/core/network/response.dart';
 import 'venue_event.dart';
 import 'venue_state.dart';

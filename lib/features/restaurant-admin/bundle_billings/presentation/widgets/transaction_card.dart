@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/entities/transaction_history.dart';
+import '/features/restaurant-admin/bundle_billings/domain/entities/transaction_history.dart';
 import '/core/utils/general_extentions.dart';
 import '/core/widgets/card_details_row.dart';
 

@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/entities/init_payment.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/targeted_campaign/domain/repositories/targeted_campaign.dart';
+import '/features/restaurant-admin/bundle_billings/domain/entities/init_payment.dart';
+import '/features/restaurant-admin/targeted_campaign/domain/repositories/targeted_campaign.dart';
 import '/core/network/response.dart';
 import '/core/usecase/usecase.dart';
 

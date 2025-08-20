@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/common/auth/data/models/user.dart';
+import '/features/common/auth/data/models/user.dart';
 import '../repositories/fee_repo.dart';
 import '/core/network/response.dart';
 import '/core/usecase/usecase.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/gallery/domain/entities/gallery.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/gallery/domain/usecases/add_gallery.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/gallery/domain/usecases/delete_gallery.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/gallery/domain/usecases/fetch_gallery.dart';
+import '/features/restaurant-admin/gallery/domain/entities/gallery.dart';
+import '/features/restaurant-admin/gallery/domain/usecases/add_gallery.dart';
+import '/features/restaurant-admin/gallery/domain/usecases/delete_gallery.dart';
+import '/features/restaurant-admin/gallery/domain/usecases/fetch_gallery.dart';
 import '/core/network/response.dart';
 import 'gallery_event.dart';
 import 'gallery_state.dart';

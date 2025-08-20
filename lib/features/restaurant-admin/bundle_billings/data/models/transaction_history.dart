@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/entities/transaction_history.dart';
+import '/features/restaurant-admin/bundle_billings/domain/entities/transaction_history.dart';
 import '/core/models/pagination.dart';
 
 class RestaurantTransactionHistoryModel extends ReataurantTransactionHistoryEntity {

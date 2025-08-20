@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/seating_area/domain/entities/seating_area.dart';
+import '/features/restaurant-admin/seating_area/domain/entities/seating_area.dart';
 import '/core/enum/query_type.dart';
 import '/core/enum/request_type.dart';
 

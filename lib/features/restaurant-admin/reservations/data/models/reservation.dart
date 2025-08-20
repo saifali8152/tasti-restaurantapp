@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/domain/entities/reservation.dart';
+import '/features/restaurant-admin/reservations/domain/entities/reservation.dart';
 
 class ReservationModel extends ReservationEntity {
   ReservationModel({

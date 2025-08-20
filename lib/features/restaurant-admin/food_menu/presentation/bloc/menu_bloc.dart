@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/data/models/menu.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/domain/usecases/add_menu.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/domain/usecases/fetch_menu.dart';
+import '/features/restaurant-admin/food_menu/data/models/menu.dart';
+import '/features/restaurant-admin/food_menu/domain/usecases/add_menu.dart';
+import '/features/restaurant-admin/food_menu/domain/usecases/fetch_menu.dart';
 import '/core/network/response.dart';
 import 'menu_event.dart';
 import 'menu_state.dart';

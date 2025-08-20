@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/domain/entities/csv_data.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/domain/repositories/reservations_db.dart';
+import '/features/restaurant-admin/reservations_db/domain/entities/csv_data.dart';
+import '/features/restaurant-admin/reservations_db/domain/repositories/reservations_db.dart';
 import '/core/network/response.dart';
 import '/core/usecase/usecase.dart';
 

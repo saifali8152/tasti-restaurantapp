@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
-import 'package:tasti_restaurant_app/config/routes/route_name.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
-import 'package:tasti_restaurant_app/features/common/manage_fee/domain/entities/monthly_fee.dart';
+import '/config/constants/colors.dart';
+import '/config/routes/route_name.dart';
+import '/core/utils/general_extentions.dart';
+import '/core/widgets/custom_button.dart';
+import '/features/common/manage_fee/domain/entities/monthly_fee.dart';
 
 class AdminContent extends StatelessWidget {
   final MonthlyFeeEntity item;

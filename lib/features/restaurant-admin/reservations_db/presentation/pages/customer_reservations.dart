@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
-import 'package:tasti_restaurant_app/config/routes/route_name.dart';
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/core/services/session_controller.dart';
-import 'package:tasti_restaurant_app/core/widgets/curved_container.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
-import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
-import 'package:tasti_restaurant_app/core/widgets/themed_app_bar.dart';
-import 'package:tasti_restaurant_app/dependency_injection.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/presentation/bloc/customer_reservations/customer_reservations_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/presentation/bloc/customer_reservations/customer_reservations_event.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/presentation/bloc/customer_reservations/customer_reservations_state.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/presentation/pages/sent_campaign.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/presentation/widgets/customer_reservation_card.dart';
+import '/config/constants/colors.dart';
+import '/config/routes/route_name.dart';
+import '/core/network/response.dart';
+import '/core/parms/parms.dart';
+import '/core/services/session_controller.dart';
+import '/core/widgets/curved_container.dart';
+import '/core/widgets/custom_button.dart';
+import '/core/widgets/loading_widget.dart';
+import '/core/widgets/themed_app_bar.dart';
+import '/dependency_injection.dart';
+import '/features/restaurant-admin/reservations_db/presentation/bloc/customer_reservations/customer_reservations_bloc.dart';
+import '/features/restaurant-admin/reservations_db/presentation/bloc/customer_reservations/customer_reservations_event.dart';
+import '/features/restaurant-admin/reservations_db/presentation/bloc/customer_reservations/customer_reservations_state.dart';
+import '/features/restaurant-admin/reservations_db/presentation/pages/sent_campaign.dart';
+import '/features/restaurant-admin/reservations_db/presentation/widgets/customer_reservation_card.dart';
 
 class CustomerReservations extends StatefulWidget {
   const CustomerReservations({super.key});

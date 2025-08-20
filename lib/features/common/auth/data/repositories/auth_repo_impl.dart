@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/core/enum/account_type.dart';
+import '/core/enum/account_type.dart';
 import '/core/parms/parms.dart';
 import '../models/user.dart';
 import '../data_sources/auth_remote_api.dart';

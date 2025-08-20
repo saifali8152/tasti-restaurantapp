@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/common/location/data/models/prediction_model.dart';
+import '/features/common/location/data/models/prediction_model.dart';
 
 class PredictionEntity {
   final String description;

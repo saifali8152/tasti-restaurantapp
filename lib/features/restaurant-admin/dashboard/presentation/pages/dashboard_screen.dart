@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/widgets/loading_widget.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/domain/entities/dashboard.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/presentation/bloc/dashboard_event.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/presentation/bloc/dashboard_state.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/presentation/widgets/today_card.dart';
+import '/core/widgets/loading_widget.dart';
+import '/features/restaurant-admin/dashboard/domain/entities/dashboard.dart';
+import '/features/restaurant-admin/dashboard/presentation/bloc/dashboard_event.dart';
+import '/features/restaurant-admin/dashboard/presentation/bloc/dashboard_state.dart';
+import '/features/restaurant-admin/dashboard/presentation/widgets/today_card.dart';
 import '/core/widgets/themed_app_bar.dart';
 import '/dependency_injection.dart';
 import '/config/constants/colors.dart';

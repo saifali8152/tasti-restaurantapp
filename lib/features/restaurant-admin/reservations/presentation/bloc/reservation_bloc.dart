@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/domain/entities/reservation.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/domain/usecases/add_update_waiter.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/domain/usecases/cancel_reservations.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/domain/usecases/fetch_reservations.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/domain/usecases/update_reservations_status.dart';
+import '/core/parms/parms.dart';
+import '/features/restaurant-admin/reservations/domain/entities/reservation.dart';
+import '/features/restaurant-admin/reservations/domain/usecases/add_update_waiter.dart';
+import '/features/restaurant-admin/reservations/domain/usecases/cancel_reservations.dart';
+import '/features/restaurant-admin/reservations/domain/usecases/fetch_reservations.dart';
+import '/features/restaurant-admin/reservations/domain/usecases/update_reservations_status.dart';
 import '/core/network/response.dart';
 import 'reservation_event.dart';
 import 'reservation_state.dart';

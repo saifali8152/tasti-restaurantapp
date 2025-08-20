@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/presentation/download_qr_cubit/download_cubit.dart';
+import '/core/utils/general_extentions.dart';
+import '/features/restaurant-admin/food_menu/presentation/download_qr_cubit/download_cubit.dart';
 import '/core/widgets/custom_app_bar.dart';
 import '/core/widgets/icon_button.dart';
 import 'package:qr_flutter/qr_flutter.dart';

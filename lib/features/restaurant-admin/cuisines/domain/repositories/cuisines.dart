@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/cuisines/domain/entities/cuisine.dart';
+import '/features/restaurant-admin/cuisines/domain/entities/cuisine.dart';
 import '/core/parms/parms.dart';
 import '/core/network/response.dart';
 

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/domain/entities/csv_data.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/domain/entities/resevation_data.dart';
+import '/core/parms/parms.dart';
+import '/features/restaurant-admin/reservations_db/domain/entities/csv_data.dart';
+import '/features/restaurant-admin/reservations_db/domain/entities/resevation_data.dart';
 
 abstract class CustomerReservationsEvent extends Equatable {
   const CustomerReservationsEvent();

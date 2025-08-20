@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/common/auth/domain/entities/user.dart';
+import '/features/common/auth/domain/entities/user.dart';
 import '/core/parms/parms.dart';
 import '../data_sources/create_restaurant_repo.dart';
 import '../../domain/repositories/create_restaurant_repo.dart';

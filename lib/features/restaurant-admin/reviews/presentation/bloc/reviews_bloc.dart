@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/domain/entities/reviews.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/domain/usecases/fetch_reviews.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/domain/usecases/unverify_review.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reviews/domain/usecases/verify_review.dart';
+import '/features/restaurant-admin/reviews/domain/entities/reviews.dart';
+import '/features/restaurant-admin/reviews/domain/usecases/fetch_reviews.dart';
+import '/features/restaurant-admin/reviews/domain/usecases/unverify_review.dart';
+import '/features/restaurant-admin/reviews/domain/usecases/verify_review.dart';
 import '/core/network/response.dart';
 import 'reviews_event.dart';
 import 'reviews_state.dart';

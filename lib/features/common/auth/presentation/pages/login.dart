@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/enum/subscription_status.dart';
-import 'package:tasti_restaurant_app/core/services/session_controller.dart';
+import '/core/enum/subscription_status.dart';
+import '/core/services/session_controller.dart';
 import '../widgets/auth_stack.dart';
 import '/core/network/response.dart';
 import '/core/utils/flushbar_extention.dart';

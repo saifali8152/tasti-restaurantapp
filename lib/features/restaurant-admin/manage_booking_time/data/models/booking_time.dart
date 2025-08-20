@@ -1,5 +1,5 @@
 // data/models/booking_time_model.dart
-import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/entities/booking_time.dart';
+import '/features/restaurant-admin/manage_booking_time/domain/entities/booking_time.dart';
 
 class BookingTimeModel extends BookingTimeEntity {
   const BookingTimeModel({

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/presentation/bloc/working_hours_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/presentation/bloc/working_hours_event.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/presentation/bloc/working_hours_state.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/presentation/widgets/add_hours_header.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/working_hours/presentation/widgets/add_hours_row.dart';
+import '/core/network/response.dart';
+import '/core/parms/parms.dart';
+import '/core/widgets/custom_button.dart';
+import '/features/restaurant-admin/working_hours/presentation/bloc/working_hours_bloc.dart';
+import '/features/restaurant-admin/working_hours/presentation/bloc/working_hours_event.dart';
+import '/features/restaurant-admin/working_hours/presentation/bloc/working_hours_state.dart';
+import '/features/restaurant-admin/working_hours/presentation/widgets/add_hours_header.dart';
+import '/features/restaurant-admin/working_hours/presentation/widgets/add_hours_row.dart';
 
 class AddWorkingHours extends StatefulWidget {
   final int id;

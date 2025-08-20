@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/dashboard/domain/repositories/dashboard_repo.dart';
+import '/features/restaurant-admin/dashboard/domain/repositories/dashboard_repo.dart';
 import '/core/network/response.dart';
 import '/core/usecase/usecase.dart';
 import '../entities/dashboard.dart';

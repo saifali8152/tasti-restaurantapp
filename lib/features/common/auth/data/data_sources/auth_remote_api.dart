@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:tasti_restaurant_app/core/enum/account_type.dart';
+import '/core/enum/account_type.dart';
 import '/core/parms/parms.dart';
 import '../models/user.dart';
 import '/core/network/api_services.dart';

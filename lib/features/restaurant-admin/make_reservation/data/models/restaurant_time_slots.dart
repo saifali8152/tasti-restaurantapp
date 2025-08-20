@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/domain/entities/restaurant_time_slots.dart';
+import '/features/restaurant-admin/make_reservation/domain/entities/restaurant_time_slots.dart';
 
 class RestaurantTimeSlotModel extends RestaurantTimeSlotEntity {
   RestaurantTimeSlotModel({

@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
+import '/core/widgets/custom_button.dart';
 import '/core/utils/image_picker.dart';
 
 class ImagePickerWidget extends StatefulWidget {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/core/services/session_controller.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/features/common/manage_fee/presentation/widgets/admin_content.dart';
-import 'package:tasti_restaurant_app/features/common/manage_fee/presentation/widgets/feature_item.dart';
-import 'package:tasti_restaurant_app/features/common/manage_fee/presentation/widgets/subscribe_dialog.dart';
+import '/core/services/session_controller.dart';
+import '/core/utils/general_extentions.dart';
+import '/features/common/manage_fee/presentation/widgets/admin_content.dart';
+import '/features/common/manage_fee/presentation/widgets/feature_item.dart';
+import '/features/common/manage_fee/presentation/widgets/subscribe_dialog.dart';
 import '/config/constants/colors.dart';
 import '/core/network/response.dart';
 import '/core/widgets/custom_app_bar.dart';

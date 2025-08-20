@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/common/location/domain/entities/location_entity.dart';
+import '/features/common/location/domain/entities/location_entity.dart';
 
 class LocationModel extends LocationEntity {
   LocationModel({

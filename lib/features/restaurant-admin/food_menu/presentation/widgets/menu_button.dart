@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/presentation/pages/pdf_preview.dart';
+import '/config/constants/colors.dart';
+import '/features/restaurant-admin/food_menu/presentation/pages/pdf_preview.dart';
 
 class MenuButton extends StatelessWidget {
   final String text;

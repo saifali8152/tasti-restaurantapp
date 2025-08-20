@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/domain/entities/venue.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/domain/repositories/venue_repo.dart';
+import '/features/restaurant-admin/set_venue_category/domain/entities/venue.dart';
+import '/features/restaurant-admin/set_venue_category/domain/repositories/venue_repo.dart';
 import '/core/network/response.dart';
 import '/core/usecase/usecase.dart';
 

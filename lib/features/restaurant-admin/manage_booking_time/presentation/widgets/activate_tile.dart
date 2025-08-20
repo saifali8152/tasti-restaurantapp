@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/domain/entities/booking_time.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/presentation/bloc/booking_time_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/manage_booking_time/presentation/bloc/booking_time_event.dart';
+import '/config/constants/colors.dart';
+import '/core/parms/parms.dart';
+import '/core/utils/general_extentions.dart';
+import '/features/restaurant-admin/manage_booking_time/domain/entities/booking_time.dart';
+import '/features/restaurant-admin/manage_booking_time/presentation/bloc/booking_time_bloc.dart';
+import '/features/restaurant-admin/manage_booking_time/presentation/bloc/booking_time_event.dart';
 
 class ActivateTile extends StatelessWidget {
   final BookingTimeDataEntity data;

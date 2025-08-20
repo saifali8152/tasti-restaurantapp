@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tasti_restaurant_app/core/enum/restaurant_filter.dart';
+import '/core/enum/restaurant_filter.dart';
 
 abstract class RestaurantEvent extends Equatable {
   const RestaurantEvent();

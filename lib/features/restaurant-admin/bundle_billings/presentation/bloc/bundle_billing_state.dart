@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:tasti_restaurant_app/core/models/pagination.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/entities/bundle.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/entities/init_payment.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/entities/sms.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/domain/entities/transaction_history.dart';
+import '/core/models/pagination.dart';
+import '/features/restaurant-admin/bundle_billings/domain/entities/bundle.dart';
+import '/features/restaurant-admin/bundle_billings/domain/entities/init_payment.dart';
+import '/features/restaurant-admin/bundle_billings/domain/entities/sms.dart';
+import '/features/restaurant-admin/bundle_billings/domain/entities/transaction_history.dart';
 import '/core/network/response.dart';
 
 class BundleBillingState extends Equatable {

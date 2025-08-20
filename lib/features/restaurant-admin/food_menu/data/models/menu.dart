@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/domain/entities/menu.dart';
+import '/features/restaurant-admin/food_menu/domain/entities/menu.dart';
 
 class MenuModel extends MenuEntity {
   MenuModel({

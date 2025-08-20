@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
+import '/core/widgets/custom_app_bar.dart';
 
 class PdfViewerPage extends StatelessWidget {
   final String pdfUrl;

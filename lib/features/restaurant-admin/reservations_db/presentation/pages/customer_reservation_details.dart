@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/domain/entities/reservation_data_email.dart';
+import '/features/restaurant-admin/reservations_db/domain/entities/reservation_data_email.dart';
 import '../../../../../core/widgets/details_row.dart';
 import '/core/widgets/custom_app_bar.dart';
 

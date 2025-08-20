@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/domain/entities/restaurant_seating_area.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/make_reservation/domain/entities/restaurant_time_slots.dart';
+import '/features/restaurant-admin/make_reservation/domain/entities/restaurant_seating_area.dart';
+import '/features/restaurant-admin/make_reservation/domain/entities/restaurant_time_slots.dart';
 import '/core/network/response.dart';
 
 class MakeReservationState extends Equatable {

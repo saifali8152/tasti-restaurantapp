@@ -1,7 +1,7 @@
-import 'package:tasti_restaurant_app/core/network/response.dart';
-import 'package:tasti_restaurant_app/env.dart';
-import 'package:tasti_restaurant_app/features/common/location/data/models/location_model.dart';
-import 'package:tasti_restaurant_app/features/common/location/data/models/prediction_model.dart';
+import '/core/network/response.dart';
+import '/env.dart';
+import '/features/common/location/data/models/location_model.dart';
+import '/features/common/location/data/models/prediction_model.dart';
 import '/core/parms/parms.dart';
 import '/core/network/api_services.dart';
 import '/config/constants/urls.dart';

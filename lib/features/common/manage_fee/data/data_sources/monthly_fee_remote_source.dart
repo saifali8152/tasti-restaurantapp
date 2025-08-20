@@ -1,6 +1,6 @@
-import 'package:tasti_restaurant_app/core/services/session_controller.dart';
-import 'package:tasti_restaurant_app/features/common/manage_fee/data/models/initialize_payment.dart';
-import 'package:tasti_restaurant_app/features/common/auth/data/models/user.dart';
+import '/core/services/session_controller.dart';
+import '/features/common/manage_fee/data/models/initialize_payment.dart';
+import '/features/common/auth/data/models/user.dart';
 import '../models/monthly_fee.dart';
 import '/core/parms/parms.dart';
 import '/core/network/api_services.dart';

@@ -1,5 +1,5 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/bundle_billings/data/models/init_payment.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/targeted_campaign/data/models/targeted_campaign.dart';
+import '/features/restaurant-admin/bundle_billings/data/models/init_payment.dart';
+import '/features/restaurant-admin/targeted_campaign/data/models/targeted_campaign.dart';
 import '/core/parms/parms.dart';
 import '/core/network/api_services.dart';
 import '/config/constants/urls.dart';

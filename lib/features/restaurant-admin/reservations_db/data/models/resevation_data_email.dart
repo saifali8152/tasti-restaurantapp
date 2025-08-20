@@ -1,5 +1,5 @@
 // MODEL
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations_db/domain/entities/reservation_data_email.dart';
+import '/features/restaurant-admin/reservations_db/domain/entities/reservation_data_email.dart';
 
 class ReservationDataEmailModel extends ReservationDataEmailEntity {
   ReservationDataEmailModel({

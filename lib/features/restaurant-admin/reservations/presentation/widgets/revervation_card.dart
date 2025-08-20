@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tasti_restaurant_app/config/routes/route_name.dart';
-import 'package:tasti_restaurant_app/core/services/launcher_services.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/domain/entities/reservation.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/presentation/widgets/add_update_waiter.dart';
+import '/config/routes/route_name.dart';
+import '/core/services/launcher_services.dart';
+import '/features/restaurant-admin/reservations/domain/entities/reservation.dart';
+import '/features/restaurant-admin/reservations/presentation/widgets/add_update_waiter.dart';
 import '/core/utils/general_extentions.dart';
 import '/core/widgets/card_details_row.dart';
 import '../../../../../core/widgets/custom_button.dart';

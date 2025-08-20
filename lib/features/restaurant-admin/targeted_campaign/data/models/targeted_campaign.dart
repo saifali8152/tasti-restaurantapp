@@ -1,4 +1,4 @@
-import 'package:tasti_restaurant_app/features/restaurant-admin/targeted_campaign/domain/entities/targeted_campaign.dart';
+import '/features/restaurant-admin/targeted_campaign/domain/entities/targeted_campaign.dart';
 
 class TargetedCampaignModel extends TargetedCampaignEntity {
   TargetedCampaignModel({

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/set_venue_category/data/models/venue.dart';
+import '/features/restaurant-admin/set_venue_category/data/models/venue.dart';
 import '/core/network/response.dart';
 
 class VenueState extends Equatable {

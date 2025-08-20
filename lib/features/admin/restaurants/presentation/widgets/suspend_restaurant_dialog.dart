@@ -1,6 +1,6 @@
-import 'package:tasti_restaurant_app/features/admin/restaurants/presentation/bloc/restaurant_bloc.dart';
-import 'package:tasti_restaurant_app/features/admin/restaurants/presentation/bloc/restaurant_event.dart';
-import 'package:tasti_restaurant_app/features/admin/restaurants/presentation/bloc/restaurant_state.dart';
+import '/features/admin/restaurants/presentation/bloc/restaurant_bloc.dart';
+import '/features/admin/restaurants/presentation/bloc/restaurant_event.dart';
+import '/features/admin/restaurants/presentation/bloc/restaurant_state.dart';
 
 import '/core/network/response.dart';
 import '/core/utils/flushbar_extention.dart';
