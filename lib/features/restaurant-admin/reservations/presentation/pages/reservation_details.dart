@@ -57,7 +57,7 @@ class ReservationDetails extends StatelessWidget {
 
     return Scaffold(
       appBar: CustomAppBar(title: 'Reservation Details'),
-      body: SingleChildScrollView(
+      body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: BlocConsumer<ReservationBloc, ReservationState>(
           bloc: context.read<ReservationBloc>(),
@@ -69,6 +69,12 @@ class ReservationDetails extends StatelessWidget {
             if (state.cancelResponse.status == Status.error) {
               context.flushBarErrorMessage(
                   message: state.cancelResponse.message.toString());
+            }
+            if (state.cancelResponse.status == Status.completed) {
+              Navigator.pop(context);
+            }
+            if (state.updateResponse.status == Status.completed) {
+              Navigator.pop(context);
             }
           },
           builder: (context, state) {
@@ -121,6 +127,7 @@ class ReservationDetails extends StatelessWidget {
                       title: 'Waiting Preferences', value: reservation.request),
                   const SizedBox(height: 5),
                 ],
+                Spacer(),
 
                 if (reservation.statusDisplay.toLowerCase() == "pending") ...[
                   const SizedBox(height: 10),
