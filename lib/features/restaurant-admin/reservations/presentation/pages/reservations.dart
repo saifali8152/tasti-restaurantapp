@@ -170,7 +170,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                           return ListView.builder(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
                             itemCount: reservations.data.length,
-                            itemBuilder: (_, index) => RevervationCard(reservation: reservations.data[index], restaurantId: id),
+                            itemBuilder: (_, index) => RevervationCard(reservation: reservations.data[index], restaurantId: id, date: date),
                           );
                         }
 

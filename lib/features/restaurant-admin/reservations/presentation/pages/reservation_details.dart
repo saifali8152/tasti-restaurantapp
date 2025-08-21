@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/core/utils/general_extentions.dart';
 import '/config/constants/colors.dart';
 import '/core/network/response.dart';
 import '/core/parms/parms.dart';
@@ -36,14 +37,22 @@ class ReservationDetails extends StatelessWidget {
     Color? textColor;
     String? displayText;
 
-    if (status == "arrived") {
-      bgColor = Colors.green.shade100;
-      textColor = Colors.green.shade800;
+    if (status == "cancelled") {
+      bgColor = Colors.red.withSafeOpacity(0.1);
+      textColor = Colors.red;
+      displayText = "The reservation is marked as Canceled at $actionDate";
+    } else if (status == "arrived") {
+      bgColor = Colors.green.withSafeOpacity(0.1);
+      textColor = Colors.green;
       displayText = "The reservation is marked as Arrived at $actionDate";
     } else if (status == "no_show") {
-      bgColor = Colors.red.shade100;
-      textColor = Colors.red.shade800;
+      bgColor = Colors.orange.withSafeOpacity(0.1);
+      textColor = Colors.orange;
       displayText = "The reservation is marked as No Show at $actionDate";
+    } else {
+      bgColor = Colors.grey.withSafeOpacity(0.1);
+      textColor = Colors.grey;
+      displayText = "The reservation status is ${reservation.statusDisplay}";
     }
 
     return Scaffold(
@@ -116,7 +125,7 @@ class ReservationDetails extends StatelessWidget {
                 if (reservation.statusDisplay.toLowerCase() == "pending") ...[
                   const SizedBox(height: 10),
                   CustomButton(
-                    isLoading: state.cancelResponse.status == Status.loading,
+                      isLoading: state.cancelResponse.status == Status.loading,
                       onPressed: () {
                         context
                             .read<ReservationBloc>()
@@ -125,7 +134,7 @@ class ReservationDetails extends StatelessWidget {
                       text: "Cancel Reservation"),
                   const SizedBox(height: 10),
                   CustomButton(
-                    isLoading: state.updateResponse.status == Status.loading,
+                      isLoading: state.updateResponse.status == Status.loading,
                       onPressed: () {
                         context.read<ReservationBloc>().add(
                             UpdateReservationStatus(
@@ -137,8 +146,9 @@ class ReservationDetails extends StatelessWidget {
                       bgColor: AppColors.pending),
                   const SizedBox(height: 10),
                   CustomButton(
-                    isLoading: state.updateResponse.status == Status.loading,
-                      onPressed: () {context.read<ReservationBloc>().add(
+                      isLoading: state.updateResponse.status == Status.loading,
+                      onPressed: () {
+                        context.read<ReservationBloc>().add(
                             UpdateReservationStatus(
                                 UpdateReservationStatusParms(
                                     reservationId: reservation.id,

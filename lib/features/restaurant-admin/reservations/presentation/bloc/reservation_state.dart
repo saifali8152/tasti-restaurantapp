@@ -25,7 +25,7 @@ class ReservationState extends Equatable {
       updateResponse: updateResponse ?? this.updateResponse,
       cancelResponse: cancelResponse ?? this.cancelResponse,
       fetchResponse: fetchResponse ?? this.fetchResponse,
-      addUpdateWaiter: addUpdateWaiter ?? this.addUpdateWaiter,
+      addUpdateWaiter: addUpdateWaiter ?? ApiResponse.initial(),
     );
   }
 

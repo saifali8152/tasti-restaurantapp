@@ -56,3 +56,13 @@ class SendCSVData extends CustomerReservationsEvent {
 
   const SendCSVData(this.parms);
 }
+
+class ToggleSelectAllReservationsEvent extends CustomerReservationsEvent {
+  final List<CSVDataEntity> allReservations;
+  const ToggleSelectAllReservationsEvent(this.allReservations);
+}
+
+class ToggleSelectAllSMSReservationsEvent extends CustomerReservationsEvent {
+  final List<ReservationDataEntity> allReservations;
+  const ToggleSelectAllSMSReservationsEvent(this.allReservations);
+}

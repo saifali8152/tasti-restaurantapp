@@ -59,7 +59,7 @@ class ReservationBloc extends Bloc<ReservationEvent, ReservationState> {
         emit(state.copyWith(
             addUpdateWaiter: ApiResponse.completed(result.data)));
         add(FetchReservationEvent(
-            FetchReservationParms(id: event.parms.restaurantId.toString())));
+            FetchReservationParms(id: event.parms.restaurantId.toString(), date: event.parms.date)));
         break;
       case DataFailure():
         emit(state.copyWith(addUpdateWaiter: ApiResponse.error(result.error)));

@@ -4,10 +4,12 @@ import '/config/constants/colors.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool applyLeading;
+  final List<Widget>? actions;
   const CustomAppBar({
     super.key,
     required this.title,
     this.applyLeading = true,
+    this.actions
   });
 
   @override
@@ -35,6 +37,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Icon(Icons.arrow_back, color: Colors.white),
         ),
       ) : SizedBox.shrink(),
+      actions: actions,
     );
   }
 

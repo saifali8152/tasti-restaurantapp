@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/presentation/widgets/status_chip.dart';
 import '/config/routes/route_name.dart';
 import '/core/services/launcher_services.dart';
 import '/features/restaurant-admin/reservations/domain/entities/reservation.dart';
@@ -10,7 +11,12 @@ import '../../../../../core/widgets/custom_button.dart';
 class RevervationCard extends StatelessWidget {
   final ReservationItem reservation;
   final int restaurantId;
-  const RevervationCard({super.key, required this.reservation, required this.restaurantId});
+  final String date;
+  const RevervationCard(
+      {super.key,
+      required this.reservation,
+      required this.restaurantId,
+      required this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +58,13 @@ class RevervationCard extends StatelessWidget {
                       const Icon(Icons.message, color: Colors.red, size: 18),
                     IconButton(
                       icon: const Icon(Icons.open_in_new, size: 18),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.reservationDetails,
+                          arguments: reservation,
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -87,6 +99,16 @@ class RevervationCard extends StatelessWidget {
             CardDetailsRow(
                 label: 'Party Size', value: reservation.guests.toString()),
             CardDetailsRow(label: 'Seating Area', value: reservation.notes),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Status',
+                  style: TextStyle(color: Colors.grey[700], fontSize: 12),
+                ),
+                ReservationStatusChip(status: reservation.statusDisplay),
+              ],
+            ),
             SizedBox(height: 5),
             const Divider(),
             if (reservation.waiter.isNotEmpty)
@@ -100,6 +122,7 @@ class RevervationCard extends StatelessWidget {
                       waiter: reservation.waiter,
                       reservationId: reservation.id,
                       restaurantId: restaurantId,
+                      date: date,
                     ));
                   },
                   text: reservation.waiter.isEmpty

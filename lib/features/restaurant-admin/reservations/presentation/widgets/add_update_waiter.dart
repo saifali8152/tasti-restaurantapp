@@ -11,12 +11,14 @@ import '/features/restaurant-admin/reservations/presentation/bloc/reservation_st
 
 class AddUpdateWaiterDialog extends StatelessWidget {
   final String waiter;
+  final String date;
   final int reservationId;
   final int restaurantId;
 
   const AddUpdateWaiterDialog({
     super.key,
     required this.waiter,
+    required this.date,
     required this.reservationId,
     required this.restaurantId,
   });
@@ -70,12 +72,16 @@ class AddUpdateWaiterDialog extends StatelessWidget {
                   child: CustomButton(
                     isLoading: state.addUpdateWaiter.status == Status.loading,
                     onPressed: () {
+                      if(controller.text.isEmpty){
+                        return context.flushBarErrorMessage(message: "Enter name to continue");
+                      }
                       context.read<ReservationBloc>().add(
                             AddUpdateWaiter(
                               AddUpdateWaiterParms(
                                 reservationId: reservationId,
                                 restaurantId: restaurantId,
                                 waiterName: controller.text.trim(),
+                                date: date
                               ),
                             ),
                           );

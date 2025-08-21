@@ -49,7 +49,7 @@ class _BundleBillingsScreenState extends State<BundleBillingsScreen> {
     return Scaffold(
       backgroundColor: AppColors.darkOrange,
       appBar: ThemedAppBar(
-        height: 120,
+        height: 160,
         title: "SMS Bundles & Transactions",
         subTitle: Column(
           children: [
@@ -63,6 +63,15 @@ class _BundleBillingsScreenState extends State<BundleBillingsScreen> {
               },
               bgColor: const Color(0xFF5A73E2),
             ),
+            ButtonWithIcon(
+            icon: Image.asset(AppIcons.seatingArea,
+                color: Colors.white, height: 15),
+            title: 'Buy SMS Bundles',
+            onTap: () {
+              Navigator.pushNamed(context, AppRoutes.buySmsBundles);
+            },
+            bgColor: const Color(0xFFE26A5A),
+          ),
           ],
         ),
       ),

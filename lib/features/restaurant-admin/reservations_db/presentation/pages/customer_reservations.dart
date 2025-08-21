@@ -131,21 +131,65 @@ class _CustomerReservationsState extends State<CustomerReservations> {
                     );
                   }
 
-                  if (state.fetchRevervationResponse.status == Status.completed) {
+                  if (state.fetchRevervationResponse.status ==
+                      Status.completed) {
                     final data = state.fetchRevervationResponse.data ?? [];
                     if (data.isEmpty) {
                       return _messageList("Nothing Found.");
                     }
 
-                    return ListView.separated(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      itemCount: data.length,
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 10),
-                      itemBuilder: (context, index) {
-                        final reservation = data[index];
-                        return CustomerReservationCard(data: reservation, bloc: bloc);
-                      },
+                    final allIds = data.toSet();
+                    final selectedIds = state.selectedRevervations.toSet();
+                    final isAllSelected = allIds.isNotEmpty &&
+                        allIds.difference(selectedIds).isEmpty;
+
+                    return Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.darkOrange,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            onPressed: () {
+                              bloc.add(
+                                  ToggleSelectAllSMSReservationsEvent(data));
+                            },
+                            icon: Icon(
+                              isAllSelected
+                                  ? Icons.check_box
+                                  : Icons.check_box_outline_blank,
+                              size: 20,
+                            ),
+                            label: Text(isAllSelected
+                                ? "Deselect All"
+                                : "Select All"),
+                          ),
+                        ),
+
+                        SizedBox(height: 10),
+
+                        /// 🔹 Reservation List
+                        Expanded(
+                          child: ListView.separated(
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            itemCount: data.length,
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(height: 10),
+                            itemBuilder: (context, index) {
+                              final reservation = data[index];
+                              return CustomerReservationCard(
+                                data: reservation,
+                                bloc: bloc,
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     );
                   }
 
@@ -178,7 +222,8 @@ class _CustomerReservationsState extends State<CustomerReservations> {
                               FetchSmsAvailability(
                                 FetchSmsAvailabilityParms(
                                   restaurantId: id,
-                                  recipients: state.selectedRevervations.length.toString(),
+                                  recipients: state.selectedRevervations.length
+                                      .toString(),
                                 ),
                               ),
                             );

@@ -57,6 +57,38 @@ class CustomerReservationsBloc
       emit(state.copyWith(selectedCVCRevervations: updatedList));
     });
 
+    on<ToggleSelectAllReservationsEvent>((event, emit) {
+  final selectedIds = state.selectedCVCRevervations.map((e) => e.id).toSet();
+  final allIds = event.allReservations.map((e) => e.id).toSet();
+
+  final allSelected = allIds.difference(selectedIds).isEmpty;
+
+  if (allSelected) {
+    // Deselect all
+    emit(state.copyWith(selectedCVCRevervations: []));
+  } else {
+    // Select all (replace with full list)
+    emit(state.copyWith(selectedCVCRevervations: event.allReservations));
+  }
+});
+    
+    on<ToggleSelectAllSMSReservationsEvent>((event, emit) {
+  final selectedIds = state.selectedRevervations.map((e) => e).toSet();
+  final allIds = event.allReservations.map((e) => e).toSet();
+
+  final allSelected = allIds.difference(selectedIds).isEmpty;
+
+  if (allSelected) {
+    // Deselect all
+    emit(state.copyWith(selectedRevervations: []));
+  } else {
+    // Select all (replace with full list)
+    emit(state.copyWith(selectedRevervations: event.allReservations));
+  }
+});
+
+
+
     on<ToggleReservationSelectionEvent>((event, emit) {
       // copy current selected list
       final updatedList =

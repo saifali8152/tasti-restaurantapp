@@ -86,11 +86,13 @@ class AddUpdateWaiterParms {
   final int restaurantId;
   final int reservationId;
   final String waiterName;
+  final String date;
 
   AddUpdateWaiterParms({
     required this.restaurantId,
     required this.reservationId,
     required this.waiterName,
+    required this.date,
   });
 }
 

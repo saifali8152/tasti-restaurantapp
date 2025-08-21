@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/config/constants/colors.dart';
 import '/config/routes/route_name.dart';
 import '/core/network/response.dart';
 import '/core/parms/parms.dart';
@@ -66,8 +67,32 @@ class _CvcImportedDataScreenState extends State<CvcImportedDataScreen> {
         }
       },
       builder: (context, state) {
+        final allIds =
+            (state.fetchCSVResponse.data ?? []).map((e) => e.id).toSet();
+        final selectedIds =
+            state.selectedCVCRevervations.map((e) => e.id).toSet();
+        final isAllSelected =
+            allIds.isNotEmpty && allIds.difference(selectedIds).isEmpty;
         return Scaffold(
-          appBar: CustomAppBar(title: "CSV Imported Data"),
+          appBar: CustomAppBar(
+            title: "CSV Imported Data",
+            actions: [
+              IconButton(
+                icon: Icon(
+                  isAllSelected
+                      ? Icons.check_box
+                      : Icons.check_box_outline_blank,
+                  color: AppColors.darkOrange,
+                ),
+                onPressed: () {
+                  final data = state.fetchCSVResponse.data ?? [];
+                  if (data.isNotEmpty) {
+                    bloc.add(ToggleSelectAllReservationsEvent(data));
+                  }
+                },
+              ),
+            ],
+          ),
 
           body: RefreshIndicator.adaptive(
             onRefresh: () async {

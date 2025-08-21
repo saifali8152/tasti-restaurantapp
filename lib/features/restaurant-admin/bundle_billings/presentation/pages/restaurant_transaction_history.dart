@@ -54,11 +54,11 @@ class _RestaurantTransactionHistoryState
           ButtonWithIcon(
             icon: Image.asset(AppIcons.seatingArea,
                 color: Colors.white, height: 15),
-            title: 'Sms History',
+            title: 'Buy SMS Bundles',
             onTap: () {
               Navigator.pushNamed(context, AppRoutes.buySmsBundles);
             },
-            bgColor: const Color(0xFF5A73E2),
+            bgColor: const Color(0xFFE26A5A),
           ),
           Expanded(
             child: Padding(
