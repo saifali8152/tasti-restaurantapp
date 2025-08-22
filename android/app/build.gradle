@@ -13,7 +13,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.tasti.tasti_restaurant_app"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 35
     ndkVersion = "26.1.10909125" // ✅ Force NDK r26 (supports 16 KB)
 
     compileOptions {
@@ -28,9 +28,9 @@ android {
     defaultConfig {
         applicationId = "com.tasti.tasti_restaurant_app"
         minSdk = 21
-        targetSdk = 34
-        versionCode = 3
-        versionName = "1.0.2"
+        targetSdk = 35
+        versionCode = 5
+        versionName = "1.0.4"
 
         // ✅ Make sure Flutter includes only modern ABIs
         ndk {
