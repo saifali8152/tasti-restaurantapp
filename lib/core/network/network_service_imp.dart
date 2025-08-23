@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:dio/dio.dart';
+import 'package:tasti_restaurant_app/config/routes/route_name.dart';
 import '/dependency_injection.dart';
 import '/core/services/session_controller.dart';
 import '/core/error/exception.dart';
 import '/core/network/api_services.dart';
 import '/core/network/network_utils.dart';
+import '/core/services/navigator_services.dart';
 
 class NetworkApiServiceImpl implements IApiService {
   final Dio dio;
@@ -131,7 +133,12 @@ class NetworkApiServiceImpl implements IApiService {
         case 400:
           return BadRequestException(msg);
         case 401:
+          return UnauthorizedException(msg);
         case 403:
+          Future.microtask(() {
+            NavigatorService.navigateToRemoveUntill(AppRoutes.monthlyFee);
+          });
+
           return UnauthorizedException(msg);
         case 404:
           return NotFoundException(msg);

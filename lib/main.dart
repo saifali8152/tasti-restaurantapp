@@ -30,6 +30,7 @@ import '/features/admin/transaction_history/presentation/bloc/transaction_histor
 import 'config/routes/routes.dart';
 import 'config/theme/theme.dart';
 import 'features/common/skaleton/cubit/skaleton_cubit.dart';
+import 'core/services/navigator_services.dart';
 
 void main() async {
   await initializeDependencies();
@@ -75,6 +76,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => sl<CustomerReservationsBloc>()),
         ],
         child: MaterialApp(
+          navigatorKey: NavigatorService.navigatorKey,
           title: 'Tasti Restaurant App',
           theme: AppTheme.lightTheme,
           themeMode: ThemeMode.light,
