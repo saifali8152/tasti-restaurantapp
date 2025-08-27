@@ -42,6 +42,7 @@ class ReviewDataModel extends ReviewEntityData {
     required super.overallRating,
     required super.userName,
     required super.reviewDate,
+    required super.images,
   });
 
   factory ReviewDataModel.fromJson(Map<String, dynamic> json) {
@@ -54,6 +55,10 @@ class ReviewDataModel extends ReviewEntityData {
       overallRating: (json['overall_rating'] as num?)?.toDouble() ?? 0.0,
       userName: json['user_name'] ?? '',
       reviewDate: json['review_date'] ?? '',
+      images: (json['images'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList() ?? [],
+
     );
   }
 
@@ -67,6 +72,7 @@ class ReviewDataModel extends ReviewEntityData {
       'overall_rating': overallRating,
       'user_name': userName,
       'review_date': reviewDate,
+      'images':images
     };
   }
 }

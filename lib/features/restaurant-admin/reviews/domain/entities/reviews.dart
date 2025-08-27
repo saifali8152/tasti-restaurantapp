@@ -17,6 +17,7 @@ class ReviewEntityData {
   final double overallRating;
   final String userName;
   final String reviewDate;
+  final List<String> images;
 
   const ReviewEntityData({
     required this.reviewId,
@@ -27,5 +28,6 @@ class ReviewEntityData {
     required this.overallRating,
     required this.userName,
     required this.reviewDate,
+    required this.images,
   });
 }
