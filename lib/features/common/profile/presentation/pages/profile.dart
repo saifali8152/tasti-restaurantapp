@@ -72,11 +72,20 @@ class ProfileScreen extends StatelessWidget {
                       leading: Icon(Icons.lock_outline, size: width * 0.06),
                       title: "Change Password",
                       onTap: () {
-                        Navigator.pushNamed(
-                            context, AppRoutes.changePassword);
+                        Navigator.pushNamed(context, AppRoutes.changePassword);
                       },
                     ),
                     SizedBox(height: height * 0.025),
+                    const Text("Help Center",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold)),
+                    CustomTile(
+                      leading: const Icon(Icons.help_outline_outlined),
+                      title: "FAQs & Chat",
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.faqChat);
+                      },
+                    ),
                     Text(
                       "Account",
                       style: TextStyle(
@@ -84,14 +93,14 @@ class ProfileScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    SizedBox(height: height * 0.025),
                     CustomTile(
                       leading: Icon(Icons.logout, size: width * 0.06),
                       title: "Logout",
                       onTap: () => context.showCustomDialog(LogoutDialog()),
                     ),
                     CustomTile(
-                      leading:
-                          Icon(Icons.delete_forever, size: width * 0.06),
+                      leading: Icon(Icons.delete_forever, size: width * 0.06),
                       title: "Delete Account",
                       onTap: () =>
                           context.showCustomDialog(DeleteAccountDialog()),

@@ -6,7 +6,6 @@ import '/core/widgets/custom_button.dart';
 import '/core/widgets/image_widget.dart';
 import '/features/admin/events/domain/entities/event.dart';
 import '/features/admin/events/presentation/widgets/delete_event_dialog.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class EventCard extends StatelessWidget {
   final EventItem event;
@@ -45,8 +44,7 @@ class EventCard extends StatelessWidget {
                 if (event.eventLink.isNotEmpty)
                   GestureDetector(
                     onTap: () {
-                      UrlLauncherService().openWebsite(event.eventLink,
-                          launchMode: LaunchMode.inAppBrowserView);
+                      UrlLauncherService().openWebsite(event.eventLink);
                     },
                     child: Row(
                       children: [

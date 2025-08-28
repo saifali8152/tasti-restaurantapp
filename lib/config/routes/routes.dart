@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/features/common/auth/presentation/pages/forgot_password.dart';
+import 'package:tasti_restaurant_app/features/common/faqs_chat/pages/faq_chat.dart';
 import '/core/parms/parms.dart';
 import '/features/admin/restaurants/domain/entities/restaurant.dart';
 import '/features/restaurant-admin/reservations_db/presentation/pages/csv_sent_campaign.dart';
@@ -166,9 +167,10 @@ class Routes {
       case AppRoutes.reservations:
         return MaterialPageRoute(builder: (_) => const ReservationsScreen());
       case AppRoutes.reservationsByEmail:
-        return MaterialPageRoute(builder: (_) => CustomerReservationsByEmail(
-          email: settings.arguments as String,
-        ));
+        return MaterialPageRoute(
+            builder: (_) => CustomerReservationsByEmail(
+                  email: settings.arguments as String,
+                ));
       // case AppRoutes.settings:
       //   return MaterialPageRoute(builder: (_) => const Settings());
       case AppRoutes.setVanueCategory:
@@ -178,9 +180,13 @@ class Routes {
       case AppRoutes.csvImportedData:
         return MaterialPageRoute(builder: (_) => const CvcImportedDataScreen());
       case AppRoutes.csvSentCampaign:
-        return MaterialPageRoute(builder: (_) => CsvSentCampaign(arguments: settings.arguments as CsvSentCampaignArguments));
+        return MaterialPageRoute(
+            builder: (_) => CsvSentCampaign(
+                arguments: settings.arguments as CsvSentCampaignArguments));
       case AppRoutes.sentCampaign:
-        return MaterialPageRoute(builder: (_) => SentCampaign(arguments: settings.arguments as SentCampaignArguments));
+        return MaterialPageRoute(
+            builder: (_) => SentCampaign(
+                arguments: settings.arguments as SentCampaignArguments));
       case AppRoutes.updateWorkingHours:
         return MaterialPageRoute(
           builder: (_) => UpdateWorkingHours(
@@ -188,14 +194,16 @@ class Routes {
           ),
         );
       case AppRoutes.campaignSummary:
-        return MaterialPageRoute(builder: (_) => CampaignSummary(
-          parms: settings.arguments as AddTargetedCampaignParms,
-        ));
+        return MaterialPageRoute(
+            builder: (_) => CampaignSummary(
+                  parms: settings.arguments as AddTargetedCampaignParms,
+                ));
       case AppRoutes.targetedCampaign:
         return MaterialPageRoute(builder: (_) => const TargetedCampaign());
       case AppRoutes.customerReservationDetails:
         return MaterialPageRoute(
-            builder: (_) => CustomerReservationDetails(data: settings.arguments as ReservationDataEmailEntity));
+            builder: (_) => CustomerReservationDetails(
+                data: settings.arguments as ReservationDataEmailEntity));
       case AppRoutes.addPhotos:
         return MaterialPageRoute(builder: (_) => const AddPhotosScreen());
       case AppRoutes.settingAreaDetails:
@@ -219,6 +227,10 @@ class Routes {
                 ));
       case AppRoutes.skaleton:
         return MaterialPageRoute(builder: (_) => const Skaleton());
+      case AppRoutes.faqChat:
+        return MaterialPageRoute(
+          builder: (_) => FAQChatScreen(),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

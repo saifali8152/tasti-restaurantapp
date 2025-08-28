@@ -72,4 +72,5 @@ class AppRoutes {
   static const String reservationsByEmail = '/reservations-by-email';
   static const String csvSentCampaign = '/csv-sent-campaign';
   static const String sentCampaign = '/sent-campaign';
+  static const String faqChat = 'faqChat';
 }
