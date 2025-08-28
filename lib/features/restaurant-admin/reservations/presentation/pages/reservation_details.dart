@@ -70,6 +70,13 @@ class ReservationDetails extends StatelessWidget {
               context.flushBarErrorMessage(
                   message: state.cancelResponse.message.toString());
             }
+            if (state.updateConfirmationResponse.status == Status.error) {
+              context.flushBarErrorMessage(
+                  message: state.updateConfirmationResponse.message.toString());
+            }
+            if (state.updateConfirmationResponse.status == Status.completed) {
+              Navigator.pop(context);
+            }
             if (state.cancelResponse.status == Status.completed) {
               Navigator.pop(context);
             }
@@ -130,6 +137,18 @@ class ReservationDetails extends StatelessWidget {
                 Spacer(),
 
                 if (reservation.statusDisplay.toLowerCase() == "pending") ...[
+                  if(!reservation.isConfirmed)...[
+
+                  const SizedBox(height: 10),
+                  CustomButton(
+                      isLoading: state.updateConfirmationResponse.status == Status.loading,
+                      onPressed: () {
+                        context
+                            .read<ReservationBloc>()
+                            .add(UpdateReservationConfirmation(reservation.id.toString()));
+                      },
+                      text: "Confirm Reservation"),
+                  ],
                   const SizedBox(height: 10),
                   CustomButton(
                       isLoading: state.cancelResponse.status == Status.loading,

@@ -7,11 +7,13 @@ class ReservationState extends Equatable {
   final ApiResponse<String> addUpdateWaiter;
   final ApiResponse<ReservationItem> cancelResponse;
   final ApiResponse<ReservationItem> updateResponse;
+  final ApiResponse<ReservationItem> updateConfirmationResponse;
 
   const ReservationState({
     required this.fetchResponse,
     required this.addUpdateWaiter,
     required this.updateResponse,
+    required this.updateConfirmationResponse,
     required this.cancelResponse,
   });
 
@@ -19,10 +21,12 @@ class ReservationState extends Equatable {
     final ApiResponse<ReservationEntity>? fetchResponse,
     final ApiResponse<ReservationItem>? cancelResponse,
     final ApiResponse<ReservationItem>? updateResponse,
+    final ApiResponse<ReservationItem>? updateConfirmationResponse,
     final ApiResponse<String>? addUpdateWaiter,
   }) {
     return ReservationState(
       updateResponse: updateResponse ?? this.updateResponse,
+      updateConfirmationResponse: updateConfirmationResponse ?? this.updateConfirmationResponse,
       cancelResponse: cancelResponse ?? this.cancelResponse,
       fetchResponse: fetchResponse ?? this.fetchResponse,
       addUpdateWaiter: addUpdateWaiter ?? ApiResponse.initial(),
@@ -34,6 +38,7 @@ class ReservationState extends Equatable {
         fetchResponse,
         addUpdateWaiter,
         updateResponse,
+        updateConfirmationResponse,
         cancelResponse,
       ];
 }

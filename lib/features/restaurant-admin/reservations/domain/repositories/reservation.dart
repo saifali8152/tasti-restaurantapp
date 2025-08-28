@@ -6,5 +6,6 @@ abstract class IReservationRepo {
   Future<DataState<ReservationEntity>> fetchReservations(FetchReservationParms parms);
   Future<DataState<String>> addUpdateWaiter(AddUpdateWaiterParms parms);
   Future<DataState<ReservationItem>> cancelReservation(String id);
+  Future<DataState<ReservationItem>> updateReservationConfirmation(String id);
   Future<DataState<ReservationItem>> updateReservationStatus(UpdateReservationStatusParms parms);
 }

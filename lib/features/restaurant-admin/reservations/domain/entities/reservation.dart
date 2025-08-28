@@ -35,9 +35,11 @@ class ReservationItem {
   final bool hasSpecialNotes;
   final String statusDisplay;
   final bool canAssignWaiter;
+  final bool isConfirmed;
 
   ReservationItem({
     required this.id,
+    required this.isConfirmed,
     required this.name,
     required this.phone,
     required this.guests,
@@ -65,9 +67,11 @@ class ReservationItem {
 
   ReservationItem copyWith({
     String? statusDisplay,
+    bool? isConfirmed,
   }) {
     return ReservationItem(
       id: id,
+      isConfirmed: isConfirmed?? this.isConfirmed,
       name: name,
       phone: phone,
       guests: guests,

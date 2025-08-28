@@ -28,6 +28,7 @@ class ReservationModel extends ReservationEntity {
 
 class ReservationItemModel extends ReservationItem {
   ReservationItemModel({
+    required super.isConfirmed,
     required super.id,
     required super.name,
     required super.phone,
@@ -57,6 +58,7 @@ class ReservationItemModel extends ReservationItem {
   factory ReservationItemModel.fromJson(Map<String, dynamic> json) {
     return ReservationItemModel(
       id: json['id'],
+      isConfirmed: json['is_confirmed'] == 0? false: true,
       name: json['name'],
       phone: json['phone'],
       guests: json['guests'],
@@ -95,6 +97,7 @@ class ReservationItemModel extends ReservationItem {
       'reservation_starts': reservationStarts,
       'reservation_ends': reservationEnds,
       'notes': notes,
+      'is_confirmed': isConfirmed,
       'dietary': dietary,
       'occasion': occasion,
       'request': request,

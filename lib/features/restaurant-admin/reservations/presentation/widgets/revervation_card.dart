@@ -46,12 +46,15 @@ class RevervationCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   reservation.name,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
+                SizedBox(width: 5),
+                if (reservation.isConfirmed)
+                  const Icon(Icons.thumb_up, color: Colors.green, size: 15),
+                Spacer(),
                 Row(
                   children: [
                     if (reservation.hasSpecialNotes)

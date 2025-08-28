@@ -8,12 +8,23 @@ abstract class IReservationRemoteApi {
   Future<String> addUpdateWaiter(AddUpdateWaiterParms parms);
   Future<ReservationItemModel> cancelReservation(String id);
   Future<ReservationItemModel> updateReservationStatus(UpdateReservationStatusParms parms);
+  Future<ReservationItemModel> updateReservationConfirmation(String id);
 }
 
 class ReservationRemoteApiImpl extends IReservationRemoteApi {
   final IApiService networkApiService;
   ReservationRemoteApiImpl(this.networkApiService);
 
+  @override
+  Future<ReservationItemModel> updateReservationConfirmation(String id) async {
+    var response = await networkApiService.post(
+      AppUrls.updateReservationConfirmation,
+      {"reservation_id": id},
+    );
+
+    return ReservationItemModel.fromJson(response['data']);
+  }
+  
   @override
   Future<ReservationItemModel> cancelReservation(String id) async {
     var response = await networkApiService.post(

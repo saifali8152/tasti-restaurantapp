@@ -17,6 +17,16 @@ class ReservationRepoImpl extends IReservationRepo {
       return DataFailure(error.toString());
     }
   }
+
+  @override
+  Future<DataState<ReservationItemModel>> updateReservationConfirmation(String id) async {
+    try {
+      final result = await remote.updateReservationConfirmation(id);
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
   
   @override
   Future<DataState<ReservationItemModel>> cancelReservation(String id) async {

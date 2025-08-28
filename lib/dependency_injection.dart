@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/domain/usecases/update_reservation_confirmation.dart';
 import '/features/restaurant-admin/reservations_db/domain/usecases/fetch_sms_availability.dart';
 import '/features/restaurant-admin/reservations_db/domain/usecases/send_csv_data.dart';
 import '/features/restaurant-admin/reservations_db/domain/usecases/send_restaurant_data.dart';
@@ -393,12 +394,13 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FetchSmsAvailabilityUsecase>(FetchSmsAvailabilityUsecase(sl()));
   sl.registerSingleton<SendCsvDataUsecase>(SendCsvDataUsecase(sl()));
   sl.registerSingleton<SendRestaurantDataUsecase>(SendRestaurantDataUsecase(sl()));
+  sl.registerSingleton<UpdateReservationConfirmationUsecase>(UpdateReservationConfirmationUsecase(sl()));
 
   // Bloc
   sl.registerFactory<CustomerReservationsBloc>(() => CustomerReservationsBloc(sl(), sl(), sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<TargetedCampaignBloc>(() => TargetedCampaignBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<MakeReservationBloc>(() => MakeReservationBloc(sl(), sl(), sl(), sl()));
-  sl.registerLazySingleton<ReservationBloc>(() => ReservationBloc(sl(), sl(), sl(), sl()));
+  sl.registerLazySingleton<ReservationBloc>(() => ReservationBloc(sl(), sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<RestaurantCampaignsBloc>(() => RestaurantCampaignsBloc(sl(), sl()));
   sl.registerLazySingleton<BundleBillingBloc>(() => BundleBillingBloc(sl(), sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<SeatingAreaBloc>(() => SeatingAreaBloc(sl(), sl(), sl(), sl()));

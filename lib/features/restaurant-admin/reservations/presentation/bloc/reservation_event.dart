@@ -30,3 +30,9 @@ class CancelReservation extends ReservationEvent {
 
   const CancelReservation(this.id);
 }
+
+class UpdateReservationConfirmation extends ReservationEvent {
+  final String id;
+
+  const UpdateReservationConfirmation(this.id);
+}

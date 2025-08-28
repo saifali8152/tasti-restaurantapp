@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/domain/usecases/update_reservation_confirmation.dart';
 import '/core/parms/parms.dart';
 import '/features/restaurant-admin/reservations/domain/entities/reservation.dart';
 import '/features/restaurant-admin/reservations/domain/usecases/add_update_waiter.dart';
@@ -14,22 +15,26 @@ class ReservationBloc extends Bloc<ReservationEvent, ReservationState> {
   final AddUpdateWaiterUsecase _addUpdateWaiterUsecase;
   final CancelReservationsUsecase _cancelUsecase;
   final UpdateReservationsStatusUsecase _updateUsecase;
+  final UpdateReservationConfirmationUsecase _updateConfirmationUsecase;
 
   ReservationBloc(
     this._fetchUsecase,
     this._addUpdateWaiterUsecase,
     this._cancelUsecase,
     this._updateUsecase,
+    this._updateConfirmationUsecase,
   ) : super(ReservationState(
           fetchResponse: ApiResponse.initial(),
           addUpdateWaiter: ApiResponse.initial(),
           updateResponse: ApiResponse.initial(),
           cancelResponse: ApiResponse.initial(),
+          updateConfirmationResponse: ApiResponse.initial(),
         )) {
     on<FetchReservationEvent>(_onFetchReservationEvent);
     on<AddUpdateWaiter>(_onAddUpdateWaiter);
     on<CancelReservation>(_onCancelReservation);
     on<UpdateReservationStatus>(_onUpdateReservationStatus);
+    on<UpdateReservationConfirmation>(_onUpdateReservationConfirmation);
   }
 
   Future<void> _onFetchReservationEvent(
@@ -58,8 +63,8 @@ class ReservationBloc extends Bloc<ReservationEvent, ReservationState> {
       case DataSuccess<String>():
         emit(state.copyWith(
             addUpdateWaiter: ApiResponse.completed(result.data)));
-        add(FetchReservationEvent(
-            FetchReservationParms(id: event.parms.restaurantId.toString(), date: event.parms.date)));
+        add(FetchReservationEvent(FetchReservationParms(
+            id: event.parms.restaurantId.toString(), date: event.parms.date)));
         break;
       case DataFailure():
         emit(state.copyWith(addUpdateWaiter: ApiResponse.error(result.error)));
@@ -113,6 +118,53 @@ class ReservationBloc extends Bloc<ReservationEvent, ReservationState> {
 
       default:
         emit(state.copyWith(cancelResponse: ApiResponse.initial()));
+    }
+  }
+
+  Future<void> _onUpdateReservationConfirmation(
+    UpdateReservationConfirmation event,
+    Emitter<ReservationState> emit,
+  ) async {
+    emit(state.copyWith(updateConfirmationResponse: ApiResponse.loading()));
+    final result = await _updateConfirmationUsecase(event.id);
+
+    switch (result) {
+      case DataSuccess<ReservationItem>():
+        final currentEntity = state.fetchResponse.data;
+
+        if (currentEntity != null) {
+          final updatedList = currentEntity.data.map((reservation) {
+            if (reservation.id.toString() == event.id) {
+              return result.data; // ✅ replace with updated item from API
+            }
+            return reservation;
+          }).toList();
+
+          final updatedEntity = ReservationEntity(
+            data: updatedList,
+            stats: currentEntity.stats,
+            total: currentEntity.total,
+          );
+
+          emit(
+            state.copyWith(
+              updateConfirmationResponse: ApiResponse.completed(result.data),
+              fetchResponse: ApiResponse.completed(updatedEntity),
+            ),
+          );
+        } else {
+          emit(state.copyWith(updateConfirmationResponse: ApiResponse.completed(result.data),
+          ));
+        }
+        break;
+
+      case DataFailure():
+        emit(state.copyWith(
+            updateConfirmationResponse: ApiResponse.error(result.error)));
+        break;
+
+      default:
+        emit(state.copyWith(updateConfirmationResponse: ApiResponse.initial()));
     }
   }
 
