@@ -1,5 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/reservations/domain/usecases/update_reservation_confirmation.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/data/data_sources/restaurant_user_remote_repo.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/data/repositories/restaurant_user_impl.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/domain/repositories/restaurant_user.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/domain/usecases/add_restaurant_user.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/bloc/seating_area_bloc.dart';
 import '/features/restaurant-admin/reservations_db/domain/usecases/fetch_sms_availability.dart';
 import '/features/restaurant-admin/reservations_db/domain/usecases/send_csv_data.dart';
 import '/features/restaurant-admin/reservations_db/domain/usecases/send_restaurant_data.dart';
@@ -265,8 +270,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IReservationRemoteApi>(ReservationRemoteApiImpl(sl()));
   sl.registerSingleton<IMakeReservationRemoteApi>(MakeReservationRemoteApiImpl(sl()));
   sl.registerSingleton<ITargetedCampaignRemoteApi>(TargetedCampaignRemoteApiImpl(sl()));
+  sl.registerSingleton<IRestaurantUserRemoteApi>(RestaurantUserRemoteApiImpl(sl()));
 
   // Repository
+  sl.registerSingleton<IRestaurantUserRepo>(RestaurantUserRepoImpl(sl()));
   sl.registerSingleton<ITargetedCampaignRepo>(TargetedCampaignRepoImpl(sl()));
   sl.registerSingleton<IMakeReservationRepo>(MakeReservationRepoImpl(sl()));
   sl.registerSingleton<IReservationRepo>(ReservationRepoImpl(sl()));
@@ -298,6 +305,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<ICreateRestaurantRepo>(CreateRestaurantRepoImpl(sl()));
 
   // UseCase
+  sl.registerSingleton<AddRestaurantUserUsecase>(AddRestaurantUserUsecase(sl()));
   sl.registerSingleton<FetchCsvDataUsecase>(FetchCsvDataUsecase(sl()));
   sl.registerSingleton<FetchReservationDataByEmailUsecase>(FetchReservationDataByEmailUsecase(sl()));
   sl.registerSingleton<FetchReservationDataUsecase>(FetchReservationDataUsecase(sl()));
@@ -404,6 +412,7 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton<RestaurantCampaignsBloc>(() => RestaurantCampaignsBloc(sl(), sl()));
   sl.registerLazySingleton<BundleBillingBloc>(() => BundleBillingBloc(sl(), sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<SeatingAreaBloc>(() => SeatingAreaBloc(sl(), sl(), sl(), sl()));
+  sl.registerLazySingleton<UserBloc>(() => UserBloc(sl()));
   sl.registerLazySingleton<ReviewsBloc>(() => ReviewsBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<MenuBloc>(() => MenuBloc(sl(), sl()));
   sl.registerLazySingleton<BookingTimeBloc>(() => BookingTimeBloc(sl(), sl(), sl(), sl()));

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/config/constants/faqs.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_expantion_tile.dart';
-import 'package:tasti_restaurant_app/features/common/faqs_chat/pages/need_assistence.dart';
+import 'package:tasti_restaurant_app/features/common/faqs_chat/need_assistence.dart';
 
 class FAQChatScreen extends StatelessWidget {
   const FAQChatScreen({super.key});

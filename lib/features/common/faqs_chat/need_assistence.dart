@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/config/constants/strings.dart';
 import 'package:tasti_restaurant_app/core/services/launcher_services.dart';
-import 'package:tasti_restaurant_app/features/common/faqs_chat/pages/chat_screen.dart';
+import 'package:tasti_restaurant_app/features/common/faqs_chat/chat_screen.dart';
 import '/config/constants/colors.dart';
-import '/core/services/launcher_services.dart';
 import '/core/widgets/custom_button.dart';
 
 class NeedFurtherAssistence extends StatelessWidget {

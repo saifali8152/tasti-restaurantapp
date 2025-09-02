@@ -214,6 +214,54 @@ class SeatingAreaParms {
   }
 }
 
+class AddRestaurantUserParms {
+  final int? id;
+  final String name;
+  final String email;
+  final String phoneNumber;
+  final int restaurantId;
+  final List<PermissionData> permissions;
+
+  AddRestaurantUserParms({
+    this.id,
+    required this.name,
+    required this.email,
+    required this.phoneNumber,
+    required this.restaurantId,
+    required this.permissions,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      if (id != null) "id": id,
+      "name": name,
+      "email": email,
+      "phone_number": phoneNumber,
+      "restaurant_id": restaurantId,
+      "permissions": permissions.map((p) => p.toJson()).toList(),
+    };
+  }
+}
+
+class PermissionData {
+  final String key;
+  final String title;
+  bool isSelected;
+
+  PermissionData({
+    required this.key,
+    required this.title,
+    this.isSelected = false,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "key": key,
+      "title": title,
+    };
+  }
+}
+
 class GetPlaceDetailsParms {
   final String placeId;
 
