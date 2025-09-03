@@ -22,6 +22,7 @@ class AppRoutes {
   static const String timeSlotManagement = '/time-slot-management';
   static const String inactiveTimeSlots = '/inactive-time-slots';
   static const String settingAreaDetails = '/setting-area-details';
+  static const String addRestaurantUser = '/add-restaurant-user';
   static const String customerReservationDetails =
       '/customer-reservation-details';
   static const String restaurantQRFoodMenu = '/restaurant-qr-food-menu';

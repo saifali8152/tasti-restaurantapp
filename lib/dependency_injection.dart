@@ -4,7 +4,8 @@ import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/d
 import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/data/repositories/restaurant_user_impl.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/domain/repositories/restaurant_user.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/domain/usecases/add_restaurant_user.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/bloc/seating_area_bloc.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/domain/usecases/fetch_restaurant_user.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/bloc/restaurant_user_bloc.dart';
 import '/features/restaurant-admin/reservations_db/domain/usecases/fetch_sms_availability.dart';
 import '/features/restaurant-admin/reservations_db/domain/usecases/send_csv_data.dart';
 import '/features/restaurant-admin/reservations_db/domain/usecases/send_restaurant_data.dart';
@@ -403,6 +404,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<SendCsvDataUsecase>(SendCsvDataUsecase(sl()));
   sl.registerSingleton<SendRestaurantDataUsecase>(SendRestaurantDataUsecase(sl()));
   sl.registerSingleton<UpdateReservationConfirmationUsecase>(UpdateReservationConfirmationUsecase(sl()));
+  sl.registerSingleton<FetchRestaurantUserUsecase>(FetchRestaurantUserUsecase(sl()));
 
   // Bloc
   sl.registerFactory<CustomerReservationsBloc>(() => CustomerReservationsBloc(sl(), sl(), sl(), sl(), sl(), sl()));
@@ -412,7 +414,7 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton<RestaurantCampaignsBloc>(() => RestaurantCampaignsBloc(sl(), sl()));
   sl.registerLazySingleton<BundleBillingBloc>(() => BundleBillingBloc(sl(), sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<SeatingAreaBloc>(() => SeatingAreaBloc(sl(), sl(), sl(), sl()));
-  sl.registerLazySingleton<UserBloc>(() => UserBloc(sl()));
+  sl.registerLazySingleton<RestaurantUserBloc>(() => RestaurantUserBloc(sl(), sl()));
   sl.registerLazySingleton<ReviewsBloc>(() => ReviewsBloc(sl(), sl(), sl()));
   sl.registerLazySingleton<MenuBloc>(() => MenuBloc(sl(), sl()));
   sl.registerLazySingleton<BookingTimeBloc>(() => BookingTimeBloc(sl(), sl(), sl(), sl()));

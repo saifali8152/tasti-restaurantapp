@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tasti_restaurant_app/features/common/auth/presentation/pages/forgot_password.dart';
 import 'package:tasti_restaurant_app/features/common/faqs_chat/faq_chat.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/pages/add_restaurant_user.dart';
 import '/core/parms/parms.dart';
 import '/features/admin/restaurants/domain/entities/restaurant.dart';
 import '/features/restaurant-admin/reservations_db/presentation/pages/csv_sent_campaign.dart';
@@ -53,6 +54,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const AddEventScreen());
       case AppRoutes.updateRestaurant:
         return MaterialPageRoute(builder: (_) => const UpdateNewRestaurant());
+      case AppRoutes.addRestaurantUser:
+        return MaterialPageRoute(builder: (_) => const AddRestaurantUserScreen());
       case AppRoutes.updateEvent:
         return MaterialPageRoute(
             builder: (_) => UpdateEventScreen(
