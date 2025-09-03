@@ -7,6 +7,7 @@ import '/config/constants/urls.dart';
 abstract class IRestaurantUserRemoteApi {
   Future<RestaurantUserModel> addRestaurantUser(AddRestaurantUserParms parms);
   Future<List<RestaurantUserModel>> fetchRestaurantUser(String id);
+  Future<String> deleteRestaurantUser(DeleteRestaurantUserParms parms);
 }
 
 class RestaurantUserRemoteApiImpl extends IRestaurantUserRemoteApi {
@@ -14,10 +15,13 @@ class RestaurantUserRemoteApiImpl extends IRestaurantUserRemoteApi {
   RestaurantUserRemoteApiImpl(this.networkApiService);
 
   @override
-  Future<RestaurantUserModel> addRestaurantUser(AddRestaurantUserParms parms) async {
+  Future<RestaurantUserModel> addRestaurantUser(
+      AddRestaurantUserParms parms) async {
     try {
       var response = await networkApiService.post(
-        parms.id == null ? AppUrls.addRestaurantUser : AppUrls.updateRestaurantUser,
+        parms.id == null
+            ? AppUrls.addRestaurantUser
+            : AppUrls.updateRestaurantUser,
         parms.toJson(),
       );
       var rawJson = response['user'];
@@ -35,9 +39,23 @@ class RestaurantUserRemoteApiImpl extends IRestaurantUserRemoteApi {
 
   @override
   Future<List<RestaurantUserModel>> fetchRestaurantUser(String id) async {
-    var response = await networkApiService.get(AppUrls.fetchRestaurantUser, queryParams: {"restaurant_id": id});
+    var response = await networkApiService
+        .get(AppUrls.fetchRestaurantUser, queryParams: {"restaurant_id": id});
     final List<dynamic> rawList = response['users'];
-    final List<RestaurantUserModel> users = rawList.map((user)=> RestaurantUserModel.fromJson(user)).toList();
+    final List<RestaurantUserModel> users =
+        rawList.map((user) => RestaurantUserModel.fromJson(user)).toList();
     return users;
+  }
+
+  @override
+  Future<String> deleteRestaurantUser(DeleteRestaurantUserParms parms) async {
+    var response = await networkApiService.post(
+      AppUrls.deleteRestaurantUser,
+      {
+        "restaurant_id": parms.restaurantId.toString(),
+        "id": parms.id.toString()
+      },
+    );
+    return response['message'];
   }
 }

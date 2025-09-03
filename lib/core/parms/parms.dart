@@ -243,6 +243,23 @@ class AddRestaurantUserParms {
   }
 }
 
+class DeleteRestaurantUserParms {
+  final int id;
+  final int restaurantId;
+
+  DeleteRestaurantUserParms({
+    required this.id,
+    required this.restaurantId,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "restaurant_id": restaurantId,
+    };
+  }
+}
+
 class PermissionData {
   final String key;
   final String title;

@@ -16,6 +16,11 @@ class FetchRestaurantUserEvent extends RestaurantUserEvent {
   FetchRestaurantUserEvent(this.id);
 }
 
+class DeleteRestaurantUserEvent extends RestaurantUserEvent {
+  final DeleteRestaurantUserParms parms;
+  DeleteRestaurantUserEvent(this.parms);
+}
+
 class UpdateRestaurantUserEvent extends RestaurantUserEvent {
   final AddRestaurantUserParms parms;
   UpdateRestaurantUserEvent(this.parms);

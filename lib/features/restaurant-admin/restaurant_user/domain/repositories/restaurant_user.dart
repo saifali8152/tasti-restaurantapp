@@ -5,4 +5,5 @@ import '/core/network/response.dart';
 abstract class IRestaurantUserRepo {
   Future<DataState<RestaurantUserEntity>> addRestaurantUser(AddRestaurantUserParms parms);
   Future<DataState<List<RestaurantUserEntity>>> fetchRestaurantUser(String id);
+  Future<DataState<String>> deleteRestaurantUser(DeleteRestaurantUserParms parms);
 }

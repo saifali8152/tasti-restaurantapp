@@ -3,6 +3,7 @@ import 'package:tasti_restaurant_app/config/constants/colors.dart';
 import 'package:tasti_restaurant_app/config/routes/route_name.dart';
 import 'package:tasti_restaurant_app/core/parms/parms.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
+import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/widgets/delete_restaurant_user_dialog.dart';
 import '/core/utils/general_extentions.dart';
 import '/core/widgets/card_details_row.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/domain/entities/restaurant_user.dart';
@@ -112,8 +113,12 @@ class RestaurantUserCard extends StatelessWidget {
                   Expanded(
                     child: CustomButton(
                       onPressed: () {
-                        //   context.showCustomDialog(
-                        //       DeleteSeatingAreaDialog(id: seatingArea.id));
+                        context.showCustomDialog(
+                          DeleteRestaurantUserDialog(
+                            parms: DeleteRestaurantUserParms(
+                                id: item.id, restaurantId: item.restaurantId),
+                          ),
+                        );
                       },
                       text: "Delete",
                     ),

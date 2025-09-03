@@ -28,4 +28,14 @@ class RestaurantUserRepoImpl extends IRestaurantUserRepo {
       return DataFailure(error.toString());
     }
   }
+ 
+  @override
+  Future<DataState<String>> deleteRestaurantUser(DeleteRestaurantUserParms parms) async {
+    try {
+      final result = await remote.deleteRestaurantUser(parms);
+      return DataSuccess(result);
+    } catch (error) {
+      return DataFailure(error.toString());
+    }
+  }
 }

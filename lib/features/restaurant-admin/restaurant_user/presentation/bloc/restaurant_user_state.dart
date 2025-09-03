@@ -6,9 +6,11 @@ class RestaurantUserState extends Equatable {
   final ApiResponse<RestaurantUserEntity> addResponse;
   final ApiResponse<RestaurantUserEntity> updateResponse;
   final ApiResponse<List<RestaurantUserEntity>> fetchResponse;
+  final ApiResponse<String> deleteResponse;
 
   const RestaurantUserState({
     required this.addResponse,
+    required this.deleteResponse,
     required this.fetchResponse,
     required this.updateResponse,
   });
@@ -16,9 +18,12 @@ class RestaurantUserState extends Equatable {
   RestaurantUserState copyWith({
     ApiResponse<RestaurantUserEntity>? addResponse,
     ApiResponse<RestaurantUserEntity>? updateResponse,
+        ApiResponse<String>? deleteResponse,
+
     ApiResponse<List<RestaurantUserEntity>>? fetchResponse,
   }) {
     return RestaurantUserState(
+      deleteResponse: deleteResponse ?? ApiResponse.initial(),
       addResponse: addResponse ?? this.addResponse,
       updateResponse: updateResponse ?? this.updateResponse,
       fetchResponse: fetchResponse ?? this.fetchResponse,
@@ -26,5 +31,5 @@ class RestaurantUserState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [addResponse, fetchResponse, updateResponse];
+  List<Object?> get props => [addResponse, fetchResponse, updateResponse, deleteResponse];
 }

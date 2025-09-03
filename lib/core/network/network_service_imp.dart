@@ -153,4 +153,38 @@ class NetworkApiServiceImpl implements IApiService {
       return FetchDataException('No response from server.');
     }
   }
+
+  @override
+  Future delete(
+    String url, {
+    Map<String, String>? queryParams,
+    dynamic data,
+  }) async {
+    try {
+      final uri = Uri.parse(url).replace(queryParameters: queryParams);
+      final headers = _buildHeaders();
+
+      log('DELETE $uri');
+      log('Query Params: $queryParams');
+      if (data != null) log('Body: $data');
+
+      final response = await dio
+          .delete(
+            uri.toString(),
+            data: data,
+            options: Options(headers: headers),
+          )
+          .timeout(const Duration(seconds: 20));
+
+      log('Response: $response');
+      return handleResponse(response);
+    } on TimeoutException {
+      throw TimeoutException('Request timed out. Please try again.');
+    } on DioException catch (e) {
+      throw _handleDioError(e);
+    } catch (e) {
+      log('Unexpected error: $e');
+      throw FetchDataException('Unexpected error occurred.');
+    }
+  }
 }

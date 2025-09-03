@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 
 abstract class IApiService {
-  Future<dynamic> get(String url, {
+  Future<dynamic> get(
+    String url, {
     Map<String, String>? queryParams,
   });
 
@@ -12,4 +13,10 @@ abstract class IApiService {
     Map<String, dynamic> fields,
     Map<String, MultipartFile> files,
   );
+
+  Future<dynamic> delete(
+    String url, {
+    Map<String, String>? queryParams,
+    dynamic data, // optional if backend requires body
+  });
 }
