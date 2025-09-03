@@ -7,8 +7,8 @@ class RestaurantUserEntity {
   final bool isPasswordChanged;
   final List<UserPermission> permissions;
   final int restaurantId;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final String createdAt;
+  final String updatedAt;
 
   RestaurantUserEntity({
     required this.id,

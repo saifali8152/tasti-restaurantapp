@@ -29,8 +29,8 @@ class RestaurantUserModel extends RestaurantUserEntity {
               ))
           .toList(),
       restaurantId: json['restaurant_id'] ?? 0,
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
+      createdAt: json['created_at'].toString(),
+      updatedAt: json['updated_at'].toString(),
     );
   }
 
@@ -45,8 +45,8 @@ class RestaurantUserModel extends RestaurantUserEntity {
       "permissions":
           permissions.map((p) => {"key": p.key, "title": p.title}).toList(),
       "restaurant_id": restaurantId,
-      "created_at": createdAt.toIso8601String(),
-      "updated_at": updatedAt.toIso8601String(),
+      "created_at": createdAt,
+      "updated_at": updatedAt,
     };
   }
 }

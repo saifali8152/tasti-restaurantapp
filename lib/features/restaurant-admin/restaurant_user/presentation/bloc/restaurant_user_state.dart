@@ -3,7 +3,7 @@ import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/d
 import '/core/network/response.dart';
 
 class RestaurantUserState extends Equatable {
-  final ApiResponse<String> addResponse;
+  final ApiResponse<RestaurantUserEntity> addResponse;
   final ApiResponse<List<RestaurantUserEntity>> fetchResponse;
 
   const RestaurantUserState({
@@ -12,7 +12,7 @@ class RestaurantUserState extends Equatable {
   });
 
   RestaurantUserState copyWith({
-    ApiResponse<String>? addResponse,
+    ApiResponse<RestaurantUserEntity>? addResponse,
     ApiResponse<List<RestaurantUserEntity>>? fetchResponse,
   }) {
     return RestaurantUserState(

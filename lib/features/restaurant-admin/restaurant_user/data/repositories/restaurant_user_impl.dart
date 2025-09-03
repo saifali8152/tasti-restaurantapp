@@ -9,7 +9,7 @@ class RestaurantUserRepoImpl extends IRestaurantUserRepo {
   RestaurantUserRepoImpl(this.remote);
 
   @override
-  Future<DataState<String>> addRestaurantUser(
+  Future<DataState<RestaurantUserModel>> addRestaurantUser(
       AddRestaurantUserParms parms) async {
     try {
       final result = await remote.addRestaurantUser(parms);
