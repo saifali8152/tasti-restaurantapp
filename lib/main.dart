@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/admin_user/presentation/bloc/admin_user_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/bloc/restaurant_user_bloc.dart';
 import '/features/admin/restaurants/presentation/bloc/restaurant_bloc.dart';
 import '/features/restaurant-admin/make_reservation/presentation/bloc/make_reservation_bloc.dart';
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => sl<ReviewsBloc>()),
           BlocProvider(create: (context) => sl<SeatingAreaBloc>()),
           BlocProvider(create: (context) => sl<RestaurantUserBloc>()),
+          BlocProvider(create: (context) => sl<AdminUserBloc>()),
           BlocProvider(create: (context) => sl<BundleBillingBloc>()),
           BlocProvider(create: (context) => sl<ReservationBloc>()),
           BlocProvider(create: (context) => sl<MakeReservationBloc>()),

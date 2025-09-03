@@ -243,11 +243,56 @@ class AddRestaurantUserParms {
   }
 }
 
+class AddAdminUserParms {
+  final int? id;
+  final String name;
+  final String email;
+  final String phoneNumber;
+  final int restaurantId;
+  final List<PermissionData> permissions;
+
+  AddAdminUserParms({
+    this.id,
+    required this.name,
+    required this.email,
+    required this.phoneNumber,
+    required this.restaurantId,
+    required this.permissions,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      if (id != null) "id": id,
+      "name": name,
+      "email": email,
+      "phone_number": phoneNumber,
+      "restaurant_id": restaurantId,
+      "permissions": permissions.map((p) => p.toJson()).toList(),
+    };
+  }
+}
+
 class DeleteRestaurantUserParms {
   final int id;
   final int restaurantId;
 
   DeleteRestaurantUserParms({
+    required this.id,
+    required this.restaurantId,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "restaurant_id": restaurantId,
+    };
+  }
+}
+class DeleteAdminUserParms {
+  final int id;
+  final int restaurantId;
+
+  DeleteAdminUserParms({
     required this.id,
     required this.restaurantId,
   });

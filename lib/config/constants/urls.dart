@@ -100,4 +100,9 @@ class AppUrls{
   static final String updateRestaurantUser = "$base/restaurant/update-restaurant-user";
   static final String fetchRestaurantUser = "$base/restaurant/get-restaurant-users";
   static final String deleteRestaurantUser = "$base/restaurant/delete-restaurant-user";
+
+  static final String updateAdminUser = "$base/restaurant/update-admin-user";
+  static final String fetchAdminUser = "$base/restaurant/get-admin-users";
+  static final String deleteAdminUser = "$base/restaurant/delete-admin-user";
+  static final String addAdminUser = "$base/restaurant/add-admin-user";
 }
