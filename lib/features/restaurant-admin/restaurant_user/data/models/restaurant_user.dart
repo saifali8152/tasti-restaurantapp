@@ -1,3 +1,4 @@
+import 'package:tasti_restaurant_app/core/parms/parms.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/domain/entities/restaurant_user.dart';
 
 class RestaurantUserModel extends RestaurantUserEntity {
@@ -23,7 +24,7 @@ class RestaurantUserModel extends RestaurantUserEntity {
       type: json['type'] ?? '',
       isPasswordChanged: json['is_password_changed'] ?? false,
       permissions: (json['permissions'] as List<dynamic>? ?? [])
-          .map((p) => UserPermission(
+          .map((p) => PermissionData(
                 key: p['key'] ?? '',
                 title: p['title'] ?? '',
               ))

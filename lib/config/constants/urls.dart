@@ -97,5 +97,6 @@ class AppUrls{
   static final String sendCsvDataSms = "$base/restaurant/send-csv-data-sms";
   static final String sendReservationDatabaseSms = "$base/restaurant/send-reservation-database-sms";
   static final String addRestaurantUser = "$base/restaurant/add-restaurant-user";
+  static final String updateRestaurantUser = "$base/restaurant/update-restaurant-user";
   static final String fetchRestaurantUser = "$base/restaurant/get-restaurant-users";
 }

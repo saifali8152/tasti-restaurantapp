@@ -54,8 +54,7 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const AddEventScreen());
       case AppRoutes.updateRestaurant:
         return MaterialPageRoute(builder: (_) => const UpdateNewRestaurant());
-      case AppRoutes.addRestaurantUser:
-        return MaterialPageRoute(builder: (_) => const AddRestaurantUserScreen());
+
       case AppRoutes.updateEvent:
         return MaterialPageRoute(
             builder: (_) => UpdateEventScreen(
@@ -213,6 +212,13 @@ class Routes {
         return MaterialPageRoute(
             builder: (_) => SeatingAreaDetails(
                   tables: settings.arguments as List<TableEntity>,
+                ));
+      case AppRoutes.addRestaurantUser:
+        final args = settings.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(
+            builder: (_) => AddRestaurantUserScreen(
+                  isEdit: args?['isEdit'] ?? false,
+                  initialData: args?['initialData'],
                 ));
       case AppRoutes.addSeatingArea:
         final args = settings.arguments as Map<String, dynamic>?;

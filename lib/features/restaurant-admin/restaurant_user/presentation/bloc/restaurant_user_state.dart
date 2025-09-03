@@ -4,23 +4,27 @@ import '/core/network/response.dart';
 
 class RestaurantUserState extends Equatable {
   final ApiResponse<RestaurantUserEntity> addResponse;
+  final ApiResponse<RestaurantUserEntity> updateResponse;
   final ApiResponse<List<RestaurantUserEntity>> fetchResponse;
 
   const RestaurantUserState({
     required this.addResponse,
     required this.fetchResponse,
+    required this.updateResponse,
   });
 
   RestaurantUserState copyWith({
     ApiResponse<RestaurantUserEntity>? addResponse,
+    ApiResponse<RestaurantUserEntity>? updateResponse,
     ApiResponse<List<RestaurantUserEntity>>? fetchResponse,
   }) {
     return RestaurantUserState(
       addResponse: addResponse ?? this.addResponse,
+      updateResponse: updateResponse ?? this.updateResponse,
       fetchResponse: fetchResponse ?? this.fetchResponse,
     );
   }
 
   @override
-  List<Object?> get props => [addResponse, fetchResponse];
+  List<Object?> get props => [addResponse, fetchResponse, updateResponse];
 }

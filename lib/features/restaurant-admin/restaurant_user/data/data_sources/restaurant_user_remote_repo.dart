@@ -17,7 +17,7 @@ class RestaurantUserRemoteApiImpl extends IRestaurantUserRemoteApi {
   Future<RestaurantUserModel> addRestaurantUser(AddRestaurantUserParms parms) async {
     try {
       var response = await networkApiService.post(
-        AppUrls.addRestaurantUser,
+        parms.id == null ? AppUrls.addRestaurantUser : AppUrls.updateRestaurantUser,
         parms.toJson(),
       );
       var rawJson = response['user'];

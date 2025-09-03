@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/config/constants/colors.dart';
+import 'package:tasti_restaurant_app/config/routes/route_name.dart';
+import 'package:tasti_restaurant_app/core/parms/parms.dart';
+import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
 import '/core/utils/general_extentions.dart';
 import '/core/widgets/card_details_row.dart';
-import '/config/routes/route_name.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/domain/entities/restaurant_user.dart';
 
 class RestaurantUserCard extends StatelessWidget {
@@ -47,24 +50,11 @@ class RestaurantUserCard extends StatelessWidget {
             const Divider(),
 
             /// User details
-            CardDetailsRow(label: "User ID", value: "#${item.id}"),
+            CardDetailsRow(label: "Name", value: "#${item.name}"),
             const SizedBox(height: 8),
             CardDetailsRow(label: "Email", value: item.email),
             const SizedBox(height: 8),
             CardDetailsRow(label: "Phone", value: item.phoneNumber),
-            const SizedBox(height: 8),
-            CardDetailsRow(label: "Role", value: item.type),
-            const SizedBox(height: 8),
-            CardDetailsRow(
-              label: "Password Changed",
-              value: item.isPasswordChanged ? "Yes" : "No",
-            ),
-            const SizedBox(height: 8),
-            CardDetailsRow(
-              label: "Restaurant ID",
-              value: item.restaurantId.toString(),
-            ),
-
             const SizedBox(height: 16),
 
             /// Permissions
@@ -88,6 +78,47 @@ class RestaurantUserCard extends StatelessWidget {
                       ),
                     )
                     .toList(),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: CustomButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.addRestaurantUser,
+                          arguments: {
+                            "isEdit": true,
+                            "initialData": AddRestaurantUserParms(
+                              id: item.id,
+                              name: item.name,
+                              email: item.email,
+                              phoneNumber: item.phoneNumber,
+                              restaurantId: item.restaurantId,
+                              permissions: item.permissions,
+                            )
+                          },
+                        );
+                      },
+                      text: 'Update',
+                      bgColor: Colors.white,
+                      textColor: AppColors.darkOrange,
+                      borderColor: AppColors.darkOrange,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: CustomButton(
+                      onPressed: () {
+                        //   context.showCustomDialog(
+                        //       DeleteSeatingAreaDialog(id: seatingArea.id));
+                      },
+                      text: "Delete",
+                    ),
+                  ),
+                ],
               ),
             ],
           ],

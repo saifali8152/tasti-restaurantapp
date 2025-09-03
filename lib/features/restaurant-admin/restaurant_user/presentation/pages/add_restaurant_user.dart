@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/config/constants/colors.dart';
 import 'package:tasti_restaurant_app/config/constants/restaurant_permissions.dart';
 import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/core/widgets/curved_container.dart';
-import 'package:tasti_restaurant_app/core/widgets/themed_app_bar.dart';
+import 'package:tasti_restaurant_app/core/widgets/custom_app_bar.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/bloc/restaurant_user_bloc.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/bloc/restaurant_user_event.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/bloc/restaurant_user_state.dart';
@@ -41,6 +39,7 @@ class _AddRestaurantUserScreenState extends State<AddRestaurantUserScreen> {
 
   @override
   void initState() {
+    print(widget.initialData?.toJson());
     super.initState();
     if (widget.isEdit && widget.initialData != null) {
       nameController.text = widget.initialData!.name;
@@ -73,11 +72,11 @@ class _AddRestaurantUserScreenState extends State<AddRestaurantUserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ThemedAppBar(
+      appBar: CustomAppBar(
         title: widget.isEdit ? "Edit User" : "Add User",
       ),
-      backgroundColor: AppColors.darkOrange,
-      body: CurvedContainer(
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
@@ -136,20 +135,18 @@ class _AddRestaurantUserScreenState extends State<AddRestaurantUserScreen> {
                         builder: (context, state) {
                           return CustomButton(
                             text: widget.isEdit ? "Update User" : "Save User",
-                            isLoading:
+                            isLoading: widget.isEdit ? state.updateResponse.status == Status.loading :
                                 state.addResponse.status == Status.loading,
                             onPressed: () {
                               final name = nameController.text.trim();
                               final email = emailController.text.trim();
                               final phone = phoneController.text.trim();
-
-                              if (name.isEmpty ||
-                                  email.isEmpty ||
-                                  phone.isEmpty) {
+        
+                              if (name.isEmpty || email.isEmpty || phone.isEmpty) {
                                 _showSnackBar("All fields are required");
                                 return;
                               }
-
+        
                               final selectedPermissions = permissions
                                   .where((p) => p.isSelected)
                                   .toList();
@@ -157,20 +154,18 @@ class _AddRestaurantUserScreenState extends State<AddRestaurantUserScreen> {
                                 _showSnackBar("Select at least one permission");
                                 return;
                               }
-
+        
                               final parms = AddRestaurantUserParms(
-                                id: widget.isEdit
-                                    ? widget.initialData?.id
-                                    : null,
+                                id: widget.isEdit ? widget.initialData?.id : null,
                                 name: name,
                                 email: email,
                                 phoneNumber: phone,
                                 restaurantId: restaurantId,
                                 permissions: selectedPermissions,
                               );
-
+        
                               if (widget.isEdit) {
-                                // bloc.add(UpdateUserEvent(parms));
+                                bloc.add(UpdateRestaurantUserEvent(parms));
                               } else {
                                 bloc.add(AddRestaurantUserEvent(parms));
                               }
