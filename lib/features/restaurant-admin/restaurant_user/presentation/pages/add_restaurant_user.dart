@@ -39,7 +39,6 @@ class _AddRestaurantUserScreenState extends State<AddRestaurantUserScreen> {
 
   @override
   void initState() {
-    print(widget.initialData?.toJson());
     super.initState();
     if (widget.isEdit && widget.initialData != null) {
       nameController.text = widget.initialData!.name;
@@ -47,7 +46,7 @@ class _AddRestaurantUserScreenState extends State<AddRestaurantUserScreen> {
       phoneController.text = widget.initialData!.phoneNumber;
 
       for (var p in widget.initialData!.permissions) {
-        final match = permissions.firstWhere(
+        final match = restaurantUserPermissions.firstWhere(
           (x) => x.key == p.key,
           orElse: () => p,
         );
@@ -62,7 +61,7 @@ class _AddRestaurantUserScreenState extends State<AddRestaurantUserScreen> {
     emailController.clear();
     phoneController.clear();
 
-    for (var p in permissions) {
+    for (var p in restaurantUserPermissions) {
       p.isSelected = false;
     }
 
@@ -110,7 +109,7 @@ class _AddRestaurantUserScreenState extends State<AddRestaurantUserScreen> {
                       Wrap(
                         spacing: 10,
                         runSpacing: 10,
-                        children: permissions.map((p) {
+                        children: restaurantUserPermissions.map((p) {
                           return PermissionChip(
                             p: p,
                             onSelected: () {
@@ -147,7 +146,7 @@ class _AddRestaurantUserScreenState extends State<AddRestaurantUserScreen> {
                                 return;
                               }
         
-                              final selectedPermissions = permissions
+                              final selectedPermissions = restaurantUserPermissions
                                   .where((p) => p.isSelected)
                                   .toList();
                               if (selectedPermissions.isEmpty) {

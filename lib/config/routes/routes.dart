@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/features/admin/admin_user/presentation/pages/add_admin_user.dart';
 import 'package:tasti_restaurant_app/features/common/auth/presentation/pages/forgot_password.dart';
 import 'package:tasti_restaurant_app/features/common/faqs_chat/faq_chat.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/pages/add_restaurant_user.dart';
@@ -217,6 +218,13 @@ class Routes {
         final args = settings.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(
             builder: (_) => AddRestaurantUserScreen(
+                  isEdit: args?['isEdit'] ?? false,
+                  initialData: args?['initialData'],
+                ));
+      case AppRoutes.addAdminUser:
+        final args = settings.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(
+            builder: (_) => AddAdminUserScreen(
                   isEdit: args?['isEdit'] ?? false,
                   initialData: args?['initialData'],
                 ));

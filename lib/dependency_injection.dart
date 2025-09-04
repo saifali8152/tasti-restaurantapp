@@ -316,7 +316,6 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<ICreateRestaurantRepo>(CreateRestaurantRepoImpl(sl()));
 
   // UseCase
-  sl.registerSingleton<AddRestaurantUserUsecase>(AddRestaurantUserUsecase(sl()));
   sl.registerSingleton<FetchCsvDataUsecase>(FetchCsvDataUsecase(sl()));
   sl.registerSingleton<FetchReservationDataByEmailUsecase>(FetchReservationDataByEmailUsecase(sl()));
   sl.registerSingleton<FetchReservationDataUsecase>(FetchReservationDataUsecase(sl()));
@@ -414,12 +413,12 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<SendCsvDataUsecase>(SendCsvDataUsecase(sl()));
   sl.registerSingleton<SendRestaurantDataUsecase>(SendRestaurantDataUsecase(sl()));
   sl.registerSingleton<UpdateReservationConfirmationUsecase>(UpdateReservationConfirmationUsecase(sl()));
-  sl.registerSingleton<UpdateReservationConfirmationUsecase>(UpdateReservationConfirmationUsecase(sl()));
   sl.registerSingleton<FetchRestaurantUserUsecase>(FetchRestaurantUserUsecase(sl()));
   sl.registerSingleton<FetchAdminUserUsecase>(FetchAdminUserUsecase(sl()));
   sl.registerSingleton<DeleteAdminUserUsecase>(DeleteAdminUserUsecase(sl()));
   sl.registerSingleton<AddAdminUserUsecase>(AddAdminUserUsecase(sl()));
   sl.registerSingleton<DeleteRestaurantUserUsecase>(DeleteRestaurantUserUsecase(sl()));
+  sl.registerSingleton<AddRestaurantUserUsecase>(AddRestaurantUserUsecase(sl()));
 
   // Bloc
   sl.registerFactory<CustomerReservationsBloc>(() => CustomerReservationsBloc(sl(), sl(), sl(), sl(), sl(), sl()));

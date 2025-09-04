@@ -11,14 +11,11 @@ class AddAdminUserEvent extends AdminUserEvent {
   AddAdminUserEvent(this.parms);
 }
 
-class FetchAdminUserEvent extends AdminUserEvent {
-  final String id;
-  FetchAdminUserEvent(this.id);
-}
+class FetchAdminUserEvent extends AdminUserEvent {}
 
 class DeleteAdminUserEvent extends AdminUserEvent {
-  final DeleteAdminUserParms parms;
-  DeleteAdminUserEvent(this.parms);
+  final int id;
+  DeleteAdminUserEvent(this.id);
 }
 
 class UpdateAdminUserEvent extends AdminUserEvent {

@@ -1,16 +1,15 @@
-import 'package:tasti_restaurant_app/core/parms/parms.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/bloc/restaurant_user_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/bloc/restaurant_user_event.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/bloc/restaurant_user_state.dart';
+import 'package:tasti_restaurant_app/features/admin/admin_user/presentation/bloc/admin_user_bloc.dart';
+import 'package:tasti_restaurant_app/features/admin/admin_user/presentation/bloc/admin_user_event.dart';
+import 'package:tasti_restaurant_app/features/admin/admin_user/presentation/bloc/admin_user_state.dart';
 import '/core/network/response.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/widgets/custom_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-class DeleteRestaurantUserDialog extends StatelessWidget {
-  final DeleteRestaurantUserParms parms;
-  const DeleteRestaurantUserDialog({super.key, required this.parms});
+class DeleteAdminUserDialog extends StatelessWidget {
+  final int id;
+  const DeleteAdminUserDialog(this.id, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +41,8 @@ class DeleteRestaurantUserDialog extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
-            BlocConsumer<RestaurantUserBloc, RestaurantUserState>(
-              bloc: context.read<RestaurantUserBloc>(),
+            BlocConsumer<AdminUserBloc, AdminUserState>(
+              bloc: context.read<AdminUserBloc>(),
               listener: (context, state) {
                 if (state.deleteResponse.status == Status.error) {
                   context.flushBarErrorMessage(
@@ -69,8 +68,8 @@ class DeleteRestaurantUserDialog extends StatelessWidget {
                       child: CustomButton(
                         onPressed: () {
                           context
-                              .read<RestaurantUserBloc>()
-                              .add(DeleteRestaurantUserEvent(parms));
+                              .read<AdminUserBloc>()
+                              .add(DeleteAdminUserEvent(id));
                         },
                         text: "Confirm",
                         isLoading:

@@ -31,12 +31,12 @@ class AdminUserBloc
   Future<void> _onDeleteAdminUserEvent(
       DeleteAdminUserEvent event, Emitter<AdminUserState> emit) async {
     emit(state.copyWith(deleteResponse: ApiResponse.loading()));
-    final result = await _deleteUsecase(event.parms);
+    final result = await _deleteUsecase(event.id);
 
     switch (result) {
       case DataSuccess<String>():
         final updatedData = state.fetchResponse.data
-            ?.where((seatingArea) => seatingArea.id != event.parms.id)
+            ?.where((seatingArea) => seatingArea.id != event.id)
             .toList();
         emit(state.copyWith(
           deleteResponse: ApiResponse.completed(result.data),
@@ -102,7 +102,7 @@ class AdminUserBloc
   Future<void> _onFetchAdminUserEvent(
       FetchAdminUserEvent event, Emitter<AdminUserState> emit) async {
     emit(state.copyWith(fetchResponse: ApiResponse.loading()));
-    final result = await _fetchUsecase(event.id);
+    final result = await _fetchUsecase('0');
 
     switch (result) {
       case DataSuccess<List<AdminUserEntity>>():

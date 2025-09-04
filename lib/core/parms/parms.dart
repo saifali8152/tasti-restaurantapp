@@ -248,7 +248,6 @@ class AddAdminUserParms {
   final String name;
   final String email;
   final String phoneNumber;
-  final int restaurantId;
   final List<PermissionData> permissions;
 
   AddAdminUserParms({
@@ -256,7 +255,6 @@ class AddAdminUserParms {
     required this.name,
     required this.email,
     required this.phoneNumber,
-    required this.restaurantId,
     required this.permissions,
   });
 
@@ -266,7 +264,6 @@ class AddAdminUserParms {
       "name": name,
       "email": email,
       "phone_number": phoneNumber,
-      "restaurant_id": restaurantId,
       "permissions": permissions.map((p) => p.toJson()).toList(),
     };
   }

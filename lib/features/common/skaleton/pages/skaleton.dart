@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/pages/add_restaurant_user.dart';
+import 'package:tasti_restaurant_app/features/admin/admin_user/presentation/pages/admin_users.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/pages/restaurant_users.dart';
 import '/core/services/session_controller.dart';
 import '/features/restaurant-admin/bundle_billings/presentation/pages/bundle_billings.dart';
@@ -116,7 +116,8 @@ class DrawerScreens {
           Events(),
           ManageSMS(),
           MarketingCampain(),
-          ProfileScreen(), // ✅ This will always be the correct index
+          AdminUserScreen(),
+          ProfileScreen(),
         ];
       case "restaurant":
       default:

@@ -5,7 +5,6 @@ import 'package:tasti_restaurant_app/features/admin/admin_user/presentation/bloc
 import 'package:tasti_restaurant_app/features/admin/admin_user/presentation/bloc/admin_user_state.dart';
 import '/config/routes/route_name.dart';
 import '/core/network/response.dart';
-import '/core/services/session_controller.dart';
 import '/core/widgets/loading_widget.dart';
 import '/dependency_injection.dart';
 import '/core/widgets/curved_container.dart';
@@ -24,12 +23,11 @@ class AdminUserScreen extends StatefulWidget {
 
 class _AdminUserScreenState extends State<AdminUserScreen> {
   final AdminUserBloc bloc = sl();
-  final int id = SessionController().user?.restaurant.id ?? 0;
 
   @override
   void initState() {
     super.initState();
-    bloc.add(FetchAdminUserEvent(id.toString()));
+    bloc.add(FetchAdminUserEvent());
   }
 
   Widget _messageList(String message, {Color? color}) {
@@ -62,7 +60,7 @@ class _AdminUserScreenState extends State<AdminUserScreen> {
               color: Colors.white, height: 15),
           title: 'Add User',
           onTap: () {
-            Navigator.pushNamed(context, AppRoutes.addRestaurantUser);
+            Navigator.pushNamed(context, AppRoutes.addAdminUser);
           },
           bgColor: const Color(0xFF5A73E2),
         ),
@@ -73,7 +71,7 @@ class _AdminUserScreenState extends State<AdminUserScreen> {
           builder: (context, state) {
             return RefreshIndicator.adaptive(
               onRefresh: () async {
-                bloc.add(FetchAdminUserEvent(id.toString()));
+                bloc.add(FetchAdminUserEvent());
               },
               child: Builder(
                 builder: (context) {
@@ -91,7 +89,7 @@ class _AdminUserScreenState extends State<AdminUserScreen> {
                   if (state.fetchResponse.status == Status.completed) {
                     final data = state.fetchResponse.data ?? [];
                     if (data.isEmpty) {
-                      return _messageList("No Seating Area Found.");
+                      return _messageList("Nothing Found.");
                     }
 
                     return ListView.separated(

@@ -8,7 +8,6 @@ import 'package:tasti_restaurant_app/features/admin/admin_user/presentation/bloc
 import 'package:tasti_restaurant_app/features/admin/admin_user/presentation/bloc/admin_user_state.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/widgets/permission_chip.dart';
 import '/core/network/response.dart';
-import '/core/services/session_controller.dart';
 import '/core/widgets/custom_button.dart';
 import '/core/widgets/custom_input_field.dart';
 import '/core/widgets/field_label.dart';
@@ -31,7 +30,6 @@ class AddAdminUserScreen extends StatefulWidget {
 
 class _AddAdminUserScreenState extends State<AddAdminUserScreen> {
   final AdminUserBloc bloc = sl();
-  final int restaurantId = SessionController().user?.restaurant.id ?? 0;
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -46,7 +44,7 @@ class _AddAdminUserScreenState extends State<AddAdminUserScreen> {
       phoneController.text = widget.initialData!.phoneNumber;
 
       for (var p in widget.initialData!.permissions) {
-        final match = permissions.firstWhere(
+        final match = adminUserPermissions.firstWhere(
           (x) => x.key == p.key,
           orElse: () => p,
         );
@@ -61,7 +59,7 @@ class _AddAdminUserScreenState extends State<AddAdminUserScreen> {
     emailController.clear();
     phoneController.clear();
 
-    for (var p in permissions) {
+    for (var p in adminUserPermissions) {
       p.isSelected = false;
     }
 
@@ -109,7 +107,7 @@ class _AddAdminUserScreenState extends State<AddAdminUserScreen> {
                       Wrap(
                         spacing: 10,
                         runSpacing: 10,
-                        children: permissions.map((p) {
+                        children: adminUserPermissions.map((p) {
                           return PermissionChip(
                             p: p,
                             onSelected: () {
@@ -146,7 +144,7 @@ class _AddAdminUserScreenState extends State<AddAdminUserScreen> {
                                 return;
                               }
         
-                              final selectedPermissions = permissions
+                              final selectedPermissions = adminUserPermissions
                                   .where((p) => p.isSelected)
                                   .toList();
                               if (selectedPermissions.isEmpty) {
@@ -159,7 +157,6 @@ class _AddAdminUserScreenState extends State<AddAdminUserScreen> {
                                 name: name,
                                 email: email,
                                 phoneNumber: phone,
-                                restaurantId: restaurantId,
                                 permissions: selectedPermissions,
                               );
         

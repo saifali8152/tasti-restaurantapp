@@ -91,7 +91,7 @@ class _RestaurantUserScreenState extends State<RestaurantUserScreen> {
                   if (state.fetchResponse.status == Status.completed) {
                     final data = state.fetchResponse.data ?? [];
                     if (data.isEmpty) {
-                      return _messageList("No Seating Area Found.");
+                      return _messageList("Nothing Found.");
                     }
 
                     return ListView.separated(

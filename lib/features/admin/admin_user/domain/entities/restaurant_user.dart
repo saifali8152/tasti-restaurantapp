@@ -8,7 +8,6 @@ class AdminUserEntity {
   final String type; // e.g. "restaurant_user"
   final bool isPasswordChanged;
   final List<PermissionData> permissions;
-  final int restaurantId;
   final String createdAt;
   final String updatedAt;
 
@@ -20,7 +19,6 @@ class AdminUserEntity {
     required this.type,
     required this.isPasswordChanged,
     required this.permissions,
-    required this.restaurantId,
     required this.createdAt,
     required this.updatedAt,
   });

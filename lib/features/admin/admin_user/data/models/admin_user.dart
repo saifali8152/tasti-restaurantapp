@@ -10,7 +10,6 @@ class AdminUserModel extends AdminUserEntity {
     required super.type,
     required super.isPasswordChanged,
     required super.permissions,
-    required super.restaurantId,
     required super.createdAt,
     required super.updatedAt,
   });
@@ -29,7 +28,6 @@ class AdminUserModel extends AdminUserEntity {
                 title: p['title'] ?? '',
               ))
           .toList(),
-      restaurantId: json['restaurant_id'] ?? 0,
       createdAt: json['created_at'].toString(),
       updatedAt: json['updated_at'].toString(),
     );
@@ -45,7 +43,6 @@ class AdminUserModel extends AdminUserEntity {
       "is_password_changed": isPasswordChanged,
       "permissions":
           permissions.map((p) => {"key": p.key, "title": p.title}).toList(),
-      "restaurant_id": restaurantId,
       "created_at": createdAt,
       "updated_at": updatedAt,
     };

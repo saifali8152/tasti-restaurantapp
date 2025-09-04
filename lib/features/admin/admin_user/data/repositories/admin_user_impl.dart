@@ -20,9 +20,9 @@ class AdminUserRepoImpl extends IAdminUserRepo {
   }
 
   @override
-  Future<DataState<List<AdminUserModel>>> fetchAdminUser(String id) async {
+  Future<DataState<List<AdminUserModel>>> fetchAdminUser() async {
     try {
-      final result = await remote.fetchAdminUser(id);
+      final result = await remote.fetchAdminUser();
       return DataSuccess(result);
     } catch (error) {
       return DataFailure(error.toString());
@@ -30,9 +30,9 @@ class AdminUserRepoImpl extends IAdminUserRepo {
   }
 
   @override
-  Future<DataState<String>> deleteAdminUser(DeleteAdminUserParms parms) async {
+  Future<DataState<String>> deleteAdminUser(int id) async {
     try {
-      final result = await remote.deleteAdminUser(parms);
+      final result = await remote.deleteAdminUser(id);
       return DataSuccess(result);
     } catch (error) {
       return DataFailure(error.toString());

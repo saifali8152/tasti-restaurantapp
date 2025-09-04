@@ -4,7 +4,7 @@ import 'package:tasti_restaurant_app/config/routes/route_name.dart';
 import 'package:tasti_restaurant_app/core/parms/parms.dart';
 import 'package:tasti_restaurant_app/core/widgets/custom_button.dart';
 import 'package:tasti_restaurant_app/features/admin/admin_user/domain/entities/restaurant_user.dart';
-import 'package:tasti_restaurant_app/features/restaurant-admin/restaurant_user/presentation/widgets/delete_restaurant_user_dialog.dart';
+import 'package:tasti_restaurant_app/features/admin/admin_user/presentation/widgets/delete_admin_user_dialog.dart';
 import '/core/utils/general_extentions.dart';
 import '/core/widgets/card_details_row.dart';
 
@@ -89,15 +89,14 @@ class AdminUserCard extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(
                           context,
-                          AppRoutes.addRestaurantUser,
+                          AppRoutes.addAdminUser,
                           arguments: {
                             "isEdit": true,
-                            "initialData": AddRestaurantUserParms(
+                            "initialData": AddAdminUserParms(
                               id: item.id,
                               name: item.name,
                               email: item.email,
                               phoneNumber: item.phoneNumber,
-                              restaurantId: item.restaurantId,
                               permissions: item.permissions,
                             )
                           },
@@ -114,10 +113,7 @@ class AdminUserCard extends StatelessWidget {
                     child: CustomButton(
                       onPressed: () {
                         context.showCustomDialog(
-                          DeleteRestaurantUserDialog(
-                            parms: DeleteRestaurantUserParms(
-                                id: item.id, restaurantId: item.restaurantId),
-                          ),
+                          DeleteAdminUserDialog(item.id),
                         );
                       },
                       text: "Delete",

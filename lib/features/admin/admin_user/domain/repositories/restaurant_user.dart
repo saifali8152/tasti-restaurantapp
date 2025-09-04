@@ -4,6 +4,6 @@ import '/core/network/response.dart';
 
 abstract class IAdminUserRepo {
   Future<DataState<AdminUserEntity>> addAdminUser(AddAdminUserParms parms);
-  Future<DataState<List<AdminUserEntity>>> fetchAdminUser(String id);
-  Future<DataState<String>> deleteAdminUser(DeleteAdminUserParms parms);
+  Future<DataState<List<AdminUserEntity>>> fetchAdminUser();
+  Future<DataState<String>> deleteAdminUser(int id);
 }

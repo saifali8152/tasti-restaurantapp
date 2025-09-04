@@ -161,7 +161,8 @@ class DrawerConfig {
           DrawerItemModel(icon: Icons.event, title: "Events", index: 9),
           DrawerItemModel(icon: Icons.sms, title: "Manage SMS & Fees", index: 10),
           DrawerItemModel(icon: Icons.campaign, title: "Campaigns", index: 11),
-          DrawerItemModel(icon: Icons.person, title: "Profile", index: 12),
+          DrawerItemModel(icon: Icons.people, title: "Users", index: 12),
+          DrawerItemModel(icon: Icons.person, title: "Profile", index: 13),
         ];
       case "restaurant":
       default:
@@ -186,7 +187,7 @@ class DrawerConfig {
           DrawerItemModel(title: "Bundles and Billings", index: 10, icon: Icons.note),
           DrawerItemModel(title: "Restaurant Settings", index: 11, icon: Icons.settings),
           DrawerItemModel(title: "Share Widget", index: 12, icon: Icons.share),
-          DrawerItemModel(title: "Add User", index: 13, icon: Icons.people),
+          DrawerItemModel(title: "Users", index: 13, icon: Icons.people),
           DrawerItemModel(title: "Profile", index: 14, icon: Icons.person),
         ];
     }
