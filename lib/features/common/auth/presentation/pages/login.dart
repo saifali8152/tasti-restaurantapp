@@ -21,24 +21,36 @@ class LoginScreen extends StatelessWidget {
     final user = SessionController().user;
     if (user == null) return;
 
-    if (user.type == 'admin' || user.type == 'admin_user' ) {
-      Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route) => false);
-    } else if (user.type == 'restaurant' || user.type == 'restaurant_user') {
+    if (user.type == 'admin' || user.type == 'admin_user') {
+      Navigator.pushNamedAndRemoveUntil(
+          context, AppRoutes.skaleton, (route) => false);
+    } else if (user.type == 'restaurant') {
       final status = user.subscriptionStatus;
       if (status == SubscriptionStatus.active.title) {
-        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, AppRoutes.skaleton, (route) => false);
       }
       if (status == SubscriptionStatus.noRestaurant.title) {
-        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.createNewRestaurant, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, AppRoutes.createNewRestaurant, (route) => false);
       }
       if (status == SubscriptionStatus.restaurantSuspended.title) {
-        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.createNewRestaurant, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, AppRoutes.createNewRestaurant, (route) => false);
       }
       if (status == SubscriptionStatus.inactive.title) {
-        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.monthlyFee, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, AppRoutes.monthlyFee, (route) => false);
       }
       if (status == SubscriptionStatus.expired.title) {
-        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.monthlyFee, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, AppRoutes.monthlyFee, (route) => false);
+      }
+    } else if (user.type == 'restaurant_user') {
+      final status = user.subscriptionStatus;
+      if (status == SubscriptionStatus.active.title) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, AppRoutes.skaleton, (route) => false);
       }
     }
   }
@@ -52,7 +64,8 @@ class LoginScreen extends StatelessWidget {
       create: (_) => loginBloc,
       child: AuthStack(
         title: "Welcome Back!",
-        subtitle: "Log in to manage tables, monitor bookings, and keep your restaurant running smoothly.",
+        subtitle:
+            "Log in to manage tables, monitor bookings, and keep your restaurant running smoothly.",
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -89,7 +102,8 @@ class LoginScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, AppRoutes.forgotPassword),
+                    onTap: () =>
+                        Navigator.pushNamed(context, AppRoutes.forgotPassword),
                     child: const Text(
                       "Forgot Password?",
                       style: TextStyle(
@@ -108,7 +122,8 @@ class LoginScreen extends StatelessWidget {
                   listener: (context, state) {
                     if (state.loginResponse.status == Status.error) {
                       context.flushBarErrorMessage(
-                        message: state.loginResponse.message ?? "Error Occurred",
+                        message:
+                            state.loginResponse.message ?? "Error Occurred",
                       );
                     }
                     if (state.loginResponse.status == Status.completed) {

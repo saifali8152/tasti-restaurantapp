@@ -19,9 +19,9 @@ class AuthRemoteApiImpl extends IAuthRemoteApi {
 
   @override
   Future<String> deleteAccount(AccountType accountType) async {
-    final String url = accountType == AccountType.admin
-        ? AppUrls.deleteAdminProfile
-        : AppUrls.deleteRestaurantProfile;
+    final String url = accountType == AccountType.restaurant
+        ? AppUrls.deleteRestaurantProfile
+        : AppUrls.deleteAdminProfile;
     Map<String, dynamic> data = {};
     var response = await networkApiService.post(url, data);
     return response['message'];

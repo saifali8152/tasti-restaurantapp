@@ -23,7 +23,7 @@ class SignupScreen extends StatelessWidget {
 
     if (user.type == 'admin' || user.type == 'admin_admin') {
       Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route) => false);
-    } else if (user.type == 'restaurant' || user.type == 'restaurant_admin') {
+    } else if (user.type == 'restaurant') {
       final status = user.subscriptionStatus;
       if (status == SubscriptionStatus.active.title) {
         Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route) => false);
@@ -39,6 +39,11 @@ class SignupScreen extends StatelessWidget {
       }
       if (status == SubscriptionStatus.expired.title) {
         Navigator.pushNamedAndRemoveUntil(context, AppRoutes.monthlyFee, (route) => false);
+      }
+    }else if(user.type == 'restaurant_user'){
+      final status = user.subscriptionStatus;
+      if (status == SubscriptionStatus.active.title) {
+        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route) => false);
       }
     }
   }
