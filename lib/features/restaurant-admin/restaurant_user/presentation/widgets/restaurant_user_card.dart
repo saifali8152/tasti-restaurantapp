@@ -51,7 +51,7 @@ class RestaurantUserCard extends StatelessWidget {
             const Divider(),
 
             /// User details
-            CardDetailsRow(label: "Name", value: "#${item.name}"),
+            CardDetailsRow(label: "Name", value: item.name),
             const SizedBox(height: 8),
             CardDetailsRow(label: "Email", value: item.email),
             const SizedBox(height: 8),

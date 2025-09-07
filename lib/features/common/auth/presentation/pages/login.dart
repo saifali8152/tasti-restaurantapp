@@ -21,9 +21,9 @@ class LoginScreen extends StatelessWidget {
     final user = SessionController().user;
     if (user == null) return;
 
-    if (user.type == 'admin') {
+    if (user.type == 'admin' || user.type == 'admin_user' ) {
       Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route) => false);
-    } else if (user.type == 'restaurant') {
+    } else if (user.type == 'restaurant' || user.type == 'restaurant_user') {
       final status = user.subscriptionStatus;
       if (status == SubscriptionStatus.active.title) {
         Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route) => false);

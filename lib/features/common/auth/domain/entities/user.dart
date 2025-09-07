@@ -12,6 +12,7 @@ class UserEntity extends Equatable {
     required this.restaurant,
     required this.subscriptionStatus,
     required this.subscriptionMessage,
+    required this.permissions,
   });
 
   final String id;
@@ -24,6 +25,7 @@ class UserEntity extends Equatable {
   final dynamic restaurant;
   final String subscriptionStatus;
   final String subscriptionMessage;
+  final List<PermissionEntity> permissions;
 
   @override
   List<Object?> get props => [
@@ -37,6 +39,7 @@ class UserEntity extends Equatable {
         restaurant,
         subscriptionStatus,
         subscriptionMessage,
+        permissions,
       ];
 }
 
@@ -168,4 +171,31 @@ class UserRestaurantEntity extends Equatable {
         tablesLeft,
         timeDuration,
       ];
+}
+
+class PermissionEntity extends Equatable {
+  const PermissionEntity({
+    required this.key,
+    required this.title,
+  });
+
+  final String key;
+  final String title;
+
+  factory PermissionEntity.fromJson(Map<String, dynamic> json) {
+    return PermissionEntity(
+      key: (json['key'] ?? '').toString(),
+      title: (json['title'] ?? '').toString(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'key': key,
+      'title': title,
+    };
+  }
+
+  @override
+  List<Object?> get props => [key, title];
 }

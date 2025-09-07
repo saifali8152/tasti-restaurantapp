@@ -42,10 +42,10 @@ class SplashServices {
 
   debugPrint("User type: ${user.type}");
 
-  if (user.type == 'admin') {
+  if (user.type == 'admin' || user.type == 'admin_user') {
     debugPrint("Navigating to admin skaleton screen.");
     nav.pushNamedAndRemoveUntil(AppRoutes.skaleton, (route) => false);
-  } else if (user.type == 'restaurant') {
+  } else if (user.type == 'restaurant'  || user.type == 'restaurant_user') {
     final status = user.subscriptionStatus;
     debugPrint("Restaurant user subscription status: $status");
 

@@ -29,7 +29,7 @@ export 'restaurant-admin/seating_area/presentation/pages/seating_area.dart';
 export 'restaurant-admin/reservations_db/presentation/pages/customer_reservations.dart';
 export 'restaurant-admin/gallery/presentation/pages/gallery.dart';
 export 'restaurant-admin/dashboard/dashboard_screen.dart';
-export '../core/widgets/custom_drawer.dart';
+export 'common/skaleton/widgets/custom_drawer.dart';
 export 'restaurant-admin/reservations/presentation/pages/reservations.dart';
 export 'admin/campaigns/presentation/pages/campaign_by_res_details.dart';
 export 'admin/manage_sms/presentation/pages/sms_bundle_details.dart';

@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import '../../domain/entities/user.dart';
 
 class UserModel extends UserEntity {
@@ -12,6 +13,7 @@ class UserModel extends UserEntity {
     required super.restaurant,
     required super.subscriptionStatus,
     required super.subscriptionMessage,
+    required super.permissions, // added
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -28,7 +30,15 @@ class UserModel extends UserEntity {
         return UserRestaurantModel.fromJson(data.first);
       }
 
-      return null; // or throw/return default
+      return null;
+    }
+
+    List<PermissionEntity> parsePermissions(dynamic data) {
+      if (data == null || data is! List) return [];
+      return data
+          .whereType<Map<String, dynamic>>()
+          .map((e) => PermissionEntity.fromJson(e))
+          .toList();
     }
 
     return UserModel(
@@ -42,6 +52,7 @@ class UserModel extends UserEntity {
       subscriptionStatus: user['subscription_status'].toString(),
       subscriptionMessage: user['subscription_message'].toString(),
       restaurant: parseRestaurant(user['restaurant']),
+      permissions: parsePermissions(user['permissions']), // added
     );
   }
 
@@ -59,6 +70,7 @@ class UserModel extends UserEntity {
       'restaurant': restaurant is UserRestaurantModel
           ? (restaurant as UserRestaurantModel).toJson()
           : [],
+      'permissions': permissions.map((e) => e.toJson()).toList(), // added
     };
   }
 
@@ -73,6 +85,7 @@ class UserModel extends UserEntity {
         subscriptionStatus: subscriptionStatus,
         subscriptionMessage: subscriptionMessage,
         restaurant: restaurant,
+        permissions: permissions, // added
       );
 
   factory UserModel.fromEntity(UserEntity entity) {
@@ -87,6 +100,7 @@ class UserModel extends UserEntity {
       subscriptionStatus: entity.subscriptionStatus,
       subscriptionMessage: entity.subscriptionMessage,
       restaurant: entity.restaurant,
+      permissions: entity.permissions, // added
     );
   }
 
@@ -101,6 +115,7 @@ class UserModel extends UserEntity {
     String? subscriptionStatus,
     String? subscriptionMessage,
     UserRestaurantEntity? restaurant,
+    List<PermissionEntity>? permissions, // added
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -113,6 +128,7 @@ class UserModel extends UserEntity {
       subscriptionStatus: subscriptionStatus ?? this.subscriptionStatus,
       subscriptionMessage: subscriptionMessage ?? this.subscriptionMessage,
       restaurant: restaurant ?? this.restaurant,
+      permissions: permissions ?? this.permissions, // added
     );
   }
 }

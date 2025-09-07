@@ -72,7 +72,7 @@ class NeedFurtherAssistence extends StatelessWidget {
                   MaterialPageRoute(builder: (_) => const ChatBotScreen()),
                 );
               },
-              text: "Intercom chat support",
+              text: "Live chat support",
             ),
             const SizedBox(height: 20),
             CustomButton(
