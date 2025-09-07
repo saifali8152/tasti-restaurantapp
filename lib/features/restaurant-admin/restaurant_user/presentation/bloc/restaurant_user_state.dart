@@ -24,8 +24,8 @@ class RestaurantUserState extends Equatable {
   }) {
     return RestaurantUserState(
       deleteResponse: deleteResponse ?? ApiResponse.initial(),
-      addResponse: addResponse ?? this.addResponse,
-      updateResponse: updateResponse ?? this.updateResponse,
+      addResponse: addResponse ?? ApiResponse.initial(),
+      updateResponse: updateResponse ?? ApiResponse.initial(),
       fetchResponse: fetchResponse ?? this.fetchResponse,
     );
   }

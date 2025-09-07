@@ -24,8 +24,8 @@ class AdminUserState extends Equatable {
   }) {
     return AdminUserState(
       deleteResponse: deleteResponse ?? ApiResponse.initial(),
-      addResponse: addResponse ?? this.addResponse,
-      updateResponse: updateResponse ?? this.updateResponse,
+      addResponse: addResponse ?? ApiResponse.initial(),
+      updateResponse: updateResponse ?? ApiResponse.initial(),
       fetchResponse: fetchResponse ?? this.fetchResponse,
     );
   }

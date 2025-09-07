@@ -89,18 +89,21 @@ class _AddRestaurantUserScreenState extends State<AddRestaurantUserScreen> {
                       CustomInputField(
                         hintText: "Enter name",
                         controller: nameController,
+                        readOnly: widget.isEdit,
                       ),
                       const SizedBox(height: 12),
                       FieldLabel(title: "Email"),
                       CustomInputField(
                         hintText: "Enter email",
                         controller: emailController,
+                        readOnly: widget.isEdit,
                         validator: (value) => null,
                       ),
                       const SizedBox(height: 12),
                       FieldLabel(title: "Phone Number"),
                       CustomInputField(
                         hintText: "Enter phone number",
+                        readOnly: widget.isEdit,
                         controller: phoneController,
                       ),
                       const SizedBox(height: 20),
@@ -127,6 +130,13 @@ class _AddRestaurantUserScreenState extends State<AddRestaurantUserScreen> {
                             context.flushBarErrorMessage(
                                 message: state.addResponse.message.toString());
                           } else if (state.addResponse.status ==Status.completed) {
+                            Navigator.pop(context, true);
+                            _resetForm();
+                          }
+                          if (state.updateResponse.status == Status.error) {
+                            context.flushBarErrorMessage(
+                                message: state.updateResponse.message.toString());
+                          } else if (state.updateResponse.status ==Status.completed) {
                             Navigator.pop(context, true);
                             _resetForm();
                           }

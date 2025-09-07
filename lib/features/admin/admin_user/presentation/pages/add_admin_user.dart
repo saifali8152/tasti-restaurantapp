@@ -34,19 +34,33 @@ class _AddAdminUserScreenState extends State<AddAdminUserScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  
+  // Create local copy of permissions to avoid global state issues
+  late List<PermissionData> localPermissions;
 
   @override
   void initState() {
     super.initState();
+    
+    // Create a local copy of permissions
+    localPermissions = adminUserPermissions.map((p) => 
+      PermissionData(
+        key: p.key,
+        title: p.title,
+        isSelected: false, // Start with all unselected
+      )
+    ).toList();
+    
     if (widget.isEdit && widget.initialData != null) {
       nameController.text = widget.initialData!.name;
       emailController.text = widget.initialData!.email;
       phoneController.text = widget.initialData!.phoneNumber;
 
+      // Set selected permissions for editing
       for (var p in widget.initialData!.permissions) {
-        final match = adminUserPermissions.firstWhere(
+        final match = localPermissions.firstWhere(
           (x) => x.key == p.key,
-          orElse: () => p,
+          orElse: () => PermissionData(key: p.key, title: p.title, isSelected: false),
         );
         match.isSelected = true;
       }
@@ -59,7 +73,7 @@ class _AddAdminUserScreenState extends State<AddAdminUserScreen> {
     emailController.clear();
     phoneController.clear();
 
-    for (var p in adminUserPermissions) {
+    for (var p in localPermissions) {
       p.isSelected = false;
     }
 
@@ -87,11 +101,13 @@ class _AddAdminUserScreenState extends State<AddAdminUserScreen> {
                       CustomInputField(
                         hintText: "Enter name",
                         controller: nameController,
+                        readOnly: widget.isEdit,
                       ),
                       const SizedBox(height: 12),
                       FieldLabel(title: "Email"),
                       CustomInputField(
                         hintText: "Enter email",
+                        readOnly: widget.isEdit,
                         controller: emailController,
                         validator: (value) => null,
                       ),
@@ -100,6 +116,7 @@ class _AddAdminUserScreenState extends State<AddAdminUserScreen> {
                       CustomInputField(
                         hintText: "Enter phone number",
                         controller: phoneController,
+                        readOnly: widget.isEdit,
                       ),
                       const SizedBox(height: 20),
                       FieldLabel(title: "Permissions"),
@@ -107,7 +124,7 @@ class _AddAdminUserScreenState extends State<AddAdminUserScreen> {
                       Wrap(
                         spacing: 10,
                         runSpacing: 10,
-                        children: adminUserPermissions.map((p) {
+                        children: localPermissions.map((p) {
                           return PermissionChip(
                             p: p,
                             onSelected: () {
@@ -118,13 +135,18 @@ class _AddAdminUserScreenState extends State<AddAdminUserScreen> {
                           );
                         }).toList(),
                       ),
-                      const Spacer(), // pushes button to bottom if space is available
+                      const Spacer(),
                       BlocConsumer<AdminUserBloc, AdminUserState>(
                         listener: (context, state) {
                           if (state.addResponse.status == Status.error) {
-                            context.flushBarErrorMessage(
-                                message: state.addResponse.message.toString());
-                          } else if (state.addResponse.status ==Status.completed) {
+                            context.flushBarErrorMessage(message: state.addResponse.message.toString());
+                          } else if (state.addResponse.status == Status.completed) {
+                            Navigator.pop(context, true);
+                            _resetForm();
+                          }
+                          if (state.updateResponse.status == Status.error) {
+                            context.flushBarErrorMessage(message: state.updateResponse.message.toString());
+                          } else if (state.updateResponse.status == Status.completed) {
                             Navigator.pop(context, true);
                             _resetForm();
                           }
@@ -132,26 +154,27 @@ class _AddAdminUserScreenState extends State<AddAdminUserScreen> {
                         builder: (context, state) {
                           return CustomButton(
                             text: widget.isEdit ? "Update User" : "Save User",
-                            isLoading: widget.isEdit ? state.updateResponse.status == Status.loading :
-                                state.addResponse.status == Status.loading,
+                            isLoading: widget.isEdit 
+                                ? state.updateResponse.status == Status.loading 
+                                : state.addResponse.status == Status.loading,
                             onPressed: () {
                               final name = nameController.text.trim();
                               final email = emailController.text.trim();
                               final phone = phoneController.text.trim();
-        
+
                               if (name.isEmpty || email.isEmpty || phone.isEmpty) {
                                 _showSnackBar("All fields are required");
                                 return;
                               }
-        
-                              final selectedPermissions = adminUserPermissions
+
+                              final selectedPermissions = localPermissions
                                   .where((p) => p.isSelected)
                                   .toList();
                               if (selectedPermissions.isEmpty) {
                                 _showSnackBar("Select at least one permission");
                                 return;
                               }
-        
+
                               final parms = AddAdminUserParms(
                                 id: widget.isEdit ? widget.initialData?.id : null,
                                 name: name,
@@ -159,7 +182,7 @@ class _AddAdminUserScreenState extends State<AddAdminUserScreen> {
                                 phoneNumber: phone,
                                 permissions: selectedPermissions,
                               );
-        
+
                               if (widget.isEdit) {
                                 bloc.add(UpdateAdminUserEvent(parms));
                               } else {
