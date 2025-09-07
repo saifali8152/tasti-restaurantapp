@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:tasti_restaurant_app/config/routes/route_name.dart';
 import 'package:tasti_restaurant_app/core/services/navigator_services.dart';
+import 'package:tasti_restaurant_app/core/services/session_controller.dart';
 import '/core/error/exception.dart';
 
 dynamic handleResponse(Response response) {
@@ -13,7 +14,12 @@ dynamic handleResponse(Response response) {
     case 401:
       throw UnauthorizedException(response.data['message'] ?? 'Unauthorized');
     case 403:
-      NavigatorService.navigateToRemoveUntill(AppRoutes.monthlyFee);
+      if (SessionController().user?.type == "restaurant_user") {
+        return NavigatorService.clearSessionAndnavigate();
+      }
+      if (SessionController().user?.type == "restaurant") {
+        return NavigatorService.navigateToRemoveUntill(AppRoutes.monthlyFee);
+      }
       throw UnauthorizedException(response.data['message'] ?? 'Unauthorized');
     case 404:
       throw NotFoundException(response.data['message'] ?? 'Not Found');

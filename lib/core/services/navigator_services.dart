@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tasti_restaurant_app/config/routes/route_name.dart';
+import 'package:tasti_restaurant_app/core/services/session_controller.dart';
 
 class NavigatorService {
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -13,5 +15,10 @@ class NavigatorService {
   
   static void navigateToRemoveUntill(String routeName) {
     navigatorKey.currentState?.pushNamedAndRemoveUntil(routeName, (route)=>false);
+  }
+  
+  static void clearSessionAndnavigate() {
+    SessionController().clearSession();
+    navigatorKey.currentState?.pushNamedAndRemoveUntil(AppRoutes.login, (route)=>false);
   }
 }

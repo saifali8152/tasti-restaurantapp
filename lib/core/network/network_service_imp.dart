@@ -136,7 +136,12 @@ class NetworkApiServiceImpl implements IApiService {
           return UnauthorizedException(msg);
         case 403:
           Future.microtask(() {
-            NavigatorService.navigateToRemoveUntill(AppRoutes.monthlyFee);
+            if(SessionController().user?.type == "restaurant_user"){
+              return NavigatorService.clearSessionAndnavigate();
+            }
+            if(SessionController().user?.type == "restaurant"){
+              return NavigatorService.navigateToRemoveUntill(AppRoutes.monthlyFee);
+            }
           });
 
           return UnauthorizedException(msg);
