@@ -37,24 +37,27 @@ class _AddRestaurantUserScreenState extends State<AddRestaurantUserScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    if (widget.isEdit && widget.initialData != null) {
-      nameController.text = widget.initialData!.name;
-      emailController.text = widget.initialData!.email;
-      phoneController.text = widget.initialData!.phoneNumber;
+@override
+void initState() {
+  super.initState();
 
-      for (var p in widget.initialData!.permissions) {
-        final match = restaurantUserPermissions.firstWhere(
-          (x) => x.key == p.key,
-          orElse: () => p,
-        );
-        match.isSelected = true;
-      }
+  if (widget.isEdit && widget.initialData != null) {
+    // Editing -> set values
+    nameController.text = widget.initialData!.name;
+    emailController.text = widget.initialData!.email;
+    phoneController.text = widget.initialData!.phoneNumber;
+
+    for (var p in restaurantUserPermissions) {
+      p.isSelected = widget.initialData!.permissions
+          .any((perm) => perm.key == p.key);
+    }
+  } else {
+    // Adding -> clear everything
+    for (var p in restaurantUserPermissions) {
+      p.isSelected = false;
     }
   }
-
+}
   /// Reset form fields and uncheck permissions
   void _resetForm() {
     nameController.clear();

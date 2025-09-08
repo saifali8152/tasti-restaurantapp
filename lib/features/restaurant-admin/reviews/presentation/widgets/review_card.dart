@@ -181,19 +181,22 @@ class ReviewCard extends StatelessWidget {
                 separatorBuilder: (_, __) => const SizedBox(width: 8),
                 itemBuilder: (context, index) {
                   final imageUrl = review.images[index];
-                  return GestureDetector(
-                    onTap: () => _openImageGallery(context, index),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: AspectRatio(
-                        aspectRatio: 1,
-                        child: Image.network(
-                          imageUrl,
-                          fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => Container(
-                            color: Colors.grey[300],
-                            child: const Icon(Icons.broken_image,
-                                color: Colors.grey),
+                  return Container(
+                    color: Colors.grey.shade100,
+                    child: GestureDetector(
+                      onTap: () => _openImageGallery(context, index),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: AspectRatio(
+                          aspectRatio: 1,
+                          child: Image.network(
+                            imageUrl,
+                            fit: BoxFit.cover,
+                            errorBuilder: (_, __, ___) => Container(
+                              color: Colors.grey[300],
+                              child: const Icon(Icons.broken_image,
+                                  color: Colors.grey),
+                            ),
                           ),
                         ),
                       ),
@@ -219,7 +222,7 @@ class ReviewCard extends StatelessWidget {
                 isFullWidth: false,
               ),
             ),
-          if (isVerified)
+          if (isVerified && review.images.isEmpty)
             Center(
               child: CustomButton(
                 onPressed: () {

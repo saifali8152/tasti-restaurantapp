@@ -42,16 +42,15 @@ class DrawerScreens {
   static const String eventsPermission = 'events';
   static const String smsManagementPermission = 'manageSmsFee';
   static const String campaignsPermission = 'campaigns';
-  static const String profilePermission = 'profile';
 
   // Restaurant permission keys
   static const String restaurantStatsPermission = 'stats';
   static const String reservationsPermission = 'reservations';
-  static const String availabilityPermission = 'availability';
+  static const String availabilityPermission = 'restaurantSetup';
   static const String reservationDatabasePermission = 'reservationDatabase';
   static const String maintainReviewsPermission = 'maintainReviews';
   static const String bundleBillingsPermission = 'bundleAndBillings';
-  static const String restaurantSettingsPermission = 'restaurantSettings';
+  static const String restaurantSettingsPermission = 'restaurantProfile';
   static const String shareWidgetPermission = 'shareWidget';
 
   static List<Widget> drawerItemsForRole(

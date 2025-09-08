@@ -15,11 +15,11 @@ class DrawerConfig {
   // Restaurant permission keys
   static const String restaurantStatsPermission = 'stats';
   static const String reservationsPermission = 'reservations';
-  static const String availabilityPermission = 'availability';
+  static const String availabilityPermission = 'restaurantSetup';
   static const String reservationDatabasePermission = 'reservationDatabase';
   static const String maintainReviewsPermission = 'maintainReviews';
   static const String bundleBillingsPermission = 'bundleAndBillings';
-  static const String restaurantSettingsPermission = 'restaurantSettings';
+  static const String restaurantSettingsPermission = 'restaurantProfile';
   static const String shareWidgetPermission = 'shareWidget';
 
   static List<DrawerItemModel> drawerItemsForRole(
@@ -143,7 +143,7 @@ class DrawerConfig {
         if (!shouldCheckPermissions) {
           adminItems.add(DrawerItemModel(
             icon: Icons.people,
-            title: "Admin Users",
+            title: "User Permissions",
             index: currentIndex++,
           ));
         }
@@ -220,7 +220,7 @@ class DrawerConfig {
 
           restaurantItems.add(DrawerItemModel(
             icon: Icons.settings_outlined,
-            title: "Availability",
+            title: "Restaurant Setup",
             isExpandable: true,
             children: availabilityChildren,
             permissionKey: availabilityPermission,
@@ -260,7 +260,7 @@ class DrawerConfig {
         // Restaurant Settings
         if (hasPermission(restaurantSettingsPermission)) {
           restaurantItems.add(DrawerItemModel(
-            title: "Restaurant Settings",
+            title: "Restaurant Profile",
             index: currentIndex++,
             icon: Icons.settings,
             permissionKey: restaurantSettingsPermission,
@@ -280,7 +280,7 @@ class DrawerConfig {
         // Add Users - only for main restaurant, not restaurant_user
         if (!shouldCheckPermissions) {
           restaurantItems.add(DrawerItemModel(
-            title: "Restaurant Users",
+            title: "User Permissions",
             index: currentIndex++,
             icon: Icons.people,
           ));

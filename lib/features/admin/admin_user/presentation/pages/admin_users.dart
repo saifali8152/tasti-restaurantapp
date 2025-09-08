@@ -54,7 +54,7 @@ class _AdminUserScreenState extends State<AdminUserScreen> {
       backgroundColor: AppColors.darkOrange,
       appBar: ThemedAppBar(
         height: 120,
-        title: "Admin Users",
+        title: "User Permissions",
         subTitle: ButtonWithIcon(
           icon: Image.asset(AppIcons.seatingArea,
               color: Colors.white, height: 15),

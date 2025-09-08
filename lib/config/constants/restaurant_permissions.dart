@@ -4,11 +4,11 @@ import 'package:tasti_restaurant_app/core/parms/parms.dart';
 final List<PermissionData> restaurantUserPermissions = [
   PermissionData(key: "stats", title: "Stats"),
   PermissionData(key: "reservations", title: "Reservations"),
-  PermissionData(key: "availability", title: "Availability"), // This encompasses all availability sub-items
+  PermissionData(key: "restaurantSetup", title: "Restaurant Setup"), // This encompasses all availability sub-items
   PermissionData(key: "reservationDatabase", title: "Reservation Database"),
   PermissionData(key: "maintainReviews", title: "Maintain Reviews"),
   PermissionData(key: "bundleAndBillings", title: "Bundles and Billings"),
-  PermissionData(key: "restaurantSettings", title: "Restaurant Settings"),
+  PermissionData(key: "restaurantProfile", title: "Restaurant Profile"),
   PermissionData(key: "shareWidget", title: "Share Widget"),
 ];
 
