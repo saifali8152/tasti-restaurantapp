@@ -8,6 +8,7 @@ import 'package:tasti_restaurant_app/features/admin/requests/presentation/pages/
 import 'package:tasti_restaurant_app/features/admin/reservations_database/presentation/pages/reservations_database.dart';
 import 'package:tasti_restaurant_app/features/admin/restaurants/presentation/pages/restaurants.dart';
 import 'package:tasti_restaurant_app/features/common/auth/domain/entities/user.dart';
+import 'package:tasti_restaurant_app/features/common/faqs_chat/faq_chat.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/cuisines/presentation/pages/cuisines.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/food_menu/presentation/pages/food_menu.dart';
 import 'package:tasti_restaurant_app/features/restaurant-admin/gallery/presentation/pages/gallery.dart';
@@ -140,6 +141,8 @@ class DrawerScreens {
         // Profile - always available
         adminScreens.add(ProfileScreen());
         
+        adminScreens.add(FAQChatScreen());
+        
         return adminScreens;
 
       case "restaurant":
@@ -200,6 +203,8 @@ class DrawerScreens {
         
         // Profile - always available
         restaurantScreens.add(ProfileScreen());
+
+        restaurantScreens.add(FAQChatScreen());
         
         return restaurantScreens;
     }

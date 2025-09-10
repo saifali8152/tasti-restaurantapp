@@ -156,6 +156,13 @@ class DrawerConfig {
           permissionKey: profilePermission,
         ));
 
+        adminItems.add(DrawerItemModel(
+          title: "24/7 Live Support",
+          index: currentIndex++,
+          icon: Icons.support_agent,
+          permissionKey: profilePermission,
+        ));
+
         return adminItems;
 
       case "restaurant":
@@ -291,6 +298,13 @@ class DrawerConfig {
           title: "Profile",
           index: currentIndex++,
           icon: Icons.person,
+          permissionKey: profilePermission,
+        ));
+        
+        restaurantItems.add(DrawerItemModel(
+          title: "24/7 Live Support",
+          index: currentIndex++,
+          icon: Icons.support_agent,
           permissionKey: profilePermission,
         ));
 
