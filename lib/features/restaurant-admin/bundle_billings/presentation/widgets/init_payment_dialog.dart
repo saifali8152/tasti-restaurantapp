@@ -1,3 +1,5 @@
+import 'package:tasti_restaurant_app/dependency_injection.dart';
+
 import '/config/constants/colors.dart';
 import '/config/routes/route_name.dart';
 import '/core/network/response.dart';
@@ -9,7 +11,6 @@ import '/features/restaurant-admin/bundle_billings/presentation/bloc/bundle_bill
 import '/features/restaurant-admin/bundle_billings/presentation/bloc/bundle_billing_state.dart';
 import '/core/utils/flushbar_extention.dart';
 import '/core/widgets/custom_button.dart';
-import '/dependency_injection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -18,14 +19,14 @@ class InitPaymentDialog extends StatelessWidget {
   const InitPaymentDialog({super.key, required this.bundleId});
 
   void _handleLoginNavigation(BuildContext context) {
-    Navigator.pop(context);
-    Navigator.pushNamedAndRemoveUntil(context, AppRoutes.skaleton, (route)=>false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, AppRoutes.skaleton, (route) => false);
   }
 
   @override
   Widget build(BuildContext context) {
-    final int id = SessionController().user?.restaurant.id ?? 0;
     final BundleBillingBloc bloc = sl();
+    final int id = SessionController().user?.restaurant.id ?? 0;
     return BlocProvider(
       create: (_) => bloc,
       child: Dialog(
@@ -59,7 +60,9 @@ class InitPaymentDialog extends StatelessWidget {
               BlocConsumer<BundleBillingBloc, BundleBillingState>(
                 bloc: bloc,
                 listener: (context, state) {
+                  // Payment initialized
                   if (state.initPaymentResponse.status == Status.completed) {
+                    
                     final url =
                         state.initPaymentResponse.data?.authorizationUrl ?? '';
                     final reference =
@@ -71,24 +74,41 @@ class InitPaymentDialog extends StatelessWidget {
                       reference: reference,
                       onVerify: (ref) {
                         bloc.add(VerifySmsPayment(VerifySmsPaymentParms(
-                          reference:
-                              state.initPaymentResponse.data?.reference ?? "",
+                          reference: ref,
                           restaurantId: id.toString(),
                           bundleId: bundleId.toString(),
                         )));
+                        context.flushBarSuccessMessage(message: "Verifying payment...");
                       },
                     );
                   }
+
+                  // Init payment error
                   if (state.initPaymentResponse.status == Status.error) {
-                    context.flushBarErrorMessage(message: state.initPaymentResponse.message.toString());
+                    context.flushBarErrorMessage(
+                      message: state.initPaymentResponse.message.toString(),
+                    );
                   }
+
+                  // Verification completed
                   if (state.verifyPaymentResponse.status == Status.completed) {
-                    _handleLoginNavigation(context);
-                    context.flushBarSuccessMessage(message: state.verifyPaymentResponse.data.toString());
+                    // Schedule navigation & flushbar in next frame for smoother UX
+                    Future.microtask(() {
+                      _handleLoginNavigation(context);
+                      context.flushBarSuccessMessage(
+                        message: state.verifyPaymentResponse.data.toString(),
+                      );
+                    });
                   }
+
+                  // Verification error
                   if (state.verifyPaymentResponse.status == Status.error) {
-                    context.flushBarErrorMessage(message:state.verifyPaymentResponse.message.toString());
-                    _handleLoginNavigation(context);
+                    Future.microtask(() {
+                      context.flushBarErrorMessage(
+                        message: state.verifyPaymentResponse.message.toString(),
+                      );
+                      _handleLoginNavigation(context);
+                    });
                   }
                 },
                 builder: (context, state) {

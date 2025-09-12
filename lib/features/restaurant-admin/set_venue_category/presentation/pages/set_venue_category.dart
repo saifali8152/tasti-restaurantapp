@@ -37,7 +37,7 @@ class _SetVenueCategoryState extends State<SetVenueCategory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Restaurant Vanue Categories',
+        title: 'Restaurant Venue Categories',
       ),
       body: BlocBuilder<VenueBloc, VenueState>(
         bloc: bloc,
@@ -59,7 +59,7 @@ class _SetVenueCategoryState extends State<SetVenueCategory> {
                               venue: state.fetchVenues.data!,
                             ),
                       SizedBox(height: 20),
-                      LabelText(text: "Select Vanue Category"),
+                      LabelText(text: "Select Venue Category"),
                       SizedBox(height: 10),
                       MultiSelectDropdown(
                         items: ['Bar', 'Restaurant', 'Night Club'],

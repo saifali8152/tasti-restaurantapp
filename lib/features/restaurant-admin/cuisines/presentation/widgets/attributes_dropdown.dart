@@ -5,11 +5,11 @@ final List<DropdownMenuEntry<String>> attribueDropdownItems = [
   DropdownMenuEntry(value: 'Child Friendly', label: 'Child Friendly'),
   DropdownMenuEntry(value: 'Fireplace', label: 'Fireplace'),
   DropdownMenuEntry(
-      value: 'Gourmet Guide Plated', label: 'Gourmet Guide Plated'),
+      value: 'Luxe awards Plated', label: 'Luxe awards Plated'),
   DropdownMenuEntry(
-      value: 'Gourmet Guide Plated 2019', label: 'Gourmet Guide Plated 2019'),
+      value: 'Luxe awards Plated 2019', label: 'Luxe awards Plated 2019'),
   DropdownMenuEntry(
-      value: 'Gourmet Guide Rated 2019', label: 'Gourmet Guide Rated 2019'),
+      value: 'Luxe awards Rated 2019', label: 'Luxe awards Rated 2019'),
   DropdownMenuEntry(value: 'Great Views', label: 'Great Views'),
   DropdownMenuEntry(value: 'Live Sport', label: 'Live Sport'),
   DropdownMenuEntry(value: 'Outdoor Seating', label: 'Outdoor Seating'),

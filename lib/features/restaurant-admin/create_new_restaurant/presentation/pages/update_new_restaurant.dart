@@ -92,7 +92,7 @@ class _UpdateNewRestaurantState extends State<UpdateNewRestaurant> {
         subTitle: ButtonWithIcon(
           icon: Icon(Icons.home,
               color: Colors.white, size: AppSpaces.iconsHeight),
-          title: 'Set Vanue Category',
+          title: 'Set Venue Category',
           onTap: () {
             Navigator.pushNamed(context, AppRoutes.setVanueCategory);
           },

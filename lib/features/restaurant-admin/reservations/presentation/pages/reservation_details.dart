@@ -57,135 +57,136 @@ class ReservationDetails extends StatelessWidget {
 
     return Scaffold(
       appBar: CustomAppBar(title: 'Reservation Details'),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: BlocConsumer<ReservationBloc, ReservationState>(
-          bloc: context.read<ReservationBloc>(),
-          listener: (context, state) {
-            if (state.updateResponse.status == Status.error) {
-              context.flushBarErrorMessage(
-                  message: state.updateResponse.message.toString());
-            }
-            if (state.cancelResponse.status == Status.error) {
-              context.flushBarErrorMessage(
-                  message: state.cancelResponse.message.toString());
-            }
-            if (state.updateConfirmationResponse.status == Status.error) {
-              context.flushBarErrorMessage(
-                  message: state.updateConfirmationResponse.message.toString());
-            }
-            if (state.updateConfirmationResponse.status == Status.completed) {
-              Navigator.pop(context);
-            }
-            if (state.cancelResponse.status == Status.completed) {
-              Navigator.pop(context);
-            }
-            if (state.updateResponse.status == Status.completed) {
-              Navigator.pop(context);
-            }
-          },
-          builder: (context, state) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // ✅ Show banner only if status is Arrived / No Show
-                if (displayText != null) ...[
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: bgColor,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      displayText,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 15,
-                        color: textColor,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: BlocConsumer<ReservationBloc, ReservationState>(
+            bloc: context.read<ReservationBloc>(),
+            listener: (context, state) {
+              if (state.updateResponse.status == Status.error) {
+                context.flushBarErrorMessage(
+                    message: state.updateResponse.message.toString());
+              }
+              if (state.cancelResponse.status == Status.error) {
+                context.flushBarErrorMessage(
+                    message: state.cancelResponse.message.toString());
+              }
+              if (state.updateConfirmationResponse.status == Status.error) {
+                context.flushBarErrorMessage(
+                    message: state.updateConfirmationResponse.message.toString());
+              }
+              if (state.updateConfirmationResponse.status == Status.completed) {
+                Navigator.pop(context);
+              }
+              if (state.cancelResponse.status == Status.completed) {
+                Navigator.pop(context);
+              }
+              if (state.updateResponse.status == Status.completed) {
+                Navigator.pop(context);
+              }
+            },
+            builder: (context, state) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // ✅ Show banner only if status is Arrived / No Show
+                  if (displayText != null) ...[
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: bgColor,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        displayText,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                          color: textColor,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 15),
-                ],
-
-                // ✅ Then show details
-                DetailsRow(title: 'Guest Name', value: reservation.name),
-                DetailsRow(
-                    title: 'Party Size', value: reservation.guests.toString()),
-                DetailsRow(
-                    title: 'Time From', value: reservation.formattedStartTime),
-                DetailsRow(
-                    title: 'Time To', value: reservation.formattedEndTime),
-                DetailsRow(title: 'Seating Area', value: reservation.notes),
-
-                if (reservation.hasSpecialNotes != false) ...[
-                  const SizedBox(height: 15),
-                  const Text(
-                    "Special Request",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-                  DetailsRow(
-                      title: 'Dietary Requirements',
-                      value: reservation.dietary),
-                  DetailsRow(
-                      title: 'Special Occasion', value: reservation.occasion),
-                  DetailsRow(
-                      title: 'Waiting Preferences', value: reservation.request),
-                  const SizedBox(height: 5),
-                ],
-                Spacer(),
-
-                if (reservation.statusDisplay.toLowerCase() == "pending") ...[
-                  if(!reservation.isConfirmed)...[
-
-                  const SizedBox(height: 10),
-                  CustomButton(
-                      isLoading: state.updateConfirmationResponse.status == Status.loading,
-                      onPressed: () {
-                        context
-                            .read<ReservationBloc>()
-                            .add(UpdateReservationConfirmation(reservation.id.toString()));
-                      },
-                      text: "Confirm Reservation"),
+                    const SizedBox(height: 15),
                   ],
-                  const SizedBox(height: 10),
-                  CustomButton(
-                      isLoading: state.cancelResponse.status == Status.loading,
-                      onPressed: () {
-                        context
-                            .read<ReservationBloc>()
-                            .add(CancelReservation(reservation.id.toString()));
-                      },
-                      text: "Cancel Reservation"),
-                  const SizedBox(height: 10),
-                  CustomButton(
-                      isLoading: state.updateResponse.status == Status.loading,
-                      onPressed: () {
-                        context.read<ReservationBloc>().add(
-                            UpdateReservationStatus(
-                                UpdateReservationStatusParms(
-                                    reservationId: reservation.id,
-                                    status: "no")));
-                      },
-                      text: "Mark as No-Show",
-                      bgColor: AppColors.pending),
-                  const SizedBox(height: 10),
-                  CustomButton(
-                      isLoading: state.updateResponse.status == Status.loading,
-                      onPressed: () {
-                        context.read<ReservationBloc>().add(
-                            UpdateReservationStatus(
-                                UpdateReservationStatusParms(
-                                    reservationId: reservation.id,
-                                    status: "yes")));
-                      },
-                      text: "Mark Arrived",
-                      bgColor: Colors.green),
-                ]
-              ],
-            );
-          },
+        
+                  // ✅ Then show details
+                  DetailsRow(title: 'Guest Name', value: reservation.name),
+                  DetailsRow(
+                      title: 'Party Size', value: reservation.guests.toString()),
+                  DetailsRow(
+                      title: 'Time From', value: reservation.formattedStartTime),
+                  DetailsRow(
+                      title: 'Time To', value: reservation.formattedEndTime),
+                  DetailsRow(title: 'Seating Area', value: reservation.notes),
+        
+                  if (reservation.hasSpecialNotes != false) ...[
+                    const SizedBox(height: 15),
+                    const Text(
+                      "Special Request",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    DetailsRow(
+                        title: 'Dietary Requirements',
+                        value: reservation.dietary),
+                    DetailsRow(
+                        title: 'Special Occasion', value: reservation.occasion),
+                    DetailsRow(
+                        title: 'Waiting Preferences', value: reservation.request),
+                    const SizedBox(height: 5),
+                  ],
+        
+                  if (reservation.statusDisplay.toLowerCase() == "pending") ...[
+                    if(!reservation.isConfirmed)...[
+        
+                    const SizedBox(height: 10),
+                    CustomButton(
+                        isLoading: state.updateConfirmationResponse.status == Status.loading,
+                        onPressed: () {
+                          context
+                              .read<ReservationBloc>()
+                              .add(UpdateReservationConfirmation(reservation.id.toString()));
+                        },
+                        text: "Confirm Reservation"),
+                    ],
+                    const SizedBox(height: 10),
+                    CustomButton(
+                        isLoading: state.cancelResponse.status == Status.loading,
+                        onPressed: () {
+                          context
+                              .read<ReservationBloc>()
+                              .add(CancelReservation(reservation.id.toString()));
+                        },
+                        text: "Cancel Reservation"),
+                    const SizedBox(height: 10),
+                    CustomButton(
+                        isLoading: state.updateResponse.status == Status.loading,
+                        onPressed: () {
+                          context.read<ReservationBloc>().add(
+                              UpdateReservationStatus(
+                                  UpdateReservationStatusParms(
+                                      reservationId: reservation.id,
+                                      status: "no")));
+                        },
+                        text: "Mark as No-Show",
+                        bgColor: AppColors.pending),
+                    const SizedBox(height: 10),
+                    CustomButton(
+                        isLoading: state.updateResponse.status == Status.loading,
+                        onPressed: () {
+                          context.read<ReservationBloc>().add(
+                              UpdateReservationStatus(
+                                  UpdateReservationStatusParms(
+                                      reservationId: reservation.id,
+                                      status: "yes")));
+                        },
+                        text: "Mark Arrived",
+                        bgColor: Colors.green),
+                  ]
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

@@ -40,7 +40,10 @@ class CuisineTabContent extends StatelessWidget {
             cuisine: bloc.state.fetchCuisine.data ?? [],
             type: type,
           ),
-          const LabelText(text: "Select Vanue Category"),
+          const SizedBox(height: 10),
+          LabelText(
+            text: "Select ${type[0].toUpperCase()}${type.substring(1)}",
+          ),
           const SizedBox(height: 10),
           CustomDropdown(
             items: dropdownItems,
