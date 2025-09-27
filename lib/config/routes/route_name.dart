@@ -13,7 +13,7 @@ class AppRoutes {
   static const String profile = '/personal-info';
 
   // ✅ Main Layout (After Login)
-  static const String skaleton = '/';
+  static const String skaleton = '/skaleton';
 
   // ✅ Restaurant-Specific Routes
   static const String makeReservation = '/make-reservation';

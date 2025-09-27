@@ -12,6 +12,7 @@ dynamic handleResponse(Response response) {
     case 400:
       throw BadRequestException(response.data['message'] ?? 'Bad Request');
     case 401:
+      NavigatorService.clearSessionAndnavigate();
       throw UnauthorizedException(response.data['message'] ?? 'Unauthorized');
     case 403:
       if (SessionController().user?.type == "restaurant_user") {

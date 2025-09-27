@@ -38,12 +38,13 @@ class NetworkApiServiceImpl implements IApiService {
       if (contentType != null && !contentType.contains('application/json')) {
         log('Non-JSON response received. Content-Type: $contentType');
         log('Response data: ${response.data}');
-        
+
         // If it's HTML (common when service is down)
         if (contentType.contains('text/html')) {
-          throw ServiceUnavailableException('Service is temporarily unavailable. Please try again later.');
+          throw ServiceUnavailableException(
+              'Service is temporarily unavailable. Please try again later.');
         }
-        
+
         throw FetchDataException('Server returned unexpected response format');
       }
 
@@ -67,7 +68,6 @@ class NetworkApiServiceImpl implements IApiService {
       log('Unexpected response data type: ${response.data.runtimeType}');
       log('Response data: ${response.data}');
       throw FetchDataException('Server returned unexpected response type');
-
     } catch (e) {
       if (e is CustomException) {
         rethrow;
@@ -116,10 +116,10 @@ class NetworkApiServiceImpl implements IApiService {
             ),
           )
           .timeout(const Duration(seconds: 20));
-      
+
       log('Response status: ${response.statusCode}');
       log('Response headers: ${response.headers.map}');
-      
+
       return _handleValidatedResponse(response);
     } on TimeoutException {
       throw TimeoutException('Request timed out. Please try again.');
@@ -130,7 +130,8 @@ class NetworkApiServiceImpl implements IApiService {
         rethrow;
       }
       log('Unexpected error in GET: $e');
-      throw FetchDataException('Unable to connect to server. Please check your connection and try again.');
+      throw FetchDataException(
+          'Unable to connect to server. Please check your connection and try again.');
     }
   }
 
@@ -154,7 +155,7 @@ class NetworkApiServiceImpl implements IApiService {
             ),
           )
           .timeout(const Duration(seconds: 20));
-      
+
       log('Response status: ${response.statusCode}');
       log('Response headers: ${response.headers.map}');
 
@@ -168,7 +169,8 @@ class NetworkApiServiceImpl implements IApiService {
         rethrow;
       }
       log('Unexpected error in POST: $e');
-      throw FetchDataException('Unable to connect to server. Please check your connection and try again.');
+      throw FetchDataException(
+          'Unable to connect to server. Please check your connection and try again.');
     }
   }
 
@@ -214,7 +216,8 @@ class NetworkApiServiceImpl implements IApiService {
         rethrow;
       }
       log('Unexpected error in POST MULTIPART: $e');
-      throw FetchDataException('Unable to upload files. Please check your connection and try again.');
+      throw FetchDataException(
+          'Unable to upload files. Please check your connection and try again.');
     }
   }
 
@@ -222,45 +225,48 @@ class NetworkApiServiceImpl implements IApiService {
     log('DioError: ${dioError.response} ${dioError.requestOptions.uri}');
     log('DioError type: ${dioError.type}');
     log('DioError message: ${dioError.message}');
-    
+
     // Handle connection errors
     if (dioError.type == DioExceptionType.connectionTimeout ||
         dioError.type == DioExceptionType.sendTimeout ||
         dioError.type == DioExceptionType.receiveTimeout) {
-      return TimeoutException('Connection timeout. Please check your internet connection.');
+      return TimeoutException(
+          'Connection timeout. Please check your internet connection.');
     }
-    
+
     if (dioError.type == DioExceptionType.connectionError) {
-      return FetchDataException('Unable to connect to server. Please check your internet connection.');
+      return FetchDataException(
+          'Unable to connect to server. Please check your internet connection.');
     }
-    
+
     if (dioError.response != null) {
       final status = dioError.response?.statusCode;
-      
+
       // Try to extract error message safely
       String msg = 'Something went wrong.';
       try {
         final responseData = dioError.response?.data;
         if (responseData != null) {
           if (responseData is Map<String, dynamic>) {
-            msg = responseData['message']?.toString() ?? 
-                  responseData['error']?.toString() ?? 
-                  responseData['msg']?.toString() ?? 
-                  'Something went wrong.';
+            msg = responseData['message']?.toString() ??
+                responseData['error']?.toString() ??
+                responseData['msg']?.toString() ??
+                'Something went wrong.';
           } else if (responseData is String) {
             // Check if it's HTML error page
-            if (responseData.toLowerCase().contains('<html>') || 
+            if (responseData.toLowerCase().contains('<html>') ||
                 responseData.toLowerCase().contains('<!doctype')) {
-              msg = 'Service is temporarily unavailable. Please try again later.';
+              msg =
+                  'Service is temporarily unavailable. Please try again later.';
             } else {
               // Try to parse as JSON
               try {
                 final parsed = json.decode(responseData);
                 if (parsed is Map<String, dynamic>) {
-                  msg = parsed['message']?.toString() ?? 
-                        parsed['error']?.toString() ?? 
-                        parsed['msg']?.toString() ?? 
-                        'Something went wrong.';
+                  msg = parsed['message']?.toString() ??
+                      parsed['error']?.toString() ??
+                      parsed['msg']?.toString() ??
+                      'Something went wrong.';
                 }
               } catch (_) {
                 msg = 'Server returned an unexpected response.';
@@ -277,14 +283,16 @@ class NetworkApiServiceImpl implements IApiService {
         case 400:
           return BadRequestException(msg);
         case 401:
+          NavigatorService.clearSessionAndnavigate();
           return UnauthorizedException(msg);
         case 403:
           Future.microtask(() {
-            if(SessionController().user?.type == "restaurant_user"){
+            if (SessionController().user?.type == "restaurant_user") {
               return NavigatorService.clearSessionAndnavigate();
             }
-            if(SessionController().user?.type == "restaurant"){
-              return NavigatorService.navigateToRemoveUntill(AppRoutes.monthlyFee);
+            if (SessionController().user?.type == "restaurant") {
+              return NavigatorService.navigateToRemoveUntill(
+                  AppRoutes.monthlyFee);
             }
           });
           return UnauthorizedException(msg);
@@ -297,12 +305,15 @@ class NetworkApiServiceImpl implements IApiService {
         case 502:
         case 503:
         case 504:
-          return ServiceUnavailableException('Service is temporarily unavailable. Please try again later.');
+          return ServiceUnavailableException(
+              'Service is temporarily unavailable. Please try again later.');
         default:
-          return FetchDataException('Server error (Status: $status). Please try again later.');
+          return FetchDataException(
+              'Server error (Status: $status). Please try again later.');
       }
     } else {
-      return FetchDataException('No response from server. Please check your internet connection.');
+      return FetchDataException(
+          'No response from server. Please check your internet connection.');
     }
   }
 
@@ -333,7 +344,7 @@ class NetworkApiServiceImpl implements IApiService {
 
       log('Response status: ${response.statusCode}');
       log('Response headers: ${response.headers.map}');
-      
+
       return _handleValidatedResponse(response);
     } on TimeoutException {
       throw TimeoutException('Request timed out. Please try again.');
@@ -344,7 +355,8 @@ class NetworkApiServiceImpl implements IApiService {
         rethrow;
       }
       log('Unexpected error in DELETE: $e');
-      throw FetchDataException('Unable to connect to server. Please check your connection and try again.');
+      throw FetchDataException(
+          'Unable to connect to server. Please check your connection and try again.');
     }
   }
 }

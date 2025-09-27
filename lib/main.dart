@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           navigatorKey: NavigatorService.navigatorKey,
-          title: 'Tasti Restaurant App',
+          title: 'Tasti Restaurant',
           theme: AppTheme.lightTheme,
           themeMode: ThemeMode.light,
           initialRoute: AppRoutes.splash,
