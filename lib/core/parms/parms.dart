@@ -431,16 +431,22 @@ class UpdateMonthlyFeeParms {
 class UpdateProfileParms {
   final String name;
   final String profilePic;
+  final String email;
+  final String phone;
 
   UpdateProfileParms({
     required this.name,
     required this.profilePic,
+    required this.email,
+    required this.phone,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'name': name,
       'profile_pic': profilePic,
+      'email': email,
+      'phone': phone,
     };
   }
 }

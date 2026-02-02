@@ -37,6 +37,8 @@ class ProfileRemoteApiImpl extends IProfileRemoteApi {
 
     final Map<String, dynamic> fields = {
       "name": parms.name,
+      "email": parms.email,
+      "phone": parms.phone,
     };
 
     final response = await networkApiService.postMultipart(url, fields, files);

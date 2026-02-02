@@ -24,10 +24,13 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
   final ProfileBloc bloc = sl<ProfileBloc>();
   final UserEntity? user = sl<UserCubit>().state.user;
   late TextEditingController nameC;
-
+  TextEditingController emailC = TextEditingController();
+  TextEditingController phoneC = TextEditingController();
   @override
   void initState() {
     nameC = TextEditingController(text: user!.name);
+    emailC.text = user?.email ?? '';
+    phoneC.text = user?.phoneNumber ?? '';
     bloc.add(SetProfilePic(user!.profilePic));
     super.initState();
   }
@@ -35,6 +38,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
   @override
   void dispose() {
     nameC.dispose();
+    emailC.dispose();
+    phoneC.dispose();
     super.dispose();
   }
 
@@ -83,14 +88,16 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                       controller: nameC,
                     ),
                     CustomInputField(
-                      hintText: user?.email ?? "Email",
+                      hintText: "Email",
                       icon: Icons.email,
-                      readOnly: true,
+                      controller: emailC,
+                      readOnly: false,
                     ),
                     CustomInputField(
-                      hintText: user?.phoneNumber ?? "Phone Number",
+                      hintText: "Phone Number",
                       icon: Icons.phone,
-                      readOnly: true,
+                      readOnly: false,
+                      controller: phoneC,
                     ),
                     // const SizedBox(height: 20),
                     // CustomTile(
@@ -104,7 +111,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                     CustomButton(
                       isLoading: state.response.status == Status.loading,
                       onPressed: () {
-                        bloc.add(UpdateProfile(nameC.text));
+                        bloc.add(UpdateProfile(nameC.text, emailC.text, phoneC.text));
                       },
                       text: "Save",
                     )

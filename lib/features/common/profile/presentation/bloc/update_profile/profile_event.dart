@@ -15,6 +15,8 @@ class SetProfilePic extends ProfileEvent {
 
 class UpdateProfile extends ProfileEvent {
   final String name;
+  final String email;
+  final String phone;
 
-  UpdateProfile(this.name);
+  UpdateProfile(this.name, this.email, this.phone);
 }

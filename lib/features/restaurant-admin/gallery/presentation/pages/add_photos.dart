@@ -41,13 +41,13 @@ class _AddPhotosScreenState extends State<AddPhotosScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FieldLabel(title: "Food Name"),
+                FieldLabel(title: "Name"),
                 CustomInputField(
-                    hintText: "Enter Food Name", controller: nameC),
+                    hintText: "Enter Name", controller: nameC),
                 SizedBox(height: 10),
-                FieldLabel(title: "Food Description"),
+                FieldLabel(title: "Description"),
                 CustomInputField(
-                  hintText: "Enter Food Description",
+                  hintText: "Enter Description",
                   controller: descriptionC,
                 ),
                 SizedBox(height: 10),

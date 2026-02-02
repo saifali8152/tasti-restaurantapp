@@ -35,11 +35,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     try {
       emit(state.copyWith(response: ApiResponse.loading()));
 
-      if(event.name == sl<UserCubit>().state.user!.name && state.profilePic.contains("http")){
+      if(event.name == sl<UserCubit>().state.user!.name && event.email == sl<UserCubit>().state.user!.email && event.phone == sl<UserCubit>().state.user!.phoneNumber && state.profilePic.contains("http")){
         return emit(state.copyWith(response: ApiResponse.completed("Profile updated successfully")));
       }
 
-      UpdateProfileParms parms = UpdateProfileParms(profilePic: state.profilePic, name: event.name);
+      UpdateProfileParms parms = UpdateProfileParms(profilePic: state.profilePic, name: event.name, email: event.email, phone: event.phone);
 
       final response = await updateProfileUseCase.call(parms);
       if (response.status == Status.completed) {
