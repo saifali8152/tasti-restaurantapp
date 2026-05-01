@@ -80,6 +80,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => sl<CustomerReservationsBloc>()),
         ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           navigatorKey: NavigatorService.navigatorKey,
           title: 'Tasti Restaurant',
           theme: AppTheme.lightTheme,

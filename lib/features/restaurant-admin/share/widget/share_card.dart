@@ -26,7 +26,7 @@ class ShareCard extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
         ),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
