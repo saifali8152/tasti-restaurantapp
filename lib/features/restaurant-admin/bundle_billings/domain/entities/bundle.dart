@@ -1,6 +1,12 @@
 import 'package:equatable/equatable.dart';
 import '/core/models/pagination.dart';
 
+double parseJsonDouble(dynamic value, [double fallback = 0.0]) {
+  if (value == null || value.toString().isEmpty) return fallback;
+  if (value is num) return value.toDouble();
+  return double.tryParse(value.toString()) ?? fallback;
+}
+
 class BundleEntity extends Equatable {
   final List<BundleItem> data;
   final PaginationModel pagination;
@@ -46,7 +52,7 @@ class BundleItem {
       productQ: json['product_q'] as int,
       source: json['source_'] as String,
       methods: json['methods'] as String,
-      amount: (json['amount'] as num).toDouble(),
+      amount: parseJsonDouble(json['amount']),
       dates: json['dates'] as String,
       times: json['times'] as String,
       resId: json['res_id'] as int,

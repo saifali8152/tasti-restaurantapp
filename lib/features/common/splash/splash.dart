@@ -27,8 +27,12 @@ class _SplashScreenState extends State<SplashScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.asset(AppImages.launcher, height: 100, width: 100,)),
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(
+                  AppImages.launcher,
+                  height: 100,
+                  width: 100,
+                )),
           ],
         ),
       ),

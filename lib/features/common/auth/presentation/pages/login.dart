@@ -121,6 +121,7 @@ class LoginScreen extends StatelessWidget {
                   bloc: loginBloc,
                   listener: (context, state) {
                     if (state.loginResponse.status == Status.error) {
+                      print("error: ${state.loginResponse.message}");
                       context.flushBarErrorMessage(
                         message:
                             state.loginResponse.message ?? "Error Occurred",

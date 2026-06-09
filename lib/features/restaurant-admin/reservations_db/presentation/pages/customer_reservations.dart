@@ -57,14 +57,17 @@ class _CustomerReservationsState extends State<CustomerReservations> {
       bloc: bloc,
       listener: (context, state) {
         if (state.fetchSmsAvailabilityResponse.status == Status.completed) {
-          Navigator.pushNamed(
-            context,
-            AppRoutes.sentCampaign,
-            arguments: SentCampaignArguments(
-              state.selectedRevervations,
-              state.fetchSmsAvailabilityResponse.data.toString(),
-            ),
-          );
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (!context.mounted) return;
+            Navigator.pushNamed(
+              context,
+              AppRoutes.sentCampaign,
+              arguments: SentCampaignArguments(
+                state.selectedRevervations,
+                state.fetchSmsAvailabilityResponse.data.toString(),
+              ),
+            );
+          });
         }
       },
       builder: (context, state) {
@@ -72,25 +75,29 @@ class _CustomerReservationsState extends State<CustomerReservations> {
           backgroundColor: AppColors.darkOrange,
           appBar: ThemedAppBar(
             height: 100,
-            title: "Customer Reservations",
+            title: "Customer Reservation",
             actions: [
               PopupMenuButton<String>(
                 icon: const Icon(Icons.more_vert, color: Colors.white),
                 onSelected: (value) {
-                  switch (value) {
-                    case 'csv':
-                      Navigator.pushNamed(context, AppRoutes.csvImportedData);
-                      break;
-                    case 'targeted':
-                      Navigator.pushNamed(context, AppRoutes.targetedCampaign);
-                      break;
-                    case 'view_campaigns':
-                      Navigator.pushNamed(context, AppRoutes.campaigns);
-                      break;
-                    case 'import':
-                      Navigator.pushNamed(context, AppRoutes.importDatabase);
-                      break;
-                  }
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    if (!context.mounted) return;
+                    switch (value) {
+                      case 'csv':
+                        Navigator.pushNamed(context, AppRoutes.csvImportedData);
+                        break;
+                      case 'targeted':
+                        Navigator.pushNamed(
+                            context, AppRoutes.targetedCampaign);
+                        break;
+                      case 'view_campaigns':
+                        Navigator.pushNamed(context, AppRoutes.campaigns);
+                        break;
+                      case 'import':
+                        Navigator.pushNamed(context, AppRoutes.importDatabase);
+                        break;
+                    }
+                  });
                 },
                 itemBuilder: (BuildContext context) => [
                   const PopupMenuItem(
@@ -165,9 +172,8 @@ class _CustomerReservationsState extends State<CustomerReservations> {
                                   : Icons.check_box_outline_blank,
                               size: 20,
                             ),
-                            label: Text(isAllSelected
-                                ? "Deselect All"
-                                : "Select All"),
+                            label: Text(
+                                isAllSelected ? "Deselect All" : "Select All"),
                           ),
                         ),
 

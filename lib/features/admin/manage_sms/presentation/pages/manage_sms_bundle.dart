@@ -44,21 +44,22 @@ class _ManageSMSState extends State<ManageSMS> {
               icon: Image.asset(AppIcons.envelop,
                   color: Colors.white, height: 15),
               title: 'Add SMS Bundles',
-              onTap: () => Navigator.pushNamed(context,AppRoutes.addSmsBundle),
+              onTap: () => Navigator.pushNamed(context, AppRoutes.addSmsBundle),
               bgColor: Color(0xFF0D49AA),
             ),
             ButtonWithIcon(
               icon:
                   Image.asset(AppIcons.target, color: Colors.white, height: 15),
               title: 'Transaction History',
-              onTap: () => Navigator.pushNamed(context,AppRoutes.transactionHistory),
+              onTap: () =>
+                  Navigator.pushNamed(context, AppRoutes.transactionHistory),
               bgColor: Color(0xFF5A73E2),
             ),
             ButtonWithIcon(
               icon:
                   Image.asset(AppIcons.target, color: Colors.white, height: 15),
               title: 'Manage Fees',
-              onTap: () => Navigator.pushNamed(context,AppRoutes.monthlyFee),
+              onTap: () => Navigator.pushNamed(context, AppRoutes.monthlyFee),
               bgColor: Color(0xFF2EBABA),
             ),
           ],
@@ -69,7 +70,7 @@ class _ManageSMSState extends State<ManageSMS> {
         builder: (context, state) {
           return CurvedContainer(
             child: RefreshIndicator.adaptive(
-              onRefresh: ()async{
+              onRefresh: () async {
                 bloc.add(FetchInitialAdminSms());
               },
               child: Builder(
@@ -77,8 +78,10 @@ class _ManageSMSState extends State<ManageSMS> {
                   if (state.fetchResponse.status == Status.loading) {
                     return const Center(child: LoadingWidget());
                   }
-              
+
                   if (state.fetchResponse.status == Status.error) {
+                    print(
+                        "Manage SMS Bundle error: ${state.fetchResponse.message}");
                     return Center(
                       child: Text(
                         state.fetchResponse.message.toString(),
@@ -86,17 +89,18 @@ class _ManageSMSState extends State<ManageSMS> {
                       ),
                     );
                   }
-              
+
                   if (state.fetchResponse.status == Status.completed) {
                     if (state.fetchResponse.data!.isEmpty) {
                       return Center(
                         child: Text(
                           "No SMS Bundle Found.",
-                          style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                          style:
+                              TextStyle(fontSize: 16, color: Colors.grey[700]),
                         ),
                       );
                     }
-              
+
                     return NotificationListener<ScrollNotification>(
                       onNotification: (scrollInfo) {
                         if (!state.isLoadingMore &&
@@ -108,8 +112,8 @@ class _ManageSMSState extends State<ManageSMS> {
                         return false;
                       },
                       child: ListView.separated(
-                        itemCount:
-                            state.fetchResponse.data!.length + (state.isLoadingMore ? 1 : 0),
+                        itemCount: state.fetchResponse.data!.length +
+                            (state.isLoadingMore ? 1 : 0),
                         separatorBuilder: (context, index) =>
                             const SizedBox(height: 10),
                         itemBuilder: (context, index) {
@@ -123,7 +127,7 @@ class _ManageSMSState extends State<ManageSMS> {
                       ),
                     );
                   }
-              
+
                   return const Center(child: Text("Something went wrong."));
                 },
               ),

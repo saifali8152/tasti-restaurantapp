@@ -48,7 +48,7 @@ class BundleItemModel extends BundleItem {
       productQ: json['product_q'] as int,
       source: json['source_'] as String,
       methods: json['methods'] as String,
-      amount: (json['amount'] as num).toDouble(),
+      amount: parseJsonDouble(json['amount']),
       dates: json['dates'] as String,
       times: json['times'] as String,
       resId: json['res_id'] as int,

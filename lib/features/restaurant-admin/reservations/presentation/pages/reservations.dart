@@ -106,7 +106,9 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                               ),
                             ),
                             Text(
-                              state.fetchResponse.data?.stats.totalBookings.toString() ?? '0',
+                              state.fetchResponse.data?.stats.totalBookings
+                                      .toString() ??
+                                  '0',
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                               ),
@@ -125,7 +127,9 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                               ),
                             ),
                             Text(
-                              state.fetchResponse.data?.stats.totalPax.toString()??'0',
+                              state.fetchResponse.data?.stats.totalPax
+                                      .toString() ??
+                                  '0',
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                               ),
@@ -140,7 +144,8 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                   ReservationsDatePicker(
                     onDateChanged: (value) {
                       date = value;
-                      bloc.add(FetchReservationEvent(FetchReservationParms(id: id.toString(),date:date)));
+                      bloc.add(FetchReservationEvent(FetchReservationParms(
+                          id: id.toString(), date: date)));
                     },
                   ),
                   const SizedBox(height: 20),
@@ -155,6 +160,8 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                         }
 
                         if (state.fetchResponse.status == Status.error) {
+                          print(
+                              "Reservations error: ${state.fetchResponse.message}");
                           return _messageList(
                             state.fetchResponse.message.toString(),
                             color: Colors.red,
@@ -163,14 +170,18 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
 
                         if (state.fetchResponse.status == Status.completed) {
                           final reservations = state.fetchResponse.data;
-                          if (reservations == null || reservations.data.isEmpty) {
+                          if (reservations == null ||
+                              reservations.data.isEmpty) {
                             return _messageList("No reservations found.");
                           }
 
                           return ListView.builder(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
                             itemCount: reservations.data.length,
-                            itemBuilder: (_, index) => RevervationCard(reservation: reservations.data[index], restaurantId: id, date: date),
+                            itemBuilder: (_, index) => RevervationCard(
+                                reservation: reservations.data[index],
+                                restaurantId: id,
+                                date: date),
                           );
                         }
 

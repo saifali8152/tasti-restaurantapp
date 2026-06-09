@@ -14,6 +14,19 @@ class SMSBundleSourceRemoteApiImpl extends ISMSBundleRemoteSourceApi {
   final IApiService networkApiService;
   SMSBundleSourceRemoteApiImpl(this.networkApiService);
 
+  Map<String, dynamic> _normalizePaginatedPayload(dynamic response) {
+    if (response is! Map<String, dynamic>) return {};
+
+    final nested = response['data'];
+    if (nested is Map<String, dynamic> &&
+        nested.containsKey('data') &&
+        nested.containsKey('pagination')) {
+      return nested;
+    }
+
+    return response;
+  }
+
   @override
   Future<String> manageSmsBundleDiscount(ManageSmsBundleDiscountParms parms) async {
     Map<String, dynamic> data = {};
@@ -67,9 +80,9 @@ class SMSBundleSourceRemoteApiImpl extends ISMSBundleRemoteSourceApi {
     };
     final response =
         await networkApiService.get(AppUrls.fetchAdminSMS, queryParams: data);
-    final Map<String, dynamic> adminReservation = response;
 
-    final AdminSmsModel adminSmsList = AdminSmsModel.fromJson(adminReservation);
+    final Map<String, dynamic> payload = _normalizePaginatedPayload(response);
+    final AdminSmsModel adminSmsList = AdminSmsModel.fromJson(payload);
 
     return adminSmsList;
   }

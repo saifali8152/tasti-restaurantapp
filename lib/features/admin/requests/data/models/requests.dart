@@ -1,6 +1,12 @@
 import '/core/models/pagination.dart';
 import '/features/admin/requests/domain/entities/requests.dart';
 
+int _parseJsonInt(dynamic value, [int fallback = 0]) {
+  if (value == null) return fallback;
+  if (value is int) return value;
+  return int.tryParse(value.toString()) ?? fallback;
+}
+
 class RequestModel extends RequestEntity {
   const RequestModel({
     required super.data,
@@ -43,7 +49,7 @@ class RequestItemModel extends RequestItem {
 
   factory RequestItemModel.fromJson(Map<String, dynamic> json) {
     return RequestItemModel(
-      reqId: json['req_id'] ?? 0,
+      reqId: _parseJsonInt(json['req_id']),
       name: json['name'] ?? '',
       email: json['email'] ?? '',
       phone: json['phone'] ?? '',

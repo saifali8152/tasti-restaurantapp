@@ -173,12 +173,8 @@ class UserRestaurantModel extends UserRestaurantEntity {
       minimumSpend: (json['minimum_spend'] ?? '').toString(),
       status: (json['status'] ?? '').toString(),
       paid: (json['paid'] ?? '').toString(),
-      lat: (json['lat'] == null || json['lat'].toString().isEmpty)
-          ? 0.0
-          : (json['lat'] as num).toDouble(),
-      lon: (json['lon'] == null || json['lon'].toString().isEmpty)
-          ? 0.0
-          : (json['lon'] as num).toDouble(),
+      lat: parseJsonDouble(json['lat']),
+      lon: parseJsonDouble(json['lon']),
       rating: (json['rating'] == null || json['rating'].toString().isEmpty)
           ? 0
           : int.tryParse(json['rating'].toString()) ?? 0,

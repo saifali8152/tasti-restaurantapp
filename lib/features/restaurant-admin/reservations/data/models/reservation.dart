@@ -1,5 +1,20 @@
 import '/features/restaurant-admin/reservations/domain/entities/reservation.dart';
 
+int _parseJsonBoolAsInt(dynamic value, [int fallback = 0]) {
+  if (value == null) return fallback;
+  if (value is bool) return value ? 1 : 0;
+  if (value is int) return value;
+  return int.tryParse(value.toString()) ?? fallback;
+}
+
+bool _parseJsonBool(dynamic value, [bool fallback = false]) {
+  if (value == null) return fallback;
+  if (value is bool) return value;
+  if (value is int) return value != 0;
+  final normalized = value.toString().toLowerCase();
+  return normalized == '1' || normalized == 'true';
+}
+
 class ReservationModel extends ReservationEntity {
   ReservationModel({
     required List<ReservationItemModel> super.data,
@@ -58,7 +73,7 @@ class ReservationItemModel extends ReservationItem {
   factory ReservationItemModel.fromJson(Map<String, dynamic> json) {
     return ReservationItemModel(
       id: json['id'],
-      isConfirmed: json['is_confirmed'] == 0? false: true,
+      isConfirmed: _parseJsonBool(json['is_confirmed']),
       name: json['name'],
       phone: json['phone'],
       guests: json['guests'],
@@ -71,7 +86,7 @@ class ReservationItemModel extends ReservationItem {
       request: json['request'],
       waiter: json['waiter'],
       status: json['status'],
-      canceled: json['canceled'],
+      canceled: _parseJsonBoolAsInt(json['canceled']),
       actionDate: json['action_date'],
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
@@ -81,9 +96,9 @@ class ReservationItemModel extends ReservationItem {
       formattedStartTime: json['formatted_start_time'],
       formattedEndTime: json['formatted_end_time'],
       formattedDateTime: json['formatted_date_time'],
-      hasSpecialNotes: json['has_special_notes'],
+      hasSpecialNotes: _parseJsonBool(json['has_special_notes']),
       statusDisplay: json['status_display'],
-      canAssignWaiter: json['can_assign_waiter'],
+      canAssignWaiter: _parseJsonBool(json['can_assign_waiter']),
     );
   }
 

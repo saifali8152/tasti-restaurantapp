@@ -1,3 +1,4 @@
+import '/features/restaurant-admin/bundle_billings/domain/entities/bundle.dart';
 import '/features/restaurant-admin/bundle_billings/domain/entities/init_payment.dart';
 
 class InitPaymentModel extends InitPaymentEntity {
@@ -13,7 +14,7 @@ class InitPaymentModel extends InitPaymentEntity {
     return InitPaymentModel(
       authorizationUrl: json['authorization_url'] ?? '',
       reference: json['reference'] ?? '',
-      amount: (json['amount'] as num).toDouble(),
+      amount: parseJsonDouble(json['amount']),
       currency: json['currency'] ?? '',
       bundleDetails: BundleDetailsModel.fromJson(json['bundle_details'] ?? {}),
     );

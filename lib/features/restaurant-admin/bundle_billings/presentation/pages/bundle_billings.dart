@@ -64,14 +64,14 @@ class _BundleBillingsScreenState extends State<BundleBillingsScreen> {
               bgColor: const Color(0xFF5A73E2),
             ),
             ButtonWithIcon(
-            icon: Image.asset(AppIcons.seatingArea,
-                color: Colors.white, height: 15),
-            title: 'Buy SMS Bundles',
-            onTap: () {
-              Navigator.pushNamed(context, AppRoutes.buySmsBundles);
-            },
-            bgColor: const Color(0xFFE26A5A),
-          ),
+              icon: Image.asset(AppIcons.seatingArea,
+                  color: Colors.white, height: 15),
+              title: 'Buy SMS Bundles',
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.buySmsBundles);
+              },
+              bgColor: const Color(0xFFE26A5A),
+            ),
           ],
         ),
       ),
@@ -92,12 +92,14 @@ class _BundleBillingsScreenState extends State<BundleBillingsScreen> {
                   }
 
                   if (state.fetchBundleResponse.status == Status.error) {
+                    print(
+                        "Bundle Billings error: ${state.fetchBundleResponse.message}");
                     return _buildScrollContent(
                       Center(
                         child: Text(
                           state.fetchBundleResponse.message.toString(),
-                          style: const TextStyle(
-                              color: Colors.red, fontSize: 16),
+                          style:
+                              const TextStyle(color: Colors.red, fontSize: 16),
                         ),
                       ),
                     );
@@ -133,8 +135,7 @@ class _BundleBillingsScreenState extends State<BundleBillingsScreen> {
                         separatorBuilder: (context, index) =>
                             const SizedBox(height: 10),
                         itemBuilder: (context, index) {
-                          if (index <
-                              state.fetchBundleResponse.data!.length) {
+                          if (index < state.fetchBundleResponse.data!.length) {
                             final bundle =
                                 state.fetchBundleResponse.data![index];
                             return BundleCard(bundle: bundle);

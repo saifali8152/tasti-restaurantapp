@@ -1,5 +1,11 @@
 import 'package:equatable/equatable.dart';
 
+double parseJsonDouble(dynamic value, [double fallback = 0.0]) {
+  if (value == null || value.toString().isEmpty) return fallback;
+  if (value is num) return value.toDouble();
+  return double.tryParse(value.toString()) ?? fallback;
+}
+
 class UserEntity extends Equatable {
   const UserEntity({
     required this.id,
@@ -108,12 +114,8 @@ class UserRestaurantEntity extends Equatable {
       minimumSpend: (json['minimum_spend'] ?? '').toString(),
       status: (json['status'] ?? '').toString(),
       paid: (json['paid'] ?? '').toString(),
-      lat: (json['lat'] == null || json['lat'].toString().isEmpty)
-          ? 0.0
-          : (json['lat'] as num).toDouble(),
-      lon: (json['lon'] == null || json['lon'].toString().isEmpty)
-          ? 0.0
-          : (json['lon'] as num).toDouble(),
+      lat: parseJsonDouble(json['lat']),
+      lon: parseJsonDouble(json['lon']),
       rating: (json['rating'] == null || json['rating'].toString().isEmpty)
           ? 0
           : int.tryParse(json['rating'].toString()) ?? 0,

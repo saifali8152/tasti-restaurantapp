@@ -1,5 +1,12 @@
 import '/features/restaurant-admin/seating_area/domain/entities/seating_area.dart';
 
+int _parseJsonBoolAsInt(dynamic value, [int fallback = 0]) {
+  if (value == null) return fallback;
+  if (value is bool) return value ? 1 : 0;
+  if (value is int) return value;
+  return int.tryParse(value.toString()) ?? fallback;
+}
+
 class SeatingAreaModel extends SeatingAreaEntity {
   SeatingAreaModel({
     required super.id,
@@ -54,7 +61,7 @@ class TableModel extends TableEntity {
       minCapacity: json['min_capacity'] ?? 0,
       tableMax: json['table_max'] ?? 0,
       abbreviation: json['abbreviation'],
-      isMoveable: json['is_moveable'] ?? 0,
+      isMoveable: _parseJsonBoolAsInt(json['is_moveable']),
       type: json['type'] ?? '',
       shape: json['shape'] ?? '',
     );

@@ -1,6 +1,12 @@
 // MODEL
 import '/features/restaurant-admin/reservations_db/domain/entities/restaurant_campaign.dart';
 
+double _parseJsonDouble(dynamic value, [double fallback = 0.0]) {
+  if (value == null || value.toString().isEmpty) return fallback;
+  if (value is num) return value.toDouble();
+  return double.tryParse(value.toString()) ?? fallback;
+}
+
 class RestaurantCampaignModel extends RestaurantCampaignEntity {
   RestaurantCampaignModel({
     required super.cId,
@@ -21,7 +27,7 @@ class RestaurantCampaignModel extends RestaurantCampaignEntity {
       sms: json['sms'] as String,
       area: json['area'] as String,
       message: json['message'] as String,
-      cash: (json['cash'] as num).toDouble(),
+      cash: _parseJsonDouble(json['cash']),
       status: json['status'] as String,
       dates: json['dates'] as String,
       reference: json['reference'] as String,

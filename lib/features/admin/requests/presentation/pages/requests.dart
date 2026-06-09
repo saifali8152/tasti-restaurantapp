@@ -59,6 +59,7 @@ class _RequestsState extends State<Requests> {
                 }
 
                 if (state.fetchResponse.status == Status.error) {
+                  print("Requests error: ${state.fetchResponse.message}");
                   return Center(
                     child: Text(
                       state.fetchResponse.message.toString(),

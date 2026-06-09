@@ -82,6 +82,7 @@ class _SeatingAreaScreenState extends State<SeatingAreaScreen> {
                   }
 
                   if (state.fetchResponse.status == Status.error) {
+                    print("error: ${state.fetchResponse.message}");
                     return _messageList(
                       state.fetchResponse.message.toString(),
                       color: Colors.red,

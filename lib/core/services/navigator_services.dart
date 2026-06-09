@@ -1,24 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:tasti_restaurant_app/config/routes/route_name.dart';
 import 'package:tasti_restaurant_app/core/services/session_controller.dart';
 
 class NavigatorService {
-  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
+
+  static void _runWhenUnlocked(void Function(NavigatorState nav) action) {
+    void execute() {
+      final nav = navigatorKey.currentState;
+      if (nav == null || !nav.mounted) return;
+      action(nav);
+    }
+
+    final binding = SchedulerBinding.instance;
+    if (binding.schedulerPhase == SchedulerPhase.idle) {
+      binding.addPostFrameCallback((_) => execute());
+    } else {
+      binding.addPostFrameCallback((_) => execute());
+    }
+  }
 
   static void navigateTo(String routeName) {
-    navigatorKey.currentState?.pushNamed(routeName);
+    _runWhenUnlocked((nav) => nav.pushNamed(routeName));
   }
 
   static void navigateToReplacement(String routeName) {
-    navigatorKey.currentState?.pushReplacementNamed(routeName);
+    _runWhenUnlocked((nav) => nav.pushReplacementNamed(routeName));
   }
-  
+
   static void navigateToRemoveUntill(String routeName) {
-    navigatorKey.currentState?.pushNamedAndRemoveUntil(routeName, (route)=>false);
+    _runWhenUnlocked(
+      (nav) => nav.pushNamedAndRemoveUntil(routeName, (route) => false),
+    );
   }
-  
+
   static void clearSessionAndnavigate() {
     SessionController().clearSession();
-    navigatorKey.currentState?.pushNamedAndRemoveUntil(AppRoutes.login, (route)=>false);
+    navigateToRemoveUntill(AppRoutes.login);
   }
 }

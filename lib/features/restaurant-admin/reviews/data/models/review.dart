@@ -1,5 +1,11 @@
 import '/features/restaurant-admin/reviews/domain/entities/reviews.dart';
 
+double _parseJsonDouble(dynamic value, [double fallback = 0.0]) {
+  if (value == null || value.toString().isEmpty) return fallback;
+  if (value is num) return value.toDouble();
+  return double.tryParse(value.toString()) ?? fallback;
+}
+
 class ReviewModel extends ReviewEntity {
   const ReviewModel({
     required super.verified,
@@ -49,10 +55,10 @@ class ReviewDataModel extends ReviewEntityData {
     return ReviewDataModel(
       reviewId: json['review_id'] ?? 0,
       review: json['review'] ?? '',
-      foodRating: (json['food_rating'] as num?)?.toDouble() ?? 0.0,
-      serviceRating: (json['service_rating'] as num?)?.toDouble() ?? 0.0,
-      ambienceRating: (json['ambience_rating'] as num?)?.toDouble() ?? 0.0,
-      overallRating: (json['overall_rating'] as num?)?.toDouble() ?? 0.0,
+      foodRating: _parseJsonDouble(json['food_rating']),
+      serviceRating: _parseJsonDouble(json['service_rating']),
+      ambienceRating: _parseJsonDouble(json['ambience_rating']),
+      overallRating: _parseJsonDouble(json['overall_rating']),
       userName: json['user_name'] ?? '',
       reviewDate: json['review_date'] ?? '',
       images: (json['images'] as List<dynamic>?)

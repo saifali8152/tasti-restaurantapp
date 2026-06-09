@@ -51,6 +51,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                 return Center(child: Text("Nothing Found!"));
               }
               if (state.fetchResponse.status == Status.error) {
+                print("Reviews error: ${state.fetchResponse.message}");
                 return Center(child: Text(state.fetchResponse.message ?? ''));
               }
               return TabsSection(id: id);

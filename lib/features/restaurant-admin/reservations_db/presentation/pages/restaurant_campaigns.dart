@@ -14,7 +14,8 @@ class RestaurantCampaignsScreen extends StatefulWidget {
   const RestaurantCampaignsScreen({super.key});
 
   @override
-  State<RestaurantCampaignsScreen> createState() => _RestaurantCampaignsScreenState();
+  State<RestaurantCampaignsScreen> createState() =>
+      _RestaurantCampaignsScreenState();
 }
 
 class _RestaurantCampaignsScreenState extends State<RestaurantCampaignsScreen> {
@@ -63,20 +64,21 @@ class _RestaurantCampaignsScreenState extends State<RestaurantCampaignsScreen> {
                   if (state.fetchResponse.status == Status.loading) {
                     return const Center(child: LoadingWidget());
                   }
-                    
+
                   if (state.fetchResponse.status == Status.error) {
+                    print("Campaigns error: ${state.fetchResponse.message}");
                     return _messageList(
                       state.fetchResponse.message.toString(),
                       color: Colors.red,
                     );
                   }
-                    
+
                   if (state.fetchResponse.status == Status.completed) {
                     final data = state.fetchResponse.data ?? [];
                     if (data.isEmpty) {
                       return _messageList("Nothing Found.");
                     }
-                    
+
                     return ListView.separated(
                       physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: data.length,
@@ -88,7 +90,7 @@ class _RestaurantCampaignsScreenState extends State<RestaurantCampaignsScreen> {
                       },
                     );
                   }
-                    
+
                   return _messageList("Something went wrong.");
                 },
               ),

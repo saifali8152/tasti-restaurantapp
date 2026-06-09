@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import '/core/utils/json_parsers.dart';
 
 class PaginationModel extends Equatable {
   final int currentPage;
@@ -19,12 +20,12 @@ class PaginationModel extends Equatable {
 
   factory PaginationModel.fromJson(Map<String, dynamic> json) {
     return PaginationModel(
-      currentPage: json['current_page'] ?? 1,
-      perPage: json['per_page'] ?? 10,
-      total: json['total'] ?? 0,
-      totalPages: json['total_pages'] ?? 0,
-      hasNext: json['has_next'] ?? false,
-      hasPrev: json['has_prev'] ?? false,
+      currentPage: parseJsonInt(json['current_page'], 1),
+      perPage: parseJsonInt(json['per_page'], 10),
+      total: parseJsonInt(json['total']),
+      totalPages: parseJsonInt(json['total_pages']),
+      hasNext: parseJsonBool(json['has_next']),
+      hasPrev: parseJsonBool(json['has_prev']),
     );
   }
 
